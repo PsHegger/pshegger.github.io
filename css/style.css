@@ -1,0 +1,19 @@
+.md-toolbar-tools h1 {
+  font-size: inherit;
+  font-weight: inherit;
+  margin: inherit;
+}
+
+.md-sidenav-bg {
+	background: #00796B;
+}
+
+.md-button-menu {
+	color: #FFFFFF;
+}
+
+.s24 {
+	width: 24px;
+	height: 24px;
+	color: #f00;
+}

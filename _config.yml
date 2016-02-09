@@ -1,0 +1,29 @@
+# Site settings
+title: pshegger
+description: 'Development as I see'
+url: 'http://pshegger.github.io' 
+baseurl: '/'
+google_analytics: 'UA-72812058-1'
+
+author:
+  name: 'Gergely Hegedüs'
+  email: pshegger@gmail.com
+  twitter_username: pshegger
+  github_username:  pshegger
+  linkedin_username:  gergely-hegedüs-5a294265
+
+# Build settings
+destination: _site
+paginate: 10
+permalink: /:year/:title/
+markdown: kramdown
+highlighter: pygments
+
+kramdown:
+  # use Github Flavored Markdown
+  input: GFM
+  # do not replace newlines by <br>s
+  hard_wrap: false
+
+gems: ['jekyll-paginate']
+exclude: ['README.md', 'Gemfile', 'Gemfile.lock', 'screenshot.png']

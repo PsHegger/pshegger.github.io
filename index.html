@@ -1,81 +1,24 @@
-<!doctype html>
-<html>
-  <head>
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="chrome=1">
-    <title>pshegger by PsHegger</title>
-    <link rel="stylesheet" href="stylesheets/styles.css">
-    <link rel="stylesheet" href="stylesheets/github-dark.css">
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>
-    <script src="javascripts/respond.js"></script>
-    <!--[if lt IE 9]>
-      <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
-    <![endif]-->
-    <!--[if lt IE 8]>
-    <link rel="stylesheet" href="stylesheets/ie.css">
-    <![endif]-->
-    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+---
+layout: default
+---
 
-  </head>
-  <body>
-      <div id="header">
-        <nav>
-          <li class="fork"><a href="https://github.com/PsHegger">View On GitHub</a></li>
-        </nav>
-      </div><!-- end header -->
+<div class="main-post-list">
 
-    <div class="wrapper">
+  <ol class="post-list">
+    {% for post in paginator.posts %}
+      <li>
+        <h2 class="post-list__post-title post-title"><a href="{{ site.baseurl }}{{ post.url | remove_first: '/' }}" title="{{ post.title }}">{{ post.title }}</a></h2>
+        <p class="excerpt">{{ post.excerpt | remove: '<p>' | remove: '</p>' }}&hellip;</p>
+        <div class="post-list__meta"><time datetime="{{ post.date | date: "%-d %b %Y" }}" class="post-list__meta--date date">{{ post.date | date: "%-d %b %Y" }}</time> &#8226; <span class="post-meta__tags">on {% for tag in post.tags %}<a href="{{ site.baseurl }}tags/#{{ tag }}">{{ tag }}</a> {% endfor %}</span></div>
+        <hr class="post-list__divider">
+      </li>
+    {% endfor %}
+  </ol>
 
-      <section>
-        <div id="title">
-          <h1>pshegger</h1>
-          <p></p>
-          <hr>
-          <span class="credits left">Project maintained by <a href="https://github.com/PsHegger">PsHegger</a></span>
-          <span class="credits right">Hosted on GitHub Pages &mdash; Theme by <a href="https://twitter.com/michigangraham">mattgraham</a></span>
-        </div>
+  <hr class="post-list__divider ">
 
-        <h2>
-<a id="about-me" class="anchor" href="#about-me" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>About me</h2>
+  {% if paginator.previous_page or paginator.next_page %}
+      {% include pagination.html %}
+  {% endif %}
 
-<p>My name is Gergely Hegedüs and this is a short website about me and my work for those who are interested in it. Currently I live in Budapest, Hungary and work as an Android Developer at <a href="https://www.tappointment.com/web/login.php">Tappointment</a>.</p>
-
-<p>In my free time I like to play video games or hang out with my friends, but my biggest passion is Kung Fu what I try to practice as much as possible. I also like to make cool things be it a usefull tool or a game.</p>
-
-<h2>
-<a id="personal-projects" class="anchor" href="#personal-projects" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Personal Projects</h2>
-
-<p>Every time I see something cool on the Internet my imagination starts to fly, and sometimes it ends up as something new and (hopefully) great which in time will make its way here.</p>
-
-<h2>
-<a id="contact" class="anchor" href="#contact" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Contact</h2>
-
-<p>Feel free to contact me if you have any kind of question/suggestion or just want to have a nice chat with me.</p>
-
-<ul>
-<li>Email: <a href="mailto:pshegger@gmail.com">pshegger@gmail.com</a>
-</li>
-<li>Twitter: <a href="https://twitter.com/pshegger">@pshegger</a>
-</li>
-<li>Facebook: <a href="https://www.facebook.com/gergely.hegedus">Gergely Hegedüs</a>
-</li>
-<li>Github <a href="https://github.com/PsHegger" class="user-mention">@PsHegger</a>
-</li>
-</ul>
-      </section>
-
-    </div>
-    <!--[if !IE]><script>fixScale(document);</script><![endif]-->
-              <script type="text/javascript">
-            var gaJsHost = (("https:" == document.location.protocol) ? "https://ssl." : "http://www.");
-            document.write(unescape("%3Cscript src='" + gaJsHost + "google-analytics.com/ga.js' type='text/javascript'%3E%3C/script%3E"));
-          </script>
-          <script type="text/javascript">
-            try {
-              var pageTracker = _gat._getTracker("UA-72812058-1");
-            pageTracker._trackPageview();
-            } catch(err) {}
-          </script>
-
-  </body>
-</html>
+</div>

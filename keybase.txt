@@ -1,0 +1,68 @@
+==================================================================
+https://keybase.io/pshegger
+--------------------------------------------------------------------
+
+I hereby claim:
+
+  * I am an admin of https://pshegger.github.io
+  * I am pshegger (https://keybase.io/pshegger) on keybase.
+  * I have a public key with fingerprint DEF3 A310 B451 3FF0 8B29  CD4F 76C3 E614 6820 77E1
+
+To do so, I am signing this object:
+
+{
+    "body": {
+        "key": {
+            "eldest_kid": "0101cb828a0d70860878d0f0ae4dbd89e7a654fc86008862c3f53db65c1684f02da70a",
+            "fingerprint": "def3a310b4513ff08b29cd4f76c3e614682077e1",
+            "host": "keybase.io",
+            "key_id": "76c3e614682077e1",
+            "kid": "0101cb828a0d70860878d0f0ae4dbd89e7a654fc86008862c3f53db65c1684f02da70a",
+            "uid": "2d684f2a945d7a8ff8d690e541c6a119",
+            "username": "pshegger"
+        },
+        "service": {
+            "hostname": "pshegger.github.io",
+            "protocol": "https:"
+        },
+        "type": "web_service_binding",
+        "version": 1
+    },
+    "ctime": 1475222174,
+    "expire_in": 157680000,
+    "prev": "508f949b0f5ebee85670a3154c5ce91f2ffe990206af67faff888ef0c3532439",
+    "seqno": 5,
+    "tag": "signature"
+}
+
+which yields the signature:
+
+-----BEGIN PGP MESSAGE-----
+Version: Keybase OpenPGP v2.0.58
+Comment: https://keybase.io/crypto
+
+yMImAnicrVJbSBRRGF7LC5pJCdGFihjooqxy5nJmzqyFRFFRFkWBPRjLmZlzdofc
+mW1nVivdSKyIDYKIjALTqCgjKroolpTdL1JEUQklspVWUpH1YtDtjNVL9Nh5OZz/
+/77vfN/Pf330SF9OWmcl9/Hkqy2n0rquNMZ95R8mNdVwmm1s4AI13FoyfJFKgzhu
+cK1pcAEO8IDXNSQgDAwFIBkgBRmAAkwkQzOQShQsQ4nqrAMQkgVdpFA0NBnqvIwk
+CgQDKwBzfo6aVojEojHTcpmsQaiIRR5oEuRFSgHSBFU3JKrIukhkXpKRABSF8IwY
+th2Pwcxp2CHFps1q7BEctvcP/H/2HR+WEwyvKmBVgoaCEaXIkFVAoMTrMuZ51QM6
+JGbhCGHoqBMmIZaWS/g5Vq0ydeIN1kvyF6I4ZLrhuPYrVTRmu7ZuV7J+2HWjTsDj
+uxuiHqGaaMHfUkHNtAw2TcaoIjHHtC0uwDOk7pqeNi8pUBAEXpH8HFkfNWMkaHoI
+qMgIsOP9Q6qYJASIqpKqAQqJRgiCMkss8lDSoU5UngqUElUFApAxlRWKWWiECAW6
+CEVBEr3MDlln2VwAMps4xCQdM2RhNx4jXOJqZ0W6Ly3Hl5kxwtsyX072mD+79+5K
+1g+3p+Pt4PbMGRmj7LaxqY367U+9/obS9jGF/a0nGhNmJDXquJO8V77Tqn+Tej4y
+UlZ3V92/9XAkN98XyMDHKqoD8cKLwsJx/s5EsmNpX7Z/2aqh91Nqv8+787XlwlOg
+9pU112cVZNXjoRVwzZkF56XB2cne/TPyztVu3tFygG7rjrwaeHLLsbtvNpCDXdy0
+1uYbjfWzlr+4ND7vxtzdRXWpDEUs3Xeke8/UywMzFW0COVhdkj7pcdVimbSnZ5dv
+Pdt1NFEyeX6DXXSt/X7+64JHi9r6A59htGjOs5VLGvaeTh6qTU1f1NS6a/zDB10D
+E1db6w+Fv4Rv9nzLfVmyqSaUfPET4LpFNQ==
+=1/Ya
+-----END PGP MESSAGE-----
+
+And finally, I am proving ownership of this host by posting or
+appending to this document.
+
+View my publicly-auditable identity here: https://keybase.io/pshegger
+
+==================================================================

@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>annotation on pshegger</title>
+    <link>http://pshegger.github.io/tags/annotation/</link>
+    <description>Recent content in annotation on pshegger</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <lastBuildDate>Mon, 11 Nov 2019 00:00:00 +0000</lastBuildDate>
+    
+	<atom:link href="http://pshegger.github.io/tags/annotation/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>@GenerateForMe</title>
+      <link>http://pshegger.github.io/post/generate-for-me/</link>
+      <pubDate>Mon, 11 Nov 2019 00:00:00 +0000</pubDate>
+      
+      <guid>http://pshegger.github.io/post/generate-for-me/</guid>
+      <description>Write once, use everywhere Sooner or later every developer meets the following scenario: you have written the same piece of code multiple times, maybe with some minor differences, and you don&amp;rsquo;t want to do it again. You analyze the situation and decide to create a separate function so the next time you need it you just have to call it. Sometimes it&amp;rsquo;s not enough so you create a new abstraction layer and write a class which does what you need.</description>
+    </item>
+    
+  </channel>
+</rss>

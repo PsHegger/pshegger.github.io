@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>parallelism on pshegger</title>
+    <link>http://pshegger.github.io/tags/parallelism/</link>
+    <description>Recent content in parallelism on pshegger</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <lastBuildDate>Sat, 29 Feb 2020 00:00:00 +0000</lastBuildDate>
+    
+	<atom:link href="http://pshegger.github.io/tags/parallelism/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>RenderScript is Still alive</title>
+      <link>http://pshegger.github.io/post/renderscript/</link>
+      <pubDate>Sat, 29 Feb 2020 00:00:00 +0000</pubDate>
+      
+      <guid>http://pshegger.github.io/post/renderscript/</guid>
+      <description>I&amp;rsquo;m sure for most of you it&amp;rsquo;s not a surprise, but I also think that there are people out there who either doesn&amp;rsquo;t know what it is or simply tends to forget about it. The aim of this article is to show these people what it is and why should they use it.
+So, what is RenderScript? RenderScript is an Android framework which can be used for running computationally heavy tasks at high performance.</description>
+    </item>
+    
+  </channel>
+</rss>

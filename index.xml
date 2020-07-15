@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>pshegger</title>
+    <link>http://pshegger.github.io/</link>
+    <description>Recent content on pshegger</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <lastBuildDate>Sat, 29 Feb 2020 00:00:00 +0000</lastBuildDate>
+    
+	<atom:link href="http://pshegger.github.io/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>About Me</title>
+      <link>http://pshegger.github.io/about/</link>
+      <pubDate>Wed, 15 Jul 2020 00:00:00 +0000</pubDate>
+      
+      <guid>http://pshegger.github.io/about/</guid>
+      <description>My name is Gergely Hegedüs and I&amp;rsquo;m from Budapest, Hungary. I&amp;rsquo;ve been working as a software developer since 2013 when I started as an Android developer at a small startup.
+Like many other startups, this one couldn&amp;rsquo;t convince people to use its product so we had to pivot toward developing software for other companies. It was around this time when I started promoting Kotlin for Android development and we finished our first Kotlin only app just a bit after the official 1.</description>
+    </item>
+    
+    <item>
+      <title>RenderScript is Still alive</title>
+      <link>http://pshegger.github.io/post/renderscript/</link>
+      <pubDate>Sat, 29 Feb 2020 00:00:00 +0000</pubDate>
+      
+      <guid>http://pshegger.github.io/post/renderscript/</guid>
+      <description>I&amp;rsquo;m sure for most of you it&amp;rsquo;s not a surprise, but I also think that there are people out there who either doesn&amp;rsquo;t know what it is or simply tends to forget about it. The aim of this article is to show these people what it is and why should they use it.
+So, what is RenderScript? RenderScript is an Android framework which can be used for running computationally heavy tasks at high performance.</description>
+    </item>
+    
+    <item>
+      <title>gRPC for Kotliners</title>
+      <link>http://pshegger.github.io/post/grpc-talk/</link>
+      <pubDate>Thu, 14 Nov 2019 00:00:00 +0000</pubDate>
+      
+      <guid>http://pshegger.github.io/post/grpc-talk/</guid>
+      <description>This is the talk I gave at the November 2019 Kotlin Budapest meetup. You can find the slides here and the sample code at GitHub.
+  </description>
+    </item>
+    
+    <item>
+      <title>@GenerateForMe</title>
+      <link>http://pshegger.github.io/post/generate-for-me/</link>
+      <pubDate>Mon, 11 Nov 2019 00:00:00 +0000</pubDate>
+      
+      <guid>http://pshegger.github.io/post/generate-for-me/</guid>
+      <description>Write once, use everywhere Sooner or later every developer meets the following scenario: you have written the same piece of code multiple times, maybe with some minor differences, and you don&amp;rsquo;t want to do it again. You analyze the situation and decide to create a separate function so the next time you need it you just have to call it. Sometimes it&amp;rsquo;s not enough so you create a new abstraction layer and write a class which does what you need.</description>
+    </item>
+    
+    <item>
+      <title>Help Yourself and the Compiler with Contracts</title>
+      <link>http://pshegger.github.io/post/kotlin-contracts/</link>
+      <pubDate>Thu, 21 Mar 2019 00:00:00 +0000</pubDate>
+      
+      <guid>http://pshegger.github.io/post/kotlin-contracts/</guid>
+      <description>What are contracts? In the world of Kotlin, contracts represent a deal between the developer and the compiler. As a developer you can share insight of your code with the compiler and it can use this extra info for better code analysis.
+Currently there are two kinds of contracts available: callsInPlace which tells the compiler how many times a lambda is called, and returns/implies which indicates that a defined condition is true if the function returns a specific value.</description>
+    </item>
+    
+  </channel>
+</rss>

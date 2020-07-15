@@ -1,13 +1,12 @@
 <html>
 <head>
-	<meta name="generator" content="Hugo 0.74.1" />
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
-    <title>pshegger</title>
+    <title>pshegger - Posts </title>
     
     
-    <meta content="pshegger" name="keywords">
+    <meta content="index" name="keywords">
     
     <meta content="pshegger - A website called pshegger" name="description">
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -15,8 +14,8 @@
     
 
     
-        <link href="/index.xml" rel="alternate" type="application/rss&#43;xml" title="pshegger" />
-        <link href="/index.xml" rel="feed" type="application/rss&#43;xml" title="pshegger" />
+        <link href="/post/index.xml" rel="alternate" type="application/rss&#43;xml" title="pshegger" />
+        <link href="/post/index.xml" rel="feed" type="application/rss&#43;xml" title="pshegger" />
     
 
     
@@ -95,58 +94,25 @@ layui.use('element', function(){
 </script>
         <div id="content" style="min-height:80%">
 
-<main>
-<div class="layui-container">
-    <div class="layui-row about">
-        <div class="layui-col-xs12 layui-col-sm4 layui-col-md4 about_left">
-            <img class="lazyload about_portrait" data-src="portrait.png" />
-            <h1> Gergely Hegedüs </h1>
-            <h2> A place to find all my Articles &amp; Talks </h2>
-            
-            
-            
-            <div class="layui-row layui-col-space10 about_left_icon">
-                
-                <div class="layui-col-md3 layui-col-sm3 layui-col-xs3">
-                <a href="mailto:pshegger@gmail.com"><i class="fa fa-envelope-o" style="font-size:32px;"></i></a>
-                </div>
-                
-                <div class="layui-col-md3 layui-col-sm3 layui-col-xs3">
-                <a href="https://github.com/pshegger"><i class="fa fa-github" style="font-size:32px;"></i></a>
-                </div>
-                
-                <div class="layui-col-md3 layui-col-sm3 layui-col-xs3">
-                <a href="https://www.linkedin.com/in/gergely-heged%C3%BCs-5a294265/"><i class="fa fa-linkedin" style="font-size:32px;"></i></a>
-                </div>
-                
-                <div class="layui-col-md3 layui-col-sm3 layui-col-xs3">
-                <a href="https://twitter.com/pshegger"><i class="fa fa-twitter" style="font-size:32px;"></i></a>
-                </div>
-                
-            </div>
-            
+<main id="main">
 
+<div class="layui-fluid list-show" >
+    <div class="layui-row">
+        <div class="layui-col-md6 layui-col-sm12 layui-col-xs12">
+            <div class="list-show-title">
+                <h1>These are my blogs</h1>
+                <h2>and also my life</h2>
+            </div>
         </div>
-        <div class="layui-col-xs12 layui-col-sm8 layui-col-md8 about_right">
-            <h1>Biography</h1>
-            <h2>    <p>I'm a Software Developer since 2013.</p>
-    <p>My main fields are Android, Kotlin and Backend development, but I like exploring new things to have a bit of knowledge in a lot of different part of CS and Software Development.</p>
-    <br/>
-    <p>The aim of this website is to have a single place where all my professional work can be found.</p>
-    </h2>
+        <div class="layui-col-md6 layui-col-sm12 layui-col-xs12" style="text-align:center;">
+            <img src="/self/img/undraw_chat_bot_kli5.png" class="list-title-pic">
         </div>
     </div>
 </div>
 
-<div class="layui-fluid recent" >
-    <div class="layui-container">
-        <div class="layui-row recent-inner" >
-            <div class="layui-col-md8 layui-col-sm8 layui-col-xs12">
-                <h1> Recent Posts </h1>
-                
-                    
-                    
-                            <blockquote class="self-elem-quote self-elem-quote-bg-orange" style="background-color:#FFFFFF;margin-top: 10px;">
+<div class="layui-container">
+        
+            <blockquote class="self-elem-quote self-elem-quote-bg-orange" style="background-color:#FFFFFF;margin-top: 10px;">
         <a href="/post/renderscript/">
             <h2 class="">RenderScript is Still alive</h2>
         </a>
@@ -195,8 +161,8 @@ layui.use('element', function(){
         </h3>
     </blockquote>
 
-                    
-                            <blockquote class="self-elem-quote self-elem-quote-bg-orange" style="background-color:#FFFFFF;margin-top: 10px;">
+    
+            <blockquote class="self-elem-quote self-elem-quote-bg-orange" style="background-color:#FFFFFF;margin-top: 10px;">
         <a href="/post/grpc-talk/">
             <h2 class="">gRPC for Kotliners</h2>
         </a>
@@ -249,8 +215,8 @@ layui.use('element', function(){
         </h3>
     </blockquote>
 
-                    
-                            <blockquote class="self-elem-quote self-elem-quote-bg-orange" style="background-color:#FFFFFF;margin-top: 10px;">
+    
+            <blockquote class="self-elem-quote self-elem-quote-bg-orange" style="background-color:#FFFFFF;margin-top: 10px;">
         <a href="/post/generate-for-me/">
             <h2 class="">@GenerateForMe</h2>
         </a>
@@ -299,8 +265,8 @@ layui.use('element', function(){
         </h3>
     </blockquote>
 
-                    
-                            <blockquote class="self-elem-quote self-elem-quote-bg-orange" style="background-color:#FFFFFF;margin-top: 10px;">
+    
+            <blockquote class="self-elem-quote self-elem-quote-bg-orange" style="background-color:#FFFFFF;margin-top: 10px;">
         <a href="/post/kotlin-contracts/">
             <h2 class="">Help Yourself and the Compiler with Contracts</h2>
         </a>
@@ -345,85 +311,30 @@ layui.use('element', function(){
         </h3>
     </blockquote>
 
-                    
-                
-            </div>
+    
 
-            <div class="layui-col-md4 layui-col-sm4 layui-col-xs12">
-
-                
-                <input id="search" type="text" name="search" placeholder="Intra-Site Search" autocomplete="off" class="layui-input">
-                <script type="text/javascript">
-                    $("#search").keyup(function(event){
-                        if(event.keyCode ==13){
-                            document.location = "https://www.google.com/search?q=" + $("#search").val() + "+site%3Ahttp:\/\/pshegger.github.io\/"
-                        }
-                    });
-                </script>
-                
-
-                
-                    <h1><a href="/categories">categories</a> </h1>
-                    
-                        <a href="/categories/android/">
-                            <span class="layui-badge layui-bg-green" style="margin: 5px">android</span>
-                        </a>
-                    
-                        <a href="/categories/kotlin/">
-                            <span class="layui-badge layui-bg-green" style="margin: 5px">kotlin</span>
-                        </a>
-                    
-                        <a href="/categories/talks/">
-                            <span class="layui-badge layui-bg-green" style="margin: 5px">talks</span>
-                        </a>
-                    
-                
-                    <h1><a href="/tags">tags</a> </h1>
-                    
-                        <a href="/tags/android/">
-                            <span class="layui-badge layui-bg-green" style="margin: 5px">android</span>
-                        </a>
-                    
-                        <a href="/tags/annotation/">
-                            <span class="layui-badge layui-bg-green" style="margin: 5px">annotation</span>
-                        </a>
-                    
-                        <a href="/tags/contracts/">
-                            <span class="layui-badge layui-bg-green" style="margin: 5px">contracts</span>
-                        </a>
-                    
-                        <a href="/tags/grpc/">
-                            <span class="layui-badge layui-bg-green" style="margin: 5px">grpc</span>
-                        </a>
-                    
-                        <a href="/tags/index/">
-                            <span class="layui-badge layui-bg-green" style="margin: 5px">index</span>
-                        </a>
-                    
-                        <a href="/tags/kapt/">
-                            <span class="layui-badge layui-bg-green" style="margin: 5px">kapt</span>
-                        </a>
-                    
-                        <a href="/tags/kotlin/">
-                            <span class="layui-badge layui-bg-green" style="margin: 5px">kotlin</span>
-                        </a>
-                    
-                        <a href="/tags/parallelism/">
-                            <span class="layui-badge layui-bg-green" style="margin: 5px">parallelism</span>
-                        </a>
-                    
-                        <a href="/tags/programming/">
-                            <span class="layui-badge layui-bg-green" style="margin: 5px">programming</span>
-                        </a>
-                    
-                        <a href="/tags/renderscript/">
-                            <span class="layui-badge layui-bg-green" style="margin: 5px">renderscript</span>
-                        </a>
-                    
-                
-            </div>
-        </div>
+    
+<div class="pager">
+    <div class="layui-btn-group">
+        <button type="button" class="layui-btn layui-btn-primary layui-btn-sm">
+            <a href="/post/"><i class="layui-icon">&#xe65a;</i></a>
+        </button>
+        
+        <button type="button" class="layui-btn layui-btn-disabled layui-btn-sm">
+            <i class="layui-icon">&#xe603;</i>
+        </button>
+        
+        
+        <button type="button" class="layui-btn layui-btn-disabled layui-btn-sm">
+            <i class="layui-icon">&#xe602;</i>
+        </button>
+        
+        <button type="button" class="layui-btn layui-btn-primary layui-btn-sm">
+            <a href="/post/"><i class="layui-icon">&#xe65b;</i></a>
+        </button>
     </div>
+</div>
+
 </div>
 
 </main>

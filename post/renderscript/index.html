@@ -1,0 +1,670 @@
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <title>pshegger - RenderScript is Still alive </title>
+    
+    
+    <meta content="programming, android, renderscript, parallelism" name="keywords">
+    
+    <meta content="pshegger - RenderScript is a great way to compute large amount of data, so let&#39;s discover together what it is and when should it be considered." name="description">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    
+    
+
+    
+
+    
+        <script async src="https://www.googletagmanager.com/gtag/js?id=UA-72812058-1"></script>
+        <script>
+          window.dataLayer = window.dataLayer || [];
+          function gtag(){dataLayer.push(arguments)};
+          gtag('js', new Date());
+          gtag('config', 'UA-72812058-1');
+        </script>
+    
+
+    
+
+    <link rel="stylesheet" href="/layui/css/layui.css">
+    <link rel="stylesheet" href="/self/css/default.css">
+    <script src="/layui/layui.js"></script>
+
+    <link rel="stylesheet" async href="/self/css/markdown.min.css">
+    <link rel="stylesheet" async href="/self/css/gallery.css">
+    
+    
+    
+
+    <script src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.min.js" integrity="sha256-9/aliU8dGd2tb6OSsuzixeV4y/faTqgFtohetphbbj0=" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/font-awesome@4.7.0/css/font-awesome.min.css" integrity="sha256-eZrrJcwDc/3uDhsdt61sL2oOBY362qM3lon1gyExkL0=" crossorigin="anonymous">
+    <script async src="https://cdn.jsdelivr.net/npm/lazysizes@5.2.0/lazysizes.min.js" integrity="sha256-h2tMEmhemR2IN4wbbdNjj9LaDIjzwk2hralQwfJmBOE=" crossorigin="anonymous"></script></head>
+
+<body>
+    
+    <header class="layui-header layui-bg-cyan">
+
+    
+    
+    <a class="nav-self-logo" href="/">
+        pshegger
+    </a>
+
+    <ul class="layui-nav layui-layout-right layui-bg-cyan" lay-filter="">
+        
+        
+        <li class="layui-nav-item" id="nav_big"><a href="/post/">Posts</a></li>
+        
+
+        
+            
+                <li class="layui-nav-item" id="nav_big"><a href="/about/">About</a></li>
+            
+        
+
+        
+        <li class="layui-nav-item" id="nav_small">
+            <a href="javascript:;">
+                <i class="layui-icon layui-icon-app" style="font-size: 24px;"></i>
+            </a>
+
+            <dl class="layui-nav-child">
+                
+                <dd><a href="/post/">Posts</a></dd>
+                
+
+                
+                    
+                        <dd><a href="/about/">About</a></dd>
+                    
+                
+            </dl>
+        </li>
+    </ul>
+</header>
+
+<script>
+layui.use('element', function(){
+  var element = layui.element;
+});
+</script>
+        <div id="content" style="min-height:80%">
+<div class="layui-container" style="margin-bottom: 10px">
+    
+
+    <div class="layui-row layui-col-space10">
+        <div class="layui-col-md8 layui-col-sm12 layui-col-xs12">
+            <div class="layui-card single-card">
+                <br />
+                <blockquote class="self-elem-quote self-elem-quote-bg-orange markdown-body single-title" >
+                    <h1>RenderScript is Still alive</h1>
+                    <h3 style="margin-top:10px; margin-bottom:10px"> 
+    <i class="layui-icon layui-icon-date" style="font-size: 28px; vertical-align: -2px;"></i>
+    <span>2020-02-29</span>
+
+    
+     
+    <i class="layui-icon layui-icon-list" style="font-size: 32px; vertical-align: -3px;"></i>
+    
+
+    
+        <a href="/categories/android/">
+            <span class="layui-badge layui-bg-green" style="vertical-align: 2px;">android</span>
+        </a>
+    
+
+    
+    <i class="layui-icon layui-icon-tabs" style="font-size: 22px; vertical-align: 1px;margin-right:2px;"></i>
+    
+
+    
+        <a href="/tags/programming/">
+            <span class="layui-badge layui-bg-green" style="vertical-align: 2px;">programming</span>
+        </a>
+    
+        <a href="/tags/android/">
+            <span class="layui-badge layui-bg-green" style="vertical-align: 2px;">android</span>
+        </a>
+    
+        <a href="/tags/renderscript/">
+            <span class="layui-badge layui-bg-green" style="vertical-align: 2px;">renderscript</span>
+        </a>
+    
+        <a href="/tags/parallelism/">
+            <span class="layui-badge layui-bg-green" style="vertical-align: 2px;">parallelism</span>
+        </a>
+    
+    
+</h3>
+                </blockquote>
+                <div class="layui-card-body markdown-body single-content">
+                    <p>I&rsquo;m sure for most of you it&rsquo;s not a surprise, but I also think that there are people out there who either doesn&rsquo;t know what it is or simply tends to forget about it. The aim of this article is to show these people what it is and why should they use it.</p>
+<h2 id="so-what-is-renderscript">So, what <em>is</em> RenderScript?</h2>
+<p>RenderScript is an Android framework which can be used for running computationally heavy tasks at high performance. You will get the most benefit on using it for tasks which require a lot of computation that can be parallelized, as the framework will run your code on every available CPU and GPU cores.</p>
+<p>The first step when writing a task for RenderScript is writing the script file. This file will contain your kernel(s) and everything else needed to compute your result. The kernel is the function which will be executed on your input data in parallel. There are two type of kernels: <em>mapping</em> and <em>reduction</em>, but in this article we will only discuss the former one.</p>
+<h2 id="testing-method">Testing method</h2>
+<p>As I mentioned before RenderScript is excellent at performing computationally heavy tasks and to demonstrate that I created a simple test application. For this test we will be generating an image of the <a href="https://en.wikipedia.org/wiki/Mandelbrot_set">Mandelbrot set</a> using different methods. Our first version will be written in Kotlin and will not contain any optimization. The second version will still be in Kotlin but we will try to use it&rsquo;s built-in features to parallelize the computation. Lastly we will have a version written in RenderScript.</p>
+<h2 id="mandelbrot">Mandelbrot</h2>
+<p>Generating an image of the Mandelbrot set is fairly easy, but it requires a lot of time. All we have to do is calculate for every pixel whether the function <code>f(z) = z*z + c</code> (where <code>z=0+0i</code> and <code>c</code> is the coordinate of the pixel mapped to the complex plane) goes to infinity or not.</p>
+<p>As there is no simple way to decide that in practice we usually run a predetermined number of iterations and see if the result leaves a predetermined neighborhood of 0. This means that we can make more precise estimates with choosing a higher iteration count, but it will also slow down the process.</p>
+<p>After that we just have to take the number of iterations it took to leave the neighborhood and color the pixel accordingly.</p>
+<h2 id="kotlin---the-easy-one">Kotlin - the easy one</h2>
+<p>With this knowledge we can easily write a method which calculates the color for a given coordinate.</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-kotlin" data-lang="kotlin"><span style="color:#66d9ef">protected</span> <span style="color:#66d9ef">fun</span> <span style="color:#a6e22e">calculatePoint</span>(x: Int, y: Int, rect: RectF): Int {
+    <span style="color:#66d9ef">val</span> cr = rect.left + (rect.right - rect.left) * (x / width.toDouble())
+    <span style="color:#66d9ef">val</span> ci = rect.top + (rect.bottom - rect.top) * (y / height.toDouble())
+    <span style="color:#66d9ef">var</span> zr = <span style="color:#ae81ff">0.0</span>
+    <span style="color:#66d9ef">var</span> zi = <span style="color:#ae81ff">0.0</span>
+    
+    <span style="color:#66d9ef">var</span> i = <span style="color:#ae81ff">0</span>
+    <span style="color:#66d9ef">while</span> (i &lt; MainActivity.MAX_ITER &amp;&amp; zr * zr + zi * zi &lt; <span style="color:#ae81ff">4</span>) {
+        <span style="color:#66d9ef">val</span> nzr = zr * zr - zi * zi + cr
+        <span style="color:#66d9ef">val</span> nzi = <span style="color:#ae81ff">2</span> * zr * zi + ci
+        zr = nzr
+        zi = nzi
+        i++
+    }
+    
+    <span style="color:#66d9ef">val</span> hue = <span style="color:#ae81ff">360</span> * i.toFloat() / MainActivity.MAX_ITER
+    <span style="color:#66d9ef">val</span> sat = <span style="color:#ae81ff">1f</span>
+    <span style="color:#66d9ef">val</span> value = <span style="color:#66d9ef">if</span> (i &lt; MainActivity.MAX_ITER) <span style="color:#ae81ff">1f</span> <span style="color:#66d9ef">else</span> <span style="color:#ae81ff">0f</span>
+    <span style="color:#66d9ef">return</span> Color.HSVToColor(floatArrayOf(hue, sat, value))
+}
+</code></pre></div><p>This function can be called with the coordinate of the pixel we want to calculate (<code>x</code> and <code>y</code>) and the specific area of the plane we want to display currently (<code>rect</code>). Using these inputs we can then calculate the coordinate on the plane (<code>cr</code>and <code>ci</code>). We could also use some complex number class, but from my experience that leads to a performance drop so we stick to calculating the real and imaginary part separately. After that we just have to loop until we either reach the maximum iteration count or leave the neighborhood of 0.</p>
+<p>The last step is coloring the pixel. For that the easiest way to do is using the HSV color model as you can see in the code above.</p>
+<p>Now that we have everything to calculate the color of one pixel all we have to do is looping over every pixel of the output image and coloring it.</p>
+<h2 id="kotlin-parallel---the-complicated-one">Kotlin Parallel - the complicated one</h2>
+<p>For this version will use the same function to calculate the color of one pixel, but we will split the output to multiple regions and calculate them in parallel. The number of partitions must equal to the number of threads we are using for calculation, but other than that we can split any way we would like to.</p>
+<p>To determine the number of threads we will use <code>Runtime.getRuntime().availableProcessors() - 1</code>. The <code>-1</code> ensures that we have one core for our main thread. When we have the number of threads we create a <code>CoroutineDispatcher</code> and launch a new scope using that as it&rsquo;s context.</p>
+<p>At this point we have to loop through our partitions and use <code>CoroutineScope.launch</code> to start the calculation on it&rsquo;s own thread. This calculation is the same as before, but we&rsquo;re just calculating the points for the given region and not for the whole image.</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-kotlin" data-lang="kotlin"><span style="color:#66d9ef">override</span> <span style="color:#66d9ef">suspend</span> <span style="color:#66d9ef">fun</span> <span style="color:#a6e22e">generate</span>(buffer: Bitmap, rect: RectF) {
+    <span style="color:#66d9ef">val</span> numThreads = Runtime.getRuntime().availableProcessors() - <span style="color:#ae81ff">1</span>
+    <span style="color:#66d9ef">val</span> context = Executors.newFixedThreadPool(numThreads).asCoroutineDispatcher()
+    
+    <span style="color:#66d9ef">var</span> h = sqrt(numThreads.toDouble()).toInt()
+    <span style="color:#66d9ef">while</span> (numThreads % h != <span style="color:#ae81ff">0</span>) h--
+    <span style="color:#66d9ef">val</span> w = numThreads / h
+    
+    <span style="color:#66d9ef">val</span> segWidth = width / w
+    <span style="color:#66d9ef">val</span> segHeight = height / h
+    
+    <span style="color:#66d9ef">val</span> canvas = Canvas(buffer)
+    
+    <span style="color:#66d9ef">val</span> calculation = CoroutineScope(context).launch {
+        <span style="color:#66d9ef">for</span> (mod <span style="color:#66d9ef">in</span> (<span style="color:#ae81ff">0</span> until numThreads)) {
+            <span style="color:#66d9ef">val</span> segX = mod % w
+            <span style="color:#66d9ef">val</span> segY = mod / w
+            <span style="color:#66d9ef">val</span> segXStart = segWidth * segX
+            <span style="color:#66d9ef">val</span> segXEnd = segWidth * (segX + <span style="color:#ae81ff">1</span>)
+            <span style="color:#66d9ef">val</span> segYStart = segHeight * segY
+            <span style="color:#66d9ef">val</span> segYEnd = segHeight * (segY + <span style="color:#ae81ff">1</span>)
+            <span style="color:#66d9ef">val</span> paint = Paint()
+    
+            launch {
+                <span style="color:#66d9ef">for</span> (y <span style="color:#66d9ef">in</span> (segYStart until segYEnd)) {
+                    <span style="color:#66d9ef">for</span> (x <span style="color:#66d9ef">in</span> (segXStart until segXEnd)) {
+                        <span style="color:#66d9ef">val</span> result = calculatePoint(x, y, rect)
+    
+                        paint.color = result
+                        canvas.drawPoint(x.toFloat(), y.toFloat(), paint)
+                    }
+                }
+            }
+        }
+    }
+    calculation.join()
+}
+</code></pre></div><h2 id="renderscript---the-fast-one">RenderScript - the fast one</h2>
+<p>As the previous example shows it can be pretty tricky to parallelize our computations. We have to manually create our threads and feed them the correct values. But this is where RenderScript comes to rescue us.</p>
+<p>RenderScript will automatically manage the parallelization, all we have to do is write the function which will be executed for every input data (this will be our <code>kernel</code>). The language is a derivative of C99 so some familiarity with that is required to use it.</p>
+<p>For our example all we have to write is a simple script which contains every input we will need for the calculation (width/height of the output image, the area of the plane we want to calculate and the number of iterations) and our kernel, which will be basically the same we have written in Kotlin to calculate the color of a single point. (We will also have to write a color converter, but that&rsquo;s only specific for this example.)</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-c" data-lang="c"><span style="color:#75715e">#pragma version(1)
+</span><span style="color:#75715e">#pragma rs_fp_full
+</span><span style="color:#75715e">#pragma rs java_package_name(io.github.pshegger.playground.rsperformance)
+</span><span style="color:#75715e"></span>    
+<span style="color:#66d9ef">int</span> width, height;
+<span style="color:#66d9ef">float</span> left, right, top, bottom;
+<span style="color:#66d9ef">int</span> maxIterations <span style="color:#f92672">=</span> <span style="color:#ae81ff">128</span>;
+    
+<span style="color:#66d9ef">static</span> uchar4 <span style="color:#a6e22e">getColor</span>(<span style="color:#66d9ef">int</span> i) {
+    <span style="color:#66d9ef">float</span> hue <span style="color:#f92672">=</span> <span style="color:#ae81ff">360</span> <span style="color:#f92672">*</span> (<span style="color:#66d9ef">float</span>) i <span style="color:#f92672">/</span> maxIterations;
+    <span style="color:#66d9ef">float</span> sat <span style="color:#f92672">=</span> <span style="color:#ae81ff">1</span>;
+    <span style="color:#66d9ef">float</span> val <span style="color:#f92672">=</span> (i <span style="color:#f92672">&lt;</span> maxIterations) <span style="color:#f92672">?</span> <span style="color:#ae81ff">1</span> <span style="color:#f92672">:</span> <span style="color:#ae81ff">0</span>;
+    <span style="color:#66d9ef">float</span> c <span style="color:#f92672">=</span> val <span style="color:#f92672">*</span> sat;
+    <span style="color:#66d9ef">float</span> k <span style="color:#f92672">=</span> hue <span style="color:#f92672">/</span> <span style="color:#ae81ff">60</span>;
+    <span style="color:#66d9ef">float</span> kmod <span style="color:#f92672">=</span> fmod(k, <span style="color:#ae81ff">2</span>);
+    <span style="color:#66d9ef">float</span> kmodAbs <span style="color:#f92672">=</span> (kmod <span style="color:#f92672">-</span> <span style="color:#ae81ff">1</span> <span style="color:#f92672">&lt;</span> <span style="color:#ae81ff">0</span>) <span style="color:#f92672">?</span> <span style="color:#f92672">-</span>(kmod <span style="color:#f92672">-</span> <span style="color:#ae81ff">1</span>) <span style="color:#f92672">:</span> (kmod <span style="color:#f92672">-</span> <span style="color:#ae81ff">1</span>);
+    <span style="color:#66d9ef">float</span> x <span style="color:#f92672">=</span> c <span style="color:#f92672">*</span> (<span style="color:#ae81ff">1</span> <span style="color:#f92672">-</span> kmodAbs);
+    <span style="color:#66d9ef">float</span> r1 <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>, g1 <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>, b1 <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>;
+    
+    <span style="color:#66d9ef">if</span>(k<span style="color:#f92672">&gt;=</span><span style="color:#ae81ff">0</span> <span style="color:#f92672">&amp;&amp;</span> k<span style="color:#f92672">&lt;=</span><span style="color:#ae81ff">1</span>) { r1<span style="color:#f92672">=</span>c; g1<span style="color:#f92672">=</span>x; }
+    <span style="color:#66d9ef">if</span>(k<span style="color:#f92672">&gt;</span><span style="color:#ae81ff">1</span> <span style="color:#f92672">&amp;&amp;</span> k<span style="color:#f92672">&lt;=</span><span style="color:#ae81ff">2</span>)  { r1<span style="color:#f92672">=</span>x; g1<span style="color:#f92672">=</span>c; }
+    <span style="color:#66d9ef">if</span>(k<span style="color:#f92672">&gt;</span><span style="color:#ae81ff">2</span> <span style="color:#f92672">&amp;&amp;</span> k<span style="color:#f92672">&lt;=</span><span style="color:#ae81ff">3</span>)  { g1<span style="color:#f92672">=</span>c; b1<span style="color:#f92672">=</span>x; }
+    <span style="color:#66d9ef">if</span>(k<span style="color:#f92672">&gt;</span><span style="color:#ae81ff">3</span> <span style="color:#f92672">&amp;&amp;</span> k<span style="color:#f92672">&lt;=</span><span style="color:#ae81ff">4</span>)  { g1<span style="color:#f92672">=</span>x; b1<span style="color:#f92672">=</span>c; }
+    <span style="color:#66d9ef">if</span>(k<span style="color:#f92672">&gt;</span><span style="color:#ae81ff">4</span> <span style="color:#f92672">&amp;&amp;</span> k<span style="color:#f92672">&lt;=</span><span style="color:#ae81ff">5</span>)  { r1<span style="color:#f92672">=</span>x; b1<span style="color:#f92672">=</span>c; }
+    <span style="color:#66d9ef">if</span>(k<span style="color:#f92672">&gt;</span><span style="color:#ae81ff">5</span> <span style="color:#f92672">&amp;&amp;</span> k<span style="color:#f92672">&lt;=</span><span style="color:#ae81ff">6</span>)  { r1<span style="color:#f92672">=</span>c; b1<span style="color:#f92672">=</span>x; }
+    
+    <span style="color:#66d9ef">float</span> m <span style="color:#f92672">=</span> val <span style="color:#f92672">-</span> c;
+    <span style="color:#66d9ef">return</span> rsPackColorTo8888(r1 <span style="color:#f92672">+</span> m, g1 <span style="color:#f92672">+</span> m, b1 <span style="color:#f92672">+</span> m);
+}
+    
+uchar4 RS_KERNEL <span style="color:#a6e22e">mandelbrot</span>(uchar4 in, uint32_t x, uint32_t y) {
+    <span style="color:#66d9ef">float</span> nzr, nzi;
+    <span style="color:#66d9ef">float</span> zr <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>, zi <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>;
+    <span style="color:#66d9ef">float</span> cr <span style="color:#f92672">=</span> left <span style="color:#f92672">+</span> (right <span style="color:#f92672">-</span> left) <span style="color:#f92672">*</span> (x <span style="color:#f92672">/</span> (<span style="color:#66d9ef">double</span>) width);
+    <span style="color:#66d9ef">float</span> ci <span style="color:#f92672">=</span> top <span style="color:#f92672">+</span> (bottom <span style="color:#f92672">-</span> top) <span style="color:#f92672">*</span> (y <span style="color:#f92672">/</span> (<span style="color:#66d9ef">double</span>) height);
+    
+    <span style="color:#66d9ef">int</span> i <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>;
+    <span style="color:#66d9ef">while</span> (i <span style="color:#f92672">&lt;</span> maxIterations <span style="color:#f92672">&amp;&amp;</span> zr <span style="color:#f92672">*</span> zr <span style="color:#f92672">+</span> zi <span style="color:#f92672">*</span> zi <span style="color:#f92672">&lt;</span> <span style="color:#ae81ff">4</span>) {
+        nzr <span style="color:#f92672">=</span> zr <span style="color:#f92672">*</span> zr <span style="color:#f92672">-</span> zi <span style="color:#f92672">*</span> zi <span style="color:#f92672">+</span> cr;
+        nzi <span style="color:#f92672">=</span> <span style="color:#ae81ff">2</span> <span style="color:#f92672">*</span> zr <span style="color:#f92672">*</span> zi <span style="color:#f92672">+</span> ci;
+        zr <span style="color:#f92672">=</span> nzr;
+        zi <span style="color:#f92672">=</span> nzi;
+        i<span style="color:#f92672">++</span>;
+    }
+    
+    <span style="color:#66d9ef">return</span> getColor(i);
+}
+</code></pre></div><p>As you can see the kernel (marked with <code>RS_KERNEL</code>) is basically the same as was before with just some minor changes required by the language. It is also worth noting that the kernel&rsquo;s <code>x</code> and <code>y</code> parameter will not be provided by us, but the framework.</p>
+<p>We have to put this file inside it&rsquo;s own directory located at <code>app/src/main/rs</code> and we will call it <code>mandelbrot.rs</code>. After saving we can build the project so the required java files will be generated and after it&rsquo;s finished we can start using it in our application.</p>
+<p>There are a few setup steps before we can really use it. First we have to create a RenderScript context and use that to initialize our script. We also have to set the global variables for the script and create allocations for our input and output.</p>
+<p>After all these steps we are ready to start the calculations by calling our kernel on the loaded script.</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-kotlin" data-lang="kotlin"><span style="color:#66d9ef">private</span> <span style="color:#66d9ef">val</span> rs = RenderScript.create(context)
+<span style="color:#66d9ef">private</span> <span style="color:#66d9ef">val</span> script = ScriptC_mandelbrot(rs).apply {
+    _width = width
+    _height = height
+    _maxIterations = MAX_ITER
+}
+    
+<span style="color:#66d9ef">override</span> <span style="color:#66d9ef">suspend</span> <span style="color:#66d9ef">fun</span> <span style="color:#a6e22e">generate</span>(buffer: Bitmap, rect: RectF) {
+    script.apply {
+        _left = rect.left
+        _top = rect.top
+        _right = rect.right
+        _bottom = rect.bottom
+    }
+    
+    <span style="color:#66d9ef">val</span> bufferAllocation = Allocation.createFromBitmap(rs, buffer)
+    script.forEach_mandelbrot(bufferAllocation, bufferAllocation)
+    bufferAllocation.copyTo(buffer)
+    bufferAllocation.destroy()
+}
+</code></pre></div><p>As there can be more than one kernels in the script we have to specify which one we would like to use by calling <code>forEach_{{kernelName}}</code>. As we are not using our input for anything we can also save some memory by using that for our output too.</p>
+<p>After all that we only have to copy our allocation back to a bitmap and we can display that to show our users the result.</p>
+<h2 id="so-was-it-worth-it">So, was it worth it?</h2>
+<p>Now that we&rsquo;re ready with our 3 implementations we can compare them.</p>
+<p>We can easily see that the easiest one to write was the Kotlin version. We had to do some extra steps to write the RenderScript version, but it was still less hassle than creating our own parallel implementation.</p>
+<p>And what about performance? To measure that I ran every computation a few times and measured the average duration it took to generate a single image. The order of the methods is as expected, Kotlin is the slowest with an average of <code>1016 ms/frame</code>, the second one is the parallel version with an average of <code>475 ms/frame</code> and the winner is RenderScript with an average of <code>33 ms/frame</code>. Of course the numbers my vary, but we can easily see that RenderScript is the fastest by a big margin.</p>
+<p>In my opinion the extra work easily worths the performance gain, but of course everybody should decide it for themselves.</p>
+<h2 id="when-should-i-use-it">When should I use it?</h2>
+<p>We have seen that it can be used with most efficiency when parallel computing can drastically increase the performance of our code. This is usually true for those scenarios when a large number of things should be computed and they are independent of each other.</p>
+<p>RenderScript (as the name suggests) is most used for image processing/manipulation, but I&rsquo;m sure that there are a lot of other areas of computing where it could be used effectively.</p>
+<p>And just to have a real life example: I&rsquo;m sure a lot of us had met a designer in the past who wanted some fancy blur effect for some dynamic parts of the UI which is almost impossible to achieve normally. From now on we don&rsquo;t have to say that we can&rsquo;t do that we just have to tell the truth:</p>
+<blockquote>
+<p>It is possible, but will take longer.</p>
+</blockquote>
+<h2 id="further-reading">Further reading</h2>
+<p>You can read more about RenderScript on the <a href="https://developer.android.com/guide/topics/renderscript/compute">Android Developer Site</a>, and check out the source code of the test application at <a href="https://github.com/PsHegger/render-script-performance">https://github.com/PsHegger/render-script-performance</a></p>
+</div>
+            </div>
+        </div>
+
+        <div class="layui-col-md4 layui-col-sm12 layui-col-xs12">
+            
+            <div class="layui-card single-card">
+                <h2 class="single-title">Relevant Topics</h2>
+                
+                	
+                    <div style="margin-left: 10px;">
+                        <blockquote class="self-elem-quote self-elem-quote-bg-orange" style="background-color:#FFFFFF;margin-top: 10px;">
+                            <a href="/post/grpc-talk/">
+                                <h3 class="">gRPC for Kotliners</h3>
+                            </a>
+                            
+                            <h3 style="margin-top:10px; margin-bottom:10px"> 
+    <i class="layui-icon layui-icon-date" style="font-size: 28px; vertical-align: -2px;"></i>
+    <span>2019-11-14</span>
+
+    
+     
+    <i class="layui-icon layui-icon-list" style="font-size: 32px; vertical-align: -3px;"></i>
+    
+
+    
+        <a href="/categories/android/">
+            <span class="layui-badge layui-bg-green" style="vertical-align: 2px;">android</span>
+        </a>
+    
+        <a href="/categories/kotlin/">
+            <span class="layui-badge layui-bg-green" style="vertical-align: 2px;">kotlin</span>
+        </a>
+    
+        <a href="/categories/talks/">
+            <span class="layui-badge layui-bg-green" style="vertical-align: 2px;">talks</span>
+        </a>
+    
+
+    
+    <i class="layui-icon layui-icon-tabs" style="font-size: 22px; vertical-align: 1px;margin-right:2px;"></i>
+    
+
+    
+        <a href="/tags/kotlin/">
+            <span class="layui-badge layui-bg-green" style="vertical-align: 2px;">kotlin</span>
+        </a>
+    
+        <a href="/tags/android/">
+            <span class="layui-badge layui-bg-green" style="vertical-align: 2px;">android</span>
+        </a>
+    
+        <a href="/tags/grpc/">
+            <span class="layui-badge layui-bg-green" style="vertical-align: 2px;">grpc</span>
+        </a>
+    
+    
+</h3>
+                        </blockquote>
+                    </div>
+                	
+                    <div style="margin-left: 10px;">
+                        <blockquote class="self-elem-quote self-elem-quote-bg-orange" style="background-color:#FFFFFF;margin-top: 10px;">
+                            <a href="/post/generate-for-me/">
+                                <h3 class="">@GenerateForMe</h3>
+                            </a>
+                            
+                            <h3 style="margin-top:10px; margin-bottom:10px"> 
+    <i class="layui-icon layui-icon-date" style="font-size: 28px; vertical-align: -2px;"></i>
+    <span>2019-11-11</span>
+
+    
+     
+    <i class="layui-icon layui-icon-list" style="font-size: 32px; vertical-align: -3px;"></i>
+    
+
+    
+        <a href="/categories/kotlin/">
+            <span class="layui-badge layui-bg-green" style="vertical-align: 2px;">kotlin</span>
+        </a>
+    
+
+    
+    <i class="layui-icon layui-icon-tabs" style="font-size: 22px; vertical-align: 1px;margin-right:2px;"></i>
+    
+
+    
+        <a href="/tags/programming/">
+            <span class="layui-badge layui-bg-green" style="vertical-align: 2px;">programming</span>
+        </a>
+    
+        <a href="/tags/kotlin/">
+            <span class="layui-badge layui-bg-green" style="vertical-align: 2px;">kotlin</span>
+        </a>
+    
+        <a href="/tags/annotation/">
+            <span class="layui-badge layui-bg-green" style="vertical-align: 2px;">annotation</span>
+        </a>
+    
+        <a href="/tags/kapt/">
+            <span class="layui-badge layui-bg-green" style="vertical-align: 2px;">kapt</span>
+        </a>
+    
+    
+</h3>
+                        </blockquote>
+                    </div>
+                	
+                    <div style="margin-left: 10px;">
+                        <blockquote class="self-elem-quote self-elem-quote-bg-orange" style="background-color:#FFFFFF;margin-top: 10px;">
+                            <a href="/post/kotlin-contracts/">
+                                <h3 class="">Help Yourself and the Compiler with Contracts</h3>
+                            </a>
+                            
+                            <h3 style="margin-top:10px; margin-bottom:10px"> 
+    <i class="layui-icon layui-icon-date" style="font-size: 28px; vertical-align: -2px;"></i>
+    <span>2019-03-21</span>
+
+    
+     
+    <i class="layui-icon layui-icon-list" style="font-size: 32px; vertical-align: -3px;"></i>
+    
+
+    
+        <a href="/categories/kotlin/">
+            <span class="layui-badge layui-bg-green" style="vertical-align: 2px;">kotlin</span>
+        </a>
+    
+
+    
+    <i class="layui-icon layui-icon-tabs" style="font-size: 22px; vertical-align: 1px;margin-right:2px;"></i>
+    
+
+    
+        <a href="/tags/programming/">
+            <span class="layui-badge layui-bg-green" style="vertical-align: 2px;">programming</span>
+        </a>
+    
+        <a href="/tags/kotlin/">
+            <span class="layui-badge layui-bg-green" style="vertical-align: 2px;">kotlin</span>
+        </a>
+    
+        <a href="/tags/contracts/">
+            <span class="layui-badge layui-bg-green" style="vertical-align: 2px;">contracts</span>
+        </a>
+    
+    
+</h3>
+                        </blockquote>
+                    </div>
+                	
+                
+                <br />
+            </div>
+            
+
+            <div class="layui-card single-card">
+                <h2 class="single-title">Recent Posts</h2>
+            
+                
+                <div style="margin-left: 10px;">
+                    <blockquote class="self-elem-quote self-elem-quote-bg-orange" style="background-color:#FFFFFF;margin-top: 10px;">
+                    <a href="/post/renderscript/">
+                        <h3 class="">RenderScript is Still alive</h3>
+                    </a>
+                    <h3 style="margin-top:10px; margin-bottom:10px"> 
+    <i class="layui-icon layui-icon-date" style="font-size: 28px; vertical-align: -2px;"></i>
+    <span>2020-02-29</span>
+
+    
+     
+    <i class="layui-icon layui-icon-list" style="font-size: 32px; vertical-align: -3px;"></i>
+    
+
+    
+        <a href="/categories/android/">
+            <span class="layui-badge layui-bg-green" style="vertical-align: 2px;">android</span>
+        </a>
+    
+
+    
+    <i class="layui-icon layui-icon-tabs" style="font-size: 22px; vertical-align: 1px;margin-right:2px;"></i>
+    
+
+    
+        <a href="/tags/programming/">
+            <span class="layui-badge layui-bg-green" style="vertical-align: 2px;">programming</span>
+        </a>
+    
+        <a href="/tags/android/">
+            <span class="layui-badge layui-bg-green" style="vertical-align: 2px;">android</span>
+        </a>
+    
+        <a href="/tags/renderscript/">
+            <span class="layui-badge layui-bg-green" style="vertical-align: 2px;">renderscript</span>
+        </a>
+    
+        <a href="/tags/parallelism/">
+            <span class="layui-badge layui-bg-green" style="vertical-align: 2px;">parallelism</span>
+        </a>
+    
+    
+</h3>
+                    </blockquote>
+                </div>
+                
+                <div style="margin-left: 10px;">
+                    <blockquote class="self-elem-quote self-elem-quote-bg-orange" style="background-color:#FFFFFF;margin-top: 10px;">
+                    <a href="/post/grpc-talk/">
+                        <h3 class="">gRPC for Kotliners</h3>
+                    </a>
+                    <h3 style="margin-top:10px; margin-bottom:10px"> 
+    <i class="layui-icon layui-icon-date" style="font-size: 28px; vertical-align: -2px;"></i>
+    <span>2019-11-14</span>
+
+    
+     
+    <i class="layui-icon layui-icon-list" style="font-size: 32px; vertical-align: -3px;"></i>
+    
+
+    
+        <a href="/categories/android/">
+            <span class="layui-badge layui-bg-green" style="vertical-align: 2px;">android</span>
+        </a>
+    
+        <a href="/categories/kotlin/">
+            <span class="layui-badge layui-bg-green" style="vertical-align: 2px;">kotlin</span>
+        </a>
+    
+        <a href="/categories/talks/">
+            <span class="layui-badge layui-bg-green" style="vertical-align: 2px;">talks</span>
+        </a>
+    
+
+    
+    <i class="layui-icon layui-icon-tabs" style="font-size: 22px; vertical-align: 1px;margin-right:2px;"></i>
+    
+
+    
+        <a href="/tags/kotlin/">
+            <span class="layui-badge layui-bg-green" style="vertical-align: 2px;">kotlin</span>
+        </a>
+    
+        <a href="/tags/android/">
+            <span class="layui-badge layui-bg-green" style="vertical-align: 2px;">android</span>
+        </a>
+    
+        <a href="/tags/grpc/">
+            <span class="layui-badge layui-bg-green" style="vertical-align: 2px;">grpc</span>
+        </a>
+    
+    
+</h3>
+                    </blockquote>
+                </div>
+                
+                <div style="margin-left: 10px;">
+                    <blockquote class="self-elem-quote self-elem-quote-bg-orange" style="background-color:#FFFFFF;margin-top: 10px;">
+                    <a href="/post/generate-for-me/">
+                        <h3 class="">@GenerateForMe</h3>
+                    </a>
+                    <h3 style="margin-top:10px; margin-bottom:10px"> 
+    <i class="layui-icon layui-icon-date" style="font-size: 28px; vertical-align: -2px;"></i>
+    <span>2019-11-11</span>
+
+    
+     
+    <i class="layui-icon layui-icon-list" style="font-size: 32px; vertical-align: -3px;"></i>
+    
+
+    
+        <a href="/categories/kotlin/">
+            <span class="layui-badge layui-bg-green" style="vertical-align: 2px;">kotlin</span>
+        </a>
+    
+
+    
+    <i class="layui-icon layui-icon-tabs" style="font-size: 22px; vertical-align: 1px;margin-right:2px;"></i>
+    
+
+    
+        <a href="/tags/programming/">
+            <span class="layui-badge layui-bg-green" style="vertical-align: 2px;">programming</span>
+        </a>
+    
+        <a href="/tags/kotlin/">
+            <span class="layui-badge layui-bg-green" style="vertical-align: 2px;">kotlin</span>
+        </a>
+    
+        <a href="/tags/annotation/">
+            <span class="layui-badge layui-bg-green" style="vertical-align: 2px;">annotation</span>
+        </a>
+    
+        <a href="/tags/kapt/">
+            <span class="layui-badge layui-bg-green" style="vertical-align: 2px;">kapt</span>
+        </a>
+    
+    
+</h3>
+                    </blockquote>
+                </div>
+                
+                <div style="margin-left: 10px;">
+                    <blockquote class="self-elem-quote self-elem-quote-bg-orange" style="background-color:#FFFFFF;margin-top: 10px;">
+                    <a href="/post/kotlin-contracts/">
+                        <h3 class="">Help Yourself and the Compiler with Contracts</h3>
+                    </a>
+                    <h3 style="margin-top:10px; margin-bottom:10px"> 
+    <i class="layui-icon layui-icon-date" style="font-size: 28px; vertical-align: -2px;"></i>
+    <span>2019-03-21</span>
+
+    
+     
+    <i class="layui-icon layui-icon-list" style="font-size: 32px; vertical-align: -3px;"></i>
+    
+
+    
+        <a href="/categories/kotlin/">
+            <span class="layui-badge layui-bg-green" style="vertical-align: 2px;">kotlin</span>
+        </a>
+    
+
+    
+    <i class="layui-icon layui-icon-tabs" style="font-size: 22px; vertical-align: 1px;margin-right:2px;"></i>
+    
+
+    
+        <a href="/tags/programming/">
+            <span class="layui-badge layui-bg-green" style="vertical-align: 2px;">programming</span>
+        </a>
+    
+        <a href="/tags/kotlin/">
+            <span class="layui-badge layui-bg-green" style="vertical-align: 2px;">kotlin</span>
+        </a>
+    
+        <a href="/tags/contracts/">
+            <span class="layui-badge layui-bg-green" style="vertical-align: 2px;">contracts</span>
+        </a>
+    
+    
+</h3>
+                    </blockquote>
+                </div>
+                
+            
+            <br />
+            </div>
+        </div>
+
+    </div>
+</div>
+
+
+        </div><footer>
+    
+    
+    <div class="layui-container">
+        <p class="copyright">&copy; All rights reserved. Powered by <a href='https://gohugo.io' style='color:#FFFFFF'>Hugo</a> and <a href='https://github.com/ertuil/erblog' style='color:#FFFFFF'>Erblog</a>.</p>
+    </div>
+</footer>
+</body>
+</html>

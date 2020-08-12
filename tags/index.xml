@@ -6,7 +6,7 @@
     <description>Recent content in Tags on pshegger</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Sat, 29 Feb 2020 00:00:00 +0000</lastBuildDate>
+    <lastBuildDate>Tue, 04 Aug 2020 00:00:00 +0000</lastBuildDate>
     
 	<atom:link href="http://pshegger.github.io/tags/index.xml" rel="self" type="application/rss+xml" />
     
@@ -14,9 +14,36 @@
     <item>
       <title>android</title>
       <link>http://pshegger.github.io/tags/android/</link>
-      <pubDate>Sat, 29 Feb 2020 00:00:00 +0000</pubDate>
+      <pubDate>Tue, 04 Aug 2020 00:00:00 +0000</pubDate>
       
       <guid>http://pshegger.github.io/tags/android/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>mlkit</title>
+      <link>http://pshegger.github.io/tags/mlkit/</link>
+      <pubDate>Tue, 04 Aug 2020 00:00:00 +0000</pubDate>
+      
+      <guid>http://pshegger.github.io/tags/mlkit/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>programming</title>
+      <link>http://pshegger.github.io/tags/programming/</link>
+      <pubDate>Tue, 04 Aug 2020 00:00:00 +0000</pubDate>
+      
+      <guid>http://pshegger.github.io/tags/programming/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>sudoku</title>
+      <link>http://pshegger.github.io/tags/sudoku/</link>
+      <pubDate>Tue, 04 Aug 2020 00:00:00 +0000</pubDate>
+      
+      <guid>http://pshegger.github.io/tags/sudoku/</guid>
       <description></description>
     </item>
     
@@ -26,15 +53,6 @@
       <pubDate>Sat, 29 Feb 2020 00:00:00 +0000</pubDate>
       
       <guid>http://pshegger.github.io/tags/parallelism/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>programming</title>
-      <link>http://pshegger.github.io/tags/programming/</link>
-      <pubDate>Sat, 29 Feb 2020 00:00:00 +0000</pubDate>
-      
-      <guid>http://pshegger.github.io/tags/programming/</guid>
       <description></description>
     </item>
     

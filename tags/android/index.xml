@@ -6,7 +6,7 @@
     <description>Recent content in android on pshegger</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Tue, 04 Aug 2020 00:00:00 +0000</lastBuildDate>
+    <lastBuildDate>Wed, 12 Aug 2020 00:00:00 +0000</lastBuildDate>
     
 	<atom:link href="http://pshegger.github.io/tags/android/index.xml" rel="self" type="application/rss+xml" />
     
@@ -14,7 +14,7 @@
     <item>
       <title>Turning a Camera Feed into a Solved Sudoku</title>
       <link>http://pshegger.github.io/post/ar-sudoku/</link>
-      <pubDate>Tue, 04 Aug 2020 00:00:00 +0000</pubDate>
+      <pubDate>Wed, 12 Aug 2020 00:00:00 +0000</pubDate>
       
       <guid>http://pshegger.github.io/post/ar-sudoku/</guid>
       <description>A few months ago, I stumbled upon a video that led me into a rabbit hole. It resulted in a simple application that overlays a sudoku&amp;rsquo;s solution into the camera image of the puzzle. This post is about the process of getting to the end result.

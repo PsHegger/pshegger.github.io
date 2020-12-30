@@ -6,10 +6,16 @@
     <description>Recent content in Posts on pshegger</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Wed, 12 Aug 2020 00:00:00 +0000</lastBuildDate>
-    
-	<atom:link href="http://pshegger.github.io/post/index.xml" rel="self" type="application/rss+xml" />
-    
+    <lastBuildDate>Wed, 30 Dec 2020 00:00:00 +0000</lastBuildDate><atom:link href="http://pshegger.github.io/post/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Advent of Code 2020</title>
+      <link>http://pshegger.github.io/post/aoc-2020/</link>
+      <pubDate>Wed, 30 Dec 2020 00:00:00 +0000</pubDate>
+      
+      <guid>http://pshegger.github.io/post/aoc-2020/</guid>
+      <description>The 2020 Advent of Code ended less than a week ago, and I thought the best way to cope with the void it left behind is writing a post about how I&amp;rsquo;ve seen it. This was my 5th year I jumped into it, but only the first one I actually did all the tasks. Just a small warning, this post contains some minor spoilers.
+This year my aim was to do all the tasks as fast as possible, so I didn&amp;rsquo;t use a new language.</description>
+    </item>
     
     <item>
       <title>Turning a Camera Feed into a Solved Sudoku</title>

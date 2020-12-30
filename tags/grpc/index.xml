@@ -6,11 +6,7 @@
     <description>Recent content in grpc on pshegger</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Thu, 14 Nov 2019 00:00:00 +0000</lastBuildDate>
-    
-	<atom:link href="http://pshegger.github.io/tags/grpc/index.xml" rel="self" type="application/rss+xml" />
-    
-    
+    <lastBuildDate>Thu, 14 Nov 2019 00:00:00 +0000</lastBuildDate><atom:link href="http://pshegger.github.io/tags/grpc/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>gRPC for Kotliners</title>
       <link>http://pshegger.github.io/post/grpc-talk/</link>

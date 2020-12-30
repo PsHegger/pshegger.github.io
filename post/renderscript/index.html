@@ -158,12 +158,12 @@ layui.use('element', function(){
     <span style="color:#66d9ef">var</span> zi = <span style="color:#ae81ff">0.0</span>
     
     <span style="color:#66d9ef">var</span> i = <span style="color:#ae81ff">0</span>
-    <span style="color:#66d9ef">while</span> (i &lt; MainActivity.MAX_ITER &amp;&amp; zr * zr + zi * zi &lt; <span style="color:#ae81ff">4</span>) {
+    <span style="color:#66d9ef">while</span> (i &lt; MainActivity.MAX_ITER <span style="color:#f92672">&amp;&amp;</span> zr * zr + zi * zi &lt; <span style="color:#ae81ff">4</span>) {
         <span style="color:#66d9ef">val</span> nzr = zr * zr - zi * zi + cr
         <span style="color:#66d9ef">val</span> nzi = <span style="color:#ae81ff">2</span> * zr * zi + ci
         zr = nzr
         zi = nzi
-        i++
+        i<span style="color:#f92672">++</span>
     }
     
     <span style="color:#66d9ef">val</span> hue = <span style="color:#ae81ff">360</span> * i.toFloat() / MainActivity.MAX_ITER
@@ -183,7 +183,7 @@ layui.use('element', function(){
     <span style="color:#66d9ef">val</span> context = Executors.newFixedThreadPool(numThreads).asCoroutineDispatcher()
     
     <span style="color:#66d9ef">var</span> h = sqrt(numThreads.toDouble()).toInt()
-    <span style="color:#66d9ef">while</span> (numThreads % h != <span style="color:#ae81ff">0</span>) h--
+    <span style="color:#66d9ef">while</span> (numThreads % h <span style="color:#f92672">!=</span> <span style="color:#ae81ff">0</span>) h<span style="color:#f92672">--</span>
     <span style="color:#66d9ef">val</span> w = numThreads / h
     
     <span style="color:#66d9ef">val</span> segWidth = width / w
@@ -468,6 +468,48 @@ uchar4 RS_KERNEL <span style="color:#a6e22e">mandelbrot</span>(uchar4 in, uint32
                 
                 <div style="margin-left: 10px;">
                     <blockquote class="self-elem-quote self-elem-quote-bg-orange" style="background-color:#FFFFFF;margin-top: 10px;">
+                    <a href="/post/aoc-2020/">
+                        <h3 class="">Advent of Code 2020</h3>
+                    </a>
+                    <h3 style="margin-top:10px; margin-bottom:10px"> 
+    <i class="layui-icon layui-icon-date" style="font-size: 28px; vertical-align: -2px;"></i>
+    <span>2020-12-30</span>
+
+    
+     
+    <i class="layui-icon layui-icon-list" style="font-size: 32px; vertical-align: -3px;"></i>
+    
+
+    
+        <a href="/categories/blog/">
+            <span class="layui-badge layui-bg-green" style="vertical-align: 2px;">blog</span>
+        </a>
+    
+
+    
+    <i class="layui-icon layui-icon-tabs" style="font-size: 22px; vertical-align: 1px;margin-right:2px;"></i>
+    
+
+    
+        <a href="/tags/programming/">
+            <span class="layui-badge layui-bg-green" style="vertical-align: 2px;">programming</span>
+        </a>
+    
+        <a href="/tags/competitive-programming/">
+            <span class="layui-badge layui-bg-green" style="vertical-align: 2px;">competitive programming</span>
+        </a>
+    
+        <a href="/tags/advent-of-code/">
+            <span class="layui-badge layui-bg-green" style="vertical-align: 2px;">advent of code</span>
+        </a>
+    
+    
+</h3>
+                    </blockquote>
+                </div>
+                
+                <div style="margin-left: 10px;">
+                    <blockquote class="self-elem-quote self-elem-quote-bg-orange" style="background-color:#FFFFFF;margin-top: 10px;">
                     <a href="/post/ar-sudoku/">
                         <h3 class="">Turning a Camera Feed into a Solved Sudoku</h3>
                     </a>
@@ -647,48 +689,6 @@ uchar4 RS_KERNEL <span style="color:#a6e22e">mandelbrot</span>(uchar4 in, uint32
     
         <a href="/tags/kapt/">
             <span class="layui-badge layui-bg-green" style="vertical-align: 2px;">kapt</span>
-        </a>
-    
-    
-</h3>
-                    </blockquote>
-                </div>
-                
-                <div style="margin-left: 10px;">
-                    <blockquote class="self-elem-quote self-elem-quote-bg-orange" style="background-color:#FFFFFF;margin-top: 10px;">
-                    <a href="/post/kotlin-contracts/">
-                        <h3 class="">Help Yourself and the Compiler with Contracts</h3>
-                    </a>
-                    <h3 style="margin-top:10px; margin-bottom:10px"> 
-    <i class="layui-icon layui-icon-date" style="font-size: 28px; vertical-align: -2px;"></i>
-    <span>2019-03-21</span>
-
-    
-     
-    <i class="layui-icon layui-icon-list" style="font-size: 32px; vertical-align: -3px;"></i>
-    
-
-    
-        <a href="/categories/kotlin/">
-            <span class="layui-badge layui-bg-green" style="vertical-align: 2px;">kotlin</span>
-        </a>
-    
-
-    
-    <i class="layui-icon layui-icon-tabs" style="font-size: 22px; vertical-align: 1px;margin-right:2px;"></i>
-    
-
-    
-        <a href="/tags/programming/">
-            <span class="layui-badge layui-bg-green" style="vertical-align: 2px;">programming</span>
-        </a>
-    
-        <a href="/tags/kotlin/">
-            <span class="layui-badge layui-bg-green" style="vertical-align: 2px;">kotlin</span>
-        </a>
-    
-        <a href="/tags/contracts/">
-            <span class="layui-badge layui-bg-green" style="vertical-align: 2px;">contracts</span>
         </a>
     
     

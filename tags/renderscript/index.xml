@@ -6,11 +6,7 @@
     <description>Recent content in renderscript on pshegger</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Sat, 29 Feb 2020 00:00:00 +0000</lastBuildDate>
-    
-	<atom:link href="http://pshegger.github.io/tags/renderscript/index.xml" rel="self" type="application/rss+xml" />
-    
-    
+    <lastBuildDate>Sat, 29 Feb 2020 00:00:00 +0000</lastBuildDate><atom:link href="http://pshegger.github.io/tags/renderscript/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>RenderScript is Still alive</title>
       <link>http://pshegger.github.io/post/renderscript/</link>

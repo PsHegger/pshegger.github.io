@@ -152,13 +152,13 @@ layui.use('element', function(){
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-kotlin" data-lang="kotlin"><span style="color:#66d9ef">fun</span> <span style="color:#a6e22e">solve</span>(): List&lt;Sudoku&gt; {
   <span style="color:#66d9ef">val</span> emptyCells = mutableListOf&lt;Pair&lt;Int, List&lt;Int&gt;&gt;&gt;()
     <span style="color:#66d9ef">for</span> (i <span style="color:#66d9ef">in</span> cells.indices) {
-      <span style="color:#66d9ef">if</span> (cells[i] == <span style="color:#66d9ef">null</span>) {
+      <span style="color:#66d9ef">if</span> (cells[i] <span style="color:#f92672">==</span> <span style="color:#66d9ef">null</span>) {
         <span style="color:#66d9ef">val</span> possible = validNumbers(i / <span style="color:#ae81ff">9</span>, i % <span style="color:#ae81ff">9</span>)
         <span style="color:#66d9ef">if</span> (possible.isEmpty()) {
             <span style="color:#75715e">// early return if this state is unsolvable
 </span><span style="color:#75715e"></span>            <span style="color:#66d9ef">return</span> emptyList()
         }
-        <span style="color:#66d9ef">if</span> (possible.size == <span style="color:#ae81ff">1</span>) {
+        <span style="color:#66d9ef">if</span> (possible.size <span style="color:#f92672">==</span> <span style="color:#ae81ff">1</span>) {
           <span style="color:#75715e">// fill in if there&#39;s only one possible number
 </span><span style="color:#75715e"></span>          <span style="color:#66d9ef">return</span> copyWithValue(i, possible[<span style="color:#ae81ff">0</span>]).solve()
         }
@@ -169,8 +169,8 @@ layui.use('element', function(){
             <span style="color:#75715e">// no more emtpy cells -&gt; we have found a solution
 </span><span style="color:#75715e"></span>      <span style="color:#66d9ef">return</span> listOf(<span style="color:#66d9ef">this</span>)
     }
-    <span style="color:#66d9ef">return</span> emptyCells[<span style="color:#ae81ff">0</span>].let { (cell, possible) -&gt;
-      possible.flatMap { n -&gt; copyWithValue(cell, n).solve() }
+    <span style="color:#66d9ef">return</span> emptyCells[<span style="color:#ae81ff">0</span>].let { (cell, possible) <span style="color:#f92672">-&gt;</span>
+      possible.flatMap { n <span style="color:#f92672">-&gt;</span> copyWithValue(cell, n).solve() }
     }
 }
 </code></pre></div><h2 id="the-camera-feed">The camera feed</h2>
@@ -183,8 +183,8 @@ layui.use('element', function(){
 <p>The original idea was to assume that most of the image is the sudoku itself. I know it&rsquo;s not the best solution, but that was my first idea, so I went with it.</p>
 <p>With this assumption, we can calculate the size of the cells and the middle of each cell. After that, we create a list of cells, where we store the calculated coordinates and the number which should go to that position (currently 0, which means that it&rsquo;s empty).</p>
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-kotlin" data-lang="kotlin"><span style="color:#66d9ef">val</span> cellSize = bmp.width / <span style="color:#ae81ff">9f</span>
-(<span style="color:#ae81ff">0.</span>.<span style="color:#ae81ff">8</span>).forEach { row -&gt;
-    (<span style="color:#ae81ff">0.</span>.<span style="color:#ae81ff">8</span>).forEach { col -&gt;
+(<span style="color:#ae81ff">0.</span>.<span style="color:#ae81ff">8</span>).forEach { row <span style="color:#f92672">-&gt;</span>
+    (<span style="color:#ae81ff">0.</span>.<span style="color:#ae81ff">8</span>).forEach { col <span style="color:#f92672">-&gt;</span>
       <span style="color:#66d9ef">val</span> cx = col * cellSize + cellSize / <span style="color:#ae81ff">2</span>
     <span style="color:#66d9ef">val</span> cy = row * cellSize + cellSize / <span style="color:#ae81ff">2</span>
     fields.add(Field(cx, cy, <span style="color:#ae81ff">0</span>))
@@ -196,19 +196,19 @@ layui.use('element', function(){
 <p>The next step is parsing the output of the text recognizer and adding the digits to our grid. For this, we will parse the recognized text line-by-line (which is a default supported feature of ML Kit). Every <code>Text.Line</code> object has two important things for us: the bounds of the text and the text itself.</p>
 <p>First, we have to calculate the width of a single cell. This can be easily done by dividing the length of the line by the number of characters. After that, we can calculate the <code>x</code> coordinate for every number using its index in the found text and the cell width (<code>val cx = box.left + index * fieldWidth + fieldWidth / 2</code>). The <code>y</code> coordinate is simply the middle point between the top and the bottom of the bounds.</p>
 <p>The last step is adding the number to our grid. For that, we have to find the cell with the nearest coordinate to our calculated value and update it with the new values.</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-kotlin" data-lang="kotlin">text.textBlocks.forEach { block -&gt;
-    block.lines.forEach { line -&gt;
-      line.boundingBox<span style="color:#f92672">?.</span>let { box -&gt;
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-kotlin" data-lang="kotlin">text.textBlocks.forEach { block <span style="color:#f92672">-&gt;</span>
+    block.lines.forEach { line <span style="color:#f92672">-&gt;</span>
+      line.boundingBox<span style="color:#f92672">?.</span>let { box <span style="color:#f92672">-&gt;</span>
         <span style="color:#66d9ef">val</span> fieldWidth = box.width().toFloat() / line.text.trimmedLength()
-      line.text.trim().forEachIndexed { index, c -&gt;
-          <span style="color:#66d9ef">val</span> n = <span style="color:#e6db74">&#34;$c&#34;</span>.toIntOrNull()
-        <span style="color:#66d9ef">if</span> (n != <span style="color:#66d9ef">null</span>) {
+      line.text.trim().forEachIndexed { index, c <span style="color:#f92672">-&gt;</span>
+          <span style="color:#66d9ef">val</span> n = <span style="color:#e6db74">&#34;</span><span style="color:#e6db74">$c</span><span style="color:#e6db74">&#34;</span>.toIntOrNull()
+        <span style="color:#66d9ef">if</span> (n <span style="color:#f92672">!=</span> <span style="color:#66d9ef">null</span>) {
           <span style="color:#66d9ef">val</span> cx = box.left + index * fieldWidth + fieldWidth / <span style="color:#ae81ff">2</span>
           <span style="color:#66d9ef">val</span> cy = box.top + (box.bottom - box.top) / <span style="color:#ae81ff">2f</span>
-          fields.indices.minBy { i -&gt;
+          fields.indices.minBy { i <span style="color:#f92672">-&gt;</span>
               <span style="color:#66d9ef">val</span> cell = fields[i]
             (cx - cell.centerX).pow(<span style="color:#ae81ff">2</span>) + (cy - cell.centerY).pow(<span style="color:#ae81ff">2</span>)
-          }<span style="color:#f92672">?.</span>let { nearestIndex -&gt;
+          }<span style="color:#f92672">?.</span>let { nearestIndex <span style="color:#f92672">-&gt;</span>
               fields[nearestIndex] = Field(cx, cy, n)
           }
         }
@@ -224,15 +224,15 @@ layui.use('element', function(){
 <p>Using the width, we can calculate what should be the coordinate of the first non-empty column, and the difference between that and the previously computed average will give us the left margin. We can calculate the right margin with the same concept, except we should use the last non-empty column.</p>
 <p>The process is basically the same for the height of the cell and the top/bottom margin.</p>
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-kotlin" data-lang="kotlin"><span style="color:#66d9ef">private</span> <span style="color:#66d9ef">fun</span> <span style="color:#a6e22e">calculateBounds</span>(width: Int, height: Int, fields: List&lt;Field&gt;): RectF? {
-    <span style="color:#66d9ef">val</span> cellXs = (<span style="color:#ae81ff">0.</span>.<span style="color:#ae81ff">8</span>).map { col -&gt;
-      (<span style="color:#ae81ff">0.</span>.<span style="color:#ae81ff">8</span>).mapNotNull { row -&gt;
+    <span style="color:#66d9ef">val</span> cellXs = (<span style="color:#ae81ff">0.</span>.<span style="color:#ae81ff">8</span>).map { col <span style="color:#f92672">-&gt;</span>
+      (<span style="color:#ae81ff">0.</span>.<span style="color:#ae81ff">8</span>).mapNotNull { row <span style="color:#f92672">-&gt;</span>
             <span style="color:#66d9ef">val</span> field = fields[row * <span style="color:#ae81ff">9</span> + col]
-      <span style="color:#66d9ef">if</span> (field.value != <span style="color:#ae81ff">0</span>) field.centerX <span style="color:#66d9ef">else</span> <span style="color:#66d9ef">null</span>
+      <span style="color:#66d9ef">if</span> (<span style="color:#66d9ef">field</span>.value <span style="color:#f92672">!=</span> <span style="color:#ae81ff">0</span>) <span style="color:#66d9ef">field</span>.centerX <span style="color:#66d9ef">else</span> <span style="color:#66d9ef">null</span>
     }.average().toFloat()
   }
-  <span style="color:#66d9ef">val</span> firstColX = cellXs.indexOfFirst { it != <span style="color:#ae81ff">0f</span> &amp;&amp; !it.isNaN() }
-  <span style="color:#66d9ef">val</span> lastColX = cellXs.indexOfLast { it != <span style="color:#ae81ff">0f</span> &amp;&amp; !it.isNaN() }
-  <span style="color:#66d9ef">if</span> (firstColX &lt; <span style="color:#ae81ff">0</span> || lastColX &lt; <span style="color:#ae81ff">0</span>) <span style="color:#66d9ef">return</span> <span style="color:#66d9ef">null</span>
+  <span style="color:#66d9ef">val</span> firstColX = cellXs.indexOfFirst { <span style="color:#66d9ef">it</span> <span style="color:#f92672">!=</span> <span style="color:#ae81ff">0f</span> <span style="color:#f92672">&amp;&amp;</span> !<span style="color:#66d9ef">it</span>.isNaN() }
+  <span style="color:#66d9ef">val</span> lastColX = cellXs.indexOfLast { <span style="color:#66d9ef">it</span> <span style="color:#f92672">!=</span> <span style="color:#ae81ff">0f</span> <span style="color:#f92672">&amp;&amp;</span> !<span style="color:#66d9ef">it</span>.isNaN() }
+  <span style="color:#66d9ef">if</span> (firstColX &lt; <span style="color:#ae81ff">0</span> <span style="color:#f92672">||</span> lastColX &lt; <span style="color:#ae81ff">0</span>) <span style="color:#66d9ef">return</span> <span style="color:#66d9ef">null</span>
   <span style="color:#66d9ef">val</span> cellWidth = (cellXs[lastColX] - cellXs[firstColX]) / (lastColX - firstColX)
   <span style="color:#66d9ef">val</span> marginLeft = cellXs[firstColX] - firstColX * cellWidth - cellWidth / <span style="color:#ae81ff">2</span>
   <span style="color:#66d9ef">val</span> marginRight = width - cellXs[lastColX] - ((<span style="color:#ae81ff">8</span> - lastColX) * cellWidth) - cellWidth / <span style="color:#ae81ff">2</span>
@@ -465,6 +465,48 @@ layui.use('element', function(){
                 
                 <div style="margin-left: 10px;">
                     <blockquote class="self-elem-quote self-elem-quote-bg-orange" style="background-color:#FFFFFF;margin-top: 10px;">
+                    <a href="/post/aoc-2020/">
+                        <h3 class="">Advent of Code 2020</h3>
+                    </a>
+                    <h3 style="margin-top:10px; margin-bottom:10px"> 
+    <i class="layui-icon layui-icon-date" style="font-size: 28px; vertical-align: -2px;"></i>
+    <span>2020-12-30</span>
+
+    
+     
+    <i class="layui-icon layui-icon-list" style="font-size: 32px; vertical-align: -3px;"></i>
+    
+
+    
+        <a href="/categories/blog/">
+            <span class="layui-badge layui-bg-green" style="vertical-align: 2px;">blog</span>
+        </a>
+    
+
+    
+    <i class="layui-icon layui-icon-tabs" style="font-size: 22px; vertical-align: 1px;margin-right:2px;"></i>
+    
+
+    
+        <a href="/tags/programming/">
+            <span class="layui-badge layui-bg-green" style="vertical-align: 2px;">programming</span>
+        </a>
+    
+        <a href="/tags/competitive-programming/">
+            <span class="layui-badge layui-bg-green" style="vertical-align: 2px;">competitive programming</span>
+        </a>
+    
+        <a href="/tags/advent-of-code/">
+            <span class="layui-badge layui-bg-green" style="vertical-align: 2px;">advent of code</span>
+        </a>
+    
+    
+</h3>
+                    </blockquote>
+                </div>
+                
+                <div style="margin-left: 10px;">
+                    <blockquote class="self-elem-quote self-elem-quote-bg-orange" style="background-color:#FFFFFF;margin-top: 10px;">
                     <a href="/post/ar-sudoku/">
                         <h3 class="">Turning a Camera Feed into a Solved Sudoku</h3>
                     </a>
@@ -644,48 +686,6 @@ layui.use('element', function(){
     
         <a href="/tags/kapt/">
             <span class="layui-badge layui-bg-green" style="vertical-align: 2px;">kapt</span>
-        </a>
-    
-    
-</h3>
-                    </blockquote>
-                </div>
-                
-                <div style="margin-left: 10px;">
-                    <blockquote class="self-elem-quote self-elem-quote-bg-orange" style="background-color:#FFFFFF;margin-top: 10px;">
-                    <a href="/post/kotlin-contracts/">
-                        <h3 class="">Help Yourself and the Compiler with Contracts</h3>
-                    </a>
-                    <h3 style="margin-top:10px; margin-bottom:10px"> 
-    <i class="layui-icon layui-icon-date" style="font-size: 28px; vertical-align: -2px;"></i>
-    <span>2019-03-21</span>
-
-    
-     
-    <i class="layui-icon layui-icon-list" style="font-size: 32px; vertical-align: -3px;"></i>
-    
-
-    
-        <a href="/categories/kotlin/">
-            <span class="layui-badge layui-bg-green" style="vertical-align: 2px;">kotlin</span>
-        </a>
-    
-
-    
-    <i class="layui-icon layui-icon-tabs" style="font-size: 22px; vertical-align: 1px;margin-right:2px;"></i>
-    
-
-    
-        <a href="/tags/programming/">
-            <span class="layui-badge layui-bg-green" style="vertical-align: 2px;">programming</span>
-        </a>
-    
-        <a href="/tags/kotlin/">
-            <span class="layui-badge layui-bg-green" style="vertical-align: 2px;">kotlin</span>
-        </a>
-    
-        <a href="/tags/contracts/">
-            <span class="layui-badge layui-bg-green" style="vertical-align: 2px;">contracts</span>
         </a>
     
     

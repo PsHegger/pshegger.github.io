@@ -147,15 +147,15 @@ layui.use('element', function(){
 <p>Writing the adapter is usually pretty straightforward, but you have to do it for every model you want to display inside a <code>RecyclerView</code>, and writing it generates a lot of boilerplate. Naturally we can&rsquo;t eliminate every parts of writing it, but we can make it easier and faster.</p>
 <h2 id="how-to-start">How to start?</h2>
 <p>Before we do any coding we should plan how our interface will look like for the end user. As we are planning to generate the adapter with the least possible code we should use a single class for the base and its functions will be used to define the bindings between the data and the view. This means that we will need 2 annotations: one for the class which will define the layout file and an other one for the binding functions, which will define the id of the specific view. Let&rsquo;s call them <em>@ModelBinding</em> and <em>@BindView</em>. Both of them will have one parameter, for <em>@ModelBinding</em> this will be the layout file for the View and for <em>@BindView</em> this will be the ID of the specific View. We will also have a few restriction on where the end user will be able to use these annotations. <em>@ModelBinding</em> will only be usable for classes which has a constructor with a single parameter (this will be the item we will bind to the View) and <em>@BindView</em> will only work for single parameter functions inside the class. Let&rsquo;s see an example:</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-kotlin" data-lang="kotlin">@ModelBinding(R.layout.item_user)
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-kotlin" data-lang="kotlin"><span style="color:#a6e22e">@ModelBinding</span>(R.layout.item_user)
 <span style="color:#66d9ef">class</span> <span style="color:#a6e22e">UserBinding</span>(<span style="color:#66d9ef">private</span> <span style="color:#66d9ef">val</span> user: User) {
     
-    @BindView(R.id.name)
+    <span style="color:#a6e22e">@BindView</span>(R.id.name)
     <span style="color:#66d9ef">fun</span> <span style="color:#a6e22e">bindName</span>(name: TextView) {
         name.text = user.name
     }
     
-    @BindView(R.id.email)
+    <span style="color:#a6e22e">@BindView</span>(R.id.email)
     <span style="color:#66d9ef">fun</span> <span style="color:#a6e22e">bindEmail</span>(email: TextView) {
         email.text = user.email
     }
@@ -165,13 +165,13 @@ layui.use('element', function(){
 <p>As we are planning to enchant our existing code with the generator we will be starting by opening the project. If you want to create the generator as a library the steps are almost the same, except we do not have to add our new modules as a dependency.</p>
 <p>First we have to create a new (Java library) module for our annotations. This module will only contain our annotation classes, so no dependency is needed (beside Kotlin). After that let&rsquo;s add our classes.</p>
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-kotlin" data-lang="kotlin"><span style="color:#75715e">// BindView.kt
-</span><span style="color:#75715e"></span>@Target(AnnotationTarget.FUNCTION)
-@Retention(AnnotationRetention.SOURCE)
+</span><span style="color:#75715e"></span><span style="color:#a6e22e">@Target</span>(AnnotationTarget.FUNCTION)
+<span style="color:#a6e22e">@Retention</span>(AnnotationRetention.SOURCE)
 <span style="color:#66d9ef">annotation</span> <span style="color:#66d9ef">class</span> <span style="color:#a6e22e">BindView</span>(<span style="color:#66d9ef">val</span> viewId: Int)
 
 <span style="color:#75715e">// ModelBinding.kt
-</span><span style="color:#75715e"></span>@Target(AnnotationTarget.CLASS)
-@Retention(AnnotationRetention.SOURCE)
+</span><span style="color:#75715e"></span><span style="color:#a6e22e">@Target</span>(AnnotationTarget.CLASS)
+<span style="color:#a6e22e">@Retention</span>(AnnotationRetention.SOURCE)
 <span style="color:#66d9ef">annotation</span> <span style="color:#66d9ef">class</span> <span style="color:#a6e22e">ModelBinding</span>(<span style="color:#66d9ef">val</span> layoutId: Int)
 </code></pre></div><p>The next step is creating our generator module. This also has to be a Java library, but it will have significantly more code in it. From this point on we will only be working in this module.</p>
 <p>First we have to add a few dependencies:</p>
@@ -204,14 +204,14 @@ kapt<span style="color:#f92672">(</span><span style="color:#e6db74">&#34;com.goo
     )
     .addFunction(
         FunSpec.builder(<span style="color:#e6db74">&#34;greet&#34;</span>)
-            .addStatement(<span style="color:#e6db74">&#34;println(\&#34;Hello $name\&#34;)&#34;</span>)
+            .addStatement(<span style="color:#e6db74">&#34;println(</span><span style="color:#ae81ff">\&#34;</span><span style="color:#e6db74">Hello </span><span style="color:#e6db74">$name</span><span style="color:#ae81ff">\&#34;</span><span style="color:#e6db74">)&#34;</span>)
             .build()
     )
     .build()
 </code></pre></div><p>This code will generate the following class:</p>
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-kotlin" data-lang="kotlin"><span style="color:#66d9ef">class</span> <span style="color:#a6e22e">Greeter</span>(<span style="color:#66d9ef">private</span> <span style="color:#66d9ef">val</span> name: String) {
     <span style="color:#66d9ef">fun</span> <span style="color:#a6e22e">greet</span>() {
-        println(<span style="color:#e6db74">&#34;Hello $name&#34;</span>)
+        println(<span style="color:#e6db74">&#34;Hello </span><span style="color:#e6db74">$name</span><span style="color:#e6db74">&#34;</span>)
     }
 }
 </code></pre></div><p>So, what&rsquo;s happening here. In my opinion KotlinPoet&rsquo;s API is pretty straightforward and reading it makes everything clear but let&rsquo;s work ourselves through the code together.</p>
@@ -220,7 +220,7 @@ kapt<span style="color:#f92672">(</span><span style="color:#e6db74">&#34;com.goo
 <p>Most of the code in this step is easy after learning the basics. We need to create a class which subclasses the <code>RecyclerView.ViewHolder</code> abstract class. It has to have a constructor which accepts a <code>View</code> as a parameter to pass it to the superclass. If we have that all that remains to write is the main part of the <code>ViewHolder</code> which binds the data to the view. We will call this function <code>bind</code>.</p>
 <p>To generate it we have to iterate over the functions marked with <code>@BindView</code> in the binding class. We can do that using <code>Element.getEnclosedElements()</code> which returns all elements inside an other one, and we can filter for the ones that are methods and has our annotation. After that we have to add each <code>View</code> as a class member for the <code>ViewHolder</code> and will be initialized with the ID which was passed to the annotation as a parameter. We will also have to call every function inside bind.</p>
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-kotlin" data-lang="kotlin"><span style="color:#66d9ef">fun</span> <span style="color:#a6e22e">generateViewHolder</span>(element: Element, itemPack: String, itemClassName: String): TypeSpec {
-    <span style="color:#66d9ef">val</span> classBuilder = TypeSpec.classBuilder(<span style="color:#e6db74">&#34;${itemClassName}ViewHolder&#34;</span>)
+    <span style="color:#66d9ef">val</span> classBuilder = TypeSpec.classBuilder(<span style="color:#e6db74">&#34;</span><span style="color:#e6db74">${itemClassName}</span><span style="color:#e6db74">ViewHolder&#34;</span>)
         .primaryConstructor(
             FunSpec.constructorBuilder()
                 .addParameter(<span style="color:#e6db74">&#34;itemView&#34;</span>, ClassName(<span style="color:#e6db74">&#34;android.view&#34;</span>, <span style="color:#e6db74">&#34;View&#34;</span>))
@@ -233,15 +233,15 @@ kapt<span style="color:#f92672">(</span><span style="color:#e6db74">&#34;com.goo
 
     <span style="color:#66d9ef">val</span> bindFunBuilder = FunSpec.builder(<span style="color:#e6db74">&#34;bind&#34;</span>)
         .addParameter(<span style="color:#e6db74">&#34;item&#34;</span>, ClassName(itemPack, itemClassName))
-        .addStatement(<span style="color:#e6db74">&#34;val binder = ${binderName.canonicalName}(item)&#34;</span>)
+        .addStatement(<span style="color:#e6db74">&#34;val binder = </span><span style="color:#e6db74">${binderName.canonicalName}</span><span style="color:#e6db74">(item)&#34;</span>)
 
     element.enclosedElements
-        .filter { element -&gt;
-            element.getAnnotation(Bind<span style="color:#f92672">::</span><span style="color:#66d9ef">class</span>.java) != <span style="color:#66d9ef">null</span> &amp;&amp;
-                            element.kind == ElementKind.METHOD &amp;&amp;
-                            (element <span style="color:#66d9ef">as</span> ExecutableElement).parameters.size == <span style="color:#ae81ff">1</span>
+        .filter { element <span style="color:#f92672">-&gt;</span>
+            element.getAnnotation(Bind<span style="color:#f92672">::</span><span style="color:#66d9ef">class</span>.java) <span style="color:#f92672">!=</span> <span style="color:#66d9ef">null</span> <span style="color:#f92672">&amp;&amp;</span>
+                            element.kind <span style="color:#f92672">==</span> ElementKind.METHOD <span style="color:#f92672">&amp;&amp;</span>
+                            (element <span style="color:#66d9ef">as</span> ExecutableElement).parameters.size <span style="color:#f92672">==</span> <span style="color:#ae81ff">1</span>
         }
-        .forEach { element -&gt;
+        .forEach { element <span style="color:#f92672">-&gt;</span>
             <span style="color:#66d9ef">val</span> bind = element.getAnnotation(Bind<span style="color:#f92672">::</span><span style="color:#66d9ef">class</span>.java)
             <span style="color:#66d9ef">val</span> p = (element <span style="color:#66d9ef">as</span> ExecutableElement).parameters[<span style="color:#ae81ff">0</span>]
             <span style="color:#66d9ef">val</span> viewName = p.simpleName.toString()
@@ -256,7 +256,7 @@ kapt<span style="color:#f92672">(</span><span style="color:#e6db74">&#34;com.goo
                     .build()
             )
 
-            bindFunBuilder.addStatement(<span style="color:#e6db74">&#34;binder.${element.simpleName}($viewName)&#34;</span>)
+            bindFunBuilder.addStatement(<span style="color:#e6db74">&#34;binder.</span><span style="color:#e6db74">${element.simpleName}</span><span style="color:#e6db74">(</span><span style="color:#e6db74">$viewName</span><span style="color:#e6db74">)&#34;</span>)
     }
 
     <span style="color:#66d9ef">return</span> classBuilder.addFunction(bindFunBuilder.build()).build()
@@ -288,22 +288,22 @@ kapt<span style="color:#f92672">(</span><span style="color:#e6db74">&#34;com.goo
     <span style="color:#66d9ef">val</span> kaptKotlinGeneratedDir = processingEnv.options[<span style="color:#e6db74">&#34;kapt.kotlin.generated&#34;</span>] <span style="color:#f92672">?:</span> <span style="color:#66d9ef">return</span> <span style="color:#66d9ef">false</span>
     
     roundEnv.getElementsAnnotatedWith(ModelBinding<span style="color:#f92672">::</span><span style="color:#66d9ef">class</span>.java)
-        .mapNotNull { element -&gt;
-            <span style="color:#66d9ef">if</span> (element.kind != ElementKind.CLASS) {
+        .mapNotNull { element <span style="color:#f92672">-&gt;</span>
+            <span style="color:#66d9ef">if</span> (element.kind <span style="color:#f92672">!=</span> ElementKind.CLASS) {
                 processingEnv.messager.printMessage(
                     Diagnostic.Kind.ERROR,
                     <span style="color:#e6db74">&#34;Only classes can be annotated with @ModelBinding&#34;</span>
                 )
-                <span style="color:#66d9ef">return</span>@mapNotNull <span style="color:#66d9ef">null</span>
+                <span style="color:#66d9ef">return</span><span style="color:#a6e22e">@mapNotNull</span> <span style="color:#66d9ef">null</span>
             }
             generateAdapterInfo(element)
         }
-        .map { adapterInfo -&gt;
-            <span style="color:#66d9ef">val</span> fileName = <span style="color:#e6db74">&#34;${adapterInfo.itemClassName}Adapter&#34;</span>
+        .map { adapterInfo <span style="color:#f92672">-&gt;</span>
+            <span style="color:#66d9ef">val</span> fileName = <span style="color:#e6db74">&#34;</span><span style="color:#e6db74">${adapterInfo.itemClassName}</span><span style="color:#e6db74">Adapter&#34;</span>
             <span style="color:#66d9ef">val</span> fileBuilder = FileSpec.builder(adapterInfo.pack, fileName)
             fileBuilder.addType(AdapterBuilder(processingEnv, adapterInfo).build()).build()
         }
-        .forEach { fileSpec -&gt;
+        .forEach { fileSpec <span style="color:#f92672">-&gt;</span>
             fileSpec.writeTo(File(kaptKotlinGeneratedDir))
         }
     
@@ -381,6 +381,48 @@ kapt<span style="color:#f92672">(</span>project<span style="color:#f92672">(</sp
             <div class="layui-card single-card">
                 <h2 class="single-title">Recent Posts</h2>
             
+                
+                <div style="margin-left: 10px;">
+                    <blockquote class="self-elem-quote self-elem-quote-bg-orange" style="background-color:#FFFFFF;margin-top: 10px;">
+                    <a href="/post/aoc-2020/">
+                        <h3 class="">Advent of Code 2020</h3>
+                    </a>
+                    <h3 style="margin-top:10px; margin-bottom:10px"> 
+    <i class="layui-icon layui-icon-date" style="font-size: 28px; vertical-align: -2px;"></i>
+    <span>2020-12-30</span>
+
+    
+     
+    <i class="layui-icon layui-icon-list" style="font-size: 32px; vertical-align: -3px;"></i>
+    
+
+    
+        <a href="/categories/blog/">
+            <span class="layui-badge layui-bg-green" style="vertical-align: 2px;">blog</span>
+        </a>
+    
+
+    
+    <i class="layui-icon layui-icon-tabs" style="font-size: 22px; vertical-align: 1px;margin-right:2px;"></i>
+    
+
+    
+        <a href="/tags/programming/">
+            <span class="layui-badge layui-bg-green" style="vertical-align: 2px;">programming</span>
+        </a>
+    
+        <a href="/tags/competitive-programming/">
+            <span class="layui-badge layui-bg-green" style="vertical-align: 2px;">competitive programming</span>
+        </a>
+    
+        <a href="/tags/advent-of-code/">
+            <span class="layui-badge layui-bg-green" style="vertical-align: 2px;">advent of code</span>
+        </a>
+    
+    
+</h3>
+                    </blockquote>
+                </div>
                 
                 <div style="margin-left: 10px;">
                     <blockquote class="self-elem-quote self-elem-quote-bg-orange" style="background-color:#FFFFFF;margin-top: 10px;">
@@ -563,48 +605,6 @@ kapt<span style="color:#f92672">(</span>project<span style="color:#f92672">(</sp
     
         <a href="/tags/kapt/">
             <span class="layui-badge layui-bg-green" style="vertical-align: 2px;">kapt</span>
-        </a>
-    
-    
-</h3>
-                    </blockquote>
-                </div>
-                
-                <div style="margin-left: 10px;">
-                    <blockquote class="self-elem-quote self-elem-quote-bg-orange" style="background-color:#FFFFFF;margin-top: 10px;">
-                    <a href="/post/kotlin-contracts/">
-                        <h3 class="">Help Yourself and the Compiler with Contracts</h3>
-                    </a>
-                    <h3 style="margin-top:10px; margin-bottom:10px"> 
-    <i class="layui-icon layui-icon-date" style="font-size: 28px; vertical-align: -2px;"></i>
-    <span>2019-03-21</span>
-
-    
-     
-    <i class="layui-icon layui-icon-list" style="font-size: 32px; vertical-align: -3px;"></i>
-    
-
-    
-        <a href="/categories/kotlin/">
-            <span class="layui-badge layui-bg-green" style="vertical-align: 2px;">kotlin</span>
-        </a>
-    
-
-    
-    <i class="layui-icon layui-icon-tabs" style="font-size: 22px; vertical-align: 1px;margin-right:2px;"></i>
-    
-
-    
-        <a href="/tags/programming/">
-            <span class="layui-badge layui-bg-green" style="vertical-align: 2px;">programming</span>
-        </a>
-    
-        <a href="/tags/kotlin/">
-            <span class="layui-badge layui-bg-green" style="vertical-align: 2px;">kotlin</span>
-        </a>
-    
-        <a href="/tags/contracts/">
-            <span class="layui-badge layui-bg-green" style="vertical-align: 2px;">contracts</span>
         </a>
     
     

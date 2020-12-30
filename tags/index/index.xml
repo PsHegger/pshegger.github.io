@@ -5,15 +5,11 @@
     <link>http://pshegger.github.io/tags/index/</link>
     <description>Recent content in index on pshegger</description>
     <generator>Hugo -- gohugo.io</generator>
-    <language>en-us</language>
-    
-	<atom:link href="http://pshegger.github.io/tags/index/index.xml" rel="self" type="application/rss+xml" />
-    
-    
+    <language>en-us</language><atom:link href="http://pshegger.github.io/tags/index/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>Posts</title>
       <link>http://pshegger.github.io/post/</link>
-      <pubDate>Wed, 12 Aug 2020 00:00:00 +0000</pubDate>
+      <pubDate>Wed, 30 Dec 2020 00:00:00 +0000</pubDate>
       
       <guid>http://pshegger.github.io/post/</guid>
       <description></description>

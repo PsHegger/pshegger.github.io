@@ -151,7 +151,7 @@ layui.use('element', function(){
 <p>After that we just have to take the number of iterations it took to leave the neighborhood and color the pixel accordingly.</p>
 <h2 id="kotlin---the-easy-one">Kotlin - the easy one</h2>
 <p>With this knowledge we can easily write a method which calculates the color for a given coordinate.</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-kotlin" data-lang="kotlin"><span style="color:#66d9ef">protected</span> <span style="color:#66d9ef">fun</span> <span style="color:#a6e22e">calculatePoint</span>(x: Int, y: Int, rect: RectF): Int {
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-kotlin" data-lang="kotlin"><span style="color:#66d9ef">protected</span> <span style="color:#66d9ef">fun</span> <span style="color:#a6e22e">calculatePoint</span>(x: Int, y: Int, rect: RectF): Int {
     <span style="color:#66d9ef">val</span> cr = rect.left + (rect.right - rect.left) * (x / width.toDouble())
     <span style="color:#66d9ef">val</span> ci = rect.top + (rect.bottom - rect.top) * (y / height.toDouble())
     <span style="color:#66d9ef">var</span> zr = <span style="color:#ae81ff">0.0</span>
@@ -178,7 +178,7 @@ layui.use('element', function(){
 <p>For this version will use the same function to calculate the color of one pixel, but we will split the output to multiple regions and calculate them in parallel. The number of partitions must equal to the number of threads we are using for calculation, but other than that we can split any way we would like to.</p>
 <p>To determine the number of threads we will use <code>Runtime.getRuntime().availableProcessors() - 1</code>. The <code>-1</code> ensures that we have one core for our main thread. When we have the number of threads we create a <code>CoroutineDispatcher</code> and launch a new scope using that as it&rsquo;s context.</p>
 <p>At this point we have to loop through our partitions and use <code>CoroutineScope.launch</code> to start the calculation on it&rsquo;s own thread. This calculation is the same as before, but we&rsquo;re just calculating the points for the given region and not for the whole image.</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-kotlin" data-lang="kotlin"><span style="color:#66d9ef">override</span> <span style="color:#66d9ef">suspend</span> <span style="color:#66d9ef">fun</span> <span style="color:#a6e22e">generate</span>(buffer: Bitmap, rect: RectF) {
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-kotlin" data-lang="kotlin"><span style="color:#66d9ef">override</span> <span style="color:#66d9ef">suspend</span> <span style="color:#66d9ef">fun</span> <span style="color:#a6e22e">generate</span>(buffer: Bitmap, rect: RectF) {
     <span style="color:#66d9ef">val</span> numThreads = Runtime.getRuntime().availableProcessors() - <span style="color:#ae81ff">1</span>
     <span style="color:#66d9ef">val</span> context = Executors.newFixedThreadPool(numThreads).asCoroutineDispatcher()
     
@@ -219,7 +219,7 @@ layui.use('element', function(){
 <p>As the previous example shows it can be pretty tricky to parallelize our computations. We have to manually create our threads and feed them the correct values. But this is where RenderScript comes to rescue us.</p>
 <p>RenderScript will automatically manage the parallelization, all we have to do is write the function which will be executed for every input data (this will be our <code>kernel</code>). The language is a derivative of C99 so some familiarity with that is required to use it.</p>
 <p>For our example all we have to write is a simple script which contains every input we will need for the calculation (width/height of the output image, the area of the plane we want to calculate and the number of iterations) and our kernel, which will be basically the same we have written in Kotlin to calculate the color of a single point. (We will also have to write a color converter, but that&rsquo;s only specific for this example.)</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-c" data-lang="c"><span style="color:#75715e">#pragma version(1)
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-c" data-lang="c"><span style="color:#75715e">#pragma version(1)
 </span><span style="color:#75715e">#pragma rs_fp_full
 </span><span style="color:#75715e">#pragma rs java_package_name(io.github.pshegger.playground.rsperformance)
 </span><span style="color:#75715e"></span>    
@@ -249,7 +249,7 @@ layui.use('element', function(){
     <span style="color:#66d9ef">return</span> rsPackColorTo8888(r1 <span style="color:#f92672">+</span> m, g1 <span style="color:#f92672">+</span> m, b1 <span style="color:#f92672">+</span> m);
 }
     
-uchar4 RS_KERNEL <span style="color:#a6e22e">mandelbrot</span>(uchar4 in, uint32_t x, uint32_t y) {
+uchar4 RS_KERNEL <span style="color:#a6e22e">mandelbrot</span>(uchar4 in, <span style="color:#66d9ef">uint32_t</span> x, <span style="color:#66d9ef">uint32_t</span> y) {
     <span style="color:#66d9ef">float</span> nzr, nzi;
     <span style="color:#66d9ef">float</span> zr <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>, zi <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>;
     <span style="color:#66d9ef">float</span> cr <span style="color:#f92672">=</span> left <span style="color:#f92672">+</span> (right <span style="color:#f92672">-</span> left) <span style="color:#f92672">*</span> (x <span style="color:#f92672">/</span> (<span style="color:#66d9ef">double</span>) width);
@@ -270,7 +270,7 @@ uchar4 RS_KERNEL <span style="color:#a6e22e">mandelbrot</span>(uchar4 in, uint32
 <p>We have to put this file inside it&rsquo;s own directory located at <code>app/src/main/rs</code> and we will call it <code>mandelbrot.rs</code>. After saving we can build the project so the required java files will be generated and after it&rsquo;s finished we can start using it in our application.</p>
 <p>There are a few setup steps before we can really use it. First we have to create a RenderScript context and use that to initialize our script. We also have to set the global variables for the script and create allocations for our input and output.</p>
 <p>After all these steps we are ready to start the calculations by calling our kernel on the loaded script.</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-kotlin" data-lang="kotlin"><span style="color:#66d9ef">private</span> <span style="color:#66d9ef">val</span> rs = RenderScript.create(context)
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-kotlin" data-lang="kotlin"><span style="color:#66d9ef">private</span> <span style="color:#66d9ef">val</span> rs = RenderScript.create(context)
 <span style="color:#66d9ef">private</span> <span style="color:#66d9ef">val</span> script = ScriptC_mandelbrot(rs).apply {
     _width = width
     _height = height
@@ -468,6 +468,60 @@ uchar4 RS_KERNEL <span style="color:#a6e22e">mandelbrot</span>(uchar4 in, uint32
                 
                 <div style="margin-left: 10px;">
                     <blockquote class="self-elem-quote self-elem-quote-bg-orange" style="background-color:#FFFFFF;margin-top: 10px;">
+                    <a href="/post/hacktivitycon-2021-ctf/">
+                        <h3 class="">h@cktivitycon 2021 CTF</h3>
+                    </a>
+                    <h3 style="margin-top:10px; margin-bottom:10px"> 
+    <i class="layui-icon layui-icon-date" style="font-size: 28px; vertical-align: -2px;"></i>
+    <span>2021-09-20</span>
+
+    
+     
+    <i class="layui-icon layui-icon-list" style="font-size: 32px; vertical-align: -3px;"></i>
+    
+
+    
+        <a href="/categories/blog/">
+            <span class="layui-badge layui-bg-green" style="vertical-align: 2px;">blog</span>
+        </a>
+    
+
+    
+    <i class="layui-icon layui-icon-tabs" style="font-size: 22px; vertical-align: 1px;margin-right:2px;"></i>
+    
+
+    
+        <a href="/tags/ctf/">
+            <span class="layui-badge layui-bg-green" style="vertical-align: 2px;">ctf</span>
+        </a>
+    
+        <a href="/tags/writeup/">
+            <span class="layui-badge layui-bg-green" style="vertical-align: 2px;">writeup</span>
+        </a>
+    
+        <a href="/tags/hacktivitycon/">
+            <span class="layui-badge layui-bg-green" style="vertical-align: 2px;">hacktivitycon</span>
+        </a>
+    
+        <a href="/tags/hackerone/">
+            <span class="layui-badge layui-bg-green" style="vertical-align: 2px;">hackerone</span>
+        </a>
+    
+        <a href="/tags/cryptography/">
+            <span class="layui-badge layui-bg-green" style="vertical-align: 2px;">cryptography</span>
+        </a>
+    
+        <a href="/tags/python/">
+            <span class="layui-badge layui-bg-green" style="vertical-align: 2px;">python</span>
+        </a>
+    
+    
+</h3>
+                    </blockquote>
+                </div>
+                
+                <div style="margin-left: 10px;">
+                    <blockquote class="self-elem-quote self-elem-quote-bg-orange" style="background-color:#FFFFFF;margin-top: 10px;">
                     <a href="/post/aoc-2020/">
                         <h3 class="">Advent of Code 2020</h3>
                     </a>
@@ -643,52 +697,6 @@ uchar4 RS_KERNEL <span style="color:#a6e22e">mandelbrot</span>(uchar4 in, uint32
     
         <a href="/tags/grpc/">
             <span class="layui-badge layui-bg-green" style="vertical-align: 2px;">grpc</span>
-        </a>
-    
-    
-</h3>
-                    </blockquote>
-                </div>
-                
-                <div style="margin-left: 10px;">
-                    <blockquote class="self-elem-quote self-elem-quote-bg-orange" style="background-color:#FFFFFF;margin-top: 10px;">
-                    <a href="/post/generate-for-me/">
-                        <h3 class="">@GenerateForMe</h3>
-                    </a>
-                    <h3 style="margin-top:10px; margin-bottom:10px"> 
-    <i class="layui-icon layui-icon-date" style="font-size: 28px; vertical-align: -2px;"></i>
-    <span>2019-11-11</span>
-
-    
-     
-    <i class="layui-icon layui-icon-list" style="font-size: 32px; vertical-align: -3px;"></i>
-    
-
-    
-        <a href="/categories/kotlin/">
-            <span class="layui-badge layui-bg-green" style="vertical-align: 2px;">kotlin</span>
-        </a>
-    
-
-    
-    <i class="layui-icon layui-icon-tabs" style="font-size: 22px; vertical-align: 1px;margin-right:2px;"></i>
-    
-
-    
-        <a href="/tags/programming/">
-            <span class="layui-badge layui-bg-green" style="vertical-align: 2px;">programming</span>
-        </a>
-    
-        <a href="/tags/kotlin/">
-            <span class="layui-badge layui-bg-green" style="vertical-align: 2px;">kotlin</span>
-        </a>
-    
-        <a href="/tags/annotation/">
-            <span class="layui-badge layui-bg-green" style="vertical-align: 2px;">annotation</span>
-        </a>
-    
-        <a href="/tags/kapt/">
-            <span class="layui-badge layui-bg-green" style="vertical-align: 2px;">kapt</span>
         </a>
     
     

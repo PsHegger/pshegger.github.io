@@ -8,7 +8,7 @@
     
     <meta content="programming, competitive programming, advent of code, blog" name="keywords">
     
-    <meta content="pshegger -  A short summary about my experiences with Advent of Code 2020" name="description">
+    <meta content="pshegger - A short summary about my experiences with Advent of Code 2020" name="description">
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     
     
@@ -143,7 +143,7 @@ layui.use('element', function(){
 <p>There were multiple tasks where we had to implement a <a href="https://en.wikipedia.org/wiki/Cellular_automaton">cellular automata</a>, but each of them was unique. We had to do it in <code>3d</code>, <code>4d</code>, and we also had one which used a hexagonal grid (which is great, because everyone should know that <a href="https://www.youtube.com/watch?v=thOifuHs6eY">Hexagons are the Bestagons</a>). I assume these tasks were a tribute to <a href="https://en.wikipedia.org/wiki/John_Horton_Conway">John Conway</a>, who died this year, and I think it was a great way to remember him.</p>
 <p>There is one task I have to mention separately, and that is day 20, <em>Jurassic Jigsaw</em>. In my opinion, this was the most challenging task this year, but it was also the most fun. The first part was relatively easy (although it still took me one and a half hours to solve it), but while I was working on it, I already knew what will be the second part, and I dreaded it. After I finished the first part, I quickly learned that my suspicion was correct, and we had to assemble the whole image. First, I didn&rsquo;t know where to start because writing a backtracking algorithm (which was my first idea) seemed to be too big of a task (especially for a Sunday morning). Luckily as the time passed, I realized that the input constraints meant that we don&rsquo;t have to backtrack; we have to use them to build the image piece by piece. With that realization, I came up with a solution step by step, and in the end, it turned out to be correct.</p>
 <p>Another honorable mention is day 21, which was one of the easier tasks, but it inspired me enough to solve it in SQL. Here&rsquo;s the solution for the first part. I have a working one for the second part, but I&rsquo;m not too fond of it because instead of a single query it uses a loop to build a table.</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sql" data-lang="sql"><span style="color:#66d9ef">SELECT</span> <span style="color:#66d9ef">COUNT</span>(name) <span style="color:#66d9ef">AS</span> non_alergenic_count
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sql" data-lang="sql"><span style="color:#66d9ef">SELECT</span> <span style="color:#66d9ef">COUNT</span>(name) <span style="color:#66d9ef">AS</span> non_alergenic_count
 <span style="color:#66d9ef">FROM</span> aoc_2020_21_ingredients
 <span style="color:#66d9ef">WHERE</span> name <span style="color:#66d9ef">NOT</span> <span style="color:#66d9ef">IN</span> (
     <span style="color:#66d9ef">SELECT</span> <span style="color:#66d9ef">DISTINCT</span> ingredient
@@ -390,6 +390,60 @@ layui.use('element', function(){
                 
                 <div style="margin-left: 10px;">
                     <blockquote class="self-elem-quote self-elem-quote-bg-orange" style="background-color:#FFFFFF;margin-top: 10px;">
+                    <a href="/post/hacktivitycon-2021-ctf/">
+                        <h3 class="">h@cktivitycon 2021 CTF</h3>
+                    </a>
+                    <h3 style="margin-top:10px; margin-bottom:10px"> 
+    <i class="layui-icon layui-icon-date" style="font-size: 28px; vertical-align: -2px;"></i>
+    <span>2021-09-20</span>
+
+    
+     
+    <i class="layui-icon layui-icon-list" style="font-size: 32px; vertical-align: -3px;"></i>
+    
+
+    
+        <a href="/categories/blog/">
+            <span class="layui-badge layui-bg-green" style="vertical-align: 2px;">blog</span>
+        </a>
+    
+
+    
+    <i class="layui-icon layui-icon-tabs" style="font-size: 22px; vertical-align: 1px;margin-right:2px;"></i>
+    
+
+    
+        <a href="/tags/ctf/">
+            <span class="layui-badge layui-bg-green" style="vertical-align: 2px;">ctf</span>
+        </a>
+    
+        <a href="/tags/writeup/">
+            <span class="layui-badge layui-bg-green" style="vertical-align: 2px;">writeup</span>
+        </a>
+    
+        <a href="/tags/hacktivitycon/">
+            <span class="layui-badge layui-bg-green" style="vertical-align: 2px;">hacktivitycon</span>
+        </a>
+    
+        <a href="/tags/hackerone/">
+            <span class="layui-badge layui-bg-green" style="vertical-align: 2px;">hackerone</span>
+        </a>
+    
+        <a href="/tags/cryptography/">
+            <span class="layui-badge layui-bg-green" style="vertical-align: 2px;">cryptography</span>
+        </a>
+    
+        <a href="/tags/python/">
+            <span class="layui-badge layui-bg-green" style="vertical-align: 2px;">python</span>
+        </a>
+    
+    
+</h3>
+                    </blockquote>
+                </div>
+                
+                <div style="margin-left: 10px;">
+                    <blockquote class="self-elem-quote self-elem-quote-bg-orange" style="background-color:#FFFFFF;margin-top: 10px;">
                     <a href="/post/aoc-2020/">
                         <h3 class="">Advent of Code 2020</h3>
                     </a>
@@ -565,52 +619,6 @@ layui.use('element', function(){
     
         <a href="/tags/grpc/">
             <span class="layui-badge layui-bg-green" style="vertical-align: 2px;">grpc</span>
-        </a>
-    
-    
-</h3>
-                    </blockquote>
-                </div>
-                
-                <div style="margin-left: 10px;">
-                    <blockquote class="self-elem-quote self-elem-quote-bg-orange" style="background-color:#FFFFFF;margin-top: 10px;">
-                    <a href="/post/generate-for-me/">
-                        <h3 class="">@GenerateForMe</h3>
-                    </a>
-                    <h3 style="margin-top:10px; margin-bottom:10px"> 
-    <i class="layui-icon layui-icon-date" style="font-size: 28px; vertical-align: -2px;"></i>
-    <span>2019-11-11</span>
-
-    
-     
-    <i class="layui-icon layui-icon-list" style="font-size: 32px; vertical-align: -3px;"></i>
-    
-
-    
-        <a href="/categories/kotlin/">
-            <span class="layui-badge layui-bg-green" style="vertical-align: 2px;">kotlin</span>
-        </a>
-    
-
-    
-    <i class="layui-icon layui-icon-tabs" style="font-size: 22px; vertical-align: 1px;margin-right:2px;"></i>
-    
-
-    
-        <a href="/tags/programming/">
-            <span class="layui-badge layui-bg-green" style="vertical-align: 2px;">programming</span>
-        </a>
-    
-        <a href="/tags/kotlin/">
-            <span class="layui-badge layui-bg-green" style="vertical-align: 2px;">kotlin</span>
-        </a>
-    
-        <a href="/tags/annotation/">
-            <span class="layui-badge layui-bg-green" style="vertical-align: 2px;">annotation</span>
-        </a>
-    
-        <a href="/tags/kapt/">
-            <span class="layui-badge layui-bg-green" style="vertical-align: 2px;">kapt</span>
         </a>
     
     

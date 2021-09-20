@@ -6,7 +6,16 @@
     <description>Recent content in Posts on pshegger</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Wed, 30 Dec 2020 00:00:00 +0000</lastBuildDate><atom:link href="http://pshegger.github.io/post/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Mon, 20 Sep 2021 00:00:00 +0000</lastBuildDate><atom:link href="http://pshegger.github.io/post/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>h@cktivitycon 2021 CTF</title>
+      <link>http://pshegger.github.io/post/hacktivitycon-2021-ctf/</link>
+      <pubDate>Mon, 20 Sep 2021 00:00:00 +0000</pubDate>
+      
+      <guid>http://pshegger.github.io/post/hacktivitycon-2021-ctf/</guid>
+      <description>This year’s h@cktivitycon was held last Saturday, but even before it started, there was another event HackerOne had organized: this year’s CTF. It began on Thursday and ran for 48 hours. As I wasn’t following the events, it was already Friday when I realized it was running. I still had a bit more than a day to complete as many challenges as possible, so I decided to register and see how it goes.</description>
+    </item>
+    
     <item>
       <title>Advent of Code 2020</title>
       <link>http://pshegger.github.io/post/aoc-2020/</link>

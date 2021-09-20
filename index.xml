@@ -6,7 +6,26 @@
     <description>Recent content on pshegger</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Wed, 30 Dec 2020 00:00:00 +0000</lastBuildDate><atom:link href="http://pshegger.github.io/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Mon, 20 Sep 2021 00:00:00 +0000</lastBuildDate><atom:link href="http://pshegger.github.io/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>h@cktivitycon 2021 CTF</title>
+      <link>http://pshegger.github.io/post/hacktivitycon-2021-ctf/</link>
+      <pubDate>Mon, 20 Sep 2021 00:00:00 +0000</pubDate>
+      
+      <guid>http://pshegger.github.io/post/hacktivitycon-2021-ctf/</guid>
+      <description>This year’s h@cktivitycon was held last Saturday, but even before it started, there was another event HackerOne had organized: this year’s CTF. It began on Thursday and ran for 48 hours. As I wasn’t following the events, it was already Friday when I realized it was running. I still had a bit more than a day to complete as many challenges as possible, so I decided to register and see how it goes.</description>
+    </item>
+    
+    <item>
+      <title>About Me</title>
+      <link>http://pshegger.github.io/about/</link>
+      <pubDate>Sun, 19 Sep 2021 00:00:00 +0000</pubDate>
+      
+      <guid>http://pshegger.github.io/about/</guid>
+      <description>My name is Gergely Hegedüs and I&amp;rsquo;m from Budapest, Hungary. I&amp;rsquo;ve been working as a software developer since 2013 when I started as an Android developer at a small startup.
+Like many other startups, this one couldn&amp;rsquo;t convince people to use its product so we had to pivot toward developing software for other companies. It was around this time when I started promoting Kotlin for Android development and we finished our first Kotlin only app just a bit after the official 1.</description>
+    </item>
+    
     <item>
       <title>Advent of Code 2020</title>
       <link>http://pshegger.github.io/post/aoc-2020/</link>
@@ -25,16 +44,6 @@ This year my aim was to do all the tasks as fast as possible, so I didn&amp;rsqu
       <guid>http://pshegger.github.io/post/ar-sudoku/</guid>
       <description>A few months ago, I stumbled upon a video that led me into a rabbit hole. It resulted in a simple application that overlays a sudoku&amp;rsquo;s solution into the camera image of the puzzle. This post is about the process of getting to the end result.
 It all started with the idea of writing a sudoku solver. The first version was ready relatively quickly, but there was one big problem: entering the starting position was slow and tedious.</description>
-    </item>
-    
-    <item>
-      <title>About Me</title>
-      <link>http://pshegger.github.io/about/</link>
-      <pubDate>Wed, 15 Jul 2020 00:00:00 +0000</pubDate>
-      
-      <guid>http://pshegger.github.io/about/</guid>
-      <description>My name is Gergely Hegedüs and I&amp;rsquo;m from Budapest, Hungary. I&amp;rsquo;ve been working as a software developer since 2013 when I started as an Android developer at a small startup.
-Like many other startups, this one couldn&amp;rsquo;t convince people to use its product so we had to pivot toward developing software for other companies. It was around this time when I started promoting Kotlin for Android development and we finished our first Kotlin only app just a bit after the official 1.</description>
     </item>
     
     <item>

@@ -1,0 +1,693 @@
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <title>pshegger - Procedural Dungeon Generation </title>
+    
+    
+    <meta content="kotlin, procgen, gamedev" name="keywords">
+    
+    <meta content="pshegger - Procedural generation is the key to writing games with endless content. In this article I show you how I generate a dungeon that can be later used in a game." name="description">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    
+    
+
+    
+
+    
+        <script async src="https://www.googletagmanager.com/gtag/js?id=UA-72812058-1"></script>
+        <script>
+          window.dataLayer = window.dataLayer || [];
+          function gtag(){dataLayer.push(arguments)};
+          gtag('js', new Date());
+          gtag('config', 'UA-72812058-1');
+        </script>
+    
+
+    
+
+    <link rel="stylesheet" href="/layui/css/layui.css">
+    <link rel="stylesheet" href="/self/css/default.css">
+    <script src="/layui/layui.js"></script>
+
+    <link rel="stylesheet" async href="/self/css/markdown.min.css">
+    <link rel="stylesheet" async href="/self/css/gallery.css">
+    
+    
+    
+
+    <script src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.min.js" integrity="sha256-9/aliU8dGd2tb6OSsuzixeV4y/faTqgFtohetphbbj0=" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/font-awesome@4.7.0/css/font-awesome.min.css" integrity="sha256-eZrrJcwDc/3uDhsdt61sL2oOBY362qM3lon1gyExkL0=" crossorigin="anonymous">
+    <script async src="https://cdn.jsdelivr.net/npm/lazysizes@5.2.0/lazysizes.min.js" integrity="sha256-h2tMEmhemR2IN4wbbdNjj9LaDIjzwk2hralQwfJmBOE=" crossorigin="anonymous"></script></head>
+
+<body>
+    
+    <header class="layui-header layui-bg-cyan">
+
+    
+    
+    <a class="nav-self-logo" href="/">
+        pshegger
+    </a>
+
+    <ul class="layui-nav layui-layout-right layui-bg-cyan" lay-filter="">
+        
+        
+        <li class="layui-nav-item" id="nav_big"><a href="/post/">Posts</a></li>
+        
+
+        
+            
+                <li class="layui-nav-item" id="nav_big"><a href="/about/">About</a></li>
+            
+        
+
+        
+        <li class="layui-nav-item" id="nav_small">
+            <a href="javascript:;">
+                <i class="layui-icon layui-icon-app" style="font-size: 24px;"></i>
+            </a>
+
+            <dl class="layui-nav-child">
+                
+                <dd><a href="/post/">Posts</a></dd>
+                
+
+                
+                    
+                        <dd><a href="/about/">About</a></dd>
+                    
+                
+            </dl>
+        </li>
+    </ul>
+</header>
+
+<script>
+layui.use('element', function(){
+  var element = layui.element;
+});
+</script>
+        <div id="content" style="min-height:80%">
+<div class="layui-container" style="margin-bottom: 10px">
+    
+
+    <div class="layui-row layui-col-space10">
+        <div class="layui-col-md8 layui-col-sm12 layui-col-xs12">
+            <div class="layui-card single-card">
+                <br />
+                <blockquote class="self-elem-quote self-elem-quote-bg-orange markdown-body single-title" >
+                    <h1>Procedural Dungeon Generation</h1>
+                    <h3 style="margin-top:10px; margin-bottom:10px"> 
+    <i class="layui-icon layui-icon-date" style="font-size: 28px; vertical-align: -2px;"></i>
+    <span>2022-03-10</span>
+
+    
+     
+    <i class="layui-icon layui-icon-list" style="font-size: 32px; vertical-align: -3px;"></i>
+    
+
+    
+        <a href="/categories/gamedev/">
+            <span class="layui-badge layui-bg-green" style="vertical-align: 2px;">gamedev</span>
+        </a>
+    
+
+    
+    <i class="layui-icon layui-icon-tabs" style="font-size: 22px; vertical-align: 1px;margin-right:2px;"></i>
+    
+
+    
+        <a href="/tags/kotlin/">
+            <span class="layui-badge layui-bg-green" style="vertical-align: 2px;">kotlin</span>
+        </a>
+    
+        <a href="/tags/procgen/">
+            <span class="layui-badge layui-bg-green" style="vertical-align: 2px;">procgen</span>
+        </a>
+    
+        <a href="/tags/gamedev/">
+            <span class="layui-badge layui-bg-green" style="vertical-align: 2px;">gamedev</span>
+        </a>
+    
+    
+</h3>
+                </blockquote>
+                <div class="layui-card-body markdown-body single-content">
+                    <p>Procedural generation is incredible. It is the key to writing games with endless content. Without it, <a href="https://www.minecraft.net/">Minecraft</a> couldn’t have (nearly) infinite worlds with infinite terrain. <a href="https://spelunkyworld.com/">Spelunky</a> would only contain a few rooms, and we could learn the layout and enemy placement instead of learning the game mechanics. These are only a few examples, but there are a lot of games that use this mechanic for generating content.</p>
+<p>In this article, I’d like to show you my way of generating a random dungeon that can be later used in a game.</p>
+<h2 id="steps">Steps</h2>
+<p>The process consists of multiple steps, each one starting after the previous finished. Let’s have a look at them one-by-one and see how they work.</p>
+<h3 id="1-generating-rooms">1. Generating rooms</h3>
+<p>This is the beginning of everything. We’re generating multiple random-sized rooms that later will be moved to their correct place and filtered.</p>
+<p>For each room, we will generate a random width and height. To control the sizes, I introduced a minimum and maximum size setting. When we have the size of the room, we have to place them somewhere. For now, we will put all of them in the middle of our map and will later find their correct position.</p>
+<p>I also needed some way of knowing when to stop generating new rooms. For this, I introduced a new setting that tells us the minimum area of the generated rooms. With this, we can stop generating new ones once the sum of their area reaches our given minimum.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-kotlin" data-lang="kotlin"><span style="display:flex;"><span><span style="color:#66d9ef">private</span> <span style="color:#66d9ef">fun</span> <span style="color:#a6e22e">generateRooms</span>() {
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">while</span> (rooms.sumOf { <span style="color:#66d9ef">it</span>.room.area() } &lt; settings.minimumArea) {
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">val</span> width = rng.nextInt(settings.maxSize - settings.minSize + <span style="color:#ae81ff">1</span>) + settings.minSize
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">val</span> height = rng.nextInt(settings.maxSize - settings.minSize + <span style="color:#ae81ff">1</span>) + settings.minSize
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">val</span> left = (<span style="color:#66d9ef">this</span>.width - width) / <span style="color:#ae81ff">2f</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">val</span> top = (<span style="color:#66d9ef">this</span>.height - height) / <span style="color:#ae81ff">2f</span>
+</span></span><span style="display:flex;"><span>        rooms.add(RoomState(Room(Vector(left, top), width, height), RoomState.State.Generated))
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><h3 id="2-finding-room-placement">2. Finding room placement</h3>
+<p>First, I select a random room, and we mark that as placed. After that, I iterate over all remaining ones and move them toward a random direction until they no longer intersect with any of the already placed rooms. I also added a margin for this to not end up with rooms that are too close to each other.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-kotlin" data-lang="kotlin"><span style="display:flex;"><span><span style="color:#66d9ef">private</span> <span style="color:#66d9ef">fun</span> <span style="color:#a6e22e">moveRooms</span>() {
+</span></span><span style="display:flex;"><span>    rooms[rng.nextInt(rooms.size)].state = RoomState.State.Placed
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">while</span> (rooms.any { <span style="color:#66d9ef">it</span>.state <span style="color:#f92672">==</span> RoomState.State.Generated }) {
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">val</span> movingRoom = rooms.first { <span style="color:#66d9ef">it</span>.state <span style="color:#f92672">==</span> RoomState.State.Generated }
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">val</span> direction = rng.nextDouble() * <span style="color:#ae81ff">2</span> * Math.PI
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">val</span> moveVector = Vector(cos(direction), sin(direction))
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">var</span> finalPlace = <span style="color:#66d9ef">false</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">while</span> (!finalPlace) {
+</span></span><span style="display:flex;"><span>            movingRoom.room.topLeft = movingRoom.room.topLeft + moveVector
+</span></span><span style="display:flex;"><span>            finalPlace = rooms
+</span></span><span style="display:flex;"><span>                .filter { <span style="color:#66d9ef">it</span>.state <span style="color:#f92672">==</span> RoomState.State.Placed }
+</span></span><span style="display:flex;"><span>                .none { <span style="color:#66d9ef">it</span>.room.intersects(movingRoom.room, settings.roomMargin) }
+</span></span><span style="display:flex;"><span>        }
+</span></span><span style="display:flex;"><span>        movingRoom.state = RoomState.State.Placed
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><h3 id="3-selecting-rooms-to-keep">3. Selecting rooms to keep</h3>
+<p>We have our rooms in the correct position now, but we still have too many of them. Let’s solve this issue by selecting a few to keep and removing the unnecessary ones. For this, I will calculate the average area of the rooms and only keep those larger than the average times a variable ratio.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-kotlin" data-lang="kotlin"><span style="display:flex;"><span><span style="color:#66d9ef">private</span> <span style="color:#66d9ef">fun</span> <span style="color:#a6e22e">selectRooms</span>() {
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">val</span> minArea = rooms.map { <span style="color:#66d9ef">it</span>.room.area() }.average() * settings.finalAreaRatio
+</span></span><span style="display:flex;"><span>    rooms.removeIf { <span style="color:#66d9ef">it</span>.room.area() &lt; minArea }
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><h3 id="4-generating-a-spanning-tree-for-the-rooms">4. Generating a spanning tree for the rooms</h3>
+<p>Next, we will generate a spanning tree of our rooms. We need this to connect our rooms with as few routes as possible.</p>
+<p>To achieve this, we need a simple graph class capable of storing our edges and calculating the shortest path between two nodes (I’m using <a href="https://en.wikipedia.org/wiki/Dijkstra%27s_algorithm">Dijkstra’s algorithm</a> for this).</p>
+<p>As a start, I calculate all possible edges between our rooms. We will have a complete graph with this, and we can now use that to calculate the spanning tree. We will calculate that by adding new edges until their number is less than the number of selected rooms minus one. We consider an edge a new one if there is currently no path between its two ends.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-kotlin" data-lang="kotlin"><span style="display:flex;"><span><span style="color:#66d9ef">private</span> <span style="color:#66d9ef">fun</span> <span style="color:#a6e22e">generateSpanningTree</span>() {
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">val</span> graph = Graph&lt;Room&gt;(emptyList())
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">val</span> allEdges = selectedRooms.mapIndexed { i, x <span style="color:#f92672">-&gt;</span>
+</span></span><span style="display:flex;"><span>        selectedRooms.mapIndexed { j, y <span style="color:#f92672">-&gt;</span>
+</span></span><span style="display:flex;"><span>            <span style="color:#66d9ef">if</span> (i &lt; j) Pair(x.room, y.room) <span style="color:#66d9ef">else</span> <span style="color:#66d9ef">null</span>
+</span></span><span style="display:flex;"><span>        }.filterNotNull()
+</span></span><span style="display:flex;"><span>    }.flatten()
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">while</span> (graph.edges.size &lt; selectedRooms.size - <span style="color:#ae81ff">1</span>) {
+</span></span><span style="display:flex;"><span>        allEdges
+</span></span><span style="display:flex;"><span>            .filterNot { graph.isRouteAvailable(<span style="color:#66d9ef">it</span>.first, <span style="color:#66d9ef">it</span>.second) }
+</span></span><span style="display:flex;"><span>            .sortedBy { <span style="color:#66d9ef">it</span>.first.center.distance(<span style="color:#66d9ef">it</span>.second.center) }
+</span></span><span style="display:flex;"><span>            .take(<span style="color:#ae81ff">1</span>)
+</span></span><span style="display:flex;"><span>            .forEach { graph.addEdge(Graph.Edge(<span style="color:#66d9ef">it</span>.first, <span style="color:#66d9ef">it</span>.second)) }
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><h3 id="5-selecting-the-entrance">5. Selecting the entrance</h3>
+<p>With the spanning tree generated, we now have the basic structure of our dungeon. For the next step, let’s choose the room where the whole adventure begins. For this, I wanted to find the farthest room away from any leaf node.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-kotlin" data-lang="kotlin"><span style="display:flex;"><span><span style="color:#66d9ef">private</span> <span style="color:#66d9ef">fun</span> <span style="color:#a6e22e">selectEntrance</span>() {
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">val</span> graph = Graph(edges)
+</span></span><span style="display:flex;"><span>    selectedRooms.forEach { <span style="color:#66d9ef">it</span>.room.type = Room.RoomType.Room }
+</span></span><span style="display:flex;"><span>    selectedRooms.maxByOrNull { graph.branchDistance(<span style="color:#66d9ef">it</span>.room) }
+</span></span><span style="display:flex;"><span>        <span style="color:#f92672">?.</span>let { <span style="color:#66d9ef">it</span>.room.type = Room.RoomType.Entrance }
+</span></span><span style="display:flex;"><span>}
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">private</span> <span style="color:#66d9ef">fun</span> &lt;<span style="color:#a6e22e">T</span>&gt; <span style="color:#a6e22e">Graph</span>&lt;T&gt;.branchDistance(n: T, prev: T? = <span style="color:#66d9ef">null</span>): Int {
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">val</span> neighborCount = neighbors(n).size
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">if</span> ((prev <span style="color:#f92672">==</span> <span style="color:#66d9ef">null</span> <span style="color:#f92672">&amp;&amp;</span> neighborCount &gt; <span style="color:#ae81ff">1</span>) <span style="color:#f92672">||</span> neighborCount &gt; <span style="color:#ae81ff">2</span>) {
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">return</span> <span style="color:#ae81ff">0</span>
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">val</span> next = neighbors(n).filterNot { <span style="color:#66d9ef">it</span>.otherEnd(n) <span style="color:#f92672">==</span> prev }.firstOrNull()<span style="color:#f92672">?.</span>otherEnd(n)
+</span></span><span style="display:flex;"><span>        <span style="color:#f92672">?:</span> <span style="color:#66d9ef">return</span> <span style="color:#ae81ff">1</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">return</span> branchDistance(next, n) + <span style="color:#ae81ff">1</span>
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><h3 id="6-quest-room-selection">6. Quest room selection</h3>
+<p>For the next step, I’d like to find the room that will contain the quest objective. I thought that this room should be one of the leaves (that’s why I chose the farthest room as the entrance in the previous step), and it should be far from the entrance.</p>
+<p>To make it more interesting, I decided to not simply use the farthest room from the entrance but to select a random one, weighted by its distance. I also introduced a factor that can be modified to specify how important the distance is.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-kotlin" data-lang="kotlin"><span style="display:flex;"><span><span style="color:#66d9ef">private</span> <span style="color:#66d9ef">fun</span> <span style="color:#a6e22e">selectQuestObjective</span>() {
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">val</span> graph = Graph(edges)
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">val</span> entrance = selectedRooms.first { <span style="color:#66d9ef">it</span>.room.type <span style="color:#f92672">==</span> Room.RoomType.Entrance }
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">val</span> distances = mutableListOf&lt;Pair&lt;RoomState, Int&gt;&gt;()
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    selectedRooms
+</span></span><span style="display:flex;"><span>        .filter { <span style="color:#66d9ef">it</span>.room.type <span style="color:#f92672">==</span> Room.RoomType.Room <span style="color:#f92672">&amp;&amp;</span> graph.neighbors(<span style="color:#66d9ef">it</span>.room).size <span style="color:#f92672">==</span> <span style="color:#ae81ff">1</span> }
+</span></span><span style="display:flex;"><span>        .forEach { roomState <span style="color:#f92672">-&gt;</span>
+</span></span><span style="display:flex;"><span>            <span style="color:#66d9ef">val</span> distance = graph.shortestPath(entrance.room, roomState.room)
+</span></span><span style="display:flex;"><span>                <span style="color:#f92672">?.</span>let { <span style="color:#66d9ef">it</span>.size - <span style="color:#ae81ff">1</span> } <span style="color:#f92672">?:</span> <span style="color:#ae81ff">0</span>
+</span></span><span style="display:flex;"><span>            <span style="color:#66d9ef">val</span> weight = settings.questObjectiveDistanceFactor.toDouble()
+</span></span><span style="display:flex;"><span>                .pow(distance.toDouble()).roundToInt()
+</span></span><span style="display:flex;"><span>            distances.add(Pair(roomState, weight))
+</span></span><span style="display:flex;"><span>        }
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">val</span> questObjective = distances.weightedRandom(rng)
+</span></span><span style="display:flex;"><span>    selectedRooms
+</span></span><span style="display:flex;"><span>        .first { <span style="color:#66d9ef">it</span> <span style="color:#f92672">==</span> questObjective}
+</span></span><span style="display:flex;"><span>        .room.type = Room.RoomType.QuestObjective
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><h3 id="7-generating-corridors">7. Generating corridors</h3>
+<p>Currently, the rooms are not connected; we just have a graph telling us which of them should be neighbors. To change this, let’s generate some corridors between them.</p>
+<p>I iterated over the rooms and checked their neighbors one by one. For each neighbor, I had to find the direction they were in relative to the current room. After that, I knew which sides of the rooms were facing each other so I could check if there were any overlapping regions of those sides. I also added some margin to prevent the corridors from being generated in the room&rsquo;s corner.</p>
+<p>At this point, there were two possibilities: there is an overlap where I can put the corridor (red on the image), or there isn’t (blue on the image).</p>
+<p><img src="/img/procedural-dungeon/coridor_types.png" alt="/img/procedural-dungeon/coridor_types.png"></p>
+<p>The first one is simple, just select a suitable location and add a corridor there.</p>
+<p>The second one is more problematic. In this case, I had to find the side closest to the current room (top, in the example above) and choose a point there. Then I chose a point on the current room and added two separate corridors.</p>
+<h3 id="8-converting-to-a-tilemap">8. Converting to a tilemap</h3>
+<p>Now that we have everything generated, there’s only one thing left to do. We should convert our rooms and corridors into a more usable format.</p>
+<p>First, I had to find the size of the map. This was an easy task, I just had to find the minimum and the maximum of every room&rsquo;s x and y coordinate. Once I got that, I split the whole area into squares and looped over them. For every square, I checked if it intersects with any room or corridor, and if there was an intersection, I set the tile type accordingly.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-kotlin" data-lang="kotlin"><span style="display:flex;"><span><span style="color:#66d9ef">private</span> <span style="color:#66d9ef">fun</span> <span style="color:#a6e22e">generateTileMap</span>() {
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">val</span> minX = rooms.minOf { <span style="color:#66d9ef">it</span>.room.left }.roundToInt()
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">val</span> maxX = rooms.maxOf { <span style="color:#66d9ef">it</span>.room.right }.roundToInt()
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">val</span> minY = rooms.minOf { <span style="color:#66d9ef">it</span>.room.top }.roundToInt()
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">val</span> maxY = rooms.maxOf { <span style="color:#66d9ef">it</span>.room.bottom }.roundToInt()
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">val</span> tileMap = TileMap(maxX - minX, maxY - minY)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">for</span> (i <span style="color:#66d9ef">in</span> <span style="color:#ae81ff">0</span> until (tileMap.width * tileMap.height)) {
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">val</span> x = i % tileMap.width
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">val</span> y = i / tileMap.width
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">val</span> tileLeft = (x + minX).toFloat()
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">val</span> tileTop = (y + minY).toFloat()
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">val</span> tileRect = RectF(tileLeft, tileTop, tileLeft + <span style="color:#ae81ff">1</span>, tileTop + <span style="color:#ae81ff">1</span>)
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">val</span> intersectedRoom = rooms.firstOrNull { <span style="color:#66d9ef">it</span>.room.getRect().intersect(tileRect) }
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">val</span> intersectedCorridor = corridors.firstOrNull { <span style="color:#66d9ef">it</span>.getRect().intersect(tileRect) }
+</span></span><span style="display:flex;"><span>        tileMap[x, y] = <span style="color:#66d9ef">when</span> {
+</span></span><span style="display:flex;"><span>            intersectedRoom <span style="color:#f92672">!=</span> <span style="color:#66d9ef">null</span> <span style="color:#f92672">-&gt;</span> <span style="color:#66d9ef">when</span> (intersectedRoom.room.type) {
+</span></span><span style="display:flex;"><span>                Room.RoomType.Room <span style="color:#f92672">-&gt;</span> TileMap.TileType.Room
+</span></span><span style="display:flex;"><span>                Room.RoomType.Entrance <span style="color:#f92672">-&gt;</span> TileMap.TileType.StartRoom
+</span></span><span style="display:flex;"><span>                Room.RoomType.QuestObjective <span style="color:#f92672">-&gt;</span> TileMap.TileType.QuestRoom
+</span></span><span style="display:flex;"><span>            }
+</span></span><span style="display:flex;"><span>            intersectedCorridor <span style="color:#f92672">!=</span> <span style="color:#66d9ef">null</span> <span style="color:#f92672">-&gt;</span> TileMap.TileType.Corridor
+</span></span><span style="display:flex;"><span>            <span style="color:#66d9ef">else</span> <span style="color:#f92672">-&gt;</span> TileMap.TileType.Void
+</span></span><span style="display:flex;"><span>        }
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><h2 id="demo">Demo</h2>
+<p><img src="/img/procedural-dungeon/dungeon.gif" alt="/img/procedural-dungeon/dungeon.gif"></p>
+<h2 id="final-thoughts">Final Thoughts</h2>
+<p>Now that we’re done with the generation, there are a few things I wanted to mention.</p>
+<p>You may have seen that I used a variable called <code>rng</code> multiple times during the examples. This is, of course, a random number generator that is initialized at the beginning and then used for every step. This way, we can set a seed to the generator, and we will always get the same end result.</p>
+<p>The source code for this article is available on <a href="https://github.com/PsHegger/playground/blob/master/app/src/main/java/pshegger/github/io/playground/gamedev/algorithms/dungeon/DungeonGenerator.kt">GitHub</a>, but if you check it, you may see that it differs from the ones presented here. This is because that code is structured in a way that makes it easier to visualize the process, but that doesn’t change the theory behind this whole process, the end result will be the same in both versions.</p>
+</div>
+            </div>
+        </div>
+
+        <div class="layui-col-md4 layui-col-sm12 layui-col-xs12">
+            
+            <div class="layui-card single-card">
+                <h2 class="single-title">Relevant Topics</h2>
+                
+                	
+                    <div style="margin-left: 10px;">
+                        <blockquote class="self-elem-quote self-elem-quote-bg-orange" style="background-color:#FFFFFF;margin-top: 10px;">
+                            <a href="/post/grpc-talk/">
+                                <h3 class="">gRPC for Kotliners</h3>
+                            </a>
+                            
+                            <h3 style="margin-top:10px; margin-bottom:10px"> 
+    <i class="layui-icon layui-icon-date" style="font-size: 28px; vertical-align: -2px;"></i>
+    <span>2019-11-14</span>
+
+    
+     
+    <i class="layui-icon layui-icon-list" style="font-size: 32px; vertical-align: -3px;"></i>
+    
+
+    
+        <a href="/categories/android/">
+            <span class="layui-badge layui-bg-green" style="vertical-align: 2px;">android</span>
+        </a>
+    
+        <a href="/categories/kotlin/">
+            <span class="layui-badge layui-bg-green" style="vertical-align: 2px;">kotlin</span>
+        </a>
+    
+        <a href="/categories/talks/">
+            <span class="layui-badge layui-bg-green" style="vertical-align: 2px;">talks</span>
+        </a>
+    
+
+    
+    <i class="layui-icon layui-icon-tabs" style="font-size: 22px; vertical-align: 1px;margin-right:2px;"></i>
+    
+
+    
+        <a href="/tags/kotlin/">
+            <span class="layui-badge layui-bg-green" style="vertical-align: 2px;">kotlin</span>
+        </a>
+    
+        <a href="/tags/android/">
+            <span class="layui-badge layui-bg-green" style="vertical-align: 2px;">android</span>
+        </a>
+    
+        <a href="/tags/grpc/">
+            <span class="layui-badge layui-bg-green" style="vertical-align: 2px;">grpc</span>
+        </a>
+    
+    
+</h3>
+                        </blockquote>
+                    </div>
+                	
+                    <div style="margin-left: 10px;">
+                        <blockquote class="self-elem-quote self-elem-quote-bg-orange" style="background-color:#FFFFFF;margin-top: 10px;">
+                            <a href="/post/generate-for-me/">
+                                <h3 class="">@GenerateForMe</h3>
+                            </a>
+                            
+                            <h3 style="margin-top:10px; margin-bottom:10px"> 
+    <i class="layui-icon layui-icon-date" style="font-size: 28px; vertical-align: -2px;"></i>
+    <span>2019-11-11</span>
+
+    
+     
+    <i class="layui-icon layui-icon-list" style="font-size: 32px; vertical-align: -3px;"></i>
+    
+
+    
+        <a href="/categories/kotlin/">
+            <span class="layui-badge layui-bg-green" style="vertical-align: 2px;">kotlin</span>
+        </a>
+    
+
+    
+    <i class="layui-icon layui-icon-tabs" style="font-size: 22px; vertical-align: 1px;margin-right:2px;"></i>
+    
+
+    
+        <a href="/tags/programming/">
+            <span class="layui-badge layui-bg-green" style="vertical-align: 2px;">programming</span>
+        </a>
+    
+        <a href="/tags/kotlin/">
+            <span class="layui-badge layui-bg-green" style="vertical-align: 2px;">kotlin</span>
+        </a>
+    
+        <a href="/tags/annotation/">
+            <span class="layui-badge layui-bg-green" style="vertical-align: 2px;">annotation</span>
+        </a>
+    
+        <a href="/tags/kapt/">
+            <span class="layui-badge layui-bg-green" style="vertical-align: 2px;">kapt</span>
+        </a>
+    
+    
+</h3>
+                        </blockquote>
+                    </div>
+                	
+                    <div style="margin-left: 10px;">
+                        <blockquote class="self-elem-quote self-elem-quote-bg-orange" style="background-color:#FFFFFF;margin-top: 10px;">
+                            <a href="/post/kotlin-contracts/">
+                                <h3 class="">Help Yourself and the Compiler with Contracts</h3>
+                            </a>
+                            
+                            <h3 style="margin-top:10px; margin-bottom:10px"> 
+    <i class="layui-icon layui-icon-date" style="font-size: 28px; vertical-align: -2px;"></i>
+    <span>2019-03-21</span>
+
+    
+     
+    <i class="layui-icon layui-icon-list" style="font-size: 32px; vertical-align: -3px;"></i>
+    
+
+    
+        <a href="/categories/kotlin/">
+            <span class="layui-badge layui-bg-green" style="vertical-align: 2px;">kotlin</span>
+        </a>
+    
+
+    
+    <i class="layui-icon layui-icon-tabs" style="font-size: 22px; vertical-align: 1px;margin-right:2px;"></i>
+    
+
+    
+        <a href="/tags/programming/">
+            <span class="layui-badge layui-bg-green" style="vertical-align: 2px;">programming</span>
+        </a>
+    
+        <a href="/tags/kotlin/">
+            <span class="layui-badge layui-bg-green" style="vertical-align: 2px;">kotlin</span>
+        </a>
+    
+        <a href="/tags/contracts/">
+            <span class="layui-badge layui-bg-green" style="vertical-align: 2px;">contracts</span>
+        </a>
+    
+    
+</h3>
+                        </blockquote>
+                    </div>
+                	
+                
+                <br />
+            </div>
+            
+
+            <div class="layui-card single-card">
+                <h2 class="single-title">Recent Posts</h2>
+            
+                
+                <div style="margin-left: 10px;">
+                    <blockquote class="self-elem-quote self-elem-quote-bg-orange" style="background-color:#FFFFFF;margin-top: 10px;">
+                    <a href="/post/procedural-dungeon/">
+                        <h3 class="">Procedural Dungeon Generation</h3>
+                    </a>
+                    <h3 style="margin-top:10px; margin-bottom:10px"> 
+    <i class="layui-icon layui-icon-date" style="font-size: 28px; vertical-align: -2px;"></i>
+    <span>2022-03-10</span>
+
+    
+     
+    <i class="layui-icon layui-icon-list" style="font-size: 32px; vertical-align: -3px;"></i>
+    
+
+    
+        <a href="/categories/gamedev/">
+            <span class="layui-badge layui-bg-green" style="vertical-align: 2px;">gamedev</span>
+        </a>
+    
+
+    
+    <i class="layui-icon layui-icon-tabs" style="font-size: 22px; vertical-align: 1px;margin-right:2px;"></i>
+    
+
+    
+        <a href="/tags/kotlin/">
+            <span class="layui-badge layui-bg-green" style="vertical-align: 2px;">kotlin</span>
+        </a>
+    
+        <a href="/tags/procgen/">
+            <span class="layui-badge layui-bg-green" style="vertical-align: 2px;">procgen</span>
+        </a>
+    
+        <a href="/tags/gamedev/">
+            <span class="layui-badge layui-bg-green" style="vertical-align: 2px;">gamedev</span>
+        </a>
+    
+    
+</h3>
+                    </blockquote>
+                </div>
+                
+                <div style="margin-left: 10px;">
+                    <blockquote class="self-elem-quote self-elem-quote-bg-orange" style="background-color:#FFFFFF;margin-top: 10px;">
+                    <a href="/post/hacktivitycon-2021-ctf/">
+                        <h3 class="">h@cktivitycon 2021 CTF</h3>
+                    </a>
+                    <h3 style="margin-top:10px; margin-bottom:10px"> 
+    <i class="layui-icon layui-icon-date" style="font-size: 28px; vertical-align: -2px;"></i>
+    <span>2021-09-20</span>
+
+    
+     
+    <i class="layui-icon layui-icon-list" style="font-size: 32px; vertical-align: -3px;"></i>
+    
+
+    
+        <a href="/categories/blog/">
+            <span class="layui-badge layui-bg-green" style="vertical-align: 2px;">blog</span>
+        </a>
+    
+
+    
+    <i class="layui-icon layui-icon-tabs" style="font-size: 22px; vertical-align: 1px;margin-right:2px;"></i>
+    
+
+    
+        <a href="/tags/ctf/">
+            <span class="layui-badge layui-bg-green" style="vertical-align: 2px;">ctf</span>
+        </a>
+    
+        <a href="/tags/writeup/">
+            <span class="layui-badge layui-bg-green" style="vertical-align: 2px;">writeup</span>
+        </a>
+    
+        <a href="/tags/hacktivitycon/">
+            <span class="layui-badge layui-bg-green" style="vertical-align: 2px;">hacktivitycon</span>
+        </a>
+    
+        <a href="/tags/hackerone/">
+            <span class="layui-badge layui-bg-green" style="vertical-align: 2px;">hackerone</span>
+        </a>
+    
+        <a href="/tags/cryptography/">
+            <span class="layui-badge layui-bg-green" style="vertical-align: 2px;">cryptography</span>
+        </a>
+    
+        <a href="/tags/python/">
+            <span class="layui-badge layui-bg-green" style="vertical-align: 2px;">python</span>
+        </a>
+    
+    
+</h3>
+                    </blockquote>
+                </div>
+                
+                <div style="margin-left: 10px;">
+                    <blockquote class="self-elem-quote self-elem-quote-bg-orange" style="background-color:#FFFFFF;margin-top: 10px;">
+                    <a href="/post/aoc-2020/">
+                        <h3 class="">Advent of Code 2020</h3>
+                    </a>
+                    <h3 style="margin-top:10px; margin-bottom:10px"> 
+    <i class="layui-icon layui-icon-date" style="font-size: 28px; vertical-align: -2px;"></i>
+    <span>2020-12-30</span>
+
+    
+     
+    <i class="layui-icon layui-icon-list" style="font-size: 32px; vertical-align: -3px;"></i>
+    
+
+    
+        <a href="/categories/blog/">
+            <span class="layui-badge layui-bg-green" style="vertical-align: 2px;">blog</span>
+        </a>
+    
+
+    
+    <i class="layui-icon layui-icon-tabs" style="font-size: 22px; vertical-align: 1px;margin-right:2px;"></i>
+    
+
+    
+        <a href="/tags/programming/">
+            <span class="layui-badge layui-bg-green" style="vertical-align: 2px;">programming</span>
+        </a>
+    
+        <a href="/tags/competitive-programming/">
+            <span class="layui-badge layui-bg-green" style="vertical-align: 2px;">competitive programming</span>
+        </a>
+    
+        <a href="/tags/advent-of-code/">
+            <span class="layui-badge layui-bg-green" style="vertical-align: 2px;">advent of code</span>
+        </a>
+    
+    
+</h3>
+                    </blockquote>
+                </div>
+                
+                <div style="margin-left: 10px;">
+                    <blockquote class="self-elem-quote self-elem-quote-bg-orange" style="background-color:#FFFFFF;margin-top: 10px;">
+                    <a href="/post/ar-sudoku/">
+                        <h3 class="">Turning a Camera Feed into a Solved Sudoku</h3>
+                    </a>
+                    <h3 style="margin-top:10px; margin-bottom:10px"> 
+    <i class="layui-icon layui-icon-date" style="font-size: 28px; vertical-align: -2px;"></i>
+    <span>2020-08-12</span>
+
+    
+     
+    <i class="layui-icon layui-icon-list" style="font-size: 32px; vertical-align: -3px;"></i>
+    
+
+    
+        <a href="/categories/machine-learning/">
+            <span class="layui-badge layui-bg-green" style="vertical-align: 2px;">machine learning</span>
+        </a>
+    
+
+    
+    <i class="layui-icon layui-icon-tabs" style="font-size: 22px; vertical-align: 1px;margin-right:2px;"></i>
+    
+
+    
+        <a href="/tags/programming/">
+            <span class="layui-badge layui-bg-green" style="vertical-align: 2px;">programming</span>
+        </a>
+    
+        <a href="/tags/android/">
+            <span class="layui-badge layui-bg-green" style="vertical-align: 2px;">android</span>
+        </a>
+    
+        <a href="/tags/mlkit/">
+            <span class="layui-badge layui-bg-green" style="vertical-align: 2px;">mlkit</span>
+        </a>
+    
+        <a href="/tags/sudoku/">
+            <span class="layui-badge layui-bg-green" style="vertical-align: 2px;">sudoku</span>
+        </a>
+    
+    
+</h3>
+                    </blockquote>
+                </div>
+                
+                <div style="margin-left: 10px;">
+                    <blockquote class="self-elem-quote self-elem-quote-bg-orange" style="background-color:#FFFFFF;margin-top: 10px;">
+                    <a href="/post/renderscript/">
+                        <h3 class="">RenderScript is Still alive</h3>
+                    </a>
+                    <h3 style="margin-top:10px; margin-bottom:10px"> 
+    <i class="layui-icon layui-icon-date" style="font-size: 28px; vertical-align: -2px;"></i>
+    <span>2020-02-29</span>
+
+    
+     
+    <i class="layui-icon layui-icon-list" style="font-size: 32px; vertical-align: -3px;"></i>
+    
+
+    
+        <a href="/categories/android/">
+            <span class="layui-badge layui-bg-green" style="vertical-align: 2px;">android</span>
+        </a>
+    
+
+    
+    <i class="layui-icon layui-icon-tabs" style="font-size: 22px; vertical-align: 1px;margin-right:2px;"></i>
+    
+
+    
+        <a href="/tags/programming/">
+            <span class="layui-badge layui-bg-green" style="vertical-align: 2px;">programming</span>
+        </a>
+    
+        <a href="/tags/android/">
+            <span class="layui-badge layui-bg-green" style="vertical-align: 2px;">android</span>
+        </a>
+    
+        <a href="/tags/renderscript/">
+            <span class="layui-badge layui-bg-green" style="vertical-align: 2px;">renderscript</span>
+        </a>
+    
+        <a href="/tags/parallelism/">
+            <span class="layui-badge layui-bg-green" style="vertical-align: 2px;">parallelism</span>
+        </a>
+    
+    
+</h3>
+                    </blockquote>
+                </div>
+                
+            
+            <br />
+            </div>
+        </div>
+
+    </div>
+</div>
+
+
+        </div><footer>
+    
+    
+    <div class="layui-container">
+        <p class="copyright">&copy; All rights reserved. Powered by <a href='https://gohugo.io' style='color:#FFFFFF'>Hugo</a> and <a href='https://github.com/ertuil/erblog' style='color:#FFFFFF'>Erblog</a>.</p>
+    </div>
+</footer>
+</body>
+</html>

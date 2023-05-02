@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>godot on pshegger</title>
+    <link>http://pshegger.github.io/tags/godot/</link>
+    <description>Recent content in godot on pshegger</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <lastBuildDate>Tue, 02 May 2023 00:00:00 +0000</lastBuildDate><atom:link href="http://pshegger.github.io/tags/godot/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>My First Gamejam</title>
+      <link>http://pshegger.github.io/post/my-first-gamejam/</link>
+      <pubDate>Tue, 02 May 2023 00:00:00 +0000</pubDate>
+      
+      <guid>http://pshegger.github.io/post/my-first-gamejam/</guid>
+      <description>If you&amp;rsquo;re only here to try the game, you can do it on itch.io
+I cannot even remember when was the first time I heard about Ludum Dare, but it was at least 5 years ago. Even back then, I was fascinated by the idea of creating a game in such a short time, but even though I wanted to try it, I had no game development experience at that time, so it always remained just a dream.</description>
+    </item>
+    
+  </channel>
+</rss>

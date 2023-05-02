@@ -29,7 +29,7 @@
 
     <link rel="stylesheet" href="/layui/css/layui.css">
     <link rel="stylesheet" href="/self/css/default.css">
-    <script src="/layui/layui.js"></script>
+    <script src=" /layui/layui.js"></script>
 
     <link rel="stylesheet" async href="/self/css/markdown.min.css">
     <link rel="stylesheet" async href="/self/css/gallery.css">
@@ -39,7 +39,7 @@
 
     <script src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.min.js" integrity="sha256-9/aliU8dGd2tb6OSsuzixeV4y/faTqgFtohetphbbj0=" crossorigin="anonymous"></script>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/font-awesome@4.7.0/css/font-awesome.min.css" integrity="sha256-eZrrJcwDc/3uDhsdt61sL2oOBY362qM3lon1gyExkL0=" crossorigin="anonymous">
-    <script async src="https://cdn.jsdelivr.net/npm/lazysizes@5.2.0/lazysizes.min.js" integrity="sha256-h2tMEmhemR2IN4wbbdNjj9LaDIjzwk2hralQwfJmBOE=" crossorigin="anonymous"></script></head>
+    <script async src="https://cdn.jsdelivr.net/npm/lazysizes@5.3.2/lazysizes.min.js" integrity="sha256-PZEg+mIdptYTwWmLcBTsa99GIDZujyt7VHBZ9Lb2Jys=" crossorigin="anonymous"></script></head>
 
 <body>
     
@@ -89,6 +89,7 @@ layui.use('element', function(){
   var element = layui.element;
 });
 </script>
+
         <div id="content" style="min-height:80%">
 <div class="layui-container" style="margin-bottom: 10px">
     
@@ -133,6 +134,7 @@ layui.use('element', function(){
     
     
 </h3>
+
                 </blockquote>
                 <div class="layui-card-body markdown-body single-content">
                     <p>Procedural generation is incredible. It is the key to writing games with endless content. Without it, <a href="https://www.minecraft.net/">Minecraft</a> couldn’t have (nearly) infinite worlds with infinite terrain. <a href="https://spelunkyworld.com/">Spelunky</a> would only contain a few rooms, and we could learn the layout and enemy placement instead of learning the game mechanics. These are only a few examples, but there are a lot of games that use this mechanic for generating content.</p>
@@ -149,26 +151,26 @@ layui.use('element', function(){
 </span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">val</span> height = rng.nextInt(settings.maxSize - settings.minSize + <span style="color:#ae81ff">1</span>) + settings.minSize
 </span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">val</span> left = (<span style="color:#66d9ef">this</span>.width - width) / <span style="color:#ae81ff">2f</span>
 </span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">val</span> top = (<span style="color:#66d9ef">this</span>.height - height) / <span style="color:#ae81ff">2f</span>
-</span></span><span style="display:flex;"><span>        rooms.add(RoomState(Room(Vector(left, top), width, height), RoomState.State.Generated))
+</span></span><span style="display:flex;"><span>        rooms.add(RoomState(Room(Vector(left, top), width, height), <span style="color:#a6e22e">RoomState</span>.<span style="color:#a6e22e">State</span>.Generated))
 </span></span><span style="display:flex;"><span>    }
 </span></span><span style="display:flex;"><span>}
 </span></span></code></pre></div><h3 id="2-finding-room-placement">2. Finding room placement</h3>
 <p>First, I select a random room, and we mark that as placed. After that, I iterate over all remaining ones and move them toward a random direction until they no longer intersect with any of the already placed rooms. I also added a margin for this to not end up with rooms that are too close to each other.</p>
 <div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-kotlin" data-lang="kotlin"><span style="display:flex;"><span><span style="color:#66d9ef">private</span> <span style="color:#66d9ef">fun</span> <span style="color:#a6e22e">moveRooms</span>() {
-</span></span><span style="display:flex;"><span>    rooms[rng.nextInt(rooms.size)].state = RoomState.State.Placed
+</span></span><span style="display:flex;"><span>    rooms[rng.nextInt(rooms.size)].state = <span style="color:#a6e22e">RoomState</span>.<span style="color:#a6e22e">State</span>.Placed
 </span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">while</span> (rooms.any { <span style="color:#66d9ef">it</span>.state <span style="color:#f92672">==</span> RoomState.State.Generated }) {
-</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">val</span> movingRoom = rooms.first { <span style="color:#66d9ef">it</span>.state <span style="color:#f92672">==</span> RoomState.State.Generated }
-</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">val</span> direction = rng.nextDouble() * <span style="color:#ae81ff">2</span> * Math.PI
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">while</span> (rooms.any { <span style="color:#66d9ef">it</span>.state <span style="color:#f92672">==</span> <span style="color:#a6e22e">RoomState</span>.<span style="color:#a6e22e">State</span>.Generated }) {
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">val</span> movingRoom = rooms.first { <span style="color:#66d9ef">it</span>.state <span style="color:#f92672">==</span> <span style="color:#a6e22e">RoomState</span>.<span style="color:#a6e22e">State</span>.Generated }
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">val</span> direction = rng.nextDouble() * <span style="color:#ae81ff">2</span> * <span style="color:#a6e22e">Math</span>.PI
 </span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">val</span> moveVector = Vector(cos(direction), sin(direction))
 </span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">var</span> finalPlace = <span style="color:#66d9ef">false</span>
 </span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">while</span> (!finalPlace) {
 </span></span><span style="display:flex;"><span>            movingRoom.room.topLeft = movingRoom.room.topLeft + moveVector
 </span></span><span style="display:flex;"><span>            finalPlace = rooms
-</span></span><span style="display:flex;"><span>                .filter { <span style="color:#66d9ef">it</span>.state <span style="color:#f92672">==</span> RoomState.State.Placed }
+</span></span><span style="display:flex;"><span>                .filter { <span style="color:#66d9ef">it</span>.state <span style="color:#f92672">==</span> <span style="color:#a6e22e">RoomState</span>.<span style="color:#a6e22e">State</span>.Placed }
 </span></span><span style="display:flex;"><span>                .none { <span style="color:#66d9ef">it</span>.room.intersects(movingRoom.room, settings.roomMargin) }
 </span></span><span style="display:flex;"><span>        }
-</span></span><span style="display:flex;"><span>        movingRoom.state = RoomState.State.Placed
+</span></span><span style="display:flex;"><span>        movingRoom.state = <span style="color:#a6e22e">RoomState</span>.<span style="color:#a6e22e">State</span>.Placed
 </span></span><span style="display:flex;"><span>    }
 </span></span><span style="display:flex;"><span>}
 </span></span></code></pre></div><h3 id="3-selecting-rooms-to-keep">3. Selecting rooms to keep</h3>
@@ -195,16 +197,16 @@ layui.use('element', function(){
 </span></span><span style="display:flex;"><span>            .filterNot { graph.isRouteAvailable(<span style="color:#66d9ef">it</span>.first, <span style="color:#66d9ef">it</span>.second) }
 </span></span><span style="display:flex;"><span>            .sortedBy { <span style="color:#66d9ef">it</span>.first.center.distance(<span style="color:#66d9ef">it</span>.second.center) }
 </span></span><span style="display:flex;"><span>            .take(<span style="color:#ae81ff">1</span>)
-</span></span><span style="display:flex;"><span>            .forEach { graph.addEdge(Graph.Edge(<span style="color:#66d9ef">it</span>.first, <span style="color:#66d9ef">it</span>.second)) }
+</span></span><span style="display:flex;"><span>            .forEach { graph.addEdge(<span style="color:#a6e22e">Graph</span>.Edge(<span style="color:#66d9ef">it</span>.first, <span style="color:#66d9ef">it</span>.second)) }
 </span></span><span style="display:flex;"><span>    }
 </span></span><span style="display:flex;"><span>}
 </span></span></code></pre></div><h3 id="5-selecting-the-entrance">5. Selecting the entrance</h3>
 <p>With the spanning tree generated, we now have the basic structure of our dungeon. For the next step, let’s choose the room where the whole adventure begins. For this, I wanted to find the farthest room away from any leaf node.</p>
 <div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-kotlin" data-lang="kotlin"><span style="display:flex;"><span><span style="color:#66d9ef">private</span> <span style="color:#66d9ef">fun</span> <span style="color:#a6e22e">selectEntrance</span>() {
 </span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">val</span> graph = Graph(edges)
-</span></span><span style="display:flex;"><span>    selectedRooms.forEach { <span style="color:#66d9ef">it</span>.room.type = Room.RoomType.Room }
+</span></span><span style="display:flex;"><span>    selectedRooms.forEach { <span style="color:#66d9ef">it</span>.room.type = <span style="color:#a6e22e">Room</span>.<span style="color:#a6e22e">RoomType</span>.Room }
 </span></span><span style="display:flex;"><span>    selectedRooms.maxByOrNull { graph.branchDistance(<span style="color:#66d9ef">it</span>.room) }
-</span></span><span style="display:flex;"><span>        <span style="color:#f92672">?.</span>let { <span style="color:#66d9ef">it</span>.room.type = Room.RoomType.Entrance }
+</span></span><span style="display:flex;"><span>        <span style="color:#f92672">?.</span>let { <span style="color:#66d9ef">it</span>.room.type = <span style="color:#a6e22e">Room</span>.<span style="color:#a6e22e">RoomType</span>.Entrance }
 </span></span><span style="display:flex;"><span>}
 </span></span><span style="display:flex;"><span>
 </span></span><span style="display:flex;"><span><span style="color:#66d9ef">private</span> <span style="color:#66d9ef">fun</span> &lt;<span style="color:#a6e22e">T</span>&gt; <span style="color:#a6e22e">Graph</span>&lt;T&gt;.branchDistance(n: T, prev: T? = <span style="color:#66d9ef">null</span>): Int {
@@ -223,11 +225,11 @@ layui.use('element', function(){
 <p>To make it more interesting, I decided to not simply use the farthest room from the entrance but to select a random one, weighted by its distance. I also introduced a factor that can be modified to specify how important the distance is.</p>
 <div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-kotlin" data-lang="kotlin"><span style="display:flex;"><span><span style="color:#66d9ef">private</span> <span style="color:#66d9ef">fun</span> <span style="color:#a6e22e">selectQuestObjective</span>() {
 </span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">val</span> graph = Graph(edges)
-</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">val</span> entrance = selectedRooms.first { <span style="color:#66d9ef">it</span>.room.type <span style="color:#f92672">==</span> Room.RoomType.Entrance }
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">val</span> entrance = selectedRooms.first { <span style="color:#66d9ef">it</span>.room.type <span style="color:#f92672">==</span> <span style="color:#a6e22e">Room</span>.<span style="color:#a6e22e">RoomType</span>.Entrance }
 </span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">val</span> distances = mutableListOf&lt;Pair&lt;RoomState, Int&gt;&gt;()
 </span></span><span style="display:flex;"><span>
 </span></span><span style="display:flex;"><span>    selectedRooms
-</span></span><span style="display:flex;"><span>        .filter { <span style="color:#66d9ef">it</span>.room.type <span style="color:#f92672">==</span> Room.RoomType.Room <span style="color:#f92672">&amp;&amp;</span> graph.neighbors(<span style="color:#66d9ef">it</span>.room).size <span style="color:#f92672">==</span> <span style="color:#ae81ff">1</span> }
+</span></span><span style="display:flex;"><span>        .filter { <span style="color:#66d9ef">it</span>.room.type <span style="color:#f92672">==</span> <span style="color:#a6e22e">Room</span>.<span style="color:#a6e22e">RoomType</span>.Room <span style="color:#f92672">&amp;&amp;</span> graph.neighbors(<span style="color:#66d9ef">it</span>.room).size <span style="color:#f92672">==</span> <span style="color:#ae81ff">1</span> }
 </span></span><span style="display:flex;"><span>        .forEach { roomState <span style="color:#f92672">-&gt;</span>
 </span></span><span style="display:flex;"><span>            <span style="color:#66d9ef">val</span> distance = graph.shortestPath(entrance.room, roomState.room)
 </span></span><span style="display:flex;"><span>                <span style="color:#f92672">?.</span>let { <span style="color:#66d9ef">it</span>.size - <span style="color:#ae81ff">1</span> } <span style="color:#f92672">?:</span> <span style="color:#ae81ff">0</span>
@@ -238,7 +240,7 @@ layui.use('element', function(){
 </span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">val</span> questObjective = distances.weightedRandom(rng)
 </span></span><span style="display:flex;"><span>    selectedRooms
 </span></span><span style="display:flex;"><span>        .first { <span style="color:#66d9ef">it</span> <span style="color:#f92672">==</span> questObjective}
-</span></span><span style="display:flex;"><span>        .room.type = Room.RoomType.QuestObjective
+</span></span><span style="display:flex;"><span>        .room.type = <span style="color:#a6e22e">Room</span>.<span style="color:#a6e22e">RoomType</span>.QuestObjective
 </span></span><span style="display:flex;"><span>}
 </span></span></code></pre></div><h3 id="7-generating-corridors">7. Generating corridors</h3>
 <p>Currently, the rooms are not connected; we just have a graph telling us which of them should be neighbors. To change this, let’s generate some corridors between them.</p>
@@ -268,12 +270,12 @@ layui.use('element', function(){
 </span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">val</span> intersectedCorridor = corridors.firstOrNull { <span style="color:#66d9ef">it</span>.getRect().intersect(tileRect) }
 </span></span><span style="display:flex;"><span>        tileMap[x, y] = <span style="color:#66d9ef">when</span> {
 </span></span><span style="display:flex;"><span>            intersectedRoom <span style="color:#f92672">!=</span> <span style="color:#66d9ef">null</span> <span style="color:#f92672">-&gt;</span> <span style="color:#66d9ef">when</span> (intersectedRoom.room.type) {
-</span></span><span style="display:flex;"><span>                Room.RoomType.Room <span style="color:#f92672">-&gt;</span> TileMap.TileType.Room
-</span></span><span style="display:flex;"><span>                Room.RoomType.Entrance <span style="color:#f92672">-&gt;</span> TileMap.TileType.StartRoom
-</span></span><span style="display:flex;"><span>                Room.RoomType.QuestObjective <span style="color:#f92672">-&gt;</span> TileMap.TileType.QuestRoom
+</span></span><span style="display:flex;"><span>                <span style="color:#a6e22e">Room</span>.<span style="color:#a6e22e">RoomType</span>.Room <span style="color:#f92672">-&gt;</span> <span style="color:#a6e22e">TileMap</span>.<span style="color:#a6e22e">TileType</span>.Room
+</span></span><span style="display:flex;"><span>                <span style="color:#a6e22e">Room</span>.<span style="color:#a6e22e">RoomType</span>.Entrance <span style="color:#f92672">-&gt;</span> <span style="color:#a6e22e">TileMap</span>.<span style="color:#a6e22e">TileType</span>.StartRoom
+</span></span><span style="display:flex;"><span>                <span style="color:#a6e22e">Room</span>.<span style="color:#a6e22e">RoomType</span>.QuestObjective <span style="color:#f92672">-&gt;</span> <span style="color:#a6e22e">TileMap</span>.<span style="color:#a6e22e">TileType</span>.QuestRoom
 </span></span><span style="display:flex;"><span>            }
-</span></span><span style="display:flex;"><span>            intersectedCorridor <span style="color:#f92672">!=</span> <span style="color:#66d9ef">null</span> <span style="color:#f92672">-&gt;</span> TileMap.TileType.Corridor
-</span></span><span style="display:flex;"><span>            <span style="color:#66d9ef">else</span> <span style="color:#f92672">-&gt;</span> TileMap.TileType.Void
+</span></span><span style="display:flex;"><span>            intersectedCorridor <span style="color:#f92672">!=</span> <span style="color:#66d9ef">null</span> <span style="color:#f92672">-&gt;</span> <span style="color:#a6e22e">TileMap</span>.<span style="color:#a6e22e">TileType</span>.Corridor
+</span></span><span style="display:flex;"><span>            <span style="color:#66d9ef">else</span> <span style="color:#f92672">-&gt;</span> <span style="color:#a6e22e">TileMap</span>.<span style="color:#a6e22e">TileType</span>.Void
 </span></span><span style="display:flex;"><span>        }
 </span></span><span style="display:flex;"><span>    }
 </span></span><span style="display:flex;"><span>}
@@ -341,6 +343,7 @@ layui.use('element', function(){
     
     
 </h3>
+
                         </blockquote>
                     </div>
                 	
@@ -388,6 +391,7 @@ layui.use('element', function(){
     
     
 </h3>
+
                         </blockquote>
                     </div>
                 	
@@ -431,6 +435,7 @@ layui.use('element', function(){
     
     
 </h3>
+
                         </blockquote>
                     </div>
                 	
@@ -442,6 +447,53 @@ layui.use('element', function(){
             <div class="layui-card single-card">
                 <h2 class="single-title">Recent Posts</h2>
             
+                
+                <div style="margin-left: 10px;">
+                    <blockquote class="self-elem-quote self-elem-quote-bg-orange" style="background-color:#FFFFFF;margin-top: 10px;">
+                    <a href="/post/my-first-gamejam/">
+                        <h3 class="">My First Gamejam</h3>
+                    </a>
+                    <h3 style="margin-top:10px; margin-bottom:10px"> 
+    <i class="layui-icon layui-icon-date" style="font-size: 28px; vertical-align: -2px;"></i>
+    <span>2023-05-02</span>
+
+    
+     
+    <i class="layui-icon layui-icon-list" style="font-size: 32px; vertical-align: -3px;"></i>
+    
+
+    
+        <a href="/categories/gamedev/">
+            <span class="layui-badge layui-bg-green" style="vertical-align: 2px;">gamedev</span>
+        </a>
+    
+
+    
+    <i class="layui-icon layui-icon-tabs" style="font-size: 22px; vertical-align: 1px;margin-right:2px;"></i>
+    
+
+    
+        <a href="/tags/gamedev/">
+            <span class="layui-badge layui-bg-green" style="vertical-align: 2px;">gamedev</span>
+        </a>
+    
+        <a href="/tags/gamejam/">
+            <span class="layui-badge layui-bg-green" style="vertical-align: 2px;">gamejam</span>
+        </a>
+    
+        <a href="/tags/ludum-dare/">
+            <span class="layui-badge layui-bg-green" style="vertical-align: 2px;">ludum dare</span>
+        </a>
+    
+        <a href="/tags/godot/">
+            <span class="layui-badge layui-bg-green" style="vertical-align: 2px;">godot</span>
+        </a>
+    
+    
+</h3>
+
+                    </blockquote>
+                </div>
                 
                 <div style="margin-left: 10px;">
                     <blockquote class="self-elem-quote self-elem-quote-bg-orange" style="background-color:#FFFFFF;margin-top: 10px;">
@@ -482,6 +534,7 @@ layui.use('element', function(){
     
     
 </h3>
+
                     </blockquote>
                 </div>
                 
@@ -536,6 +589,7 @@ layui.use('element', function(){
     
     
 </h3>
+
                     </blockquote>
                 </div>
                 
@@ -578,6 +632,7 @@ layui.use('element', function(){
     
     
 </h3>
+
                     </blockquote>
                 </div>
                 
@@ -624,52 +679,7 @@ layui.use('element', function(){
     
     
 </h3>
-                    </blockquote>
-                </div>
-                
-                <div style="margin-left: 10px;">
-                    <blockquote class="self-elem-quote self-elem-quote-bg-orange" style="background-color:#FFFFFF;margin-top: 10px;">
-                    <a href="/post/renderscript/">
-                        <h3 class="">RenderScript is Still alive</h3>
-                    </a>
-                    <h3 style="margin-top:10px; margin-bottom:10px"> 
-    <i class="layui-icon layui-icon-date" style="font-size: 28px; vertical-align: -2px;"></i>
-    <span>2020-02-29</span>
 
-    
-     
-    <i class="layui-icon layui-icon-list" style="font-size: 32px; vertical-align: -3px;"></i>
-    
-
-    
-        <a href="/categories/android/">
-            <span class="layui-badge layui-bg-green" style="vertical-align: 2px;">android</span>
-        </a>
-    
-
-    
-    <i class="layui-icon layui-icon-tabs" style="font-size: 22px; vertical-align: 1px;margin-right:2px;"></i>
-    
-
-    
-        <a href="/tags/programming/">
-            <span class="layui-badge layui-bg-green" style="vertical-align: 2px;">programming</span>
-        </a>
-    
-        <a href="/tags/android/">
-            <span class="layui-badge layui-bg-green" style="vertical-align: 2px;">android</span>
-        </a>
-    
-        <a href="/tags/renderscript/">
-            <span class="layui-badge layui-bg-green" style="vertical-align: 2px;">renderscript</span>
-        </a>
-    
-        <a href="/tags/parallelism/">
-            <span class="layui-badge layui-bg-green" style="vertical-align: 2px;">parallelism</span>
-        </a>
-    
-    
-</h3>
                     </blockquote>
                 </div>
                 
@@ -689,5 +699,6 @@ layui.use('element', function(){
         <p class="copyright">&copy; All rights reserved. Powered by <a href='https://gohugo.io' style='color:#FFFFFF'>Hugo</a> and <a href='https://github.com/ertuil/erblog' style='color:#FFFFFF'>Erblog</a>.</p>
     </div>
 </footer>
+
 </body>
 </html>

@@ -1,20 +1,91 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>contracts on pshegger</title>
-    <link>http://pshegger.github.io/tags/contracts/</link>
+    <title>pshegger</title>
+    <link>https://pshegger.github.io/tags/contracts/</link>
     <description>Recent content in contracts on pshegger</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Thu, 21 Mar 2019 00:00:00 +0000</lastBuildDate><atom:link href="http://pshegger.github.io/tags/contracts/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Thu, 21 Mar 2019 00:00:00 +0100</lastBuildDate><atom:link href="https://pshegger.github.io/tags/contracts/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>My First Gamejam</title>
+      <link>https://pshegger.github.io/posts/my-first-gamejam/</link>
+      <pubDate>Tue, 02 May 2023 00:00:00 +0200</pubDate>
+      
+      <guid>https://pshegger.github.io/posts/my-first-gamejam/</guid>
+      <description>My thought and experiences about my first gamejam (Ludum Dare 53)</description>
+    </item>
+    
+    <item>
+      <title>Procedural Dungeon Generation</title>
+      <link>https://pshegger.github.io/posts/procedural-dungeon/</link>
+      <pubDate>Thu, 10 Mar 2022 00:00:00 +0100</pubDate>
+      
+      <guid>https://pshegger.github.io/posts/procedural-dungeon/</guid>
+      <description>Procedural generation is the key to writing games with endless content. In this article I show you how I generate a dungeon that can be later used in a game.</description>
+    </item>
+    
+    <item>
+      <title>h@cktivitycon 2021 CTF</title>
+      <link>https://pshegger.github.io/posts/hacktivitycon-2021-ctf/</link>
+      <pubDate>Mon, 20 Sep 2021 00:00:00 +0200</pubDate>
+      
+      <guid>https://pshegger.github.io/posts/hacktivitycon-2021-ctf/</guid>
+      <description>Writeups and my thoughts about the 2021 h@cktivitycon CTF</description>
+    </item>
+    
+    <item>
+      <title>Advent of Code 2020</title>
+      <link>https://pshegger.github.io/posts/aoc-2020/</link>
+      <pubDate>Wed, 30 Dec 2020 00:00:00 +0100</pubDate>
+      
+      <guid>https://pshegger.github.io/posts/aoc-2020/</guid>
+      <description>A short summary about my experiences with Advent of Code 2020</description>
+    </item>
+    
+    <item>
+      <title>Turning a Camera Feed into a Solved Sudoku</title>
+      <link>https://pshegger.github.io/posts/ar-sudoku/</link>
+      <pubDate>Wed, 12 Aug 2020 00:00:00 +0200</pubDate>
+      
+      <guid>https://pshegger.github.io/posts/ar-sudoku/</guid>
+      <description>An introduction to a simple application that uses ML Kit &amp; maths to create an augmented reality sudoku solver</description>
+    </item>
+    
+    <item>
+      <title>RenderScript is Still alive</title>
+      <link>https://pshegger.github.io/posts/renderscript/</link>
+      <pubDate>Sat, 29 Feb 2020 00:00:00 +0100</pubDate>
+      
+      <guid>https://pshegger.github.io/posts/renderscript/</guid>
+      <description>RenderScript is a great way to compute large amount of data, so let&#39;s discover together what it is and when should it be considered.</description>
+    </item>
+    
+    <item>
+      <title>gRPC for Kotliners</title>
+      <link>https://pshegger.github.io/posts/grpc-talk/</link>
+      <pubDate>Thu, 14 Nov 2019 00:00:00 +0100</pubDate>
+      
+      <guid>https://pshegger.github.io/posts/grpc-talk/</guid>
+      <description>gRPC is a worthy alternative for REST, let&#39;s explore together what it is and how to use it as a Kotlin developer.</description>
+    </item>
+    
+    <item>
+      <title>@GenerateForMe</title>
+      <link>https://pshegger.github.io/posts/generate-for-me/</link>
+      <pubDate>Mon, 11 Nov 2019 00:00:00 +0100</pubDate>
+      
+      <guid>https://pshegger.github.io/posts/generate-for-me/</guid>
+      <description>Annotations are extremely versatile especially if we write our own processor to overcharge our development. Learn how to write one in Kotlin.</description>
+    </item>
+    
     <item>
       <title>Help Yourself and the Compiler with Contracts</title>
-      <link>http://pshegger.github.io/post/kotlin-contracts/</link>
-      <pubDate>Thu, 21 Mar 2019 00:00:00 +0000</pubDate>
+      <link>https://pshegger.github.io/posts/kotlin-contracts/</link>
+      <pubDate>Thu, 21 Mar 2019 00:00:00 +0100</pubDate>
       
-      <guid>http://pshegger.github.io/post/kotlin-contracts/</guid>
-      <description>What are contracts? In the world of Kotlin, contracts represent a deal between the developer and the compiler. As a developer you can share insight of your code with the compiler and it can use this extra info for better code analysis.
-Currently there are two kinds of contracts available: callsInPlace which tells the compiler how many times a lambda is called, and returns/implies which indicates that a defined condition is true if the function returns a specific value.</description>
+      <guid>https://pshegger.github.io/posts/kotlin-contracts/</guid>
+      <description>In the world of Kotlin, contracts represent a deal between the developer and the compiler. As a developer you can share insight of your code with the compiler and it can use this extra info for better code analysis.</description>
     </item>
     
   </channel>

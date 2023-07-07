@@ -1,0 +1,730 @@
+<!DOCTYPE html>
+<html lang="en-us"><head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  
+  
+
+
+
+
+
+  
+  
+  
+    
+    
+  
+
+
+
+
+
+  
+
+
+
+  
+  
+
+<link rel="stylesheet" href="https://pshegger.github.io/main.min.css" />
+  
+<meta name="robots" content="index, follow">
+    <meta name="googlebot" content="index, follow, max-snippet:-1, max-image-preview:large, max-video-preview:-1">
+    <meta name="bingbot" content="index, follow, max-snippet:-1, max-image-preview:large, max-video-preview:-1">
+  
+
+<title>RenderScript is Still alive</title>
+
+
+<meta name="author" content="pshegger">
+
+<meta name="description" content="RenderScript is a great way to compute large amount of data, so let&#39;s discover together what it is and when should it be considered.">
+<link rel="canonical" href="https://pshegger.github.io/posts/renderscript/">
+<meta property="og:locale" content="">
+<meta property="og:type" content="article">
+<meta property="og:title" content="RenderScript is Still alive">
+<meta property="og:description" content="RenderScript is a great way to compute large amount of data, so let&#39;s discover together what it is and when should it be considered.">
+<meta property="og:url" content="https://pshegger.github.io/posts/renderscript/">
+<meta property="article:published_time" content="2020-02-29T00:00:00+01:00">
+  <meta property="article:modified_time" content="2020-02-29T00:00:00+01:00">
+  
+
+
+
+
+
+
+  <meta name="twitter:site" content="pshegger">
+
+
+  <meta name="twitter:creator" content="pshegger">
+
+<meta name="twitter:title" content="RenderScript is Still alive">
+<meta name="twitter:description" content="RenderScript is a great way to compute large amount of data, so let&#39;s discover together what it is and when should it be considered.">
+
+
+
+  <meta name="twitter:card" content="summary">
+
+
+
+
+
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "Person",
+      "@id": "https://pshegger.github.io/#/schema/person/1",
+      "name":  null ,
+      "url": "https://pshegger.github.io/",
+      "image": {
+        "@type": "ImageObject",
+        "@id": "https://pshegger.github.io/#/schema/image/1",
+        "url": "https://pshegger.github.io/\u003cnil\u003e",
+        "width": null ,
+        "height": null ,
+        "caption":  null 
+      }
+    },
+    {
+      "@type": "WebSite",
+      "@id": "https://pshegger.github.io/#/schema/website/1",
+      "url": "https://pshegger.github.io/",
+      "name": "pshegger",
+      "description":  null ,
+      "publisher": {
+        "@id": "https://pshegger.github.io/#/schema/person/1"
+      }
+    },
+    {
+      "@type": "WebPage",
+      "@id": "https://pshegger.github.io/posts/renderscript/",
+      "url": "https://pshegger.github.io/posts/renderscript/",
+      "name": "RenderScript is Still alive",
+      "description": "RenderScript is a great way to compute large amount of data, so let's discover together what it is and when should it be considered.",
+      "isPartOf": {
+        "@id": "https://pshegger.github.io/#/schema/website/1"
+      },
+      "about": {
+        "@id": "https://pshegger.github.io/#/schema/person/1"
+      },
+      "datePublished": "2020-02-29T00:00:00+01:00",
+      "dateModified": "2020-02-29T00:00:00+01:00",
+      "breadcrumb": {
+        "@id": "https://pshegger.github.io/posts/renderscript/#/schema/breadcrumb/1"
+      },
+      "primaryImageOfPage": {
+        "@id": "https://pshegger.github.io/posts/renderscript/#/schema/image/2"
+      },
+      "inLanguage":  null ,
+      "potentialAction": [{
+        "@type": "ReadAction", "target": ["https://pshegger.github.io/posts/renderscript/"]
+      }]
+    },
+    {
+      "@type": "BreadcrumbList",
+      "@id": "https://pshegger.github.io/posts/renderscript/#/schema/breadcrumb/1",
+      "name": "Breadcrumbs",
+      "itemListElement": [{
+        "@type": "ListItem",
+        "position":  1 ,
+        "item": {
+          "@type": "WebPage",
+          "@id": "https://pshegger.github.io/",
+          "url": "https://pshegger.github.io/",
+          "name": "Home"
+          }
+        },{
+        "@type": "ListItem",
+        "position":  2 ,
+        "item": {
+          "@type": "WebPage",
+          "@id": "https://pshegger.github.io/posts/",
+          "url": "https://pshegger.github.io/posts/",
+          "name": "Posts"
+          }
+        },{
+        "@type": "ListItem",
+        "position":  3 ,
+        "item": {
+          "@id": "https://pshegger.github.io/posts/renderscript/"
+          }
+        }]
+    },
+    {
+      "@context": "https://schema.org",
+      "@graph": [
+        {
+          "@type": "Article",
+          "@id": "https://pshegger.github.io/#/schema/article/1",
+          "headline": "RenderScript is Still alive",
+          "description": "RenderScript is a great way to compute large amount of data, so let's discover together what it is and when should it be considered.",
+          "isPartOf": {
+            "@id": "https://pshegger.github.io/posts/renderscript/"
+          },
+          "mainEntityOfPage": {
+            "@id": "https://pshegger.github.io/posts/renderscript/"
+          },
+          "datePublished": "2020-02-29T00:00:00+01:00",
+          "dateModified": "2020-02-29T00:00:00+01:00",
+          "author": {
+            "@id": "https://pshegger.github.io/#/schema/person/1"
+          },          
+          "publisher": {
+            "@id": "https://pshegger.github.io/#/schema/person/1"
+          },
+          "image": {
+            "@id": "https://pshegger.github.io/posts/renderscript/#/schema/image/2"
+          }
+        }
+      ]
+    },{
+      "@context": "https://schema.org",
+      "@graph": [
+        {
+          "@type": "ImageObject",
+          "@id": "https://pshegger.github.io/posts/renderscript/#/schema/image/2",
+          "url":  null ,
+          "contentUrl":  null ,
+          "caption": "RenderScript is Still alive"
+        }
+      ]
+    }
+  ]
+}
+</script>
+  
+
+  
+
+</head><body>
+    <header class="container">
+  <nav class="main-nav" id="js-navbar">
+    <a class="logo" href="https://pshegger.github.io/">pshegger</a>
+    <ul class="menu" id="js-menu">
+      
+      
+      
+        <li class="menu-item">
+          <a href="/about/" class="menu-link">About</a>
+        </li>
+      
+      
+      
+        <li class="menu-item">
+          <a href="/posts/" class="menu-link">All Posts</a>
+        </li>
+      
+      
+      
+      <li class="menu-item">
+        <span class="menu-link">Explore<span class="drop-icon">▾</span></span>
+        <ul class="sub-menu">
+          
+            <li class="menu-item">
+              <a href="/categories/" class="menu-link">Categories</a>                  
+            </li>
+          
+            <li class="menu-item">
+              <a href="/tags/" class="menu-link">Tags</a>                  
+            </li>
+          
+            <li class="menu-item">
+              <a href="/series/" class="menu-link">Series</a>                  
+            </li>
+          
+        </ul>
+      </li>
+      
+      
+      <li class="menu-item--align">
+        <div class="switch">
+          <input class="switch-input" type="checkbox" id="themeSwitch">
+          <label aria-hidden="true" class="switch-label" for="themeSwitch">On</label>
+          <div aria-hidden="true" class="switch-marker"></div>
+        </div>
+      </li>
+    </ul>
+    <span class="nav-toggle" id="js-navbar-toggle">
+      <svg xmlns="http://www.w3.org/2000/svg" id="Outline" viewBox="0 0 24 24" width="30" height="30" fill="var(--color-contrast-high)"><rect y="11" width="24" height="2" rx="1"/><rect y="4" width="24" height="2" rx="1"/><rect y="18" width="24" height="2" rx="1"/></svg>
+    </span>
+  </nav>
+</header><main class="section">
+<div class="container">
+  <section class="page-header">
+    <h1 class="page-header-title">RenderScript is Still alive</h1>
+    <div class="post-list-meta">
+      <div class="post-list-dates">Feb 29, 2020&nbsp;&middot;&nbsp;10 min.</div>
+      
+      <div class="post-list-categories">
+        
+          <a href="https://pshegger.github.io/categories/android/">android</a>
+        
+      </div>
+      
+      
+    </div>
+    <p class="page-header-desc">RenderScript is a great way to compute large amount of data, so let&#39;s discover together what it is and when should it be considered.</p>
+    <div class="single-terms">
+      
+      
+      <a class="term" href="https://pshegger.github.io/tags/programming/">programming</a></li>
+      
+      <a class="term" href="https://pshegger.github.io/tags/android/">android</a></li>
+      
+      <a class="term" href="https://pshegger.github.io/tags/renderscript/">renderscript</a></li>
+      
+      <a class="term" href="https://pshegger.github.io/tags/parallelism/">parallelism</a></li>
+      
+      
+    </div>
+  </section>
+</div>
+<div class="single-container-post">
+  
+
+  <aside class="toc">
+    <div id="js-toc-toggle">
+      <h2 class="toc-header">Table of Contents</h2>
+      <span class="toc-drop-icon">&blacktriangledown;</span>
+    </div>
+    <div id="js-toc-contents" class="toc-contents"><nav id="TableOfContents">
+  <ul>
+    <li><a href="#so-what-is-renderscript">So, what <em>is</em> RenderScript?</a></li>
+    <li><a href="#testing-method">Testing method</a></li>
+    <li><a href="#mandelbrot">Mandelbrot</a></li>
+    <li><a href="#kotlin---the-easy-one">Kotlin - the easy one</a></li>
+    <li><a href="#kotlin-parallel---the-complicated-one">Kotlin Parallel - the complicated one</a></li>
+    <li><a href="#renderscript---the-fast-one">RenderScript - the fast one</a></li>
+    <li><a href="#so-was-it-worth-it">So, was it worth it?</a></li>
+    <li><a href="#when-should-i-use-it">When should I use it?</a></li>
+    <li><a href="#further-reading">Further reading</a></li>
+  </ul>
+</nav></div>
+  </aside>
+
+  <div class="single-post-contents">
+    <div class="single-feature-img">
+
+
+
+  
+
+</div>
+    <article class="markdown">
+        <p>I&rsquo;m sure for most of you it&rsquo;s not a surprise, but I also think that there are people out there who either doesn&rsquo;t know what it is or simply tends to forget about it. The aim of this article is to show these people what it is and why should they use it.</p>
+<h2 id="so-what-is-renderscript">So, what <em>is</em> RenderScript?<a href="#so-what-is-renderscript">
+    <svg role="img" aria-labelledby="so-what-is-renderscript-IconTitle" fill="var(--color-primary)" height="22" viewBox="0 0 24 24" width="22" xmlns="http://www.w3.org/2000/svg">
+      <title id="so-what-is-renderscript-IconTitle">Link to this heading</title>
+      <path d="M0 0h24v24H0z" fill="none"></path>
+      <path d="M3.9 12c0-1.71 1.39-3.1 3.1-3.1h4V7H7c-2.76.0-5 2.24-5 5s2.24 5 5 5h4v-1.9H7c-1.71.0-3.1-1.39-3.1-3.1zM8 13h8v-2H8v2zm9-6h-4v1.9h4c1.71.0 3.1 1.39 3.1 3.1s-1.39 3.1-3.1 3.1h-4V17h4c2.76.0 5-2.24 5-5s-2.24-5-5-5z"></path>
+    </svg>
+  </a>
+</h2><p>RenderScript is an Android framework which can be used for running computationally heavy tasks at high performance. You will get the most benefit on using it for tasks which require a lot of computation that can be parallelized, as the framework will run your code on every available CPU and GPU cores.</p>
+<p>The first step when writing a task for RenderScript is writing the script file. This file will contain your kernel(s) and everything else needed to compute your result. The kernel is the function which will be executed on your input data in parallel. There are two type of kernels: <em>mapping</em> and <em>reduction</em>, but in this article we will only discuss the former one.</p>
+<h2 id="testing-method">Testing method<a href="#testing-method">
+    <svg role="img" aria-labelledby="testing-method-IconTitle" fill="var(--color-primary)" height="22" viewBox="0 0 24 24" width="22" xmlns="http://www.w3.org/2000/svg">
+      <title id="testing-method-IconTitle">Link to this heading</title>
+      <path d="M0 0h24v24H0z" fill="none"></path>
+      <path d="M3.9 12c0-1.71 1.39-3.1 3.1-3.1h4V7H7c-2.76.0-5 2.24-5 5s2.24 5 5 5h4v-1.9H7c-1.71.0-3.1-1.39-3.1-3.1zM8 13h8v-2H8v2zm9-6h-4v1.9h4c1.71.0 3.1 1.39 3.1 3.1s-1.39 3.1-3.1 3.1h-4V17h4c2.76.0 5-2.24 5-5s-2.24-5-5-5z"></path>
+    </svg>
+  </a>
+</h2><p>As I mentioned before RenderScript is excellent at performing computationally heavy tasks and to demonstrate that I created a simple test application. For this test we will be generating an image of the <a href="https://en.wikipedia.org/wiki/Mandelbrot_set" target="_blank" rel="noopener">Mandelbrot set</a> using different methods. Our first version will be written in Kotlin and will not contain any optimization. The second version will still be in Kotlin but we will try to use it&rsquo;s built-in features to parallelize the computation. Lastly we will have a version written in RenderScript.</p>
+<h2 id="mandelbrot">Mandelbrot<a href="#mandelbrot">
+    <svg role="img" aria-labelledby="mandelbrot-IconTitle" fill="var(--color-primary)" height="22" viewBox="0 0 24 24" width="22" xmlns="http://www.w3.org/2000/svg">
+      <title id="mandelbrot-IconTitle">Link to this heading</title>
+      <path d="M0 0h24v24H0z" fill="none"></path>
+      <path d="M3.9 12c0-1.71 1.39-3.1 3.1-3.1h4V7H7c-2.76.0-5 2.24-5 5s2.24 5 5 5h4v-1.9H7c-1.71.0-3.1-1.39-3.1-3.1zM8 13h8v-2H8v2zm9-6h-4v1.9h4c1.71.0 3.1 1.39 3.1 3.1s-1.39 3.1-3.1 3.1h-4V17h4c2.76.0 5-2.24 5-5s-2.24-5-5-5z"></path>
+    </svg>
+  </a>
+</h2><p>Generating an image of the Mandelbrot set is fairly easy, but it requires a lot of time. All we have to do is calculate for every pixel whether the function <code>f(z) = z*z + c</code> (where <code>z=0+0i</code> and <code>c</code> is the coordinate of the pixel mapped to the complex plane) goes to infinity or not.</p>
+<p>As there is no simple way to decide that in practice we usually run a predetermined number of iterations and see if the result leaves a predetermined neighborhood of 0. This means that we can make more precise estimates with choosing a higher iteration count, but it will also slow down the process.</p>
+<p>After that we just have to take the number of iterations it took to leave the neighborhood and color the pixel accordingly.</p>
+<h2 id="kotlin---the-easy-one">Kotlin - the easy one<a href="#kotlin---the-easy-one">
+    <svg role="img" aria-labelledby="kotlin---the-easy-one-IconTitle" fill="var(--color-primary)" height="22" viewBox="0 0 24 24" width="22" xmlns="http://www.w3.org/2000/svg">
+      <title id="kotlin---the-easy-one-IconTitle">Link to this heading</title>
+      <path d="M0 0h24v24H0z" fill="none"></path>
+      <path d="M3.9 12c0-1.71 1.39-3.1 3.1-3.1h4V7H7c-2.76.0-5 2.24-5 5s2.24 5 5 5h4v-1.9H7c-1.71.0-3.1-1.39-3.1-3.1zM8 13h8v-2H8v2zm9-6h-4v1.9h4c1.71.0 3.1 1.39 3.1 3.1s-1.39 3.1-3.1 3.1h-4V17h4c2.76.0 5-2.24 5-5s-2.24-5-5-5z"></path>
+    </svg>
+  </a>
+</h2><p>With this knowledge we can easily write a method which calculates the color for a given coordinate.</p>
+
+
+  <span class="code-language">kotlin</span><div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-kotlin" data-lang="kotlin"><span style="display:flex;"><span><span style="color:#66d9ef">protected</span> <span style="color:#66d9ef">fun</span> <span style="color:#a6e22e">calculatePoint</span>(x: Int, y: Int, rect: RectF): Int {
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">val</span> cr = rect.left + (rect.right - rect.left) * (x / width.toDouble())
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">val</span> ci = rect.top + (rect.bottom - rect.top) * (y / height.toDouble())
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">var</span> zr = <span style="color:#ae81ff">0.0</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">var</span> zi = <span style="color:#ae81ff">0.0</span>
+</span></span><span style="display:flex;"><span>    
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">var</span> i = <span style="color:#ae81ff">0</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">while</span> (i &lt; <span style="color:#a6e22e">MainActivity</span>.MAX_ITER <span style="color:#f92672">&amp;&amp;</span> zr * zr + zi * zi &lt; <span style="color:#ae81ff">4</span>) {
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">val</span> nzr = zr * zr - zi * zi + cr
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">val</span> nzi = <span style="color:#ae81ff">2</span> * zr * zi + ci
+</span></span><span style="display:flex;"><span>        zr = nzr
+</span></span><span style="display:flex;"><span>        zi = nzi
+</span></span><span style="display:flex;"><span>        i<span style="color:#f92672">++</span>
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>    
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">val</span> hue = <span style="color:#ae81ff">360</span> * i.toFloat() / <span style="color:#a6e22e">MainActivity</span>.MAX_ITER
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">val</span> sat = <span style="color:#ae81ff">1f</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">val</span> value = <span style="color:#66d9ef">if</span> (i &lt; <span style="color:#a6e22e">MainActivity</span>.MAX_ITER) <span style="color:#ae81ff">1f</span> <span style="color:#66d9ef">else</span> <span style="color:#ae81ff">0f</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">return</span> <span style="color:#a6e22e">Color</span>.HSVToColor(floatArrayOf(hue, sat, <span style="color:#66d9ef">value</span>))
+</span></span><span style="display:flex;"><span>}</span></span></code></pre></div>
+<p>This function can be called with the coordinate of the pixel we want to calculate (<code>x</code> and <code>y</code>) and the specific area of the plane we want to display currently (<code>rect</code>). Using these inputs we can then calculate the coordinate on the plane (<code>cr</code>and <code>ci</code>). We could also use some complex number class, but from my experience that leads to a performance drop so we stick to calculating the real and imaginary part separately. After that we just have to loop until we either reach the maximum iteration count or leave the neighborhood of 0.</p>
+<p>The last step is coloring the pixel. For that the easiest way to do is using the HSV color model as you can see in the code above.</p>
+<p>Now that we have everything to calculate the color of one pixel all we have to do is looping over every pixel of the output image and coloring it.</p>
+<h2 id="kotlin-parallel---the-complicated-one">Kotlin Parallel - the complicated one<a href="#kotlin-parallel---the-complicated-one">
+    <svg role="img" aria-labelledby="kotlin-parallel---the-complicated-one-IconTitle" fill="var(--color-primary)" height="22" viewBox="0 0 24 24" width="22" xmlns="http://www.w3.org/2000/svg">
+      <title id="kotlin-parallel---the-complicated-one-IconTitle">Link to this heading</title>
+      <path d="M0 0h24v24H0z" fill="none"></path>
+      <path d="M3.9 12c0-1.71 1.39-3.1 3.1-3.1h4V7H7c-2.76.0-5 2.24-5 5s2.24 5 5 5h4v-1.9H7c-1.71.0-3.1-1.39-3.1-3.1zM8 13h8v-2H8v2zm9-6h-4v1.9h4c1.71.0 3.1 1.39 3.1 3.1s-1.39 3.1-3.1 3.1h-4V17h4c2.76.0 5-2.24 5-5s-2.24-5-5-5z"></path>
+    </svg>
+  </a>
+</h2><p>For this version will use the same function to calculate the color of one pixel, but we will split the output to multiple regions and calculate them in parallel. The number of partitions must equal to the number of threads we are using for calculation, but other than that we can split any way we would like to.</p>
+<p>To determine the number of threads we will use <code>Runtime.getRuntime().availableProcessors() - 1</code>. The <code>-1</code> ensures that we have one core for our main thread. When we have the number of threads we create a <code>CoroutineDispatcher</code> and launch a new scope using that as it&rsquo;s context.</p>
+<p>At this point we have to loop through our partitions and use <code>CoroutineScope.launch</code> to start the calculation on it&rsquo;s own thread. This calculation is the same as before, but we&rsquo;re just calculating the points for the given region and not for the whole image.</p>
+
+
+  <span class="code-language">kotlin</span><div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-kotlin" data-lang="kotlin"><span style="display:flex;"><span><span style="color:#66d9ef">override</span> <span style="color:#66d9ef">suspend</span> <span style="color:#66d9ef">fun</span> <span style="color:#a6e22e">generate</span>(buffer: Bitmap, rect: RectF) {
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">val</span> numThreads = <span style="color:#a6e22e">Runtime</span>.getRuntime().availableProcessors() - <span style="color:#ae81ff">1</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">val</span> context = <span style="color:#a6e22e">Executors</span>.newFixedThreadPool(numThreads).asCoroutineDispatcher()
+</span></span><span style="display:flex;"><span>    
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">var</span> h = sqrt(numThreads.toDouble()).toInt()
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">while</span> (numThreads % h <span style="color:#f92672">!=</span> <span style="color:#ae81ff">0</span>) h<span style="color:#f92672">--</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">val</span> w = numThreads / h
+</span></span><span style="display:flex;"><span>    
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">val</span> segWidth = width / w
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">val</span> segHeight = height / h
+</span></span><span style="display:flex;"><span>    
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">val</span> canvas = Canvas(buffer)
+</span></span><span style="display:flex;"><span>    
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">val</span> calculation = CoroutineScope(context).launch {
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">for</span> (mod <span style="color:#66d9ef">in</span> (<span style="color:#ae81ff">0</span> until numThreads)) {
+</span></span><span style="display:flex;"><span>            <span style="color:#66d9ef">val</span> segX = mod % w
+</span></span><span style="display:flex;"><span>            <span style="color:#66d9ef">val</span> segY = mod / w
+</span></span><span style="display:flex;"><span>            <span style="color:#66d9ef">val</span> segXStart = segWidth * segX
+</span></span><span style="display:flex;"><span>            <span style="color:#66d9ef">val</span> segXEnd = segWidth * (segX + <span style="color:#ae81ff">1</span>)
+</span></span><span style="display:flex;"><span>            <span style="color:#66d9ef">val</span> segYStart = segHeight * segY
+</span></span><span style="display:flex;"><span>            <span style="color:#66d9ef">val</span> segYEnd = segHeight * (segY + <span style="color:#ae81ff">1</span>)
+</span></span><span style="display:flex;"><span>            <span style="color:#66d9ef">val</span> paint = Paint()
+</span></span><span style="display:flex;"><span>    
+</span></span><span style="display:flex;"><span>            launch {
+</span></span><span style="display:flex;"><span>                <span style="color:#66d9ef">for</span> (y <span style="color:#66d9ef">in</span> (segYStart until segYEnd)) {
+</span></span><span style="display:flex;"><span>                    <span style="color:#66d9ef">for</span> (x <span style="color:#66d9ef">in</span> (segXStart until segXEnd)) {
+</span></span><span style="display:flex;"><span>                        <span style="color:#66d9ef">val</span> result = calculatePoint(x, y, rect)
+</span></span><span style="display:flex;"><span>    
+</span></span><span style="display:flex;"><span>                        paint.color = result
+</span></span><span style="display:flex;"><span>                        canvas.drawPoint(x.toFloat(), y.toFloat(), paint)
+</span></span><span style="display:flex;"><span>                    }
+</span></span><span style="display:flex;"><span>                }
+</span></span><span style="display:flex;"><span>            }
+</span></span><span style="display:flex;"><span>        }
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>    calculation.join()
+</span></span><span style="display:flex;"><span>}</span></span></code></pre></div>
+<h2 id="renderscript---the-fast-one">RenderScript - the fast one<a href="#renderscript---the-fast-one">
+    <svg role="img" aria-labelledby="renderscript---the-fast-one-IconTitle" fill="var(--color-primary)" height="22" viewBox="0 0 24 24" width="22" xmlns="http://www.w3.org/2000/svg">
+      <title id="renderscript---the-fast-one-IconTitle">Link to this heading</title>
+      <path d="M0 0h24v24H0z" fill="none"></path>
+      <path d="M3.9 12c0-1.71 1.39-3.1 3.1-3.1h4V7H7c-2.76.0-5 2.24-5 5s2.24 5 5 5h4v-1.9H7c-1.71.0-3.1-1.39-3.1-3.1zM8 13h8v-2H8v2zm9-6h-4v1.9h4c1.71.0 3.1 1.39 3.1 3.1s-1.39 3.1-3.1 3.1h-4V17h4c2.76.0 5-2.24 5-5s-2.24-5-5-5z"></path>
+    </svg>
+  </a>
+</h2><p>As the previous example shows it can be pretty tricky to parallelize our computations. We have to manually create our threads and feed them the correct values. But this is where RenderScript comes to rescue us.</p>
+<p>RenderScript will automatically manage the parallelization, all we have to do is write the function which will be executed for every input data (this will be our <code>kernel</code>). The language is a derivative of C99 so some familiarity with that is required to use it.</p>
+<p>For our example all we have to write is a simple script which contains every input we will need for the calculation (width/height of the output image, the area of the plane we want to calculate and the number of iterations) and our kernel, which will be basically the same we have written in Kotlin to calculate the color of a single point. (We will also have to write a color converter, but that&rsquo;s only specific for this example.)</p>
+
+
+  <span class="code-language">c</span><div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-c" data-lang="c"><span style="display:flex;"><span><span style="color:#75715e">#pragma version(1)
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e">#pragma rs_fp_full
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e">#pragma rs java_package_name(io.github.pshegger.playground.rsperformance)
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>    
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">int</span> width, height;
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">float</span> left, right, top, bottom;
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">int</span> maxIterations <span style="color:#f92672">=</span> <span style="color:#ae81ff">128</span>;
+</span></span><span style="display:flex;"><span>    
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">static</span> uchar4 <span style="color:#a6e22e">getColor</span>(<span style="color:#66d9ef">int</span> i) {
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">float</span> hue <span style="color:#f92672">=</span> <span style="color:#ae81ff">360</span> <span style="color:#f92672">*</span> (<span style="color:#66d9ef">float</span>) i <span style="color:#f92672">/</span> maxIterations;
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">float</span> sat <span style="color:#f92672">=</span> <span style="color:#ae81ff">1</span>;
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">float</span> val <span style="color:#f92672">=</span> (i <span style="color:#f92672">&lt;</span> maxIterations) <span style="color:#f92672">?</span> <span style="color:#ae81ff">1</span> <span style="color:#f92672">:</span> <span style="color:#ae81ff">0</span>;
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">float</span> c <span style="color:#f92672">=</span> val <span style="color:#f92672">*</span> sat;
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">float</span> k <span style="color:#f92672">=</span> hue <span style="color:#f92672">/</span> <span style="color:#ae81ff">60</span>;
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">float</span> kmod <span style="color:#f92672">=</span> <span style="color:#a6e22e">fmod</span>(k, <span style="color:#ae81ff">2</span>);
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">float</span> kmodAbs <span style="color:#f92672">=</span> (kmod <span style="color:#f92672">-</span> <span style="color:#ae81ff">1</span> <span style="color:#f92672">&lt;</span> <span style="color:#ae81ff">0</span>) <span style="color:#f92672">?</span> <span style="color:#f92672">-</span>(kmod <span style="color:#f92672">-</span> <span style="color:#ae81ff">1</span>) <span style="color:#f92672">:</span> (kmod <span style="color:#f92672">-</span> <span style="color:#ae81ff">1</span>);
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">float</span> x <span style="color:#f92672">=</span> c <span style="color:#f92672">*</span> (<span style="color:#ae81ff">1</span> <span style="color:#f92672">-</span> kmodAbs);
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">float</span> r1 <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>, g1 <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>, b1 <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>;
+</span></span><span style="display:flex;"><span>    
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">if</span>(k<span style="color:#f92672">&gt;=</span><span style="color:#ae81ff">0</span> <span style="color:#f92672">&amp;&amp;</span> k<span style="color:#f92672">&lt;=</span><span style="color:#ae81ff">1</span>) { r1<span style="color:#f92672">=</span>c; g1<span style="color:#f92672">=</span>x; }
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">if</span>(k<span style="color:#f92672">&gt;</span><span style="color:#ae81ff">1</span> <span style="color:#f92672">&amp;&amp;</span> k<span style="color:#f92672">&lt;=</span><span style="color:#ae81ff">2</span>)  { r1<span style="color:#f92672">=</span>x; g1<span style="color:#f92672">=</span>c; }
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">if</span>(k<span style="color:#f92672">&gt;</span><span style="color:#ae81ff">2</span> <span style="color:#f92672">&amp;&amp;</span> k<span style="color:#f92672">&lt;=</span><span style="color:#ae81ff">3</span>)  { g1<span style="color:#f92672">=</span>c; b1<span style="color:#f92672">=</span>x; }
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">if</span>(k<span style="color:#f92672">&gt;</span><span style="color:#ae81ff">3</span> <span style="color:#f92672">&amp;&amp;</span> k<span style="color:#f92672">&lt;=</span><span style="color:#ae81ff">4</span>)  { g1<span style="color:#f92672">=</span>x; b1<span style="color:#f92672">=</span>c; }
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">if</span>(k<span style="color:#f92672">&gt;</span><span style="color:#ae81ff">4</span> <span style="color:#f92672">&amp;&amp;</span> k<span style="color:#f92672">&lt;=</span><span style="color:#ae81ff">5</span>)  { r1<span style="color:#f92672">=</span>x; b1<span style="color:#f92672">=</span>c; }
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">if</span>(k<span style="color:#f92672">&gt;</span><span style="color:#ae81ff">5</span> <span style="color:#f92672">&amp;&amp;</span> k<span style="color:#f92672">&lt;=</span><span style="color:#ae81ff">6</span>)  { r1<span style="color:#f92672">=</span>c; b1<span style="color:#f92672">=</span>x; }
+</span></span><span style="display:flex;"><span>    
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">float</span> m <span style="color:#f92672">=</span> val <span style="color:#f92672">-</span> c;
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">return</span> <span style="color:#a6e22e">rsPackColorTo8888</span>(r1 <span style="color:#f92672">+</span> m, g1 <span style="color:#f92672">+</span> m, b1 <span style="color:#f92672">+</span> m);
+</span></span><span style="display:flex;"><span>}
+</span></span><span style="display:flex;"><span>    
+</span></span><span style="display:flex;"><span>uchar4 RS_KERNEL <span style="color:#a6e22e">mandelbrot</span>(uchar4 in, <span style="color:#66d9ef">uint32_t</span> x, <span style="color:#66d9ef">uint32_t</span> y) {
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">float</span> nzr, nzi;
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">float</span> zr <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>, zi <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>;
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">float</span> cr <span style="color:#f92672">=</span> left <span style="color:#f92672">+</span> (right <span style="color:#f92672">-</span> left) <span style="color:#f92672">*</span> (x <span style="color:#f92672">/</span> (<span style="color:#66d9ef">double</span>) width);
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">float</span> ci <span style="color:#f92672">=</span> top <span style="color:#f92672">+</span> (bottom <span style="color:#f92672">-</span> top) <span style="color:#f92672">*</span> (y <span style="color:#f92672">/</span> (<span style="color:#66d9ef">double</span>) height);
+</span></span><span style="display:flex;"><span>    
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">int</span> i <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>;
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">while</span> (i <span style="color:#f92672">&lt;</span> maxIterations <span style="color:#f92672">&amp;&amp;</span> zr <span style="color:#f92672">*</span> zr <span style="color:#f92672">+</span> zi <span style="color:#f92672">*</span> zi <span style="color:#f92672">&lt;</span> <span style="color:#ae81ff">4</span>) {
+</span></span><span style="display:flex;"><span>        nzr <span style="color:#f92672">=</span> zr <span style="color:#f92672">*</span> zr <span style="color:#f92672">-</span> zi <span style="color:#f92672">*</span> zi <span style="color:#f92672">+</span> cr;
+</span></span><span style="display:flex;"><span>        nzi <span style="color:#f92672">=</span> <span style="color:#ae81ff">2</span> <span style="color:#f92672">*</span> zr <span style="color:#f92672">*</span> zi <span style="color:#f92672">+</span> ci;
+</span></span><span style="display:flex;"><span>        zr <span style="color:#f92672">=</span> nzr;
+</span></span><span style="display:flex;"><span>        zi <span style="color:#f92672">=</span> nzi;
+</span></span><span style="display:flex;"><span>        i<span style="color:#f92672">++</span>;
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>    
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">return</span> <span style="color:#a6e22e">getColor</span>(i);
+</span></span><span style="display:flex;"><span>}</span></span></code></pre></div>
+<p>As you can see the kernel (marked with <code>RS_KERNEL</code>) is basically the same as was before with just some minor changes required by the language. It is also worth noting that the kernel&rsquo;s <code>x</code> and <code>y</code> parameter will not be provided by us, but the framework.</p>
+<p>We have to put this file inside it&rsquo;s own directory located at <code>app/src/main/rs</code> and we will call it <code>mandelbrot.rs</code>. After saving we can build the project so the required java files will be generated and after it&rsquo;s finished we can start using it in our application.</p>
+<p>There are a few setup steps before we can really use it. First we have to create a RenderScript context and use that to initialize our script. We also have to set the global variables for the script and create allocations for our input and output.</p>
+<p>After all these steps we are ready to start the calculations by calling our kernel on the loaded script.</p>
+
+
+  <span class="code-language">kotlin</span><div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-kotlin" data-lang="kotlin"><span style="display:flex;"><span><span style="color:#66d9ef">private</span> <span style="color:#66d9ef">val</span> rs = <span style="color:#a6e22e">RenderScript</span>.create(context)
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">private</span> <span style="color:#66d9ef">val</span> script = ScriptC_mandelbrot(rs).apply {
+</span></span><span style="display:flex;"><span>    _width = width
+</span></span><span style="display:flex;"><span>    _height = height
+</span></span><span style="display:flex;"><span>    _maxIterations = MAX_ITER
+</span></span><span style="display:flex;"><span>}
+</span></span><span style="display:flex;"><span>    
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">override</span> <span style="color:#66d9ef">suspend</span> <span style="color:#66d9ef">fun</span> <span style="color:#a6e22e">generate</span>(buffer: Bitmap, rect: RectF) {
+</span></span><span style="display:flex;"><span>    script.apply {
+</span></span><span style="display:flex;"><span>        _left = rect.left
+</span></span><span style="display:flex;"><span>        _top = rect.top
+</span></span><span style="display:flex;"><span>        _right = rect.right
+</span></span><span style="display:flex;"><span>        _bottom = rect.bottom
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>    
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">val</span> bufferAllocation = <span style="color:#a6e22e">Allocation</span>.createFromBitmap(rs, buffer)
+</span></span><span style="display:flex;"><span>    script.forEach_mandelbrot(bufferAllocation, bufferAllocation)
+</span></span><span style="display:flex;"><span>    bufferAllocation.copyTo(buffer)
+</span></span><span style="display:flex;"><span>    bufferAllocation.destroy()
+</span></span><span style="display:flex;"><span>}</span></span></code></pre></div>
+<p>As there can be more than one kernels in the script we have to specify which one we would like to use by calling <code>forEach_{{kernelName}}</code>. As we are not using our input for anything we can also save some memory by using that for our output too.</p>
+<p>After all that we only have to copy our allocation back to a bitmap and we can display that to show our users the result.</p>
+<h2 id="so-was-it-worth-it">So, was it worth it?<a href="#so-was-it-worth-it">
+    <svg role="img" aria-labelledby="so-was-it-worth-it-IconTitle" fill="var(--color-primary)" height="22" viewBox="0 0 24 24" width="22" xmlns="http://www.w3.org/2000/svg">
+      <title id="so-was-it-worth-it-IconTitle">Link to this heading</title>
+      <path d="M0 0h24v24H0z" fill="none"></path>
+      <path d="M3.9 12c0-1.71 1.39-3.1 3.1-3.1h4V7H7c-2.76.0-5 2.24-5 5s2.24 5 5 5h4v-1.9H7c-1.71.0-3.1-1.39-3.1-3.1zM8 13h8v-2H8v2zm9-6h-4v1.9h4c1.71.0 3.1 1.39 3.1 3.1s-1.39 3.1-3.1 3.1h-4V17h4c2.76.0 5-2.24 5-5s-2.24-5-5-5z"></path>
+    </svg>
+  </a>
+</h2><p>Now that we&rsquo;re ready with our 3 implementations we can compare them.</p>
+<p>We can easily see that the easiest one to write was the Kotlin version. We had to do some extra steps to write the RenderScript version, but it was still less hassle than creating our own parallel implementation.</p>
+<p>And what about performance? To measure that I ran every computation a few times and measured the average duration it took to generate a single image. The order of the methods is as expected, Kotlin is the slowest with an average of <code>1016 ms/frame</code>, the second one is the parallel version with an average of <code>475 ms/frame</code> and the winner is RenderScript with an average of <code>33 ms/frame</code>. Of course the numbers my vary, but we can easily see that RenderScript is the fastest by a big margin.</p>
+<p>In my opinion the extra work easily worths the performance gain, but of course everybody should decide it for themselves.</p>
+<h2 id="when-should-i-use-it">When should I use it?<a href="#when-should-i-use-it">
+    <svg role="img" aria-labelledby="when-should-i-use-it-IconTitle" fill="var(--color-primary)" height="22" viewBox="0 0 24 24" width="22" xmlns="http://www.w3.org/2000/svg">
+      <title id="when-should-i-use-it-IconTitle">Link to this heading</title>
+      <path d="M0 0h24v24H0z" fill="none"></path>
+      <path d="M3.9 12c0-1.71 1.39-3.1 3.1-3.1h4V7H7c-2.76.0-5 2.24-5 5s2.24 5 5 5h4v-1.9H7c-1.71.0-3.1-1.39-3.1-3.1zM8 13h8v-2H8v2zm9-6h-4v1.9h4c1.71.0 3.1 1.39 3.1 3.1s-1.39 3.1-3.1 3.1h-4V17h4c2.76.0 5-2.24 5-5s-2.24-5-5-5z"></path>
+    </svg>
+  </a>
+</h2><p>We have seen that it can be used with most efficiency when parallel computing can drastically increase the performance of our code. This is usually true for those scenarios when a large number of things should be computed and they are independent of each other.</p>
+<p>RenderScript (as the name suggests) is most used for image processing/manipulation, but I&rsquo;m sure that there are a lot of other areas of computing where it could be used effectively.</p>
+<p>And just to have a real life example: I&rsquo;m sure a lot of us had met a designer in the past who wanted some fancy blur effect for some dynamic parts of the UI which is almost impossible to achieve normally. From now on we don&rsquo;t have to say that we can&rsquo;t do that we just have to tell the truth:</p>
+<blockquote>
+<p>It is possible, but will take longer.</p>
+</blockquote>
+<h2 id="further-reading">Further reading<a href="#further-reading">
+    <svg role="img" aria-labelledby="further-reading-IconTitle" fill="var(--color-primary)" height="22" viewBox="0 0 24 24" width="22" xmlns="http://www.w3.org/2000/svg">
+      <title id="further-reading-IconTitle">Link to this heading</title>
+      <path d="M0 0h24v24H0z" fill="none"></path>
+      <path d="M3.9 12c0-1.71 1.39-3.1 3.1-3.1h4V7H7c-2.76.0-5 2.24-5 5s2.24 5 5 5h4v-1.9H7c-1.71.0-3.1-1.39-3.1-3.1zM8 13h8v-2H8v2zm9-6h-4v1.9h4c1.71.0 3.1 1.39 3.1 3.1s-1.39 3.1-3.1 3.1h-4V17h4c2.76.0 5-2.24 5-5s-2.24-5-5-5z"></path>
+    </svg>
+  </a>
+</h2><p>You can read more about RenderScript on the <a href="https://developer.android.com/guide/topics/renderscript/compute" target="_blank" rel="noopener">Android Developer Site</a>, and check out the source code of the test application at <a href="https://github.com/PsHegger/render-script-performance" target="_blank" rel="noopener">https://github.com/PsHegger/render-script-performance</a></p>
+
+    </article>
+    <aside>
+      <div class="single-terms">
+        
+          
+          <a class="term" href="https://pshegger.github.io/tags/programming/">programming</a></li>
+          
+          <a class="term" href="https://pshegger.github.io/tags/android/">android</a></li>
+          
+          <a class="term" href="https://pshegger.github.io/tags/renderscript/">renderscript</a></li>
+          
+          <a class="term" href="https://pshegger.github.io/tags/parallelism/">parallelism</a></li>
+          
+        
+      </div>
+      
+  
+  
+  
+
+  <section>
+    <h2>Share</h2>
+    <div class="social-links">
+      <ul class="social-icons--share">
+        
+        
+        <a href="https://twitter.com/intent/tweet?url=https%3a%2f%2fpshegger.github.io%2fposts%2frenderscript%2f&amp;text=RenderScript%20is%20Still%20alive" target="_blank" rel="noopener" aria-label="Share on Twitter" class="social-btn twitter">
+          <li><svg xmlns="http://www.w3.org/2000/svg" class="icon icon-twitter" width="24" height="24" viewBox="0 0 384 312" fill="var(--color-primary)"><path d="m384 36.9c-14.1 6.3-29.3 10.5-45.2 12.4 16.3-9.7 28.8-25.2 34.6-43.6-15.2 9-32.1 15.6-50 19.1-14.4-15.2-34.9-24.8-57.5-24.8-43.5 0-78.8 35.3-78.8 78.8 0 6.2.7 12.2 2 17.9-65.5-3.3-123.5-34.6-162.4-82.3-6.7 11.6-10.6 25.2-10.6 39.6 0 27.3 13.9 51.4 35 65.6-12.9-.4-25.1-4-35.7-9.9v1c0 38.2 27.2 70 63.2 77.2-6.6 1.8-13.6 2.8-20.8 2.8-5.1 0-10-.5-14.8-1.4 10 31.3 39.1 54.1 73.6 54.7-27 21.1-60.9 33.7-97.8 33.7-6.4 0-12.6-.4-18.8-1.1 34.9 22.4 76.3 35.4 120.8 35.4 144.9 0 224.1-120 224.1-224.1 0-3.4-.1-6.8-.2-10.2 15.4-11.1 28.7-25 39.3-40.8z"/></svg></li>
+        </a>
+        
+        
+        
+        <a href="https://www.reddit.com/submit?url=https%3a%2f%2fpshegger.github.io%2fposts%2frenderscript%2f" target="_blank" rel="noopener" aria-label="Share on Reddit" class="social-btn reddit">
+          <li><svg xmlns="http://www.w3.org/2000/svg" class="icon icon-reddit" width="24" height="24" viewBox="0 0 24 24" fill="var(--color-primary)"><path d="M24 11.779c0-1.459-1.192-2.645-2.657-2.645-.715 0-1.363.286-1.84.746-1.81-1.191-4.259-1.949-6.971-2.046l1.483-4.669 4.016.941-.006.058c0 1.193.975 2.163 2.174 2.163 1.198 0 2.172-.97 2.172-2.163s-.975-2.164-2.172-2.164c-.92 0-1.704.574-2.021 1.379l-4.329-1.015c-.189-.046-.381.063-.44.249l-1.654 5.207c-2.838.034-5.409.798-7.3 2.025-.474-.438-1.103-.712-1.799-.712-1.465 0-2.656 1.187-2.656 2.646 0 .97.533 1.811 1.317 2.271-.052.282-.086.567-.086.857 0 3.911 4.808 7.093 10.719 7.093s10.72-3.182 10.72-7.093c0-.274-.029-.544-.075-.81.832-.447 1.405-1.312 1.405-2.318zm-17.224 1.816c0-.868.71-1.575 1.582-1.575.872 0 1.581.707 1.581 1.575s-.709 1.574-1.581 1.574-1.582-.706-1.582-1.574zm9.061 4.669c-.797.793-2.048 1.179-3.824 1.179l-.013-.003-.013.003c-1.777 0-3.028-.386-3.824-1.179-.145-.144-.145-.379 0-.523.145-.145.381-.145.526 0 .65.647 1.729.961 3.298.961l.013.003.013-.003c1.569 0 2.648-.315 3.298-.962.145-.145.381-.144.526 0 .145.145.145.379 0 .524zm-.189-3.095c-.872 0-1.581-.706-1.581-1.574 0-.868.709-1.575 1.581-1.575s1.581.707 1.581 1.575-.709 1.574-1.581 1.574z"/></svg></li>
+        </a>
+        
+        
+                
+        <a href="https://www.facebook.com/sharer.php?u=https%3a%2f%2fpshegger.github.io%2fposts%2frenderscript%2f" target="_blank" rel="noopener" aria-label="Share on Facebook" class="social-btn facebook">
+          <li><svg xmlns="http://www.w3.org/2000/svg" class="icon icon-facebook" width="24" height="24" viewBox="0 0 352 352" fill="var(--color-primary)"><path d="m0 32v288c0 17.5 14.5 32 32 32h288c17.5 0 32-14.5 32-32v-288c0-17.5-14.5-32-32-32h-288c-17.5 0-32 14.5-32 32zm320 0v288h-83v-108h41.5l6-48h-47.5v-31c0-14 3.5-23.5 23.5-23.5h26v-43.5c-4.4-.6-19.8-1.5-37.5-1.5-36.9 0-62 22.2-62 63.5v36h-42v48h42v108h-155v-288z"/></svg></li>
+        </a>
+        
+        
+        
+        <a href="https://www.linkedin.com/shareArticle?mini=true&amp;url=https%3a%2f%2fpshegger.github.io%2fposts%2frenderscript%2f&amp;source=https%3a%2f%2fpshegger.github.io%2fposts%2frenderscript%2f&amp;title=RenderScript%20is%20Still%20alive&amp;summary=RenderScript%20is%20Still%20alive" target="_blank" rel="noopener" aria-label="Share on LinkedIn" class="social-btn linkedin">
+          <li><svg xmlns="http://www.w3.org/2000/svg" class="icon icon-linkedin" width="24" height="24" viewBox="0 0 352 352" fill="var(--color-primary)"><path d="M0,40v272c0,21.9,18.1,40,40,40h272c21.9,0,40-18.1,40-40V40c0-21.9-18.1-40-40-40H40C18.1,0,0,18.1,0,40z M312,32 c4.6,0,8,3.4,8,8v272c0,4.6-3.4,8-8,8H40c-4.6,0-8-3.4-8-8V40c0-4.6,3.4-8,8-8H312z M59.5,87c0,15.2,12.3,27.5,27.5,27.5 c15.2,0,27.5-12.3,27.5-27.5c0-15.2-12.3-27.5-27.5-27.5C71.8,59.5,59.5,71.8,59.5,87z M187,157h-1v-21h-45v152h47v-75 c0-19.8,3.9-39,28.5-39c24.2,0,24.5,22.4,24.5,40v74h47v-83.5c0-40.9-8.7-72-56.5-72C208.5,132.5,193.3,145.1,187,157z M64,288h47.5 V136H64V288z"/></svg></li>
+        </a>
+        
+        
+        
+        <a href="mailto:?subject=pshegger%20-%20RenderScript%20is%20Still%20alive.&amp;body=RenderScript%20is%20Still%20alive%2c%20by%20pshegger%0aRenderScript%20is%20a%20great%20way%20to%20compute%20large%20amount%20of%20data%2c%20so%20let%27s%20discover%20together%20what%20it%20is%20and%20when%20should%20it%20be%20considered.%0a%0ahttps%3a%2f%2fpshegger.github.io%2fposts%2frenderscript%2f%0a" target="_blank" class="social-btn email">
+          <li><svg xmlns="http://www.w3.org/2000/svg" class="icon icon-mail" width="24" height="24" viewBox="0 0 416 288" fill="var(--color-primary)"><path d="m0 16v256 16h16 384 16v-16-256-16h-16-384-16zm347 16-139 92.5-139-92.5zm-148 125.5 9 5.5 9-5.5 167-111.5v210h-352v-210z"/></svg></li>
+        </a>
+      </ul>
+    </div>
+  </section>
+  
+        
+
+  
+  
+    <section class="related">
+      <h2>See Also</h2>
+      <ul class="related-posts">
+        
+          <li><a href="/posts/grpc-talk/">gRPC for Kotliners</a></li>
+        
+          <li><a href="/posts/generate-for-me/">@GenerateForMe</a></li>
+        
+          <li><a href="/posts/kotlin-contracts/">Help Yourself and the Compiler with Contracts</a></li>
+        
+      </ul>
+    </section>
+  
+
+        
+  <section>
+    <h2>Read Next</h2>
+    <div class="single-next-previous">
+      
+        <a class="previous" href="https://pshegger.github.io/posts/grpc-talk/">&laquo; gRPC for Kotliners</a>
+      
+      
+        <a class="next" href="https://pshegger.github.io/posts/ar-sudoku/">Turning a Camera Feed into a Solved Sudoku &raquo;</a>
+      
+    </div>
+  </section>
+
+      
+    </aside>
+  </div>
+</div>
+
+    </main><footer>
+  
+  <div class="section footer">
+    <p class="footer-copyright">&copy; 2023 &middot; 
+      <a href="https://pshegger.github.io/">pshegger</a>
+      
+    </p>
+    
+      <div class="footer-socials">
+        
+<div class="social-links">
+  <ul class="social-icons">
+    
+    
+    <li>
+      <a href="https://twitter.com/pshegger" target="_blank" rel="noopener" aria-label="Visit Twitter profile" class="social-btn twitter">
+        <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-twitter" width="24" height="24" viewBox="0 0 384 312" fill="var(--color-primary)"><path d="m384 36.9c-14.1 6.3-29.3 10.5-45.2 12.4 16.3-9.7 28.8-25.2 34.6-43.6-15.2 9-32.1 15.6-50 19.1-14.4-15.2-34.9-24.8-57.5-24.8-43.5 0-78.8 35.3-78.8 78.8 0 6.2.7 12.2 2 17.9-65.5-3.3-123.5-34.6-162.4-82.3-6.7 11.6-10.6 25.2-10.6 39.6 0 27.3 13.9 51.4 35 65.6-12.9-.4-25.1-4-35.7-9.9v1c0 38.2 27.2 70 63.2 77.2-6.6 1.8-13.6 2.8-20.8 2.8-5.1 0-10-.5-14.8-1.4 10 31.3 39.1 54.1 73.6 54.7-27 21.1-60.9 33.7-97.8 33.7-6.4 0-12.6-.4-18.8-1.1 34.9 22.4 76.3 35.4 120.8 35.4 144.9 0 224.1-120 224.1-224.1 0-3.4-.1-6.8-.2-10.2 15.4-11.1 28.7-25 39.3-40.8z"/></svg>
+      </a>
+    </li>
+    
+
+    
+    
+    <li>
+      <a href="https://github.com/pshegger" target="_blank" rel="noopener" aria-label="Visit Github profile" class="social-btn github">
+        <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-github" width="24" height="24" viewBox="0 0 24 24" fill="var(--color-primary)"><path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/></svg>
+      </a>
+    </li>
+    
+
+    
+    
+    <li>
+      <a href="https://stackoverflow.com/users/751482/pshegger" target="_blank" rel="noopener" aria-label="Visit Stack Overflow profile" class="social-btn stack-overflow">
+        <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-stack-overflow" width="24" height="24" viewBox="0 0 24 24" fill="var(--color-primary)"><path d="M15 21h-10v-2h10v2zm6-11.665l-1.621-9.335-1.993.346 1.62 9.335 1.994-.346zm-5.964 6.937l-9.746-.975-.186 2.016 9.755.879.177-1.92zm.538-2.587l-9.276-2.608-.526 1.954 9.306 2.5.496-1.846zm1.204-2.413l-8.297-4.864-1.029 1.743 8.298 4.865 1.028-1.744zm1.866-1.467l-5.339-7.829-1.672 1.14 5.339 7.829 1.672-1.14zm-2.644 4.195v8h-12v-8h-2v10h16v-10h-2z"/></svg>
+      </a>
+    </li>
+    
+
+    
+    
+
+    
+    
+    <li>
+      <a href="mailto:?to=pshegger%40gmail.com" target="_blank" class="social-btn email">
+        <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-mail" width="24" height="24" viewBox="0 0 416 288" fill="var(--color-primary)"><path d="m0 16v256 16h16 384 16v-16-256-16h-16-384-16zm347 16-139 92.5-139-92.5zm-148 125.5 9 5.5 9-5.5 167-111.5v210h-352v-210z"/></svg>
+      </a>
+    </li>
+    
+  </ul>
+</div>
+      </div>
+    
+  </div>
+</footer>
+
+  
+
+
+
+
+
+
+
+
+  
+  
+    
+
+<script src="https://pshegger.github.io/main.min.js"></script>
+
+
+
+  
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-NKBPT9CS94"></script>
+<script>
+var doNotTrack = false;
+if (!doNotTrack) {
+	window.dataLayer = window.dataLayer || [];
+	function gtag(){dataLayer.push(arguments);}
+	gtag('js', new Date());
+	gtag('config', 'G-NKBPT9CS94', { 'anonymize_ip': false });
+}
+</script>
+
+</body>
+</html>

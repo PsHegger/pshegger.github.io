@@ -1,0 +1,695 @@
+<!DOCTYPE html>
+<html lang="en-us"><head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  
+  
+
+
+
+
+
+  
+  
+  
+    
+    
+  
+
+
+
+
+
+  
+
+
+
+  
+  
+
+<link rel="stylesheet" href="https://pshegger.github.io/main.min.css" />
+  
+<meta name="robots" content="index, follow">
+    <meta name="googlebot" content="index, follow, max-snippet:-1, max-image-preview:large, max-video-preview:-1">
+    <meta name="bingbot" content="index, follow, max-snippet:-1, max-image-preview:large, max-video-preview:-1">
+  
+
+<title>Turning a Camera Feed into a Solved Sudoku</title>
+
+
+<meta name="author" content="pshegger">
+
+<meta name="description" content="An introduction to a simple application that uses ML Kit &amp; maths to create an augmented reality sudoku solver">
+<link rel="canonical" href="https://pshegger.github.io/posts/ar-sudoku/">
+<meta property="og:locale" content="">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Turning a Camera Feed into a Solved Sudoku">
+<meta property="og:description" content="An introduction to a simple application that uses ML Kit &amp; maths to create an augmented reality sudoku solver">
+<meta property="og:url" content="https://pshegger.github.io/posts/ar-sudoku/">
+<meta property="article:published_time" content="2020-08-12T00:00:00+02:00">
+  <meta property="article:modified_time" content="2020-08-12T00:00:00+02:00">
+  
+
+
+
+
+
+
+  <meta name="twitter:site" content="pshegger">
+
+
+  <meta name="twitter:creator" content="pshegger">
+
+<meta name="twitter:title" content="Turning a Camera Feed into a Solved Sudoku">
+<meta name="twitter:description" content="An introduction to a simple application that uses ML Kit &amp; maths to create an augmented reality sudoku solver">
+
+
+
+  <meta name="twitter:card" content="summary">
+
+
+
+
+
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "Person",
+      "@id": "https://pshegger.github.io/#/schema/person/1",
+      "name":  null ,
+      "url": "https://pshegger.github.io/",
+      "image": {
+        "@type": "ImageObject",
+        "@id": "https://pshegger.github.io/#/schema/image/1",
+        "url": "https://pshegger.github.io/\u003cnil\u003e",
+        "width": null ,
+        "height": null ,
+        "caption":  null 
+      }
+    },
+    {
+      "@type": "WebSite",
+      "@id": "https://pshegger.github.io/#/schema/website/1",
+      "url": "https://pshegger.github.io/",
+      "name": "pshegger",
+      "description":  null ,
+      "publisher": {
+        "@id": "https://pshegger.github.io/#/schema/person/1"
+      }
+    },
+    {
+      "@type": "WebPage",
+      "@id": "https://pshegger.github.io/posts/ar-sudoku/",
+      "url": "https://pshegger.github.io/posts/ar-sudoku/",
+      "name": "Turning a Camera Feed into a Solved Sudoku",
+      "description": "An introduction to a simple application that uses ML Kit \u0026 maths to create an augmented reality sudoku solver",
+      "isPartOf": {
+        "@id": "https://pshegger.github.io/#/schema/website/1"
+      },
+      "about": {
+        "@id": "https://pshegger.github.io/#/schema/person/1"
+      },
+      "datePublished": "2020-08-12T00:00:00+02:00",
+      "dateModified": "2020-08-12T00:00:00+02:00",
+      "breadcrumb": {
+        "@id": "https://pshegger.github.io/posts/ar-sudoku/#/schema/breadcrumb/1"
+      },
+      "primaryImageOfPage": {
+        "@id": "https://pshegger.github.io/posts/ar-sudoku/#/schema/image/2"
+      },
+      "inLanguage":  null ,
+      "potentialAction": [{
+        "@type": "ReadAction", "target": ["https://pshegger.github.io/posts/ar-sudoku/"]
+      }]
+    },
+    {
+      "@type": "BreadcrumbList",
+      "@id": "https://pshegger.github.io/posts/ar-sudoku/#/schema/breadcrumb/1",
+      "name": "Breadcrumbs",
+      "itemListElement": [{
+        "@type": "ListItem",
+        "position":  1 ,
+        "item": {
+          "@type": "WebPage",
+          "@id": "https://pshegger.github.io/",
+          "url": "https://pshegger.github.io/",
+          "name": "Home"
+          }
+        },{
+        "@type": "ListItem",
+        "position":  2 ,
+        "item": {
+          "@type": "WebPage",
+          "@id": "https://pshegger.github.io/posts/",
+          "url": "https://pshegger.github.io/posts/",
+          "name": "Posts"
+          }
+        },{
+        "@type": "ListItem",
+        "position":  3 ,
+        "item": {
+          "@id": "https://pshegger.github.io/posts/ar-sudoku/"
+          }
+        }]
+    },
+    {
+      "@context": "https://schema.org",
+      "@graph": [
+        {
+          "@type": "Article",
+          "@id": "https://pshegger.github.io/#/schema/article/1",
+          "headline": "Turning a Camera Feed into a Solved Sudoku",
+          "description": "An introduction to a simple application that uses ML Kit \u0026 maths to create an augmented reality sudoku solver",
+          "isPartOf": {
+            "@id": "https://pshegger.github.io/posts/ar-sudoku/"
+          },
+          "mainEntityOfPage": {
+            "@id": "https://pshegger.github.io/posts/ar-sudoku/"
+          },
+          "datePublished": "2020-08-12T00:00:00+02:00",
+          "dateModified": "2020-08-12T00:00:00+02:00",
+          "author": {
+            "@id": "https://pshegger.github.io/#/schema/person/1"
+          },          
+          "publisher": {
+            "@id": "https://pshegger.github.io/#/schema/person/1"
+          },
+          "image": {
+            "@id": "https://pshegger.github.io/posts/ar-sudoku/#/schema/image/2"
+          }
+        }
+      ]
+    },{
+      "@context": "https://schema.org",
+      "@graph": [
+        {
+          "@type": "ImageObject",
+          "@id": "https://pshegger.github.io/posts/ar-sudoku/#/schema/image/2",
+          "url":  null ,
+          "contentUrl":  null ,
+          "caption": "Turning a Camera Feed into a Solved Sudoku"
+        }
+      ]
+    }
+  ]
+}
+</script>
+  
+
+  
+
+</head><body>
+    <header class="container">
+  <nav class="main-nav" id="js-navbar">
+    <a class="logo" href="https://pshegger.github.io/">pshegger</a>
+    <ul class="menu" id="js-menu">
+      
+      
+      
+        <li class="menu-item">
+          <a href="/about/" class="menu-link">About</a>
+        </li>
+      
+      
+      
+        <li class="menu-item">
+          <a href="/posts/" class="menu-link">All Posts</a>
+        </li>
+      
+      
+      
+      <li class="menu-item">
+        <span class="menu-link">Explore<span class="drop-icon">▾</span></span>
+        <ul class="sub-menu">
+          
+            <li class="menu-item">
+              <a href="/categories/" class="menu-link">Categories</a>                  
+            </li>
+          
+            <li class="menu-item">
+              <a href="/tags/" class="menu-link">Tags</a>                  
+            </li>
+          
+            <li class="menu-item">
+              <a href="/series/" class="menu-link">Series</a>                  
+            </li>
+          
+        </ul>
+      </li>
+      
+      
+      <li class="menu-item--align">
+        <div class="switch">
+          <input class="switch-input" type="checkbox" id="themeSwitch">
+          <label aria-hidden="true" class="switch-label" for="themeSwitch">On</label>
+          <div aria-hidden="true" class="switch-marker"></div>
+        </div>
+      </li>
+    </ul>
+    <span class="nav-toggle" id="js-navbar-toggle">
+      <svg xmlns="http://www.w3.org/2000/svg" id="Outline" viewBox="0 0 24 24" width="30" height="30" fill="var(--color-contrast-high)"><rect y="11" width="24" height="2" rx="1"/><rect y="4" width="24" height="2" rx="1"/><rect y="18" width="24" height="2" rx="1"/></svg>
+    </span>
+  </nav>
+</header><main class="section">
+<div class="container">
+  <section class="page-header">
+    <h1 class="page-header-title">Turning a Camera Feed into a Solved Sudoku</h1>
+    <div class="post-list-meta">
+      <div class="post-list-dates">Aug 12, 2020&nbsp;&middot;&nbsp;10 min.</div>
+      
+      <div class="post-list-categories">
+        
+          <a href="https://pshegger.github.io/categories/machine-learning/">machine learning</a>
+        
+      </div>
+      
+      
+    </div>
+    <p class="page-header-desc">An introduction to a simple application that uses ML Kit &amp; maths to create an augmented reality sudoku solver</p>
+    <div class="single-terms">
+      
+      
+      <a class="term" href="https://pshegger.github.io/tags/programming/">programming</a></li>
+      
+      <a class="term" href="https://pshegger.github.io/tags/android/">android</a></li>
+      
+      <a class="term" href="https://pshegger.github.io/tags/mlkit/">mlkit</a></li>
+      
+      <a class="term" href="https://pshegger.github.io/tags/sudoku/">sudoku</a></li>
+      
+      
+    </div>
+  </section>
+</div>
+<div class="single-container-post">
+  
+
+  <aside class="toc">
+    <div id="js-toc-toggle">
+      <h2 class="toc-header">Table of Contents</h2>
+      <span class="toc-drop-icon">&blacktriangledown;</span>
+    </div>
+    <div id="js-toc-contents" class="toc-contents"><nav id="TableOfContents">
+  <ul>
+    <li><a href="#the-case-of-the-slow-solver">The case of the slow solver</a></li>
+    <li><a href="#the-camera-feed">The camera feed</a></li>
+    <li><a href="#reading-the-numbers-on-the-image">Reading the numbers on the image</a></li>
+    <li><a href="#constructing-the-grid">Constructing the grid</a></li>
+    <li><a href="#adding-the-known-digits">Adding the known digits</a></li>
+    <li><a href="#refining-the-grid">Refining the grid</a></li>
+    <li><a href="#the-final-steps">The final steps</a></li>
+    <li><a href="#conclusion">Conclusion</a></li>
+  </ul>
+</nav></div>
+  </aside>
+
+  <div class="single-post-contents">
+    <div class="single-feature-img">
+
+
+
+  
+
+</div>
+    <article class="markdown">
+        <p>A few months ago, I stumbled upon a <a href="https://www.youtube.com/watch?v=hAyZ9K2EBF0" target="_blank" rel="noopener">video</a> that led me into a rabbit hole. It resulted in a simple application that overlays a sudoku&rsquo;s solution into the camera image of the puzzle. This post is about the process of getting to the end result.</p>
+<p>It all started with the idea of writing a sudoku solver. The first version was ready relatively quickly, but there was one big problem: entering the starting position was slow and tedious. That&rsquo;s when I realized that I could use the camera on my phone as the input device. I&rsquo;ve never worked with image processing before, but it sounded like a good challenge, so I dived into it.</p>
+<h2 id="the-case-of-the-slow-solver">The case of the slow solver<a href="#the-case-of-the-slow-solver">
+    <svg role="img" aria-labelledby="the-case-of-the-slow-solver-IconTitle" fill="var(--color-primary)" height="22" viewBox="0 0 24 24" width="22" xmlns="http://www.w3.org/2000/svg">
+      <title id="the-case-of-the-slow-solver-IconTitle">Link to this heading</title>
+      <path d="M0 0h24v24H0z" fill="none"></path>
+      <path d="M3.9 12c0-1.71 1.39-3.1 3.1-3.1h4V7H7c-2.76.0-5 2.24-5 5s2.24 5 5 5h4v-1.9H7c-1.71.0-3.1-1.39-3.1-3.1zM8 13h8v-2H8v2zm9-6h-4v1.9h4c1.71.0 3.1 1.39 3.1 3.1s-1.39 3.1-3.1 3.1h-4V17h4c2.76.0 5-2.24 5-5s-2.24-5-5-5z"></path>
+    </svg>
+  </a>
+</h2><p>As I mentioned before, I already had a working sudoku solver, but it was not ready for this kind of usage. It was a simple brute-force algorithm that tried every solution and discarded the incorrect ones.</p>
+<p>The only optimization which was in place is that it only tried the currently possible numbers to every cell. This version solved the <a href="https://www.nytimes.com/puzzles/sudoku/hard" target="_blank" rel="noopener">New York Times hard sudoku</a> in about 3 seconds on my MacBook Pro, and that&rsquo;s far from ideal, especially on a phone.</p>
+<p>Luckily I already had an idea in mind. Instead of mindlessly trying every possible number in a cell, we can first fill in the ones where there&rsquo;s only 1 possible number and run the solver on that version of the sudoku. This small change led to a considerable time saving as this version solved the same sudoku as before in ~300 ms.</p>
+<p>In the beginning, I thought I&rsquo;ll write the solver to work like a human would do, so I used sealed classes to store the 3 states of a cell (<code>Empty</code>, <code>Filled</code>, and <code>PossibleNumbers</code>). As the first version of the solver wasn&rsquo;t using the third state and I wasn&rsquo;t planning on using it, I changed the cell type to be a nullable integer, <code>null</code> being the empty state and any other value the filled state. Although it wasn&rsquo;t as big of a time saver as the previous optimization, it also made the solver faster.</p>
+<p>The third idea was that I could pre-calculate the coordinates for the 3x3 boxes, so we don&rsquo;t have to do it on the fly. Even though the calculation was only a few steps, we had to do it for every cell in every iteration, which added up in the end, so this change was also a good idea.</p>
+<p>Finally, I rewrote the code from functional to use old-school loops. This way, it was possible to break preemptively from them and save even more time. I&rsquo;m sure it&rsquo;s possible to write functional code that behaves the same, but I don&rsquo;t know enough functional programming for that, so I chose this solution.</p>
+<p>With these changes, I could shave off a huge amount of time, the final version solved the test puzzle in about 80 ms (and the easy puzzle only took ~12 ms). This is still more than I&rsquo;d prefer, but I stopped here.</p>
+
+
+  <span class="code-language">kotlin</span><div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-kotlin" data-lang="kotlin"><span style="display:flex;"><span><span style="color:#66d9ef">fun</span> <span style="color:#a6e22e">solve</span>(): List&lt;Sudoku&gt; {
+</span></span><span style="display:flex;"><span>  <span style="color:#66d9ef">val</span> emptyCells = mutableListOf&lt;Pair&lt;Int, List&lt;Int&gt;&gt;&gt;()
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">for</span> (i <span style="color:#66d9ef">in</span> cells.indices) {
+</span></span><span style="display:flex;"><span>      <span style="color:#66d9ef">if</span> (cells[i] <span style="color:#f92672">==</span> <span style="color:#66d9ef">null</span>) {
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">val</span> possible = validNumbers(i / <span style="color:#ae81ff">9</span>, i % <span style="color:#ae81ff">9</span>)
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">if</span> (possible.isEmpty()) {
+</span></span><span style="display:flex;"><span>            <span style="color:#75715e">// early return if this state is unsolvable
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>            <span style="color:#66d9ef">return</span> emptyList()
+</span></span><span style="display:flex;"><span>        }
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">if</span> (possible.size <span style="color:#f92672">==</span> <span style="color:#ae81ff">1</span>) {
+</span></span><span style="display:flex;"><span>          <span style="color:#75715e">// fill in if there&#39;s only one possible number
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>          <span style="color:#66d9ef">return</span> copyWithValue(i, possible[<span style="color:#ae81ff">0</span>]).solve()
+</span></span><span style="display:flex;"><span>        }
+</span></span><span style="display:flex;"><span>        emptyCells.add(Pair(i, possible))
+</span></span><span style="display:flex;"><span>      }
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">if</span> (emptyCells.isEmpty()) {
+</span></span><span style="display:flex;"><span>            <span style="color:#75715e">// no more emtpy cells -&gt; we have found a solution
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>      <span style="color:#66d9ef">return</span> listOf(<span style="color:#66d9ef">this</span>)
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">return</span> emptyCells[<span style="color:#ae81ff">0</span>].let { (cell, possible) <span style="color:#f92672">-&gt;</span>
+</span></span><span style="display:flex;"><span>      possible.flatMap { n <span style="color:#f92672">-&gt;</span> copyWithValue(cell, n).solve() }
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>}</span></span></code></pre></div>
+<h2 id="the-camera-feed">The camera feed<a href="#the-camera-feed">
+    <svg role="img" aria-labelledby="the-camera-feed-IconTitle" fill="var(--color-primary)" height="22" viewBox="0 0 24 24" width="22" xmlns="http://www.w3.org/2000/svg">
+      <title id="the-camera-feed-IconTitle">Link to this heading</title>
+      <path d="M0 0h24v24H0z" fill="none"></path>
+      <path d="M3.9 12c0-1.71 1.39-3.1 3.1-3.1h4V7H7c-2.76.0-5 2.24-5 5s2.24 5 5 5h4v-1.9H7c-1.71.0-3.1-1.39-3.1-3.1zM8 13h8v-2H8v2zm9-6h-4v1.9h4c1.71.0 3.1 1.39 3.1 3.1s-1.39 3.1-3.1 3.1h-4V17h4c2.76.0 5-2.24 5-5s-2.24-5-5-5z"></path>
+    </svg>
+  </a>
+</h2><p>The next step was getting the camera feed. For this, I used <a href="https://developer.android.com/training/camerax" target="_blank" rel="noopener">CameraX</a>, which makes the Android camera API usable. I still had problems setting it up because even though I used it only a month prior, it had a beta release since, and the API changed significantly, but after a short time, I could make it work.</p>
+<h2 id="reading-the-numbers-on-the-image">Reading the numbers on the image<a href="#reading-the-numbers-on-the-image">
+    <svg role="img" aria-labelledby="reading-the-numbers-on-the-image-IconTitle" fill="var(--color-primary)" height="22" viewBox="0 0 24 24" width="22" xmlns="http://www.w3.org/2000/svg">
+      <title id="reading-the-numbers-on-the-image-IconTitle">Link to this heading</title>
+      <path d="M0 0h24v24H0z" fill="none"></path>
+      <path d="M3.9 12c0-1.71 1.39-3.1 3.1-3.1h4V7H7c-2.76.0-5 2.24-5 5s2.24 5 5 5h4v-1.9H7c-1.71.0-3.1-1.39-3.1-3.1zM8 13h8v-2H8v2zm9-6h-4v1.9h4c1.71.0 3.1 1.39 3.1 3.1s-1.39 3.1-3.1 3.1h-4V17h4c2.76.0 5-2.24 5-5s-2.24-5-5-5z"></path>
+    </svg>
+  </a>
+</h2><p>This was the part where I had the least experience. I&rsquo;ve already heard about Google&rsquo;s <a href="https://developers.google.com/ml-kit" target="_blank" rel="noopener">ML Kit</a>, but I haven&rsquo;t used it before. After some documentation reading, I found that it&rsquo;s relatively easy to use with CameraX, and the Text Recognition API was exactly what I needed.</p>
+<p>After setting it up, I was at a point where I had texts and their coordinates, but I still needed to turn it to a grid of numbers somehow.</p>
+<h2 id="constructing-the-grid">Constructing the grid<a href="#constructing-the-grid">
+    <svg role="img" aria-labelledby="constructing-the-grid-IconTitle" fill="var(--color-primary)" height="22" viewBox="0 0 24 24" width="22" xmlns="http://www.w3.org/2000/svg">
+      <title id="constructing-the-grid-IconTitle">Link to this heading</title>
+      <path d="M0 0h24v24H0z" fill="none"></path>
+      <path d="M3.9 12c0-1.71 1.39-3.1 3.1-3.1h4V7H7c-2.76.0-5 2.24-5 5s2.24 5 5 5h4v-1.9H7c-1.71.0-3.1-1.39-3.1-3.1zM8 13h8v-2H8v2zm9-6h-4v1.9h4c1.71.0 3.1 1.39 3.1 3.1s-1.39 3.1-3.1 3.1h-4V17h4c2.76.0 5-2.24 5-5s-2.24-5-5-5z"></path>
+    </svg>
+  </a>
+</h2><p>I knew that the ideal solution would be using ML Kit to find the exact position of the grid on the image, but I wanted to make it work with the information I already had.</p>
+<p>The original idea was to assume that most of the image is the sudoku itself. I know it&rsquo;s not the best solution, but that was my first idea, so I went with it.</p>
+<p>With this assumption, we can calculate the size of the cells and the middle of each cell. After that, we create a list of cells, where we store the calculated coordinates and the number which should go to that position (currently 0, which means that it&rsquo;s empty).</p>
+
+
+  <span class="code-language">kotlin</span><div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-kotlin" data-lang="kotlin"><span style="display:flex;"><span><span style="color:#66d9ef">val</span> cellSize = bmp.width / <span style="color:#ae81ff">9f</span>
+</span></span><span style="display:flex;"><span>(<span style="color:#ae81ff">0.</span>.<span style="color:#ae81ff">8</span>).forEach { row <span style="color:#f92672">-&gt;</span>
+</span></span><span style="display:flex;"><span>    (<span style="color:#ae81ff">0.</span>.<span style="color:#ae81ff">8</span>).forEach { col <span style="color:#f92672">-&gt;</span>
+</span></span><span style="display:flex;"><span>      <span style="color:#66d9ef">val</span> cx = col * cellSize + cellSize / <span style="color:#ae81ff">2</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">val</span> cy = row * cellSize + cellSize / <span style="color:#ae81ff">2</span>
+</span></span><span style="display:flex;"><span>    fields.add(Field(cx, cy, <span style="color:#ae81ff">0</span>))
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>}</span></span></code></pre></div>
+<p>Here&rsquo;s how the grid looks like according to our first estimate. It is clear that the cells are not placed correctly, but we&rsquo;ll refine them later:</p>
+<p><img src="/img/ar-sudoku/base_grid_dots.png"
+	alt="/img/ar-sudoku/base_grid_dots.png" 
+	class="single-post-image" 
+	loading="lazy"
+	decoding="async"
+	></p>
+<h2 id="adding-the-known-digits">Adding the known digits<a href="#adding-the-known-digits">
+    <svg role="img" aria-labelledby="adding-the-known-digits-IconTitle" fill="var(--color-primary)" height="22" viewBox="0 0 24 24" width="22" xmlns="http://www.w3.org/2000/svg">
+      <title id="adding-the-known-digits-IconTitle">Link to this heading</title>
+      <path d="M0 0h24v24H0z" fill="none"></path>
+      <path d="M3.9 12c0-1.71 1.39-3.1 3.1-3.1h4V7H7c-2.76.0-5 2.24-5 5s2.24 5 5 5h4v-1.9H7c-1.71.0-3.1-1.39-3.1-3.1zM8 13h8v-2H8v2zm9-6h-4v1.9h4c1.71.0 3.1 1.39 3.1 3.1s-1.39 3.1-3.1 3.1h-4V17h4c2.76.0 5-2.24 5-5s-2.24-5-5-5z"></path>
+    </svg>
+  </a>
+</h2><p>The next step is parsing the output of the text recognizer and adding the digits to our grid. For this, we will parse the recognized text line-by-line (which is a default supported feature of ML Kit). Every <code>Text.Line</code> object has two important things for us: the bounds of the text and the text itself.</p>
+<p>First, we have to calculate the width of a single cell. This can be easily done by dividing the length of the line by the number of characters. After that, we can calculate the <code>x</code> coordinate for every number using its index in the found text and the cell width (<code>val cx = box.left + index * fieldWidth + fieldWidth / 2</code>). The <code>y</code> coordinate is simply the middle point between the top and the bottom of the bounds.</p>
+<p>The last step is adding the number to our grid. For that, we have to find the cell with the nearest coordinate to our calculated value and update it with the new values.</p>
+
+
+  <span class="code-language">kotlin</span><div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-kotlin" data-lang="kotlin"><span style="display:flex;"><span>text.textBlocks.forEach { block <span style="color:#f92672">-&gt;</span>
+</span></span><span style="display:flex;"><span>    block.lines.forEach { line <span style="color:#f92672">-&gt;</span>
+</span></span><span style="display:flex;"><span>      line.boundingBox<span style="color:#f92672">?.</span>let { box <span style="color:#f92672">-&gt;</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">val</span> fieldWidth = box.width().toFloat() / line.text.trimmedLength()
+</span></span><span style="display:flex;"><span>      line.text.trim().forEachIndexed { index, c <span style="color:#f92672">-&gt;</span>
+</span></span><span style="display:flex;"><span>          <span style="color:#66d9ef">val</span> n = <span style="color:#e6db74">&#34;</span><span style="color:#e6db74">$c</span><span style="color:#e6db74">&#34;</span>.toIntOrNull()
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">if</span> (n <span style="color:#f92672">!=</span> <span style="color:#66d9ef">null</span>) {
+</span></span><span style="display:flex;"><span>          <span style="color:#66d9ef">val</span> cx = box.left + index * fieldWidth + fieldWidth / <span style="color:#ae81ff">2</span>
+</span></span><span style="display:flex;"><span>          <span style="color:#66d9ef">val</span> cy = box.top + (box.bottom - box.top) / <span style="color:#ae81ff">2f</span>
+</span></span><span style="display:flex;"><span>          fields.indices.minBy { i <span style="color:#f92672">-&gt;</span>
+</span></span><span style="display:flex;"><span>              <span style="color:#66d9ef">val</span> cell = fields[i]
+</span></span><span style="display:flex;"><span>            (cx - cell.centerX).pow(<span style="color:#ae81ff">2</span>) + (cy - cell.centerY).pow(<span style="color:#ae81ff">2</span>)
+</span></span><span style="display:flex;"><span>          }<span style="color:#f92672">?.</span>let { nearestIndex <span style="color:#f92672">-&gt;</span>
+</span></span><span style="display:flex;"><span>              fields[nearestIndex] = Field(cx, cy, n)
+</span></span><span style="display:flex;"><span>          }
+</span></span><span style="display:flex;"><span>        }
+</span></span><span style="display:flex;"><span>      }
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>  }
+</span></span><span style="display:flex;"><span>}</span></span></code></pre></div>
+<p>Here&rsquo;s a simple visualization of the grid after this step:</p>
+<p><img src="/img/ar-sudoku/vision_dots.png"
+	alt="/img/ar-sudoku/vision_dots.png" 
+	class="single-post-image" 
+	loading="lazy"
+	decoding="async"
+	></p>
+<p>We can see that the numbers do not align with our previously calculated cells, but this is a good thing as we can use it to calculate the correct coordinates for the whole puzzle now.</p>
+<h2 id="refining-the-grid">Refining the grid<a href="#refining-the-grid">
+    <svg role="img" aria-labelledby="refining-the-grid-IconTitle" fill="var(--color-primary)" height="22" viewBox="0 0 24 24" width="22" xmlns="http://www.w3.org/2000/svg">
+      <title id="refining-the-grid-IconTitle">Link to this heading</title>
+      <path d="M0 0h24v24H0z" fill="none"></path>
+      <path d="M3.9 12c0-1.71 1.39-3.1 3.1-3.1h4V7H7c-2.76.0-5 2.24-5 5s2.24 5 5 5h4v-1.9H7c-1.71.0-3.1-1.39-3.1-3.1zM8 13h8v-2H8v2zm9-6h-4v1.9h4c1.71.0 3.1 1.39 3.1 3.1s-1.39 3.1-3.1 3.1h-4V17h4c2.76.0 5-2.24 5-5s-2.24-5-5-5z"></path>
+    </svg>
+  </a>
+</h2><p>Now that we know where the real numbers are, we can calculate the correct bounds of the whole grid. For this, we first have to find the distance between two numbers in neighboring cells. We will do this by calculating the average <code>x</code> position of the known numbers in each column of the puzzle and finding the first and last column with at least one number in it. We now have the distance between two columns, and we know which columns are they, so we can easily calculate the width of a single cell.</p>
+<p>Using the width, we can calculate what should be the coordinate of the first non-empty column, and the difference between that and the previously computed average will give us the left margin. We can calculate the right margin with the same concept, except we should use the last non-empty column.</p>
+<p>The process is basically the same for the height of the cell and the top/bottom margin.</p>
+
+
+  <span class="code-language">kotlin</span><div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-kotlin" data-lang="kotlin"><span style="display:flex;"><span><span style="color:#66d9ef">private</span> <span style="color:#66d9ef">fun</span> <span style="color:#a6e22e">calculateBounds</span>(width: Int, height: Int, fields: List&lt;Field&gt;): RectF? {
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">val</span> cellXs = (<span style="color:#ae81ff">0.</span>.<span style="color:#ae81ff">8</span>).map { col <span style="color:#f92672">-&gt;</span>
+</span></span><span style="display:flex;"><span>      (<span style="color:#ae81ff">0.</span>.<span style="color:#ae81ff">8</span>).mapNotNull { row <span style="color:#f92672">-&gt;</span>
+</span></span><span style="display:flex;"><span>            <span style="color:#66d9ef">val</span> field = fields[row * <span style="color:#ae81ff">9</span> + col]
+</span></span><span style="display:flex;"><span>      <span style="color:#66d9ef">if</span> (<span style="color:#66d9ef">field</span>.<span style="color:#66d9ef">value</span> <span style="color:#f92672">!=</span> <span style="color:#ae81ff">0</span>) <span style="color:#66d9ef">field</span>.centerX <span style="color:#66d9ef">else</span> <span style="color:#66d9ef">null</span>
+</span></span><span style="display:flex;"><span>    }.average().toFloat()
+</span></span><span style="display:flex;"><span>  }
+</span></span><span style="display:flex;"><span>  <span style="color:#66d9ef">val</span> firstColX = cellXs.indexOfFirst { <span style="color:#66d9ef">it</span> <span style="color:#f92672">!=</span> <span style="color:#ae81ff">0f</span> <span style="color:#f92672">&amp;&amp;</span> !<span style="color:#66d9ef">it</span>.isNaN() }
+</span></span><span style="display:flex;"><span>  <span style="color:#66d9ef">val</span> lastColX = cellXs.indexOfLast { <span style="color:#66d9ef">it</span> <span style="color:#f92672">!=</span> <span style="color:#ae81ff">0f</span> <span style="color:#f92672">&amp;&amp;</span> !<span style="color:#66d9ef">it</span>.isNaN() }
+</span></span><span style="display:flex;"><span>  <span style="color:#66d9ef">if</span> (firstColX &lt; <span style="color:#ae81ff">0</span> <span style="color:#f92672">||</span> lastColX &lt; <span style="color:#ae81ff">0</span>) <span style="color:#66d9ef">return</span> <span style="color:#66d9ef">null</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#66d9ef">val</span> cellWidth = (cellXs[lastColX] - cellXs[firstColX]) / (lastColX - firstColX)
+</span></span><span style="display:flex;"><span>  <span style="color:#66d9ef">val</span> marginLeft = cellXs[firstColX] - firstColX * cellWidth - cellWidth / <span style="color:#ae81ff">2</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#66d9ef">val</span> marginRight = width - cellXs[lastColX] - ((<span style="color:#ae81ff">8</span> - lastColX) * cellWidth) - cellWidth / <span style="color:#ae81ff">2</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>  <span style="color:#75715e">// ... repeate with `y` coordinate to find marginTop &amp; marginBottom
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>
+</span></span><span style="display:flex;"><span>  <span style="color:#66d9ef">return</span> RectF(marginLeft, marginTop, width - marginRight, height - marginBottom)
+</span></span><span style="display:flex;"><span>}</span></span></code></pre></div>
+<p><img src="/img/ar-sudoku/refine_dots.png"
+	alt="/img/ar-sudoku/refine_dots.png" 
+	class="single-post-image" 
+	loading="lazy"
+	decoding="async"
+	></p>
+<p>The last step for having the final coordinates of our cells is looping over the grid and updating every empty cell&rsquo;s coordinates.</p>
+<h2 id="the-final-steps">The final steps<a href="#the-final-steps">
+    <svg role="img" aria-labelledby="the-final-steps-IconTitle" fill="var(--color-primary)" height="22" viewBox="0 0 24 24" width="22" xmlns="http://www.w3.org/2000/svg">
+      <title id="the-final-steps-IconTitle">Link to this heading</title>
+      <path d="M0 0h24v24H0z" fill="none"></path>
+      <path d="M3.9 12c0-1.71 1.39-3.1 3.1-3.1h4V7H7c-2.76.0-5 2.24-5 5s2.24 5 5 5h4v-1.9H7c-1.71.0-3.1-1.39-3.1-3.1zM8 13h8v-2H8v2zm9-6h-4v1.9h4c1.71.0 3.1 1.39 3.1 3.1s-1.39 3.1-3.1 3.1h-4V17h4c2.76.0 5-2.24 5-5s-2.24-5-5-5z"></path>
+    </svg>
+  </a>
+</h2><p>Now that we have everything to display our result, there are only a few things left to do.</p>
+<p>First of all, we have to check if the recognized numbers are really a sudoku or just some random numbers on the screen. There&rsquo;s currently only a basic check: we count the numbers, and if there&rsquo;s less than 17 of them, we discard everything as that&rsquo;s the minimum number required to have a uniquely solvable sudoku.</p>
+<p>If we decide we found a sudoku, we just have to pass it to our solver, render the solution to a bitmap and set it as an overlay over the camera image.</p>
+<p><img src="/img/ar-sudoku/result.gif"
+	alt="/img/ar-sudoku/result.gif" 
+	class="single-post-image" 
+	loading="lazy"
+	decoding="async"
+	></p>
+<p>The application also caches the solved sudoku, so we don&rsquo;t have to find the solution every frame.</p>
+<h2 id="conclusion">Conclusion<a href="#conclusion">
+    <svg role="img" aria-labelledby="conclusion-IconTitle" fill="var(--color-primary)" height="22" viewBox="0 0 24 24" width="22" xmlns="http://www.w3.org/2000/svg">
+      <title id="conclusion-IconTitle">Link to this heading</title>
+      <path d="M0 0h24v24H0z" fill="none"></path>
+      <path d="M3.9 12c0-1.71 1.39-3.1 3.1-3.1h4V7H7c-2.76.0-5 2.24-5 5s2.24 5 5 5h4v-1.9H7c-1.71.0-3.1-1.39-3.1-3.1zM8 13h8v-2H8v2zm9-6h-4v1.9h4c1.71.0 3.1 1.39 3.1 3.1s-1.39 3.1-3.1 3.1h-4V17h4c2.76.0 5-2.24 5-5s-2.24-5-5-5z"></path>
+    </svg>
+  </a>
+</h2><p>This is the final version I settled with as a proof-of-concept, but I known there are problems with it. The assumption that the camera image only contains the sudoku itself makes using the program harder. I have an idea of how to solve this problem, but I&rsquo;m currently not planning to improve on it.</p>
+<p>The other big problem is the check for real sudokus. The current method can only find cases when there are not enough numbers but doesn&rsquo;t filter when there&rsquo;s a recognized number that should not be part of the puzzle. The idea that I have for finding the grid on the image might be a good solution; maybe sometimes I&rsquo;ll explore it better in the future.</p>
+<p>Finding a mathematical way to know where to render the solution was fun, but I don&rsquo;t think it&rsquo;s the best way to do it. I think it would be better to train a model that can tell the bounds of the puzzle and use that instead, but as I already mentioned, I wanted this to be a fun exercise and not just putting together things until I got the result I wanted.</p>
+<p>Even though most of the code is part of this article, you might want to see the whole thing. In that case, you can find it on <a href="https://github.com/PsHegger/ar-sudoku-solver" target="_blank" rel="noopener">GitHub</a>.</p>
+<hr>
+<p>This post was originally published on <a href="https://www.kotlindevelopment.com/" target="_blank" rel="noopener">kotlindevelopment.com</a>. If you liked it please consider visiting and reading some other articles there.</p>
+
+    </article>
+    <aside>
+      <div class="single-terms">
+        
+          
+          <a class="term" href="https://pshegger.github.io/tags/programming/">programming</a></li>
+          
+          <a class="term" href="https://pshegger.github.io/tags/android/">android</a></li>
+          
+          <a class="term" href="https://pshegger.github.io/tags/mlkit/">mlkit</a></li>
+          
+          <a class="term" href="https://pshegger.github.io/tags/sudoku/">sudoku</a></li>
+          
+        
+      </div>
+      
+  
+  
+  
+
+  <section>
+    <h2>Share</h2>
+    <div class="social-links">
+      <ul class="social-icons--share">
+        
+        
+        <a href="https://twitter.com/intent/tweet?url=https%3a%2f%2fpshegger.github.io%2fposts%2far-sudoku%2f&amp;text=Turning%20a%20Camera%20Feed%20into%20a%20Solved%20Sudoku" target="_blank" rel="noopener" aria-label="Share on Twitter" class="social-btn twitter">
+          <li><svg xmlns="http://www.w3.org/2000/svg" class="icon icon-twitter" width="24" height="24" viewBox="0 0 384 312" fill="var(--color-primary)"><path d="m384 36.9c-14.1 6.3-29.3 10.5-45.2 12.4 16.3-9.7 28.8-25.2 34.6-43.6-15.2 9-32.1 15.6-50 19.1-14.4-15.2-34.9-24.8-57.5-24.8-43.5 0-78.8 35.3-78.8 78.8 0 6.2.7 12.2 2 17.9-65.5-3.3-123.5-34.6-162.4-82.3-6.7 11.6-10.6 25.2-10.6 39.6 0 27.3 13.9 51.4 35 65.6-12.9-.4-25.1-4-35.7-9.9v1c0 38.2 27.2 70 63.2 77.2-6.6 1.8-13.6 2.8-20.8 2.8-5.1 0-10-.5-14.8-1.4 10 31.3 39.1 54.1 73.6 54.7-27 21.1-60.9 33.7-97.8 33.7-6.4 0-12.6-.4-18.8-1.1 34.9 22.4 76.3 35.4 120.8 35.4 144.9 0 224.1-120 224.1-224.1 0-3.4-.1-6.8-.2-10.2 15.4-11.1 28.7-25 39.3-40.8z"/></svg></li>
+        </a>
+        
+        
+        
+        <a href="https://www.reddit.com/submit?url=https%3a%2f%2fpshegger.github.io%2fposts%2far-sudoku%2f" target="_blank" rel="noopener" aria-label="Share on Reddit" class="social-btn reddit">
+          <li><svg xmlns="http://www.w3.org/2000/svg" class="icon icon-reddit" width="24" height="24" viewBox="0 0 24 24" fill="var(--color-primary)"><path d="M24 11.779c0-1.459-1.192-2.645-2.657-2.645-.715 0-1.363.286-1.84.746-1.81-1.191-4.259-1.949-6.971-2.046l1.483-4.669 4.016.941-.006.058c0 1.193.975 2.163 2.174 2.163 1.198 0 2.172-.97 2.172-2.163s-.975-2.164-2.172-2.164c-.92 0-1.704.574-2.021 1.379l-4.329-1.015c-.189-.046-.381.063-.44.249l-1.654 5.207c-2.838.034-5.409.798-7.3 2.025-.474-.438-1.103-.712-1.799-.712-1.465 0-2.656 1.187-2.656 2.646 0 .97.533 1.811 1.317 2.271-.052.282-.086.567-.086.857 0 3.911 4.808 7.093 10.719 7.093s10.72-3.182 10.72-7.093c0-.274-.029-.544-.075-.81.832-.447 1.405-1.312 1.405-2.318zm-17.224 1.816c0-.868.71-1.575 1.582-1.575.872 0 1.581.707 1.581 1.575s-.709 1.574-1.581 1.574-1.582-.706-1.582-1.574zm9.061 4.669c-.797.793-2.048 1.179-3.824 1.179l-.013-.003-.013.003c-1.777 0-3.028-.386-3.824-1.179-.145-.144-.145-.379 0-.523.145-.145.381-.145.526 0 .65.647 1.729.961 3.298.961l.013.003.013-.003c1.569 0 2.648-.315 3.298-.962.145-.145.381-.144.526 0 .145.145.145.379 0 .524zm-.189-3.095c-.872 0-1.581-.706-1.581-1.574 0-.868.709-1.575 1.581-1.575s1.581.707 1.581 1.575-.709 1.574-1.581 1.574z"/></svg></li>
+        </a>
+        
+        
+                
+        <a href="https://www.facebook.com/sharer.php?u=https%3a%2f%2fpshegger.github.io%2fposts%2far-sudoku%2f" target="_blank" rel="noopener" aria-label="Share on Facebook" class="social-btn facebook">
+          <li><svg xmlns="http://www.w3.org/2000/svg" class="icon icon-facebook" width="24" height="24" viewBox="0 0 352 352" fill="var(--color-primary)"><path d="m0 32v288c0 17.5 14.5 32 32 32h288c17.5 0 32-14.5 32-32v-288c0-17.5-14.5-32-32-32h-288c-17.5 0-32 14.5-32 32zm320 0v288h-83v-108h41.5l6-48h-47.5v-31c0-14 3.5-23.5 23.5-23.5h26v-43.5c-4.4-.6-19.8-1.5-37.5-1.5-36.9 0-62 22.2-62 63.5v36h-42v48h42v108h-155v-288z"/></svg></li>
+        </a>
+        
+        
+        
+        <a href="https://www.linkedin.com/shareArticle?mini=true&amp;url=https%3a%2f%2fpshegger.github.io%2fposts%2far-sudoku%2f&amp;source=https%3a%2f%2fpshegger.github.io%2fposts%2far-sudoku%2f&amp;title=Turning%20a%20Camera%20Feed%20into%20a%20Solved%20Sudoku&amp;summary=Turning%20a%20Camera%20Feed%20into%20a%20Solved%20Sudoku" target="_blank" rel="noopener" aria-label="Share on LinkedIn" class="social-btn linkedin">
+          <li><svg xmlns="http://www.w3.org/2000/svg" class="icon icon-linkedin" width="24" height="24" viewBox="0 0 352 352" fill="var(--color-primary)"><path d="M0,40v272c0,21.9,18.1,40,40,40h272c21.9,0,40-18.1,40-40V40c0-21.9-18.1-40-40-40H40C18.1,0,0,18.1,0,40z M312,32 c4.6,0,8,3.4,8,8v272c0,4.6-3.4,8-8,8H40c-4.6,0-8-3.4-8-8V40c0-4.6,3.4-8,8-8H312z M59.5,87c0,15.2,12.3,27.5,27.5,27.5 c15.2,0,27.5-12.3,27.5-27.5c0-15.2-12.3-27.5-27.5-27.5C71.8,59.5,59.5,71.8,59.5,87z M187,157h-1v-21h-45v152h47v-75 c0-19.8,3.9-39,28.5-39c24.2,0,24.5,22.4,24.5,40v74h47v-83.5c0-40.9-8.7-72-56.5-72C208.5,132.5,193.3,145.1,187,157z M64,288h47.5 V136H64V288z"/></svg></li>
+        </a>
+        
+        
+        
+        <a href="mailto:?subject=pshegger%20-%20Turning%20a%20Camera%20Feed%20into%20a%20Solved%20Sudoku.&amp;body=Turning%20a%20Camera%20Feed%20into%20a%20Solved%20Sudoku%2c%20by%20pshegger%0aAn%20introduction%20to%20a%20simple%20application%20that%20uses%20ML%20Kit%20%26%20maths%20to%20create%20an%20augmented%20reality%20sudoku%20solver%0a%0ahttps%3a%2f%2fpshegger.github.io%2fposts%2far-sudoku%2f%0a" target="_blank" class="social-btn email">
+          <li><svg xmlns="http://www.w3.org/2000/svg" class="icon icon-mail" width="24" height="24" viewBox="0 0 416 288" fill="var(--color-primary)"><path d="m0 16v256 16h16 384 16v-16-256-16h-16-384-16zm347 16-139 92.5-139-92.5zm-148 125.5 9 5.5 9-5.5 167-111.5v210h-352v-210z"/></svg></li>
+        </a>
+      </ul>
+    </div>
+  </section>
+  
+        
+
+  
+  
+    <section class="related">
+      <h2>See Also</h2>
+      <ul class="related-posts">
+        
+          <li><a href="/posts/renderscript/">RenderScript is Still alive</a></li>
+        
+          <li><a href="/posts/grpc-talk/">gRPC for Kotliners</a></li>
+        
+          <li><a href="/posts/generate-for-me/">@GenerateForMe</a></li>
+        
+          <li><a href="/posts/kotlin-contracts/">Help Yourself and the Compiler with Contracts</a></li>
+        
+      </ul>
+    </section>
+  
+
+        
+  <section>
+    <h2>Read Next</h2>
+    <div class="single-next-previous">
+      
+        <a class="previous" href="https://pshegger.github.io/posts/renderscript/">&laquo; RenderScript is Still alive</a>
+      
+      
+        <a class="next" href="https://pshegger.github.io/posts/aoc-2020/">Advent of Code 2020 &raquo;</a>
+      
+    </div>
+  </section>
+
+      
+    </aside>
+  </div>
+</div>
+
+    </main><footer>
+  
+  <div class="section footer">
+    <p class="footer-copyright">&copy; 2023 &middot; 
+      <a href="https://pshegger.github.io/">pshegger</a>
+      
+    </p>
+    
+      <div class="footer-socials">
+        
+<div class="social-links">
+  <ul class="social-icons">
+    
+    
+    <li>
+      <a href="https://twitter.com/pshegger" target="_blank" rel="noopener" aria-label="Visit Twitter profile" class="social-btn twitter">
+        <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-twitter" width="24" height="24" viewBox="0 0 384 312" fill="var(--color-primary)"><path d="m384 36.9c-14.1 6.3-29.3 10.5-45.2 12.4 16.3-9.7 28.8-25.2 34.6-43.6-15.2 9-32.1 15.6-50 19.1-14.4-15.2-34.9-24.8-57.5-24.8-43.5 0-78.8 35.3-78.8 78.8 0 6.2.7 12.2 2 17.9-65.5-3.3-123.5-34.6-162.4-82.3-6.7 11.6-10.6 25.2-10.6 39.6 0 27.3 13.9 51.4 35 65.6-12.9-.4-25.1-4-35.7-9.9v1c0 38.2 27.2 70 63.2 77.2-6.6 1.8-13.6 2.8-20.8 2.8-5.1 0-10-.5-14.8-1.4 10 31.3 39.1 54.1 73.6 54.7-27 21.1-60.9 33.7-97.8 33.7-6.4 0-12.6-.4-18.8-1.1 34.9 22.4 76.3 35.4 120.8 35.4 144.9 0 224.1-120 224.1-224.1 0-3.4-.1-6.8-.2-10.2 15.4-11.1 28.7-25 39.3-40.8z"/></svg>
+      </a>
+    </li>
+    
+
+    
+    
+    <li>
+      <a href="https://github.com/pshegger" target="_blank" rel="noopener" aria-label="Visit Github profile" class="social-btn github">
+        <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-github" width="24" height="24" viewBox="0 0 24 24" fill="var(--color-primary)"><path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/></svg>
+      </a>
+    </li>
+    
+
+    
+    
+    <li>
+      <a href="https://stackoverflow.com/users/751482/pshegger" target="_blank" rel="noopener" aria-label="Visit Stack Overflow profile" class="social-btn stack-overflow">
+        <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-stack-overflow" width="24" height="24" viewBox="0 0 24 24" fill="var(--color-primary)"><path d="M15 21h-10v-2h10v2zm6-11.665l-1.621-9.335-1.993.346 1.62 9.335 1.994-.346zm-5.964 6.937l-9.746-.975-.186 2.016 9.755.879.177-1.92zm.538-2.587l-9.276-2.608-.526 1.954 9.306 2.5.496-1.846zm1.204-2.413l-8.297-4.864-1.029 1.743 8.298 4.865 1.028-1.744zm1.866-1.467l-5.339-7.829-1.672 1.14 5.339 7.829 1.672-1.14zm-2.644 4.195v8h-12v-8h-2v10h16v-10h-2z"/></svg>
+      </a>
+    </li>
+    
+
+    
+    
+
+    
+    
+    <li>
+      <a href="mailto:?to=pshegger%40gmail.com" target="_blank" class="social-btn email">
+        <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-mail" width="24" height="24" viewBox="0 0 416 288" fill="var(--color-primary)"><path d="m0 16v256 16h16 384 16v-16-256-16h-16-384-16zm347 16-139 92.5-139-92.5zm-148 125.5 9 5.5 9-5.5 167-111.5v210h-352v-210z"/></svg>
+      </a>
+    </li>
+    
+  </ul>
+</div>
+      </div>
+    
+  </div>
+</footer>
+
+  
+
+
+
+
+
+
+
+
+  
+  
+    
+
+<script src="https://pshegger.github.io/main.min.js"></script>
+
+
+
+  
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-NKBPT9CS94"></script>
+<script>
+var doNotTrack = false;
+if (!doNotTrack) {
+	window.dataLayer = window.dataLayer || [];
+	function gtag(){dataLayer.push(arguments);}
+	gtag('js', new Date());
+	gtag('config', 'G-NKBPT9CS94', { 'anonymize_ip': false });
+}
+</script>
+
+</body>
+</html>

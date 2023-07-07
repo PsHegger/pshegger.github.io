@@ -1,235 +1,91 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>Tags on pshegger</title>
-    <link>http://pshegger.github.io/tags/</link>
+    <title>pshegger</title>
+    <link>https://pshegger.github.io/tags/</link>
     <description>Recent content in Tags on pshegger</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Tue, 02 May 2023 00:00:00 +0000</lastBuildDate><atom:link href="http://pshegger.github.io/tags/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Tue, 02 May 2023 00:00:00 +0200</lastBuildDate><atom:link href="https://pshegger.github.io/tags/index.xml" rel="self" type="application/rss+xml" />
     <item>
-      <title>gamedev</title>
-      <link>http://pshegger.github.io/tags/gamedev/</link>
-      <pubDate>Tue, 02 May 2023 00:00:00 +0000</pubDate>
+      <title>My First Gamejam</title>
+      <link>https://pshegger.github.io/posts/my-first-gamejam/</link>
+      <pubDate>Tue, 02 May 2023 00:00:00 +0200</pubDate>
       
-      <guid>http://pshegger.github.io/tags/gamedev/</guid>
-      <description></description>
+      <guid>https://pshegger.github.io/posts/my-first-gamejam/</guid>
+      <description>My thought and experiences about my first gamejam (Ludum Dare 53)</description>
     </item>
     
     <item>
-      <title>gamejam</title>
-      <link>http://pshegger.github.io/tags/gamejam/</link>
-      <pubDate>Tue, 02 May 2023 00:00:00 +0000</pubDate>
+      <title>Procedural Dungeon Generation</title>
+      <link>https://pshegger.github.io/posts/procedural-dungeon/</link>
+      <pubDate>Thu, 10 Mar 2022 00:00:00 +0100</pubDate>
       
-      <guid>http://pshegger.github.io/tags/gamejam/</guid>
-      <description></description>
+      <guid>https://pshegger.github.io/posts/procedural-dungeon/</guid>
+      <description>Procedural generation is the key to writing games with endless content. In this article I show you how I generate a dungeon that can be later used in a game.</description>
     </item>
     
     <item>
-      <title>godot</title>
-      <link>http://pshegger.github.io/tags/godot/</link>
-      <pubDate>Tue, 02 May 2023 00:00:00 +0000</pubDate>
+      <title>h@cktivitycon 2021 CTF</title>
+      <link>https://pshegger.github.io/posts/hacktivitycon-2021-ctf/</link>
+      <pubDate>Mon, 20 Sep 2021 00:00:00 +0200</pubDate>
       
-      <guid>http://pshegger.github.io/tags/godot/</guid>
-      <description></description>
+      <guid>https://pshegger.github.io/posts/hacktivitycon-2021-ctf/</guid>
+      <description>Writeups and my thoughts about the 2021 h@cktivitycon CTF</description>
     </item>
     
     <item>
-      <title>ludum dare</title>
-      <link>http://pshegger.github.io/tags/ludum-dare/</link>
-      <pubDate>Tue, 02 May 2023 00:00:00 +0000</pubDate>
+      <title>Advent of Code 2020</title>
+      <link>https://pshegger.github.io/posts/aoc-2020/</link>
+      <pubDate>Wed, 30 Dec 2020 00:00:00 +0100</pubDate>
       
-      <guid>http://pshegger.github.io/tags/ludum-dare/</guid>
-      <description></description>
+      <guid>https://pshegger.github.io/posts/aoc-2020/</guid>
+      <description>A short summary about my experiences with Advent of Code 2020</description>
     </item>
     
     <item>
-      <title>kotlin</title>
-      <link>http://pshegger.github.io/tags/kotlin/</link>
-      <pubDate>Thu, 10 Mar 2022 00:00:00 +0000</pubDate>
+      <title>Turning a Camera Feed into a Solved Sudoku</title>
+      <link>https://pshegger.github.io/posts/ar-sudoku/</link>
+      <pubDate>Wed, 12 Aug 2020 00:00:00 +0200</pubDate>
       
-      <guid>http://pshegger.github.io/tags/kotlin/</guid>
-      <description></description>
+      <guid>https://pshegger.github.io/posts/ar-sudoku/</guid>
+      <description>An introduction to a simple application that uses ML Kit &amp; maths to create an augmented reality sudoku solver</description>
     </item>
     
     <item>
-      <title>procgen</title>
-      <link>http://pshegger.github.io/tags/procgen/</link>
-      <pubDate>Thu, 10 Mar 2022 00:00:00 +0000</pubDate>
+      <title>RenderScript is Still alive</title>
+      <link>https://pshegger.github.io/posts/renderscript/</link>
+      <pubDate>Sat, 29 Feb 2020 00:00:00 +0100</pubDate>
       
-      <guid>http://pshegger.github.io/tags/procgen/</guid>
-      <description></description>
+      <guid>https://pshegger.github.io/posts/renderscript/</guid>
+      <description>RenderScript is a great way to compute large amount of data, so let&#39;s discover together what it is and when should it be considered.</description>
     </item>
     
     <item>
-      <title>cryptography</title>
-      <link>http://pshegger.github.io/tags/cryptography/</link>
-      <pubDate>Mon, 20 Sep 2021 00:00:00 +0000</pubDate>
+      <title>gRPC for Kotliners</title>
+      <link>https://pshegger.github.io/posts/grpc-talk/</link>
+      <pubDate>Thu, 14 Nov 2019 00:00:00 +0100</pubDate>
       
-      <guid>http://pshegger.github.io/tags/cryptography/</guid>
-      <description></description>
+      <guid>https://pshegger.github.io/posts/grpc-talk/</guid>
+      <description>gRPC is a worthy alternative for REST, let&#39;s explore together what it is and how to use it as a Kotlin developer.</description>
     </item>
     
     <item>
-      <title>ctf</title>
-      <link>http://pshegger.github.io/tags/ctf/</link>
-      <pubDate>Mon, 20 Sep 2021 00:00:00 +0000</pubDate>
+      <title>@GenerateForMe</title>
+      <link>https://pshegger.github.io/posts/generate-for-me/</link>
+      <pubDate>Mon, 11 Nov 2019 00:00:00 +0100</pubDate>
       
-      <guid>http://pshegger.github.io/tags/ctf/</guid>
-      <description></description>
+      <guid>https://pshegger.github.io/posts/generate-for-me/</guid>
+      <description>Annotations are extremely versatile especially if we write our own processor to overcharge our development. Learn how to write one in Kotlin.</description>
     </item>
     
     <item>
-      <title>hackerone</title>
-      <link>http://pshegger.github.io/tags/hackerone/</link>
-      <pubDate>Mon, 20 Sep 2021 00:00:00 +0000</pubDate>
+      <title>Help Yourself and the Compiler with Contracts</title>
+      <link>https://pshegger.github.io/posts/kotlin-contracts/</link>
+      <pubDate>Thu, 21 Mar 2019 00:00:00 +0100</pubDate>
       
-      <guid>http://pshegger.github.io/tags/hackerone/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>hacktivitycon</title>
-      <link>http://pshegger.github.io/tags/hacktivitycon/</link>
-      <pubDate>Mon, 20 Sep 2021 00:00:00 +0000</pubDate>
-      
-      <guid>http://pshegger.github.io/tags/hacktivitycon/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>python</title>
-      <link>http://pshegger.github.io/tags/python/</link>
-      <pubDate>Mon, 20 Sep 2021 00:00:00 +0000</pubDate>
-      
-      <guid>http://pshegger.github.io/tags/python/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>writeup</title>
-      <link>http://pshegger.github.io/tags/writeup/</link>
-      <pubDate>Mon, 20 Sep 2021 00:00:00 +0000</pubDate>
-      
-      <guid>http://pshegger.github.io/tags/writeup/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>advent of code</title>
-      <link>http://pshegger.github.io/tags/advent-of-code/</link>
-      <pubDate>Wed, 30 Dec 2020 00:00:00 +0000</pubDate>
-      
-      <guid>http://pshegger.github.io/tags/advent-of-code/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>competitive programming</title>
-      <link>http://pshegger.github.io/tags/competitive-programming/</link>
-      <pubDate>Wed, 30 Dec 2020 00:00:00 +0000</pubDate>
-      
-      <guid>http://pshegger.github.io/tags/competitive-programming/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>programming</title>
-      <link>http://pshegger.github.io/tags/programming/</link>
-      <pubDate>Wed, 30 Dec 2020 00:00:00 +0000</pubDate>
-      
-      <guid>http://pshegger.github.io/tags/programming/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>android</title>
-      <link>http://pshegger.github.io/tags/android/</link>
-      <pubDate>Wed, 12 Aug 2020 00:00:00 +0000</pubDate>
-      
-      <guid>http://pshegger.github.io/tags/android/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>mlkit</title>
-      <link>http://pshegger.github.io/tags/mlkit/</link>
-      <pubDate>Wed, 12 Aug 2020 00:00:00 +0000</pubDate>
-      
-      <guid>http://pshegger.github.io/tags/mlkit/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>sudoku</title>
-      <link>http://pshegger.github.io/tags/sudoku/</link>
-      <pubDate>Wed, 12 Aug 2020 00:00:00 +0000</pubDate>
-      
-      <guid>http://pshegger.github.io/tags/sudoku/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>parallelism</title>
-      <link>http://pshegger.github.io/tags/parallelism/</link>
-      <pubDate>Sat, 29 Feb 2020 00:00:00 +0000</pubDate>
-      
-      <guid>http://pshegger.github.io/tags/parallelism/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>renderscript</title>
-      <link>http://pshegger.github.io/tags/renderscript/</link>
-      <pubDate>Sat, 29 Feb 2020 00:00:00 +0000</pubDate>
-      
-      <guid>http://pshegger.github.io/tags/renderscript/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>grpc</title>
-      <link>http://pshegger.github.io/tags/grpc/</link>
-      <pubDate>Thu, 14 Nov 2019 00:00:00 +0000</pubDate>
-      
-      <guid>http://pshegger.github.io/tags/grpc/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>annotation</title>
-      <link>http://pshegger.github.io/tags/annotation/</link>
-      <pubDate>Mon, 11 Nov 2019 00:00:00 +0000</pubDate>
-      
-      <guid>http://pshegger.github.io/tags/annotation/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>kapt</title>
-      <link>http://pshegger.github.io/tags/kapt/</link>
-      <pubDate>Mon, 11 Nov 2019 00:00:00 +0000</pubDate>
-      
-      <guid>http://pshegger.github.io/tags/kapt/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>contracts</title>
-      <link>http://pshegger.github.io/tags/contracts/</link>
-      <pubDate>Thu, 21 Mar 2019 00:00:00 +0000</pubDate>
-      
-      <guid>http://pshegger.github.io/tags/contracts/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>index</title>
-      <link>http://pshegger.github.io/tags/index/</link>
-      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
-      
-      <guid>http://pshegger.github.io/tags/index/</guid>
-      <description></description>
+      <guid>https://pshegger.github.io/posts/kotlin-contracts/</guid>
+      <description>In the world of Kotlin, contracts represent a deal between the developer and the compiler. As a developer you can share insight of your code with the compiler and it can use this extra info for better code analysis.</description>
     </item>
     
   </channel>

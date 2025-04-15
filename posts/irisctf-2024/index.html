@@ -1,362 +1,184 @@
 <!DOCTYPE html>
-<html lang="en-us"><head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  
-  
+<html lang="en" dir="auto">
 
-
-
-
-
-  
-  
-  
-    
-    
-  
-
-
-
-
-
-  
-
-
-
-  
-  
-
-<link rel="stylesheet" href="https://pshegger.github.io/main.min.css" />
-  
-<meta name="robots" content="index, follow">
-    <meta name="googlebot" content="index, follow, max-snippet:-1, max-image-preview:large, max-video-preview:-1">
-    <meta name="bingbot" content="index, follow, max-snippet:-1, max-image-preview:large, max-video-preview:-1">
-  
-
-<title>IrisCTF 2024</title>
-
-
-<meta name="author" content="pshegger">
-
+<head><meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<meta name="robots" content="noindex, nofollow">
+<title>IrisCTF 2024 | pshegger&#39;s blog</title>
+<meta name="keywords" content="ctf, writeup, cryptography, python, sql injection, forensics, osint">
 <meta name="description" content="Writeups and blog about the first CTF of this year">
+<meta name="author" content="pshegger">
 <link rel="canonical" href="https://pshegger.github.io/posts/irisctf-2024/">
-<meta property="og:locale" content="">
-<meta property="og:type" content="article">
-<meta property="og:title" content="IrisCTF 2024">
-<meta property="og:description" content="Writeups and blog about the first CTF of this year">
-<meta property="og:url" content="https://pshegger.github.io/posts/irisctf-2024/">
-<meta property="article:published_time" content="2024-01-08T00:00:00+01:00">
-  <meta property="article:modified_time" content="2024-01-08T00:00:00+01:00">
-  
-
-
-
-
-
-
-  <meta name="twitter:site" content="pshegger">
-
-
-  <meta name="twitter:creator" content="pshegger">
-
-<meta name="twitter:title" content="IrisCTF 2024">
-<meta name="twitter:description" content="Writeups and blog about the first CTF of this year">
-
-
-
-  <meta name="twitter:card" content="summary">
-
-
-
-
-
-
-<script type="application/ld+json">
-{
-  "@context": "https://schema.org",
-  "@graph": [
-    {
-      "@type": "Person",
-      "@id": "https://pshegger.github.io/#/schema/person/1",
-      "name":  null ,
-      "url": "https://pshegger.github.io/",
-      "image": {
-        "@type": "ImageObject",
-        "@id": "https://pshegger.github.io/#/schema/image/1",
-        "url": "https://pshegger.github.io/\u003cnil\u003e",
-        "width": null ,
-        "height": null ,
-        "caption":  null 
-      }
-    },
-    {
-      "@type": "WebSite",
-      "@id": "https://pshegger.github.io/#/schema/website/1",
-      "url": "https://pshegger.github.io/",
-      "name": "pshegger",
-      "description":  null ,
-      "publisher": {
-        "@id": "https://pshegger.github.io/#/schema/person/1"
-      }
-    },
-    {
-      "@type": "WebPage",
-      "@id": "https://pshegger.github.io/posts/irisctf-2024/",
-      "url": "https://pshegger.github.io/posts/irisctf-2024/",
-      "name": "IrisCTF 2024",
-      "description": "Writeups and blog about the first CTF of this year",
-      "isPartOf": {
-        "@id": "https://pshegger.github.io/#/schema/website/1"
-      },
-      "about": {
-        "@id": "https://pshegger.github.io/#/schema/person/1"
-      },
-      "datePublished": "2024-01-08T00:00:00+01:00",
-      "dateModified": "2024-01-08T00:00:00+01:00",
-      "breadcrumb": {
-        "@id": "https://pshegger.github.io/posts/irisctf-2024/#/schema/breadcrumb/1"
-      },
-      "primaryImageOfPage": {
-        "@id": "https://pshegger.github.io/posts/irisctf-2024/#/schema/image/2"
-      },
-      "inLanguage":  null ,
-      "potentialAction": [{
-        "@type": "ReadAction", "target": ["https://pshegger.github.io/posts/irisctf-2024/"]
-      }]
-    },
-    {
-      "@type": "BreadcrumbList",
-      "@id": "https://pshegger.github.io/posts/irisctf-2024/#/schema/breadcrumb/1",
-      "name": "Breadcrumbs",
-      "itemListElement": [{
-        "@type": "ListItem",
-        "position":  1 ,
-        "item": {
-          "@type": "WebPage",
-          "@id": "https://pshegger.github.io/",
-          "url": "https://pshegger.github.io/",
-          "name": "Home"
-          }
-        },{
-        "@type": "ListItem",
-        "position":  2 ,
-        "item": {
-          "@type": "WebPage",
-          "@id": "https://pshegger.github.io/posts/",
-          "url": "https://pshegger.github.io/posts/",
-          "name": "Posts"
-          }
-        },{
-        "@type": "ListItem",
-        "position":  3 ,
-        "item": {
-          "@id": "https://pshegger.github.io/posts/irisctf-2024/"
-          }
-        }]
-    },
-    {
-      "@context": "https://schema.org",
-      "@graph": [
-        {
-          "@type": "Article",
-          "@id": "https://pshegger.github.io/#/schema/article/1",
-          "headline": "IrisCTF 2024",
-          "description": "Writeups and blog about the first CTF of this year",
-          "isPartOf": {
-            "@id": "https://pshegger.github.io/posts/irisctf-2024/"
-          },
-          "mainEntityOfPage": {
-            "@id": "https://pshegger.github.io/posts/irisctf-2024/"
-          },
-          "datePublished": "2024-01-08T00:00:00+01:00",
-          "dateModified": "2024-01-08T00:00:00+01:00",
-          "author": {
-            "@id": "https://pshegger.github.io/#/schema/person/1"
-          },          
-          "publisher": {
-            "@id": "https://pshegger.github.io/#/schema/person/1"
-          },
-          "image": {
-            "@id": "https://pshegger.github.io/posts/irisctf-2024/#/schema/image/2"
-          }
+<link crossorigin="anonymous" href="/assets/css/stylesheet.f49d66caae9ea0fd43f21f29e71a8d3e284517ed770f2aa86fa012953ad3c9ef.css" integrity="sha256-9J1myq6eoP1D8h8p5xqNPihFF&#43;13Dyqob6ASlTrTye8=" rel="preload stylesheet" as="style">
+<link rel="icon" href="https://pshegger.github.io/favicon.ico">
+<link rel="icon" type="image/png" sizes="16x16" href="https://pshegger.github.io/favicon-16x16.png">
+<link rel="icon" type="image/png" sizes="32x32" href="https://pshegger.github.io/favicon-32x32.png">
+<link rel="apple-touch-icon" href="https://pshegger.github.io/apple-touch-icon.png">
+<link rel="mask-icon" href="https://pshegger.github.io/safari-pinned-tab.svg">
+<meta name="theme-color" content="#2e2e33">
+<meta name="msapplication-TileColor" content="#2e2e33">
+<link rel="alternate" hreflang="en" href="https://pshegger.github.io/posts/irisctf-2024/">
+<noscript>
+    <style>
+        #theme-toggle,
+        .top-link {
+            display: none;
         }
-      ]
-    },{
-      "@context": "https://schema.org",
-      "@graph": [
-        {
-          "@type": "ImageObject",
-          "@id": "https://pshegger.github.io/posts/irisctf-2024/#/schema/image/2",
-          "url":  null ,
-          "contentUrl":  null ,
-          "caption": "IrisCTF 2024"
+
+    </style>
+    <style>
+        @media (prefers-color-scheme: dark) {
+            :root {
+                --theme: rgb(29, 30, 32);
+                --entry: rgb(46, 46, 51);
+                --primary: rgb(218, 218, 219);
+                --secondary: rgb(155, 156, 157);
+                --tertiary: rgb(65, 66, 68);
+                --content: rgb(196, 196, 197);
+                --code-block-bg: rgb(46, 46, 51);
+                --code-bg: rgb(55, 56, 62);
+                --border: rgb(51, 51, 51);
+            }
+
+            .list {
+                background: var(--theme);
+            }
+
+            .list:not(.dark)::-webkit-scrollbar-track {
+                background: 0 0;
+            }
+
+            .list:not(.dark)::-webkit-scrollbar-thumb {
+                border-color: var(--theme);
+            }
         }
-      ]
+
+    </style>
+</noscript>
+</head>
+
+<body class="" id="top">
+<script>
+    if (localStorage.getItem("pref-theme") === "dark") {
+        document.body.classList.add('dark');
+    } else if (localStorage.getItem("pref-theme") === "light") {
+        document.body.classList.remove('dark')
+    } else if (window.matchMedia('(prefers-color-scheme: dark)').matches) {
+        document.body.classList.add('dark');
     }
-  ]
-}
+
 </script>
-  
 
-  
-
-</head><body>
-    <header class="container">
-  <nav class="main-nav" id="js-navbar">
-    <a class="logo" href="https://pshegger.github.io/">pshegger</a>
-    <ul class="menu" id="js-menu">
-      
-      
-      
-        <li class="menu-item">
-          <a href="/about/" class="menu-link">About</a>
-        </li>
-      
-      
-      
-        <li class="menu-item">
-          <a href="/posts/" class="menu-link">All Posts</a>
-        </li>
-      
-      
-      
-      <li class="menu-item">
-        <span class="menu-link">Explore<span class="drop-icon">▾</span></span>
-        <ul class="sub-menu">
-          
-            <li class="menu-item">
-              <a href="/categories/" class="menu-link">Categories</a>                  
-            </li>
-          
-            <li class="menu-item">
-              <a href="/tags/" class="menu-link">Tags</a>                  
-            </li>
-          
-            <li class="menu-item">
-              <a href="/series/" class="menu-link">Series</a>                  
-            </li>
-          
-        </ul>
-      </li>
-      
-      
-      <li class="menu-item--align">
-        <div class="switch">
-          <input class="switch-input" type="checkbox" id="themeSwitch">
-          <label aria-hidden="true" class="switch-label" for="themeSwitch">On</label>
-          <div aria-hidden="true" class="switch-marker"></div>
+<header class="header">
+    <nav class="nav">
+        <div class="logo">
+            <a href="https://pshegger.github.io/" accesskey="h" title="pshegger&#39;s blog (Alt + H)">pshegger&#39;s blog</a>
+            <div class="logo-switches">
+                <button id="theme-toggle" accesskey="t" title="(Alt + T)" aria-label="Toggle theme">
+                    <svg id="moon" xmlns="http://www.w3.org/2000/svg" width="24" height="18" viewBox="0 0 24 24"
+                        fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                        stroke-linejoin="round">
+                        <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
+                    </svg>
+                    <svg id="sun" xmlns="http://www.w3.org/2000/svg" width="24" height="18" viewBox="0 0 24 24"
+                        fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                        stroke-linejoin="round">
+                        <circle cx="12" cy="12" r="5"></circle>
+                        <line x1="12" y1="1" x2="12" y2="3"></line>
+                        <line x1="12" y1="21" x2="12" y2="23"></line>
+                        <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line>
+                        <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line>
+                        <line x1="1" y1="12" x2="3" y2="12"></line>
+                        <line x1="21" y1="12" x2="23" y2="12"></line>
+                        <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line>
+                        <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
+                    </svg>
+                </button>
+            </div>
         </div>
-      </li>
-    </ul>
-    <span class="nav-toggle" id="js-navbar-toggle">
-      <svg xmlns="http://www.w3.org/2000/svg" id="Outline" viewBox="0 0 24 24" width="30" height="30" fill="var(--color-contrast-high)"><rect y="11" width="24" height="2" rx="1"/><rect y="4" width="24" height="2" rx="1"/><rect y="18" width="24" height="2" rx="1"/></svg>
-    </span>
-  </nav>
-</header><main class="section">
-<div class="container">
-  <section class="page-header">
-    <h1 class="page-header-title">IrisCTF 2024</h1>
-    <div class="post-list-meta">
-      <div class="post-list-dates">Jan 8, 2024&nbsp;&middot;&nbsp;16 min.</div>
-      
-      <div class="post-list-categories">
-        
-          <a href="https://pshegger.github.io/categories/ctf/">ctf</a>
-        
-      </div>
-      
-      
+        <ul id="menu">
+            <li>
+                <a href="https://pshegger.github.io/categories/" title="Categories">
+                    <span>Categories</span>
+                </a>
+            </li>
+            <li>
+                <a href="https://pshegger.github.io/tags/" title="Tags">
+                    <span>Tags</span>
+                </a>
+            </li>
+        </ul>
+    </nav>
+</header>
+<main class="main">
+
+<article class="post-single">
+  <header class="post-header">
+    
+    <h1 class="post-title entry-hint-parent">
+      IrisCTF 2024
+    </h1>
+    <div class="post-description">
+      Writeups and blog about the first CTF of this year
     </div>
-    <p class="page-header-desc">Writeups and blog about the first CTF of this year</p>
-    <div class="single-terms">
-      
-      
-      <a class="term" href="https://pshegger.github.io/tags/ctf/">ctf</a></li>
-      
-      <a class="term" href="https://pshegger.github.io/tags/writeup/">writeup</a></li>
-      
-      <a class="term" href="https://pshegger.github.io/tags/cryptography/">cryptography</a></li>
-      
-      <a class="term" href="https://pshegger.github.io/tags/python/">python</a></li>
-      
-      <a class="term" href="https://pshegger.github.io/tags/sql-injection/">sql injection</a></li>
-      
-      <a class="term" href="https://pshegger.github.io/tags/forensics/">forensics</a></li>
-      
-      <a class="term" href="https://pshegger.github.io/tags/osint/">osint</a></li>
-      
-      
-    </div>
-  </section>
-</div>
-<div class="single-container-post">
-  
-
-  <aside class="toc">
-    <div id="js-toc-toggle">
-      <h2 class="toc-header">Table of Contents</h2>
-      <span class="toc-drop-icon">&blacktriangledown;</span>
-    </div>
-    <div id="js-toc-contents" class="toc-contents"><nav id="TableOfContents">
-  <ul>
-    <li><a href="#cryptography">Cryptography</a>
-      <ul>
-        <li><a href="#baby-charge">Baby Charge</a></li>
-        <li><a href="#accessible-sesamum-indicum">Accessible Sesamum Indicum</a></li>
-      </ul>
-    </li>
-    <li><a href="#web">Web</a>
-      <ul>
-        <li><a href="#whats-my-password">What&rsquo;s My Password?</a></li>
-        <li><a href="#mokersee">Mokersee</a></li>
-      </ul>
-    </li>
-    <li><a href="#forensics">Forensics</a>
-      <ul>
-        <li><a href="#not-just-media">Not Just Media</a></li>
-        <li><a href="#what-the-beep">What the Beep?</a></li>
-      </ul>
-    </li>
-    <li><a href="#osint">OSINT</a>
-      <ul>
-        <li><a href="#away-on-vacation">Away on Vacation</a></li>
-        <li><a href="#personal-breach">Personal Breach</a></li>
-        <li><a href="#czech-where">Czech Where?</a></li>
-      </ul>
-    </li>
-    <li><a href="#closing-thoughts">Closing Thoughts</a></li>
-  </ul>
-</nav></div>
-  </aside>
-
-  <div class="single-post-contents">
-    <div class="single-feature-img">
-
-
-
-  
+    <div class="post-meta"><span title='2024-01-08 00:00:00 +0000 UTC'>January 8, 2024</span>&nbsp;·&nbsp;15 min&nbsp;·&nbsp;pshegger
 
 </div>
-    <article class="markdown">
-        <p><a href="https://ctftime.org/event/2085" target="_blank" rel="noopener">IrisCTF</a> has just ended, and since I was one of the participants, I decided to write a few thoughts about it, as well as write proper writeups for the challenges I managed to solve.</p>
+  </header> <div class="toc">
+    <details >
+        <summary accesskey="c" title="(Alt + C)">
+            <span class="details">Table of Contents</span>
+        </summary>
+
+        <div class="inner"><ul>
+                <li>
+                    <a href="#cryptography" aria-label="Cryptography">Cryptography</a><ul>
+                        
+                <li>
+                    <a href="#baby-charge" aria-label="Baby Charge">Baby Charge</a></li>
+                <li>
+                    <a href="#accessible-sesamum-indicum" aria-label="Accessible Sesamum Indicum">Accessible Sesamum Indicum</a></li></ul>
+                </li>
+                <li>
+                    <a href="#web" aria-label="Web">Web</a><ul>
+                        
+                <li>
+                    <a href="#whats-my-password" aria-label="What&rsquo;s My Password?">What&rsquo;s My Password?</a></li>
+                <li>
+                    <a href="#mokersee" aria-label="Mokersee">Mokersee</a></li></ul>
+                </li>
+                <li>
+                    <a href="#forensics" aria-label="Forensics">Forensics</a><ul>
+                        
+                <li>
+                    <a href="#not-just-media" aria-label="Not Just Media">Not Just Media</a></li>
+                <li>
+                    <a href="#what-the-beep" aria-label="What the Beep?">What the Beep?</a></li></ul>
+                </li>
+                <li>
+                    <a href="#osint" aria-label="OSINT">OSINT</a><ul>
+                        
+                <li>
+                    <a href="#away-on-vacation" aria-label="Away on Vacation">Away on Vacation</a></li>
+                <li>
+                    <a href="#personal-breach" aria-label="Personal Breach">Personal Breach</a></li>
+                <li>
+                    <a href="#czech-where" aria-label="Czech Where?">Czech Where?</a></li></ul>
+                </li>
+                <li>
+                    <a href="#closing-thoughts" aria-label="Closing Thoughts">Closing Thoughts</a>
+                </li>
+            </ul>
+        </div>
+    </details>
+</div>
+
+  <div class="post-content"><p><a href="https://ctftime.org/event/2085">IrisCTF</a> has just ended, and since I was one of the participants, I decided to write a few thoughts about it, as well as write proper writeups for the challenges I managed to solve.</p>
 <p>As a start, let&rsquo;s go through the challenges by categories, and in the end, I&rsquo;ll add some personal thoughts.</p>
-<h2 id="cryptography">Cryptography<a href="#cryptography">
-    <svg role="img" aria-labelledby="cryptography-IconTitle" fill="var(--color-primary)" height="22" viewBox="0 0 24 24" width="22" xmlns="http://www.w3.org/2000/svg">
-      <title id="cryptography-IconTitle">Link to this heading</title>
-      <path d="M0 0h24v24H0z" fill="none"></path>
-      <path d="M3.9 12c0-1.71 1.39-3.1 3.1-3.1h4V7H7c-2.76.0-5 2.24-5 5s2.24 5 5 5h4v-1.9H7c-1.71.0-3.1-1.39-3.1-3.1zM8 13h8v-2H8v2zm9-6h-4v1.9h4c1.71.0 3.1 1.39 3.1 3.1s-1.39 3.1-3.1 3.1h-4V17h4c2.76.0 5-2.24 5-5s-2.24-5-5-5z"></path>
-    </svg>
-  </a>
-</h2><h3 id="baby-charge">Baby Charge<a href="#baby-charge">
-    <svg role="img" aria-labelledby="baby-charge-IconTitle" fill="var(--color-primary)" height="22" viewBox="0 0 24 24" width="22" xmlns="http://www.w3.org/2000/svg">
-      <title id="baby-charge-IconTitle">Link to this heading</title>
-      <path d="M0 0h24v24H0z" fill="none"></path>
-      <path d="M3.9 12c0-1.71 1.39-3.1 3.1-3.1h4V7H7c-2.76.0-5 2.24-5 5s2.24 5 5 5h4v-1.9H7c-1.71.0-3.1-1.39-3.1-3.1zM8 13h8v-2H8v2zm9-6h-4v1.9h4c1.71.0 3.1 1.39 3.1 3.1s-1.39 3.1-3.1 3.1h-4V17h4c2.76.0 5-2.24 5-5s-2.24-5-5-5z"></path>
-    </svg>
-  </a>
-</h3><p>For this challenge, we got access to the source code for a custom cipher. At startup, it generated a random key and nonce, and after that, there were two options for the user:</p>
+<h2 id="cryptography">Cryptography<a hidden class="anchor" aria-hidden="true" href="#cryptography">#</a></h2>
+<h3 id="baby-charge">Baby Charge<a hidden class="anchor" aria-hidden="true" href="#baby-charge">#</a></h3>
+<p>For this challenge, we got access to the source code for a custom cipher. At startup, it generated a random key and nonce, and after that, there were two options for the user:</p>
 <ol>
 <li>encrypt our input</li>
 <li>print the encrypted flag</li>
@@ -371,70 +193,40 @@
 </ol>
 <p>Let&rsquo;s start with getting the initial state. Reading through the code, we could see, that the encryption itself is a simple, byte-by-byte <code>xor</code> operation with a buffer, that initially contains the state. Once this buffer runs out of bytes to use for the operation, it will generate a new state. We could also see, that the buffer (and with that the state) was 64 bytes long. This meant, that all we had to do was to provide 64 <code>0</code> bytes as an input, and the “encrypted” output would be the initial state.</p>
 <p>Next, we just needed to tell the application to generate the encrypted flag for us. Since we used a 64-byte input in the previous step, this round of encryption already used the new state, which we could now determine from the initial one.</p>
-<p>For the last two steps, we could use mostly the same code that was used for the encryption itself. You can find the final script that I used to get the flag <a href="https://gist.github.com/PsHegger/96379860fae333bde0fd16777f1a8986#file-baby_charge-py" target="_blank" rel="noopener">here</a>.</p>
-<h3 id="accessible-sesamum-indicum">Accessible Sesamum Indicum<a href="#accessible-sesamum-indicum">
-    <svg role="img" aria-labelledby="accessible-sesamum-indicum-IconTitle" fill="var(--color-primary)" height="22" viewBox="0 0 24 24" width="22" xmlns="http://www.w3.org/2000/svg">
-      <title id="accessible-sesamum-indicum-IconTitle">Link to this heading</title>
-      <path d="M0 0h24v24H0z" fill="none"></path>
-      <path d="M3.9 12c0-1.71 1.39-3.1 3.1-3.1h4V7H7c-2.76.0-5 2.24-5 5s2.24 5 5 5h4v-1.9H7c-1.71.0-3.1-1.39-3.1-3.1zM8 13h8v-2H8v2zm9-6h-4v1.9h4c1.71.0 3.1 1.39 3.1 3.1s-1.39 3.1-3.1 3.1h-4V17h4c2.76.0 5-2.24 5-5s-2.24-5-5-5z"></path>
-    </svg>
-  </a>
-</h3><p>This challenge was easier than the previous one. Once we looked at the code, we could see, that we have to enter a 4-digit PIN code on a 16-digit &ldquo;input panel&rdquo;, and then repeat it 15 times. There were a few noteworthy details needed to solve this challenge:</p>
+<p>For the last two steps, we could use mostly the same code that was used for the encryption itself. You can find the final script that I used to get the flag <a href="https://gist.github.com/PsHegger/96379860fae333bde0fd16777f1a8986#file-baby_charge-py">here</a>.</p>
+<h3 id="accessible-sesamum-indicum">Accessible Sesamum Indicum<a hidden class="anchor" aria-hidden="true" href="#accessible-sesamum-indicum">#</a></h3>
+<p>This challenge was easier than the previous one. Once we looked at the code, we could see, that we have to enter a 4-digit PIN code on a 16-digit &ldquo;input panel&rdquo;, and then repeat it 15 times. There were a few noteworthy details needed to solve this challenge:</p>
 <ol>
 <li>the PIN was rolling (so once you entered the first 4 digits, every subsequent digit was checked one by one using the last 4 entered digits)</li>
 <li>the max number of digits that we were allowed to enter before we failed was <code>65536</code></li>
 <li>less important, but makes implementation a bit easier: we could enter any number of digits at once</li>
 </ol>
-<p>Some people may already know it, but I needed some searching to find the perfect solution for this task: the <a href="https://en.wikipedia.org/wiki/De_Bruijn_sequence" target="_blank" rel="noopener">de Bruijn sequence</a>. Shortly: it is a sequence where every possible string of a given length occurs exactly once. This is all the information needed to solve this challenge, there&rsquo;s only one line of code that&rsquo;s useful here:</p>
-
-
-  <span class="code-language">python</span><div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span>pwn<span style="color:#f92672">.</span>cyclic_gen(<span style="color:#e6db74">&#34;0123456789abcdef&#34;</span>, <span style="color:#ae81ff">4</span>)<span style="color:#f92672">.</span>get()</span></span></code></pre></div>
-<p>Not too surprisingly, this string is exactly <code>65536</code> characters long, so we just have to provide it 16 times to the app, and we&rsquo;ll get the flag. For the full source of the script that I used for this challenge, click <a href="https://gist.github.com/PsHegger/96379860fae333bde0fd16777f1a8986#file-accessible_sesamum_indicum-py" target="_blank" rel="noopener">here</a>.</p>
-<h2 id="web">Web<a href="#web">
-    <svg role="img" aria-labelledby="web-IconTitle" fill="var(--color-primary)" height="22" viewBox="0 0 24 24" width="22" xmlns="http://www.w3.org/2000/svg">
-      <title id="web-IconTitle">Link to this heading</title>
-      <path d="M0 0h24v24H0z" fill="none"></path>
-      <path d="M3.9 12c0-1.71 1.39-3.1 3.1-3.1h4V7H7c-2.76.0-5 2.24-5 5s2.24 5 5 5h4v-1.9H7c-1.71.0-3.1-1.39-3.1-3.1zM8 13h8v-2H8v2zm9-6h-4v1.9h4c1.71.0 3.1 1.39 3.1 3.1s-1.39 3.1-3.1 3.1h-4V17h4c2.76.0 5-2.24 5-5s-2.24-5-5-5z"></path>
-    </svg>
-  </a>
-</h2><h3 id="whats-my-password">What&rsquo;s My Password?<a href="#whats-my-password">
-    <svg role="img" aria-labelledby="whats-my-password-IconTitle" fill="var(--color-primary)" height="22" viewBox="0 0 24 24" width="22" xmlns="http://www.w3.org/2000/svg">
-      <title id="whats-my-password-IconTitle">Link to this heading</title>
-      <path d="M0 0h24v24H0z" fill="none"></path>
-      <path d="M3.9 12c0-1.71 1.39-3.1 3.1-3.1h4V7H7c-2.76.0-5 2.24-5 5s2.24 5 5 5h4v-1.9H7c-1.71.0-3.1-1.39-3.1-3.1zM8 13h8v-2H8v2zm9-6h-4v1.9h4c1.71.0 3.1 1.39 3.1 3.1s-1.39 3.1-3.1 3.1h-4V17h4c2.76.0 5-2.24 5-5s-2.24-5-5-5z"></path>
-    </svg>
-  </a>
-</h3><p>This was a fairly straightforward SQL injection challenge, and since we had access to the source, we could easily craft our query without any guessing.</p>
+<p>Some people may already know it, but I needed some searching to find the perfect solution for this task: the <a href="https://en.wikipedia.org/wiki/De_Bruijn_sequence">de Bruijn sequence</a>. Shortly: it is a sequence where every possible string of a given length occurs exactly once. This is all the information needed to solve this challenge, there&rsquo;s only one line of code that&rsquo;s useful here:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span>pwn<span style="color:#f92672">.</span>cyclic_gen(<span style="color:#e6db74">&#34;0123456789abcdef&#34;</span>, <span style="color:#ae81ff">4</span>)<span style="color:#f92672">.</span>get()
+</span></span></code></pre></div><p>Not too surprisingly, this string is exactly <code>65536</code> characters long, so we just have to provide it 16 times to the app, and we&rsquo;ll get the flag. For the full source of the script that I used for this challenge, click <a href="https://gist.github.com/PsHegger/96379860fae333bde0fd16777f1a8986#file-accessible_sesamum_indicum-py">here</a>.</p>
+<h2 id="web">Web<a hidden class="anchor" aria-hidden="true" href="#web">#</a></h2>
+<h3 id="whats-my-password">What&rsquo;s My Password?<a hidden class="anchor" aria-hidden="true" href="#whats-my-password">#</a></h3>
+<p>This was a fairly straightforward SQL injection challenge, and since we had access to the source, we could easily craft our query without any guessing.</p>
 <p>Thanks to the <code>setup.sql</code> file, we already knew the username of our target, all we needed was to find a way of getting their password. For that we only needed two small pieces of information:</p>
 <ol>
 <li>the query used for checking the user credentials is constructed with <code>fmt.Sprintf</code></li>
 <li>after a successful login, the backend will respond with both username and password</li>
 </ol>
 <p>Knowing this, we just have to create a good injection that logs in to the user we need. Once we&rsquo;re logged in we can just check the network traffic to get the flag. The only hard part about the injection is that if we try the standard <code>' or 1==1 -- </code>, the backend will log us into the account of the first user in the database, who is not our target. To prevent this, we have to make sure to only return 1 result with our query. We can easily achieve this by providing an incorrect username/password combination and using <code>union</code> to append our target account to the result list.</p>
-
-
-  <span class="code-language">sql</span><div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-sql" data-lang="sql"><span style="display:flex;"><span><span style="color:#75715e">-- paste this in the password field
-</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span><span style="color:#e6db74">&#34; union select * from users where username = &#34;</span>skat<span style="color:#e6db74">&#34; --</span></span></span></code></pre></div>
-<h3 id="mokersee">Mokersee<a href="#mokersee">
-    <svg role="img" aria-labelledby="mokersee-IconTitle" fill="var(--color-primary)" height="22" viewBox="0 0 24 24" width="22" xmlns="http://www.w3.org/2000/svg">
-      <title id="mokersee-IconTitle">Link to this heading</title>
-      <path d="M0 0h24v24H0z" fill="none"></path>
-      <path d="M3.9 12c0-1.71 1.39-3.1 3.1-3.1h4V7H7c-2.76.0-5 2.24-5 5s2.24 5 5 5h4v-1.9H7c-1.71.0-3.1-1.39-3.1-3.1zM8 13h8v-2H8v2zm9-6h-4v1.9h4c1.71.0 3.1 1.39 3.1 3.1s-1.39 3.1-3.1 3.1h-4V17h4c2.76.0 5-2.24 5-5s-2.24-5-5-5z"></path>
-    </svg>
-  </a>
-</h3><p>For this challenge, we get access to a website that displays cat images. It also informs us, that we can embed the images to our site, and mentions an optional <code>filter</code> parameter that could be used to apply filters to the image.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-sql" data-lang="sql"><span style="display:flex;"><span><span style="color:#75715e">-- paste this in the password field
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span><span style="color:#e6db74">&#34; union select * from users where username = &#34;</span>skat<span style="color:#e6db74">&#34; --
+</span></span></span></code></pre></div><h3 id="mokersee">Mokersee<a hidden class="anchor" aria-hidden="true" href="#mokersee">#</a></h3>
+<p>For this challenge, we get access to a website that displays cat images. It also informs us, that we can embed the images to our site, and mentions an optional <code>filter</code> parameter that could be used to apply filters to the image.</p>
 <p>Once we download the source code to the server, we can find that there are multiple images available, and we&rsquo;re looking for the one named <code>flagmoker</code>. Unfortunately, it&rsquo;s marked as private, so when we try to request it, the server will just respond with an error message instead.</p>
 <p>As a first idea, I tried looking into some kind of RCE in the code. The obvious parts were <code>json.loads</code> and the filters themselves, but I couldn&rsquo;t find anything, so I gave up.</p>
 <p>After that, I had another idea: what if I could read the image pixel-by-pixel somehow, and construct the image that way? In the beginning, I just started playing with the filters to see, if I can get to an image that contains only one pixel from the original one. After some trial and error, I came up with the following filter chain:</p>
-
-
-  <span class="code-language">json</span><div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-json" data-lang="json"><span style="display:flex;"><span>[
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-json" data-lang="json"><span style="display:flex;"><span>[
 </span></span><span style="display:flex;"><span>    {<span style="color:#f92672">&#34;filter&#34;</span>: <span style="color:#e6db74">&#34;gamma&#34;</span>, <span style="color:#f92672">&#34;args&#34;</span>: [<span style="color:#ae81ff">0.001</span>]},
 </span></span><span style="display:flex;"><span>    {<span style="color:#f92672">&#34;filter&#34;</span>: <span style="color:#e6db74">&#34;resize&#34;</span>, <span style="color:#f92672">&#34;args&#34;</span>: [[<span style="color:#ae81ff">128</span>, <span style="color:#ae81ff">96</span>]]},
 </span></span><span style="display:flex;"><span>    {<span style="color:#f92672">&#34;filter&#34;</span>: <span style="color:#e6db74">&#34;warp&#34;</span>, <span style="color:#f92672">&#34;args&#34;</span>: [[[<span style="color:#ae81ff">1</span>, <span style="color:#ae81ff">0</span>, <span style="color:#ae81ff">200</span>], [<span style="color:#ae81ff">0</span>, <span style="color:#ae81ff">1</span>, <span style="color:#ae81ff">300</span>], [<span style="color:#ae81ff">0</span>, <span style="color:#ae81ff">0</span>, <span style="color:#ae81ff">100</span>]]]},
 </span></span><span style="display:flex;"><span>    {<span style="color:#f92672">&#34;filter&#34;</span>: <span style="color:#e6db74">&#34;resize&#34;</span>, <span style="color:#f92672">&#34;args&#34;</span>: [[<span style="color:#ae81ff">1</span>, <span style="color:#ae81ff">1</span>]]}
-</span></span><span style="display:flex;"><span>]</span></span></code></pre></div>
-<p>Let&rsquo;s take a line-by-line look at what this achieves:</p>
+</span></span><span style="display:flex;"><span>]
+</span></span></code></pre></div><p>Let&rsquo;s take a line-by-line look at what this achieves:</p>
 <ol>
 <li>apply a gamma filter with a low value: in the resulting image the background turns almost completely white, while the flag text stays red</li>
 <li>resize the image to a smaller size: just for convenience. If we manage later to read the image pixel-by-pixel, this will save us a lot of requests</li>
@@ -444,9 +236,7 @@
 <p>With that, we have a way of getting the color of any pixel of the image, but we still need a way of accessing this information about the private image. Luckily, there&rsquo;s a logical error in the code, that we could use here. The check for the private flag only happens after the filters are applied. I also discovered during the testing, that there&rsquo;s no proper error handling, so if we get an exception during the execution we will get an <code>Internal Server Error</code>, instead of the usual <code>Not for public consumption.</code> message.</p>
 <p>This meant, that if we managed to come up with a filter, that throws an exception for one color, but not for the other one, we could extract <code>1-bit</code> of information about every pixel, and that&rsquo;s enough for us to get the flag.</p>
 <p>At this point, I went back to check the source code of the filters, and I finally found this piece of code:</p>
-
-
-  <span class="code-language">python</span><div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span><span style="color:#75715e"># original: https://github.com/scikit-image/scikit-image/blob/0e35d8040d0b0bb409de41f3c0f024f941e09d8a/skimage/exposure/exposure.py#L626</span>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span><span style="color:#75715e"># original: https://github.com/scikit-image/scikit-image/blob/0e35d8040d0b0bb409de41f3c0f024f941e09d8a/skimage/exposure/exposure.py#L626</span>
 </span></span><span style="display:flex;"><span><span style="color:#66d9ef">def</span> <span style="color:#a6e22e">adjust_gamma</span>(image, gamma<span style="color:#f92672">=</span><span style="color:#ae81ff">1</span>, gain<span style="color:#f92672">=</span><span style="color:#ae81ff">1</span>):
 </span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">if</span> gamma <span style="color:#f92672">&lt;</span> <span style="color:#ae81ff">0</span>:
 </span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">raise</span> <span style="color:#a6e22e">ValueError</span>(<span style="color:#e6db74">&#34;Gamma should be a non-negative real number.&#34;</span>)
@@ -463,8 +253,8 @@
 </span></span><span style="display:flex;"><span>
 </span></span><span style="display:flex;"><span>        out <span style="color:#f92672">=</span> (((image <span style="color:#f92672">/</span> scale) <span style="color:#f92672">**</span> gamma) <span style="color:#f92672">*</span> scale <span style="color:#f92672">*</span> gain)<span style="color:#f92672">.</span>astype(dtype)
 </span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">return</span> out</span></span></code></pre></div>
-<p>The important part here is the assertion (<code>_assert_non_negative(image)</code>). This method checks if any color values are negative, and if yes, it throws an exception. All that was left, was to find a way of making it fail the assertion for one color, but pass for the other one. Luckily, we have a filter available, that does exactly that.</p>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">return</span> out
+</span></span></code></pre></div><p>The important part here is the assertion (<code>_assert_non_negative(image)</code>). This method checks if any color values are negative, and if yes, it throws an exception. All that was left, was to find a way of making it fail the assertion for one color, but pass for the other one. Luckily, we have a filter available, that does exactly that.</p>
 <p>According to the documentation of the <code>intensity</code> filter, it <code>returns image after stretching or shrinking its intensity levels</code>. We can specify an input and an output range, and it will convert the image between them. Right now, we&rsquo;re using a range of <code>(0..1)</code>, but let&rsquo;s see what happens, if we change it to <code>(-1..1)</code>:</p>
 <ul>
 <li>high (<code>&gt;0.5</code>) color values will still be between <code>0</code> and <code>1</code></li>
@@ -472,21 +262,17 @@
 </ul>
 <p>What does it mean in our case? We have 2 colors that we&rsquo;re working with. One of them is white, where every value is close to <code>1</code>, so after stretching the levels, they will still be positive. The other color is red (<code>0xFF0000</code>). In this case, only the red value is higher than <code>0.5</code>, but green and blue are close to <code>0</code>, so they&rsquo;ll become negative, and this is exactly what we wanted.</p>
 <p>With this knowledge, we can add the two new filters to our chain to end up with this final one:</p>
-
-
-  <span class="code-language">json</span><div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-json" data-lang="json"><span style="display:flex;"><span>[
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-json" data-lang="json"><span style="display:flex;"><span>[
 </span></span><span style="display:flex;"><span>    {<span style="color:#f92672">&#34;filter&#34;</span>: <span style="color:#e6db74">&#34;gamma&#34;</span>, <span style="color:#f92672">&#34;args&#34;</span>: [<span style="color:#ae81ff">0.001</span>]},
 </span></span><span style="display:flex;"><span>    {<span style="color:#f92672">&#34;filter&#34;</span>: <span style="color:#e6db74">&#34;resize&#34;</span>, <span style="color:#f92672">&#34;args&#34;</span>: [[<span style="color:#ae81ff">128</span>,<span style="color:#ae81ff">96</span>]]},
 </span></span><span style="display:flex;"><span>    {<span style="color:#f92672">&#34;filter&#34;</span>: <span style="color:#e6db74">&#34;warp&#34;</span>, <span style="color:#f92672">&#34;args&#34;</span>: [[[<span style="color:#ae81ff">1</span>,<span style="color:#ae81ff">0</span>,<span style="color:#960050;background-color:#1e0010">x</span>],[<span style="color:#ae81ff">0</span>,<span style="color:#ae81ff">1</span>,<span style="color:#960050;background-color:#1e0010">y</span>],[<span style="color:#ae81ff">0</span>,<span style="color:#ae81ff">0</span>,<span style="color:#ae81ff">100</span>]]]},
 </span></span><span style="display:flex;"><span>    {<span style="color:#f92672">&#34;filter&#34;</span>: <span style="color:#e6db74">&#34;resize&#34;</span>, <span style="color:#f92672">&#34;args&#34;</span>: [[<span style="color:#ae81ff">1</span>,<span style="color:#ae81ff">1</span>]]},
 </span></span><span style="display:flex;"><span>    {<span style="color:#f92672">&#34;filter&#34;</span>: <span style="color:#e6db74">&#34;intensity&#34;</span>, <span style="color:#f92672">&#34;args&#34;</span>: [[<span style="color:#ae81ff">0</span>,<span style="color:#ae81ff">1</span>],[<span style="color:#ae81ff">-1</span>,<span style="color:#ae81ff">1</span>]]},
 </span></span><span style="display:flex;"><span>    {<span style="color:#f92672">&#34;filter&#34;</span>: <span style="color:#e6db74">&#34;gamma&#34;</span>,<span style="color:#f92672">&#34;args&#34;</span>: []}
-</span></span><span style="display:flex;"><span>]</span></span></code></pre></div>
-<p>After testing this filter, we can see, that the backend will have different responses based on the color of the specified pixel (status code <code>200</code> for white and <code>500</code> for red). All that&rsquo;s left is getting this <code>1-bit</code> information for each pixel, and reconstructing the flag. For that, I used the fuzzer built into OWASP ZAP (fuzz <code>x</code> and <code>y</code> with <code>Numberzz</code> payload, start: <code>0</code>, step: <code>100</code>, end: <code>9600</code> for <code>x</code> and <code>12800</code> for <code>y</code>).</p>
+</span></span><span style="display:flex;"><span>]
+</span></span></code></pre></div><p>After testing this filter, we can see, that the backend will have different responses based on the color of the specified pixel (status code <code>200</code> for white and <code>500</code> for red). All that&rsquo;s left is getting this <code>1-bit</code> information for each pixel, and reconstructing the flag. For that, I used the fuzzer built into OWASP ZAP (fuzz <code>x</code> and <code>y</code> with <code>Numberzz</code> payload, start: <code>0</code>, step: <code>100</code>, end: <code>9600</code> for <code>x</code> and <code>12800</code> for <code>y</code>).</p>
 <p>Once it was done, I exported the results, wrote a small script to parse the <code>csv</code> and construct our output image, and submitted the flag.</p>
-
-
-  <span class="code-language">python</span><div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span><span style="color:#f92672">import</span> csv
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span><span style="color:#f92672">import</span> csv
 </span></span><span style="display:flex;"><span><span style="color:#f92672">import</span> numpy <span style="color:#66d9ef">as</span> np
 </span></span><span style="display:flex;"><span><span style="color:#f92672">from</span> PIL <span style="color:#f92672">import</span> Image
 </span></span><span style="display:flex;"><span>
@@ -504,31 +290,12 @@
 </span></span><span style="display:flex;"><span>            image[y][x][<span style="color:#ae81ff">0</span>] <span style="color:#f92672">=</span> <span style="color:#ae81ff">255</span>
 </span></span><span style="display:flex;"><span>
 </span></span><span style="display:flex;"><span>image <span style="color:#f92672">=</span> Image<span style="color:#f92672">.</span>fromarray(image, <span style="color:#e6db74">&#39;RGB&#39;</span>)
-</span></span><span style="display:flex;"><span>image<span style="color:#f92672">.</span>save(<span style="color:#e6db74">&#39;flagmoker.png&#39;</span>)</span></span></code></pre></div>
-<p><img src="/img/irisctf-2024/flagmoker.png"
-	alt="/img/irisctf-2024/flagmoker.png" 
-	class="single-post-image" 
-	loading="lazy"
-	decoding="async"
-	></p>
-<h2 id="forensics">Forensics<a href="#forensics">
-    <svg role="img" aria-labelledby="forensics-IconTitle" fill="var(--color-primary)" height="22" viewBox="0 0 24 24" width="22" xmlns="http://www.w3.org/2000/svg">
-      <title id="forensics-IconTitle">Link to this heading</title>
-      <path d="M0 0h24v24H0z" fill="none"></path>
-      <path d="M3.9 12c0-1.71 1.39-3.1 3.1-3.1h4V7H7c-2.76.0-5 2.24-5 5s2.24 5 5 5h4v-1.9H7c-1.71.0-3.1-1.39-3.1-3.1zM8 13h8v-2H8v2zm9-6h-4v1.9h4c1.71.0 3.1 1.39 3.1 3.1s-1.39 3.1-3.1 3.1h-4V17h4c2.76.0 5-2.24 5-5s-2.24-5-5-5z"></path>
-    </svg>
-  </a>
-</h2><h3 id="not-just-media">Not Just Media<a href="#not-just-media">
-    <svg role="img" aria-labelledby="not-just-media-IconTitle" fill="var(--color-primary)" height="22" viewBox="0 0 24 24" width="22" xmlns="http://www.w3.org/2000/svg">
-      <title id="not-just-media-IconTitle">Link to this heading</title>
-      <path d="M0 0h24v24H0z" fill="none"></path>
-      <path d="M3.9 12c0-1.71 1.39-3.1 3.1-3.1h4V7H7c-2.76.0-5 2.24-5 5s2.24 5 5 5h4v-1.9H7c-1.71.0-3.1-1.39-3.1-3.1zM8 13h8v-2H8v2zm9-6h-4v1.9h4c1.71.0 3.1 1.39 3.1 3.1s-1.39 3.1-3.1 3.1h-4V17h4c2.76.0 5-2.24 5-5s-2.24-5-5-5z"></path>
-    </svg>
-  </a>
-</h3><p>For this challenge we got an <code>mkv</code> file to work with. After opening it, the first thing we notice is the subtitle being Chinese. This should be suspicious on its own, but matched with the challenge description it&rsquo;s a sure sign that it has something to do with the flag. Let&rsquo;s have a deeper look at the video file itself. For that, we can use <code>ffmpeg</code> with the following command: <code>ffmpeg -i chal.mkv</code></p>
-
-
-  <span class="code-language">bash</span><div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>Input <span style="color:#75715e">#0, matroska,webm, from &#39;chal.mkv&#39;:</span>
+</span></span><span style="display:flex;"><span>image<span style="color:#f92672">.</span>save(<span style="color:#e6db74">&#39;flagmoker.png&#39;</span>)
+</span></span></code></pre></div><p><img alt="/img/irisctf-2024/flagmoker.png" loading="lazy" src="/img/irisctf-2024/flagmoker.png"></p>
+<h2 id="forensics">Forensics<a hidden class="anchor" aria-hidden="true" href="#forensics">#</a></h2>
+<h3 id="not-just-media">Not Just Media<a hidden class="anchor" aria-hidden="true" href="#not-just-media">#</a></h3>
+<p>For this challenge we got an <code>mkv</code> file to work with. After opening it, the first thing we notice is the subtitle being Chinese. This should be suspicious on its own, but matched with the challenge description it&rsquo;s a sure sign that it has something to do with the flag. Let&rsquo;s have a deeper look at the video file itself. For that, we can use <code>ffmpeg</code> with the following command: <code>ffmpeg -i chal.mkv</code></p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>Input <span style="color:#75715e">#0, matroska,webm, from &#39;chal.mkv&#39;:</span>
 </span></span><span style="display:flex;"><span>  Metadata:
 </span></span><span style="display:flex;"><span>    encoder         : libebml v1.4.4 + libmatroska v1.7.1
 </span></span><span style="display:flex;"><span>    creation_time   : 2024-01-05T00:28:38.000000Z
@@ -575,23 +342,17 @@
 </span></span><span style="display:flex;"><span>    Metadata:
 </span></span><span style="display:flex;"><span>      filename        : NotoSans-Regular_0.ttf
 </span></span><span style="display:flex;"><span>      mimetype        : font/ttf
-</span></span><span style="display:flex;"><span>      title           : Imported font from Untitled.ass</span></span></code></pre></div>
-<p>We can see the subtitle as a stream in the video file, but we can also notice some other interesting streams. Namely, <code>Stream #0:3</code>, <code>Stream #0:4</code>, and <code>Stream #0:5</code>. All of these are font files, and one of them has a suspicious name: <code>FakeFont_0.ttf</code>.</p>
+</span></span><span style="display:flex;"><span>      title           : Imported font from Untitled.ass
+</span></span></code></pre></div><p>We can see the subtitle as a stream in the video file, but we can also notice some other interesting streams. Namely, <code>Stream #0:3</code>, <code>Stream #0:4</code>, and <code>Stream #0:5</code>. All of these are font files, and one of them has a suspicious name: <code>FakeFont_0.ttf</code>.</p>
 <p>As a next step, we can extract the subtitle and the font files:</p>
 <ul>
 <li>subtitle: <code>ffmpeg -i chal.mkv -map 0:s:0 subs.srt</code></li>
 <li>fonts: <code>ffmpeg -dump_attachment:t &quot;&quot; -i chal.mkv</code></li>
 </ul>
 <p>Now that we have all the files, we just have to use <code>FakeFont_0.ttf</code> to display the subtitle, and we&rsquo;ll have our flag.</p>
-<h3 id="what-the-beep">What the Beep?<a href="#what-the-beep">
-    <svg role="img" aria-labelledby="what-the-beep-IconTitle" fill="var(--color-primary)" height="22" viewBox="0 0 24 24" width="22" xmlns="http://www.w3.org/2000/svg">
-      <title id="what-the-beep-IconTitle">Link to this heading</title>
-      <path d="M0 0h24v24H0z" fill="none"></path>
-      <path d="M3.9 12c0-1.71 1.39-3.1 3.1-3.1h4V7H7c-2.76.0-5 2.24-5 5s2.24 5 5 5h4v-1.9H7c-1.71.0-3.1-1.39-3.1-3.1zM8 13h8v-2H8v2zm9-6h-4v1.9h4c1.71.0 3.1 1.39 3.1 3.1s-1.39 3.1-3.1 3.1h-4V17h4c2.76.0 5-2.24 5-5s-2.24-5-5-5z"></path>
-    </svg>
-  </a>
-</h3><p>In this challenge, we get access to 4 HTML files. When we open them, we&rsquo;ll see similar results: a page with a graph. The title of the graph is the latitude and the longitude for the station that recorded the graph, and the recorded sound level at the time of the event. We also know from the challenge description, that the original sound was <code>140 dB</code> at the source.</p>
-<p>At this point, I started to search for the physics of how sound gets quieter. I quickly found <a href="https://www.wkcgroup.com/tools-room/inverse-square-law-sound-calculator/" target="_blank" rel="noopener">this</a> website, that has a calculator, and more importantly, a formula, to calculate the sound level at a given distance, if we know the original sound level. This is almost what we needed, but after some rearranging, I ended up with a formula that I could use to go on: <code>R2 = R1 * 10**((LP(R1) - LP(R2)) / 20)</code></p>
+<h3 id="what-the-beep">What the Beep?<a hidden class="anchor" aria-hidden="true" href="#what-the-beep">#</a></h3>
+<p>In this challenge, we get access to 4 HTML files. When we open them, we&rsquo;ll see similar results: a page with a graph. The title of the graph is the latitude and the longitude for the station that recorded the graph, and the recorded sound level at the time of the event. We also know from the challenge description, that the original sound was <code>140 dB</code> at the source.</p>
+<p>At this point, I started to search for the physics of how sound gets quieter. I quickly found <a href="https://www.wkcgroup.com/tools-room/inverse-square-law-sound-calculator/">this</a> website, that has a calculator, and more importantly, a formula, to calculate the sound level at a given distance, if we know the original sound level. This is almost what we needed, but after some rearranging, I ended up with a formula that I could use to go on: <code>R2 = R1 * 10**((LP(R1) - LP(R2)) / 20)</code></p>
 <ul>
 <li><code>R1</code>: distance from the sound source (where we recorded the event)</li>
 <li><code>R2</code>: distance from the sound source (what we&rsquo;re looking for)</li>
@@ -599,9 +360,7 @@
 <li><code>LP(R2)</code>: the sound level at <code>R2</code> (this is what we recorded)</li>
 </ul>
 <p>The next step after this was to calculate the distances. For that, I just manually copied the interesting data points from the HTML files, averaged them, and plucked everything into the formula.</p>
-
-
-  <span class="code-language">python</span><div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span><span style="color:#75715e">#!/usr/bin/env python3</span>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span><span style="color:#75715e">#!/usr/bin/env python3</span>
 </span></span><span style="display:flex;"><span>
 </span></span><span style="display:flex;"><span><span style="color:#f92672">import</span> statistics
 </span></span><span style="display:flex;"><span>
@@ -621,249 +380,163 @@
 </span></span><span style="display:flex;"><span>
 </span></span><span style="display:flex;"><span><span style="color:#66d9ef">for</span> beep <span style="color:#f92672">in</span> beeps:
 </span></span><span style="display:flex;"><span>    average_sound_level <span style="color:#f92672">=</span> statistics<span style="color:#f92672">.</span>fmean(beep[<span style="color:#ae81ff">1</span>])
-</span></span><span style="display:flex;"><span>    print(beep[<span style="color:#ae81ff">0</span>], average_sound_level, calculate_distance(<span style="color:#ae81ff">1</span>, <span style="color:#ae81ff">140</span>, average_sound_level))</span></span></code></pre></div>
-<p>After I got the distances I just searched for an <a href="https://www.freemaptools.com/radius-around-point.htm" target="_blank" rel="noopener">online tool</a> that can visualize them on a map.</p>
-<p><img src="/img/irisctf-2024/what_the_beep.png"
-	alt="/img/irisctf-2024/what_the_beep.png" 
-	class="single-post-image" 
-	loading="lazy"
-	decoding="async"
-	></p>
+</span></span><span style="display:flex;"><span>    print(beep[<span style="color:#ae81ff">0</span>], average_sound_level, calculate_distance(<span style="color:#ae81ff">1</span>, <span style="color:#ae81ff">140</span>, average_sound_level))
+</span></span></code></pre></div><p>After I got the distances I just searched for an <a href="https://www.freemaptools.com/radius-around-point.htm">online tool</a> that can visualize them on a map.</p>
+<p><img alt="/img/irisctf-2024/what_the_beep.png" loading="lazy" src="/img/irisctf-2024/what_the_beep.png"></p>
 <p>Once this was done, I just had to find the latitude and the longitude for the location where the circles intersect each other and send it to the answer checker service to get the flag.</p>
-<h2 id="osint">OSINT<a href="#osint">
-    <svg role="img" aria-labelledby="osint-IconTitle" fill="var(--color-primary)" height="22" viewBox="0 0 24 24" width="22" xmlns="http://www.w3.org/2000/svg">
-      <title id="osint-IconTitle">Link to this heading</title>
-      <path d="M0 0h24v24H0z" fill="none"></path>
-      <path d="M3.9 12c0-1.71 1.39-3.1 3.1-3.1h4V7H7c-2.76.0-5 2.24-5 5s2.24 5 5 5h4v-1.9H7c-1.71.0-3.1-1.39-3.1-3.1zM8 13h8v-2H8v2zm9-6h-4v1.9h4c1.71.0 3.1 1.39 3.1 3.1s-1.39 3.1-3.1 3.1h-4V17h4c2.76.0 5-2.24 5-5s-2.24-5-5-5z"></path>
-    </svg>
-  </a>
-</h2><h3 id="away-on-vacation">Away on Vacation<a href="#away-on-vacation">
-    <svg role="img" aria-labelledby="away-on-vacation-IconTitle" fill="var(--color-primary)" height="22" viewBox="0 0 24 24" width="22" xmlns="http://www.w3.org/2000/svg">
-      <title id="away-on-vacation-IconTitle">Link to this heading</title>
-      <path d="M0 0h24v24H0z" fill="none"></path>
-      <path d="M3.9 12c0-1.71 1.39-3.1 3.1-3.1h4V7H7c-2.76.0-5 2.24-5 5s2.24 5 5 5h4v-1.9H7c-1.71.0-3.1-1.39-3.1-3.1zM8 13h8v-2H8v2zm9-6h-4v1.9h4c1.71.0 3.1 1.39 3.1 3.1s-1.39 3.1-3.1 3.1h-4V17h4c2.76.0 5-2.24 5-5s-2.24-5-5-5z"></path>
-    </svg>
-  </a>
-</h3><p>For this challenge, we had to find information about Iris&rsquo;s assistant. At the start, all we knew was his email address (<code>michelangelocorning0490@gmail.com</code>).</p>
+<h2 id="osint">OSINT<a hidden class="anchor" aria-hidden="true" href="#osint">#</a></h2>
+<h3 id="away-on-vacation">Away on Vacation<a hidden class="anchor" aria-hidden="true" href="#away-on-vacation">#</a></h3>
+<p>For this challenge, we had to find information about Iris&rsquo;s assistant. At the start, all we knew was his email address (<code>michelangelocorning0490@gmail.com</code>).</p>
 <p>As a first step I tried writing him an email, and I quickly got an answer from him. He said that he&rsquo;s on vacation right now, but I should check his social media profiles. He also mentioned that he likes to talk about birds.</p>
-<p>With that info in mind, I went on various social media sites and tried searching for his name. I managed to find his <a href="https://www.instagram.com/michelangelo_corning/" target="_blank" rel="noopener">Instagram</a> profile. Thanks to the birds it was easy to be sure that it was his profile, so I went through his images to see what I can found, and the flag was in the description of one of them.</p>
-<h3 id="personal-breach">Personal Breach<a href="#personal-breach">
-    <svg role="img" aria-labelledby="personal-breach-IconTitle" fill="var(--color-primary)" height="22" viewBox="0 0 24 24" width="22" xmlns="http://www.w3.org/2000/svg">
-      <title id="personal-breach-IconTitle">Link to this heading</title>
-      <path d="M0 0h24v24H0z" fill="none"></path>
-      <path d="M3.9 12c0-1.71 1.39-3.1 3.1-3.1h4V7H7c-2.76.0-5 2.24-5 5s2.24 5 5 5h4v-1.9H7c-1.71.0-3.1-1.39-3.1-3.1zM8 13h8v-2H8v2zm9-6h-4v1.9h4c1.71.0 3.1 1.39 3.1 3.1s-1.39 3.1-3.1 3.1h-4V17h4c2.76.0 5-2.24 5-5s-2.24-5-5-5z"></path>
-    </svg>
-  </a>
-</h3><p>This time we had to find some information about Iris to pass her security questions and get access to the flag.</p>
-<p>I started where I left the previous challenge off, on Michel&rsquo;s Instagram page. Looking at the accounts he&rsquo;s following we can find one called <a href="https://www.instagram.com/irisstein_station/" target="_blank" rel="noopener">irisstein_station</a>.</p>
-<p>Once again, I went through her posts, and found one that mentions her mother, and also has a (broken) tagging for her. I started to search for her on Instagram, but without success, so I went on to Facebook. There, I found a <a href="https://www.facebook.com/profile.php?id=61555040318052" target="_blank" rel="noopener">profile</a> that looked promising, so I started to read the posts and I found one that was about Iris&rsquo;s birth. It contained her birthday, which was the first piece of information we needed to solve this challenge.</p>
+<p>With that info in mind, I went on various social media sites and tried searching for his name. I managed to find his <a href="https://www.instagram.com/michelangelo_corning/">Instagram</a> profile. Thanks to the birds it was easy to be sure that it was his profile, so I went through his images to see what I can found, and the flag was in the description of one of them.</p>
+<h3 id="personal-breach">Personal Breach<a hidden class="anchor" aria-hidden="true" href="#personal-breach">#</a></h3>
+<p>This time we had to find some information about Iris to pass her security questions and get access to the flag.</p>
+<p>I started where I left the previous challenge off, on Michel&rsquo;s Instagram page. Looking at the accounts he&rsquo;s following we can find one called <a href="https://www.instagram.com/irisstein_station/">irisstein_station</a>.</p>
+<p>Once again, I went through her posts, and found one that mentions her mother, and also has a (broken) tagging for her. I started to search for her on Instagram, but without success, so I went on to Facebook. There, I found a <a href="https://www.facebook.com/profile.php?id=61555040318052">profile</a> that looked promising, so I started to read the posts and I found one that was about Iris&rsquo;s birth. It contained her birthday, which was the first piece of information we needed to solve this challenge.</p>
 <p>Elaina&rsquo;s comment on this post also contained some useful information:</p>
 <ul>
 <li>Iris was born in the &ldquo;best maternity hospital in Manhattan&rdquo;</li>
 <li>she also added an image of one of the rooms in the hospital</li>
 </ul>
-<p>I did a reverse image search of the picture she posted and found the website of the <a href="https://lenoxhill.northwell.edu/obgyn/obstetrics" target="_blank" rel="noopener">Lenox Hill Hospital</a>, and with that, the second information we needed.</p>
-<p>All that was left was to find her workplace. Since we&rsquo;re talking about work, I instantly went to LinkedIn, and after a quick search I found her <a href="https://www.linkedin.com/in/iris-stein-57894b2a7/" target="_blank" rel="noopener">profile</a>, and with that, the company she&rsquo;s working for.</p>
-<h3 id="czech-where">Czech Where?<a href="#czech-where">
-    <svg role="img" aria-labelledby="czech-where-IconTitle" fill="var(--color-primary)" height="22" viewBox="0 0 24 24" width="22" xmlns="http://www.w3.org/2000/svg">
-      <title id="czech-where-IconTitle">Link to this heading</title>
-      <path d="M0 0h24v24H0z" fill="none"></path>
-      <path d="M3.9 12c0-1.71 1.39-3.1 3.1-3.1h4V7H7c-2.76.0-5 2.24-5 5s2.24 5 5 5h4v-1.9H7c-1.71.0-3.1-1.39-3.1-3.1zM8 13h8v-2H8v2zm9-6h-4v1.9h4c1.71.0 3.1 1.39 3.1 3.1s-1.39 3.1-3.1 3.1h-4V17h4c2.76.0 5-2.24 5-5s-2.24-5-5-5z"></path>
-    </svg>
-  </a>
-</h3><p>We&rsquo;re continuing our creepy obsession with Iris, this time we got a photo and had to find the street she took it on.</p>
-<p>As a first step, I tried to see the coordinates in the EXIF data. Unfortunately, it was not present, so I had to find another way. I did a reverse image search and found a <a href="http://tabiichigo.livedoor.biz/archives/51921024.html" target="_blank" rel="noopener">blog post</a> containing the exact picture.</p>
-<p>Since the post was in Japanese, I had to translate it to see if I could find any more useful information. The post was about a trip to Prague Castle and mentioned some kind of weapon exhibition, so I googled <code>prague castle weapon museum</code>. I found some information about a <a href="https://tropter.com/en/czechia/prague/prague-castle/golden-lane/medieval-armory" target="_blank" rel="noopener">Medieval Armory</a>, and since the pictures looked similar to the ones in the blog post, I started my search at its address.</p>
-<p>I went to StreetView, and after a short look around I managed to find the <a href="https://www.google.com/maps/@50.091989,14.4039707,3a,75.8y,49.2h,75.07t/data=!3m6!1e1!3m4!1sAF1QipPuxuqtYEzTQoWZGlqcdcKSsw1QxCgUy7UcRmGJ!2e10!7i3840!8i1920?entry=ttu" target="_blank" rel="noopener">door on the original picture</a>, so I converted the name of the street to the format specified by the task and submitted the flag.</p>
-<h2 id="closing-thoughts">Closing Thoughts<a href="#closing-thoughts">
-    <svg role="img" aria-labelledby="closing-thoughts-IconTitle" fill="var(--color-primary)" height="22" viewBox="0 0 24 24" width="22" xmlns="http://www.w3.org/2000/svg">
-      <title id="closing-thoughts-IconTitle">Link to this heading</title>
-      <path d="M0 0h24v24H0z" fill="none"></path>
-      <path d="M3.9 12c0-1.71 1.39-3.1 3.1-3.1h4V7H7c-2.76.0-5 2.24-5 5s2.24 5 5 5h4v-1.9H7c-1.71.0-3.1-1.39-3.1-3.1zM8 13h8v-2H8v2zm9-6h-4v1.9h4c1.71.0 3.1 1.39 3.1 3.1s-1.39 3.1-3.1 3.1h-4V17h4c2.76.0 5-2.24 5-5s-2.24-5-5-5z"></path>
-    </svg>
-  </a>
-</h2><p>These are all the challenges I managed to solve, but I&rsquo;m very happy about it. I got two flags for challenges that were solved by only a handful of teams (<code>Mokersee</code> and <code>What the Beep?</code>), and with <code>Mokersee</code> I even got a third blood for the first time since I&rsquo;m participating in CTFs.</p>
+<p>I did a reverse image search of the picture she posted and found the website of the <a href="https://lenoxhill.northwell.edu/obgyn/obstetrics">Lenox Hill Hospital</a>, and with that, the second information we needed.</p>
+<p>All that was left was to find her workplace. Since we&rsquo;re talking about work, I instantly went to LinkedIn, and after a quick search I found her <a href="https://www.linkedin.com/in/iris-stein-57894b2a7/">profile</a>, and with that, the company she&rsquo;s working for.</p>
+<h3 id="czech-where">Czech Where?<a hidden class="anchor" aria-hidden="true" href="#czech-where">#</a></h3>
+<p>We&rsquo;re continuing our creepy obsession with Iris, this time we got a photo and had to find the street she took it on.</p>
+<p>As a first step, I tried to see the coordinates in the EXIF data. Unfortunately, it was not present, so I had to find another way. I did a reverse image search and found a <a href="http://tabiichigo.livedoor.biz/archives/51921024.html">blog post</a> containing the exact picture.</p>
+<p>Since the post was in Japanese, I had to translate it to see if I could find any more useful information. The post was about a trip to Prague Castle and mentioned some kind of weapon exhibition, so I googled <code>prague castle weapon museum</code>. I found some information about a <a href="https://tropter.com/en/czechia/prague/prague-castle/golden-lane/medieval-armory">Medieval Armory</a>, and since the pictures looked similar to the ones in the blog post, I started my search at its address.</p>
+<p>I went to StreetView, and after a short look around I managed to find the <a href="https://www.google.com/maps/@50.091989,14.4039707,3a,75.8y,49.2h,75.07t/data=!3m6!1e1!3m4!1sAF1QipPuxuqtYEzTQoWZGlqcdcKSsw1QxCgUy7UcRmGJ!2e10!7i3840!8i1920?entry=ttu">door on the original picture</a>, so I converted the name of the street to the format specified by the task and submitted the flag.</p>
+<h2 id="closing-thoughts">Closing Thoughts<a hidden class="anchor" aria-hidden="true" href="#closing-thoughts">#</a></h2>
+<p>These are all the challenges I managed to solve, but I&rsquo;m very happy about it. I got two flags for challenges that were solved by only a handful of teams (<code>Mokersee</code> and <code>What the Beep?</code>), and with <code>Mokersee</code> I even got a third blood for the first time since I&rsquo;m participating in CTFs.</p>
 <p>In the end, I earned <code>1542</code> points and finished in 90th place (out of 1207 teams), which is probably my best result ever (so far).</p>
 <p>All in all, I&rsquo;m really happy with the result and enjoyed the whole competition. Thanks to the organizers, they did a great job, and I&rsquo;m looking forward to next year&rsquo;s competition.</p>
 
-    </article>
-    <aside>
-      <div class="single-terms">
-        
-          
-          <a class="term" href="https://pshegger.github.io/tags/ctf/">ctf</a></li>
-          
-          <a class="term" href="https://pshegger.github.io/tags/writeup/">writeup</a></li>
-          
-          <a class="term" href="https://pshegger.github.io/tags/cryptography/">cryptography</a></li>
-          
-          <a class="term" href="https://pshegger.github.io/tags/python/">python</a></li>
-          
-          <a class="term" href="https://pshegger.github.io/tags/sql-injection/">sql injection</a></li>
-          
-          <a class="term" href="https://pshegger.github.io/tags/forensics/">forensics</a></li>
-          
-          <a class="term" href="https://pshegger.github.io/tags/osint/">osint</a></li>
-          
-        
-      </div>
-      
-  
-  
-  
 
-  <section>
-    <h2>Share</h2>
-    <div class="social-links">
-      <ul class="social-icons--share">
-        
-        
-        <a href="https://twitter.com/intent/tweet?url=https%3a%2f%2fpshegger.github.io%2fposts%2firisctf-2024%2f&amp;text=IrisCTF%202024" target="_blank" rel="noopener" aria-label="Share on Twitter" class="social-btn twitter">
-          <li><svg xmlns="http://www.w3.org/2000/svg" class="icon icon-twitter" width="24" height="24" viewBox="0 0 384 312" fill="var(--color-primary)"><path d="m384 36.9c-14.1 6.3-29.3 10.5-45.2 12.4 16.3-9.7 28.8-25.2 34.6-43.6-15.2 9-32.1 15.6-50 19.1-14.4-15.2-34.9-24.8-57.5-24.8-43.5 0-78.8 35.3-78.8 78.8 0 6.2.7 12.2 2 17.9-65.5-3.3-123.5-34.6-162.4-82.3-6.7 11.6-10.6 25.2-10.6 39.6 0 27.3 13.9 51.4 35 65.6-12.9-.4-25.1-4-35.7-9.9v1c0 38.2 27.2 70 63.2 77.2-6.6 1.8-13.6 2.8-20.8 2.8-5.1 0-10-.5-14.8-1.4 10 31.3 39.1 54.1 73.6 54.7-27 21.1-60.9 33.7-97.8 33.7-6.4 0-12.6-.4-18.8-1.1 34.9 22.4 76.3 35.4 120.8 35.4 144.9 0 224.1-120 224.1-224.1 0-3.4-.1-6.8-.2-10.2 15.4-11.1 28.7-25 39.3-40.8z"/></svg></li>
-        </a>
-        
-        
-        
-        <a href="https://www.reddit.com/submit?url=https%3a%2f%2fpshegger.github.io%2fposts%2firisctf-2024%2f" target="_blank" rel="noopener" aria-label="Share on Reddit" class="social-btn reddit">
-          <li><svg xmlns="http://www.w3.org/2000/svg" class="icon icon-reddit" width="24" height="24" viewBox="0 0 24 24" fill="var(--color-primary)"><path d="M24 11.779c0-1.459-1.192-2.645-2.657-2.645-.715 0-1.363.286-1.84.746-1.81-1.191-4.259-1.949-6.971-2.046l1.483-4.669 4.016.941-.006.058c0 1.193.975 2.163 2.174 2.163 1.198 0 2.172-.97 2.172-2.163s-.975-2.164-2.172-2.164c-.92 0-1.704.574-2.021 1.379l-4.329-1.015c-.189-.046-.381.063-.44.249l-1.654 5.207c-2.838.034-5.409.798-7.3 2.025-.474-.438-1.103-.712-1.799-.712-1.465 0-2.656 1.187-2.656 2.646 0 .97.533 1.811 1.317 2.271-.052.282-.086.567-.086.857 0 3.911 4.808 7.093 10.719 7.093s10.72-3.182 10.72-7.093c0-.274-.029-.544-.075-.81.832-.447 1.405-1.312 1.405-2.318zm-17.224 1.816c0-.868.71-1.575 1.582-1.575.872 0 1.581.707 1.581 1.575s-.709 1.574-1.581 1.574-1.582-.706-1.582-1.574zm9.061 4.669c-.797.793-2.048 1.179-3.824 1.179l-.013-.003-.013.003c-1.777 0-3.028-.386-3.824-1.179-.145-.144-.145-.379 0-.523.145-.145.381-.145.526 0 .65.647 1.729.961 3.298.961l.013.003.013-.003c1.569 0 2.648-.315 3.298-.962.145-.145.381-.144.526 0 .145.145.145.379 0 .524zm-.189-3.095c-.872 0-1.581-.706-1.581-1.574 0-.868.709-1.575 1.581-1.575s1.581.707 1.581 1.575-.709 1.574-1.581 1.574z"/></svg></li>
-        </a>
-        
-        
-                
-        <a href="https://www.facebook.com/sharer.php?u=https%3a%2f%2fpshegger.github.io%2fposts%2firisctf-2024%2f" target="_blank" rel="noopener" aria-label="Share on Facebook" class="social-btn facebook">
-          <li><svg xmlns="http://www.w3.org/2000/svg" class="icon icon-facebook" width="24" height="24" viewBox="0 0 352 352" fill="var(--color-primary)"><path d="m0 32v288c0 17.5 14.5 32 32 32h288c17.5 0 32-14.5 32-32v-288c0-17.5-14.5-32-32-32h-288c-17.5 0-32 14.5-32 32zm320 0v288h-83v-108h41.5l6-48h-47.5v-31c0-14 3.5-23.5 23.5-23.5h26v-43.5c-4.4-.6-19.8-1.5-37.5-1.5-36.9 0-62 22.2-62 63.5v36h-42v48h42v108h-155v-288z"/></svg></li>
-        </a>
-        
-        
-        
-        <a href="https://www.linkedin.com/shareArticle?mini=true&amp;url=https%3a%2f%2fpshegger.github.io%2fposts%2firisctf-2024%2f&amp;source=https%3a%2f%2fpshegger.github.io%2fposts%2firisctf-2024%2f&amp;title=IrisCTF%202024&amp;summary=IrisCTF%202024" target="_blank" rel="noopener" aria-label="Share on LinkedIn" class="social-btn linkedin">
-          <li><svg xmlns="http://www.w3.org/2000/svg" class="icon icon-linkedin" width="24" height="24" viewBox="0 0 352 352" fill="var(--color-primary)"><path d="M0,40v272c0,21.9,18.1,40,40,40h272c21.9,0,40-18.1,40-40V40c0-21.9-18.1-40-40-40H40C18.1,0,0,18.1,0,40z M312,32 c4.6,0,8,3.4,8,8v272c0,4.6-3.4,8-8,8H40c-4.6,0-8-3.4-8-8V40c0-4.6,3.4-8,8-8H312z M59.5,87c0,15.2,12.3,27.5,27.5,27.5 c15.2,0,27.5-12.3,27.5-27.5c0-15.2-12.3-27.5-27.5-27.5C71.8,59.5,59.5,71.8,59.5,87z M187,157h-1v-21h-45v152h47v-75 c0-19.8,3.9-39,28.5-39c24.2,0,24.5,22.4,24.5,40v74h47v-83.5c0-40.9-8.7-72-56.5-72C208.5,132.5,193.3,145.1,187,157z M64,288h47.5 V136H64V288z"/></svg></li>
-        </a>
-        
-        
-        
-        <a href="mailto:?subject=pshegger%20-%20IrisCTF%202024.&amp;body=IrisCTF%202024%2c%20by%20pshegger%0aWriteups%20and%20blog%20about%20the%20first%20CTF%20of%20this%20year%0a%0ahttps%3a%2f%2fpshegger.github.io%2fposts%2firisctf-2024%2f%0a" target="_blank" class="social-btn email">
-          <li><svg xmlns="http://www.w3.org/2000/svg" class="icon icon-mail" width="24" height="24" viewBox="0 0 416 288" fill="var(--color-primary)"><path d="m0 16v256 16h16 384 16v-16-256-16h-16-384-16zm347 16-139 92.5-139-92.5zm-148 125.5 9 5.5 9-5.5 167-111.5v210h-352v-210z"/></svg></li>
-        </a>
-      </ul>
-    </div>
-  </section>
-  
-        
-
-  
-  
-    <section class="related">
-      <h2>See Also</h2>
-      <ul class="related-posts">
-        
-          <li><a href="/posts/hacktivitycon-2021-ctf/">h@cktivitycon 2021 CTF</a></li>
-        
-      </ul>
-    </section>
-  
-
-        
-  <section>
-    <h2>Read Next</h2>
-    <div class="single-next-previous">
-      
-        <a class="previous" href="https://pshegger.github.io/posts/my-first-gamejam/">&laquo; My First Gamejam</a>
-      
-      
-    </div>
-  </section>
-
-      
-    </aside>
   </div>
-</div>
 
-    </main><footer>
-  
-  <div class="section footer">
-    <p class="footer-copyright">&copy; 2024 &middot; 
-      <a href="https://pshegger.github.io/">pshegger</a>
-      
-    </p>
-    
-      <div class="footer-socials">
-        
-<div class="social-links">
-  <ul class="social-icons">
-    
-    
+  <footer class="post-footer">
+    <ul class="post-tags">
+      <li><a href="https://pshegger.github.io/tags/ctf/">Ctf</a></li>
+      <li><a href="https://pshegger.github.io/tags/writeup/">Writeup</a></li>
+      <li><a href="https://pshegger.github.io/tags/cryptography/">Cryptography</a></li>
+      <li><a href="https://pshegger.github.io/tags/python/">Python</a></li>
+      <li><a href="https://pshegger.github.io/tags/sql-injection/">Sql Injection</a></li>
+      <li><a href="https://pshegger.github.io/tags/forensics/">Forensics</a></li>
+      <li><a href="https://pshegger.github.io/tags/osint/">Osint</a></li>
+    </ul>
+
+<ul class="share-buttons">
     <li>
-      <a href="https://twitter.com/pshegger" target="_blank" rel="noopener" aria-label="Visit Twitter profile" class="social-btn twitter">
-        <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-twitter" width="24" height="24" viewBox="0 0 384 312" fill="var(--color-primary)"><path d="m384 36.9c-14.1 6.3-29.3 10.5-45.2 12.4 16.3-9.7 28.8-25.2 34.6-43.6-15.2 9-32.1 15.6-50 19.1-14.4-15.2-34.9-24.8-57.5-24.8-43.5 0-78.8 35.3-78.8 78.8 0 6.2.7 12.2 2 17.9-65.5-3.3-123.5-34.6-162.4-82.3-6.7 11.6-10.6 25.2-10.6 39.6 0 27.3 13.9 51.4 35 65.6-12.9-.4-25.1-4-35.7-9.9v1c0 38.2 27.2 70 63.2 77.2-6.6 1.8-13.6 2.8-20.8 2.8-5.1 0-10-.5-14.8-1.4 10 31.3 39.1 54.1 73.6 54.7-27 21.1-60.9 33.7-97.8 33.7-6.4 0-12.6-.4-18.8-1.1 34.9 22.4 76.3 35.4 120.8 35.4 144.9 0 224.1-120 224.1-224.1 0-3.4-.1-6.8-.2-10.2 15.4-11.1 28.7-25 39.3-40.8z"/></svg>
-      </a>
+        <a target="_blank" rel="noopener noreferrer" aria-label="share IrisCTF 2024 on x"
+            href="https://x.com/intent/tweet/?text=IrisCTF%202024&amp;url=https%3a%2f%2fpshegger.github.io%2fposts%2firisctf-2024%2f&amp;hashtags=ctf%2cwriteup%2ccryptography%2cpython%2csqlinjection%2cforensics%2cosint">
+            <svg version="1.1" viewBox="0 0 512 512" xml:space="preserve" height="30px" width="30px" fill="currentColor">
+                <path
+                    d="M512 62.554 L 512 449.446 C 512 483.97 483.97 512 449.446 512 L 62.554 512 C 28.03 512 0 483.97 0 449.446 L 0 62.554 C 0 28.03 28.029 0 62.554 0 L 449.446 0 C 483.971 0 512 28.03 512 62.554 Z M 269.951 190.75 L 182.567 75.216 L 56 75.216 L 207.216 272.95 L 63.9 436.783 L 125.266 436.783 L 235.9 310.383 L 332.567 436.783 L 456 436.783 L 298.367 228.367 L 432.367 75.216 L 371.033 75.216 Z M 127.633 110 L 164.101 110 L 383.481 400.065 L 349.5 400.065 Z" />
+            </svg>
+        </a>
     </li>
-    
-
-    
-    
     <li>
-      <a href="https://github.com/pshegger" target="_blank" rel="noopener" aria-label="Visit Github profile" class="social-btn github">
-        <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-github" width="24" height="24" viewBox="0 0 24 24" fill="var(--color-primary)"><path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/></svg>
-      </a>
+        <a target="_blank" rel="noopener noreferrer" aria-label="share IrisCTF 2024 on linkedin"
+            href="https://www.linkedin.com/shareArticle?mini=true&amp;url=https%3a%2f%2fpshegger.github.io%2fposts%2firisctf-2024%2f&amp;title=IrisCTF%202024&amp;summary=IrisCTF%202024&amp;source=https%3a%2f%2fpshegger.github.io%2fposts%2firisctf-2024%2f">
+            <svg version="1.1" viewBox="0 0 512 512" xml:space="preserve" height="30px" width="30px" fill="currentColor">
+                <path
+                    d="M449.446,0c34.525,0 62.554,28.03 62.554,62.554l0,386.892c0,34.524 -28.03,62.554 -62.554,62.554l-386.892,0c-34.524,0 -62.554,-28.03 -62.554,-62.554l0,-386.892c0,-34.524 28.029,-62.554 62.554,-62.554l386.892,0Zm-288.985,423.278l0,-225.717l-75.04,0l0,225.717l75.04,0Zm270.539,0l0,-129.439c0,-69.333 -37.018,-101.586 -86.381,-101.586c-39.804,0 -57.634,21.891 -67.617,37.266l0,-31.958l-75.021,0c0.995,21.181 0,225.717 0,225.717l75.02,0l0,-126.056c0,-6.748 0.486,-13.492 2.474,-18.315c5.414,-13.475 17.767,-27.434 38.494,-27.434c27.135,0 38.007,20.707 38.007,51.037l0,120.768l75.024,0Zm-307.552,-334.556c-25.674,0 -42.448,16.879 -42.448,39.002c0,21.658 16.264,39.002 41.455,39.002l0.484,0c26.165,0 42.452,-17.344 42.452,-39.002c-0.485,-22.092 -16.241,-38.954 -41.943,-39.002Z" />
+            </svg>
+        </a>
     </li>
-    
-
-    
-    
     <li>
-      <a href="https://stackoverflow.com/users/751482/pshegger" target="_blank" rel="noopener" aria-label="Visit Stack Overflow profile" class="social-btn stack-overflow">
-        <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-stack-overflow" width="24" height="24" viewBox="0 0 24 24" fill="var(--color-primary)"><path d="M15 21h-10v-2h10v2zm6-11.665l-1.621-9.335-1.993.346 1.62 9.335 1.994-.346zm-5.964 6.937l-9.746-.975-.186 2.016 9.755.879.177-1.92zm.538-2.587l-9.276-2.608-.526 1.954 9.306 2.5.496-1.846zm1.204-2.413l-8.297-4.864-1.029 1.743 8.298 4.865 1.028-1.744zm1.866-1.467l-5.339-7.829-1.672 1.14 5.339 7.829 1.672-1.14zm-2.644 4.195v8h-12v-8h-2v10h16v-10h-2z"/></svg>
-      </a>
+        <a target="_blank" rel="noopener noreferrer" aria-label="share IrisCTF 2024 on reddit"
+            href="https://reddit.com/submit?url=https%3a%2f%2fpshegger.github.io%2fposts%2firisctf-2024%2f&title=IrisCTF%202024">
+            <svg version="1.1" viewBox="0 0 512 512" xml:space="preserve" height="30px" width="30px" fill="currentColor">
+                <path
+                    d="M449.446,0c34.525,0 62.554,28.03 62.554,62.554l0,386.892c0,34.524 -28.03,62.554 -62.554,62.554l-386.892,0c-34.524,0 -62.554,-28.03 -62.554,-62.554l0,-386.892c0,-34.524 28.029,-62.554 62.554,-62.554l386.892,0Zm-3.446,265.638c0,-22.964 -18.616,-41.58 -41.58,-41.58c-11.211,0 -21.361,4.457 -28.841,11.666c-28.424,-20.508 -67.586,-33.757 -111.204,-35.278l18.941,-89.121l61.884,13.157c0.756,15.734 13.642,28.29 29.56,28.29c16.407,0 29.706,-13.299 29.706,-29.701c0,-16.403 -13.299,-29.702 -29.706,-29.702c-11.666,0 -21.657,6.792 -26.515,16.578l-69.105,-14.69c-1.922,-0.418 -3.939,-0.042 -5.585,1.036c-1.658,1.073 -2.811,2.761 -3.224,4.686l-21.152,99.438c-44.258,1.228 -84.046,14.494 -112.837,35.232c-7.468,-7.164 -17.589,-11.591 -28.757,-11.591c-22.965,0 -41.585,18.616 -41.585,41.58c0,16.896 10.095,31.41 24.568,37.918c-0.639,4.135 -0.99,8.328 -0.99,12.576c0,63.977 74.469,115.836 166.33,115.836c91.861,0 166.334,-51.859 166.334,-115.836c0,-4.218 -0.347,-8.387 -0.977,-12.493c14.564,-6.47 24.735,-21.034 24.735,-38.001Zm-119.474,108.193c-20.27,20.241 -59.115,21.816 -70.534,21.816c-11.428,0 -50.277,-1.575 -70.522,-21.82c-3.007,-3.008 -3.007,-7.882 0,-10.889c3.003,-2.999 7.882,-3.003 10.885,0c12.777,12.781 40.11,17.317 59.637,17.317c19.522,0 46.86,-4.536 59.657,-17.321c3.016,-2.999 7.886,-2.995 10.885,0.008c3.008,3.011 3.003,7.882 -0.008,10.889Zm-5.23,-48.781c-16.373,0 -29.701,-13.324 -29.701,-29.698c0,-16.381 13.328,-29.714 29.701,-29.714c16.378,0 29.706,13.333 29.706,29.714c0,16.374 -13.328,29.698 -29.706,29.698Zm-160.386,-29.702c0,-16.381 13.328,-29.71 29.714,-29.71c16.369,0 29.689,13.329 29.689,29.71c0,16.373 -13.32,29.693 -29.689,29.693c-16.386,0 -29.714,-13.32 -29.714,-29.693Z" />
+            </svg>
+        </a>
     </li>
-    
-
-    
-    
-
-    
-    
     <li>
-      <a href="mailto:?to=pshegger%40gmail.com" target="_blank" class="social-btn email">
-        <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-mail" width="24" height="24" viewBox="0 0 416 288" fill="var(--color-primary)"><path d="m0 16v256 16h16 384 16v-16-256-16h-16-384-16zm347 16-139 92.5-139-92.5zm-148 125.5 9 5.5 9-5.5 167-111.5v210h-352v-210z"/></svg>
-      </a>
+        <a target="_blank" rel="noopener noreferrer" aria-label="share IrisCTF 2024 on ycombinator"
+            href="https://news.ycombinator.com/submitlink?t=IrisCTF%202024&u=https%3a%2f%2fpshegger.github.io%2fposts%2firisctf-2024%2f">
+            <svg version="1.1" xml:space="preserve" width="30px" height="30px" viewBox="0 0 512 512" fill="currentColor"
+                xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape">
+                <path
+                    d="M449.446 0C483.971 0 512 28.03 512 62.554L512 449.446C512 483.97 483.97 512 449.446 512L62.554 512C28.03 512 0 483.97 0 449.446L0 62.554C0 28.03 28.029 0 62.554 0L449.446 0ZM183.8767 87.9921H121.8427L230.6673 292.4508V424.0079H281.3328V292.4508L390.1575 87.9921H328.1233L256 238.2489z" />
+            </svg>
+        </a>
     </li>
+</ul>
+
+  </footer>
+</article>
+    </main>
     
-  </ul>
-</div>
-      </div>
-    
-  </div>
+<footer class="footer">
+        <span>&copy; 2025 <a href="https://pshegger.github.io/">pshegger&#39;s blog</a></span> · 
+
+    <span>
+        Powered by
+        <a href="https://gohugo.io/" rel="noopener noreferrer" target="_blank">Hugo</a> &
+        <a href="https://github.com/adityatelange/hugo-PaperMod/" rel="noopener" target="_blank">PaperMod</a>
+    </span>
 </footer>
+<a href="#top" aria-label="go to top" title="Go to Top (Alt + G)" class="top-link" id="top-link" accesskey="g">
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 12 6" fill="currentColor">
+        <path d="M12 6H0l6-6z" />
+    </svg>
+</a>
 
-  
-
-
-
-
-
-
-
-
-  
-  
-    
-
-<script src="https://pshegger.github.io/main.min.js"></script>
-
-
-
-  
-<script async src="https://www.googletagmanager.com/gtag/js?id=G-NKBPT9CS94"></script>
 <script>
-var doNotTrack = false;
-if (!doNotTrack) {
-	window.dataLayer = window.dataLayer || [];
-	function gtag(){dataLayer.push(arguments);}
-	gtag('js', new Date());
-	gtag('config', 'G-NKBPT9CS94', { 'anonymize_ip': false });
-}
-</script>
+    let menu = document.getElementById('menu')
+    if (menu) {
+        menu.scrollLeft = localStorage.getItem("menu-scroll-position");
+        menu.onscroll = function () {
+            localStorage.setItem("menu-scroll-position", menu.scrollLeft);
+        }
+    }
 
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+        anchor.addEventListener("click", function (e) {
+            e.preventDefault();
+            var id = this.getAttribute("href").substr(1);
+            if (!window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+                document.querySelector(`[id='${decodeURIComponent(id)}']`).scrollIntoView({
+                    behavior: "smooth"
+                });
+            } else {
+                document.querySelector(`[id='${decodeURIComponent(id)}']`).scrollIntoView();
+            }
+            if (id === "top") {
+                history.replaceState(null, null, " ");
+            } else {
+                history.pushState(null, null, `#${id}`);
+            }
+        });
+    });
+
+</script>
+<script>
+    var mybutton = document.getElementById("top-link");
+    window.onscroll = function () {
+        if (document.body.scrollTop > 800 || document.documentElement.scrollTop > 800) {
+            mybutton.style.visibility = "visible";
+            mybutton.style.opacity = "1";
+        } else {
+            mybutton.style.visibility = "hidden";
+            mybutton.style.opacity = "0";
+        }
+    };
+
+</script>
+<script>
+    document.getElementById("theme-toggle").addEventListener("click", () => {
+        if (document.body.className.includes("dark")) {
+            document.body.classList.remove('dark');
+            localStorage.setItem("pref-theme", 'light');
+        } else {
+            document.body.classList.add('dark');
+            localStorage.setItem("pref-theme", 'dark');
+        }
+    })
+
+</script>
 </body>
+
 </html>

@@ -1,357 +1,178 @@
 <!DOCTYPE html>
-<html lang="en-us"><head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  
-  
+<html lang="en" dir="auto">
 
-
-
-
-
-  
-  
-  
-    
-    
-  
-
-
-
-
-
-  
-
-
-
-  
-  
-
-<link rel="stylesheet" href="https://pshegger.github.io/main.min.css" />
-  
-<meta name="robots" content="index, follow">
-    <meta name="googlebot" content="index, follow, max-snippet:-1, max-image-preview:large, max-video-preview:-1">
-    <meta name="bingbot" content="index, follow, max-snippet:-1, max-image-preview:large, max-video-preview:-1">
-  
-
-<title>@GenerateForMe</title>
-
-
-<meta name="author" content="pshegger">
-
+<head><meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<meta name="robots" content="noindex, nofollow">
+<title>@GenerateForMe | pshegger&#39;s blog</title>
+<meta name="keywords" content="programming, kotlin, annotation, kapt">
 <meta name="description" content="Annotations are extremely versatile especially if we write our own processor to overcharge our development. Learn how to write one in Kotlin.">
+<meta name="author" content="pshegger">
 <link rel="canonical" href="https://pshegger.github.io/posts/generate-for-me/">
-<meta property="og:locale" content="">
-<meta property="og:type" content="article">
-<meta property="og:title" content="@GenerateForMe">
-<meta property="og:description" content="Annotations are extremely versatile especially if we write our own processor to overcharge our development. Learn how to write one in Kotlin.">
-<meta property="og:url" content="https://pshegger.github.io/posts/generate-for-me/">
-<meta property="article:published_time" content="2019-11-11T00:00:00+01:00">
-  <meta property="article:modified_time" content="2019-11-11T00:00:00+01:00">
-  
-
-
-
-
-
-
-  <meta name="twitter:site" content="pshegger">
-
-
-  <meta name="twitter:creator" content="pshegger">
-
-<meta name="twitter:title" content="@GenerateForMe">
-<meta name="twitter:description" content="Annotations are extremely versatile especially if we write our own processor to overcharge our development. Learn how to write one in Kotlin.">
-
-
-
-  <meta name="twitter:card" content="summary">
-
-
-
-
-
-
-<script type="application/ld+json">
-{
-  "@context": "https://schema.org",
-  "@graph": [
-    {
-      "@type": "Person",
-      "@id": "https://pshegger.github.io/#/schema/person/1",
-      "name":  null ,
-      "url": "https://pshegger.github.io/",
-      "image": {
-        "@type": "ImageObject",
-        "@id": "https://pshegger.github.io/#/schema/image/1",
-        "url": "https://pshegger.github.io/\u003cnil\u003e",
-        "width": null ,
-        "height": null ,
-        "caption":  null 
-      }
-    },
-    {
-      "@type": "WebSite",
-      "@id": "https://pshegger.github.io/#/schema/website/1",
-      "url": "https://pshegger.github.io/",
-      "name": "pshegger",
-      "description":  null ,
-      "publisher": {
-        "@id": "https://pshegger.github.io/#/schema/person/1"
-      }
-    },
-    {
-      "@type": "WebPage",
-      "@id": "https://pshegger.github.io/posts/generate-for-me/",
-      "url": "https://pshegger.github.io/posts/generate-for-me/",
-      "name": "@GenerateForMe",
-      "description": "Annotations are extremely versatile especially if we write our own processor to overcharge our development. Learn how to write one in Kotlin.",
-      "isPartOf": {
-        "@id": "https://pshegger.github.io/#/schema/website/1"
-      },
-      "about": {
-        "@id": "https://pshegger.github.io/#/schema/person/1"
-      },
-      "datePublished": "2019-11-11T00:00:00+01:00",
-      "dateModified": "2019-11-11T00:00:00+01:00",
-      "breadcrumb": {
-        "@id": "https://pshegger.github.io/posts/generate-for-me/#/schema/breadcrumb/1"
-      },
-      "primaryImageOfPage": {
-        "@id": "https://pshegger.github.io/posts/generate-for-me/#/schema/image/2"
-      },
-      "inLanguage":  null ,
-      "potentialAction": [{
-        "@type": "ReadAction", "target": ["https://pshegger.github.io/posts/generate-for-me/"]
-      }]
-    },
-    {
-      "@type": "BreadcrumbList",
-      "@id": "https://pshegger.github.io/posts/generate-for-me/#/schema/breadcrumb/1",
-      "name": "Breadcrumbs",
-      "itemListElement": [{
-        "@type": "ListItem",
-        "position":  1 ,
-        "item": {
-          "@type": "WebPage",
-          "@id": "https://pshegger.github.io/",
-          "url": "https://pshegger.github.io/",
-          "name": "Home"
-          }
-        },{
-        "@type": "ListItem",
-        "position":  2 ,
-        "item": {
-          "@type": "WebPage",
-          "@id": "https://pshegger.github.io/posts/",
-          "url": "https://pshegger.github.io/posts/",
-          "name": "Posts"
-          }
-        },{
-        "@type": "ListItem",
-        "position":  3 ,
-        "item": {
-          "@id": "https://pshegger.github.io/posts/generate-for-me/"
-          }
-        }]
-    },
-    {
-      "@context": "https://schema.org",
-      "@graph": [
-        {
-          "@type": "Article",
-          "@id": "https://pshegger.github.io/#/schema/article/1",
-          "headline": "@GenerateForMe",
-          "description": "Annotations are extremely versatile especially if we write our own processor to overcharge our development. Learn how to write one in Kotlin.",
-          "isPartOf": {
-            "@id": "https://pshegger.github.io/posts/generate-for-me/"
-          },
-          "mainEntityOfPage": {
-            "@id": "https://pshegger.github.io/posts/generate-for-me/"
-          },
-          "datePublished": "2019-11-11T00:00:00+01:00",
-          "dateModified": "2019-11-11T00:00:00+01:00",
-          "author": {
-            "@id": "https://pshegger.github.io/#/schema/person/1"
-          },          
-          "publisher": {
-            "@id": "https://pshegger.github.io/#/schema/person/1"
-          },
-          "image": {
-            "@id": "https://pshegger.github.io/posts/generate-for-me/#/schema/image/2"
-          }
+<link crossorigin="anonymous" href="/assets/css/stylesheet.f49d66caae9ea0fd43f21f29e71a8d3e284517ed770f2aa86fa012953ad3c9ef.css" integrity="sha256-9J1myq6eoP1D8h8p5xqNPihFF&#43;13Dyqob6ASlTrTye8=" rel="preload stylesheet" as="style">
+<link rel="icon" href="https://pshegger.github.io/favicon.ico">
+<link rel="icon" type="image/png" sizes="16x16" href="https://pshegger.github.io/favicon-16x16.png">
+<link rel="icon" type="image/png" sizes="32x32" href="https://pshegger.github.io/favicon-32x32.png">
+<link rel="apple-touch-icon" href="https://pshegger.github.io/apple-touch-icon.png">
+<link rel="mask-icon" href="https://pshegger.github.io/safari-pinned-tab.svg">
+<meta name="theme-color" content="#2e2e33">
+<meta name="msapplication-TileColor" content="#2e2e33">
+<link rel="alternate" hreflang="en" href="https://pshegger.github.io/posts/generate-for-me/">
+<noscript>
+    <style>
+        #theme-toggle,
+        .top-link {
+            display: none;
         }
-      ]
-    },{
-      "@context": "https://schema.org",
-      "@graph": [
-        {
-          "@type": "ImageObject",
-          "@id": "https://pshegger.github.io/posts/generate-for-me/#/schema/image/2",
-          "url":  null ,
-          "contentUrl":  null ,
-          "caption": "@GenerateForMe"
+
+    </style>
+    <style>
+        @media (prefers-color-scheme: dark) {
+            :root {
+                --theme: rgb(29, 30, 32);
+                --entry: rgb(46, 46, 51);
+                --primary: rgb(218, 218, 219);
+                --secondary: rgb(155, 156, 157);
+                --tertiary: rgb(65, 66, 68);
+                --content: rgb(196, 196, 197);
+                --code-block-bg: rgb(46, 46, 51);
+                --code-bg: rgb(55, 56, 62);
+                --border: rgb(51, 51, 51);
+            }
+
+            .list {
+                background: var(--theme);
+            }
+
+            .list:not(.dark)::-webkit-scrollbar-track {
+                background: 0 0;
+            }
+
+            .list:not(.dark)::-webkit-scrollbar-thumb {
+                border-color: var(--theme);
+            }
         }
-      ]
+
+    </style>
+</noscript>
+</head>
+
+<body class="" id="top">
+<script>
+    if (localStorage.getItem("pref-theme") === "dark") {
+        document.body.classList.add('dark');
+    } else if (localStorage.getItem("pref-theme") === "light") {
+        document.body.classList.remove('dark')
+    } else if (window.matchMedia('(prefers-color-scheme: dark)').matches) {
+        document.body.classList.add('dark');
     }
-  ]
-}
+
 </script>
-  
 
-  
-
-</head><body>
-    <header class="container">
-  <nav class="main-nav" id="js-navbar">
-    <a class="logo" href="https://pshegger.github.io/">pshegger</a>
-    <ul class="menu" id="js-menu">
-      
-      
-      
-        <li class="menu-item">
-          <a href="/about/" class="menu-link">About</a>
-        </li>
-      
-      
-      
-        <li class="menu-item">
-          <a href="/posts/" class="menu-link">All Posts</a>
-        </li>
-      
-      
-      
-      <li class="menu-item">
-        <span class="menu-link">Explore<span class="drop-icon">▾</span></span>
-        <ul class="sub-menu">
-          
-            <li class="menu-item">
-              <a href="/categories/" class="menu-link">Categories</a>                  
-            </li>
-          
-            <li class="menu-item">
-              <a href="/tags/" class="menu-link">Tags</a>                  
-            </li>
-          
-            <li class="menu-item">
-              <a href="/series/" class="menu-link">Series</a>                  
-            </li>
-          
-        </ul>
-      </li>
-      
-      
-      <li class="menu-item--align">
-        <div class="switch">
-          <input class="switch-input" type="checkbox" id="themeSwitch">
-          <label aria-hidden="true" class="switch-label" for="themeSwitch">On</label>
-          <div aria-hidden="true" class="switch-marker"></div>
+<header class="header">
+    <nav class="nav">
+        <div class="logo">
+            <a href="https://pshegger.github.io/" accesskey="h" title="pshegger&#39;s blog (Alt + H)">pshegger&#39;s blog</a>
+            <div class="logo-switches">
+                <button id="theme-toggle" accesskey="t" title="(Alt + T)" aria-label="Toggle theme">
+                    <svg id="moon" xmlns="http://www.w3.org/2000/svg" width="24" height="18" viewBox="0 0 24 24"
+                        fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                        stroke-linejoin="round">
+                        <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
+                    </svg>
+                    <svg id="sun" xmlns="http://www.w3.org/2000/svg" width="24" height="18" viewBox="0 0 24 24"
+                        fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                        stroke-linejoin="round">
+                        <circle cx="12" cy="12" r="5"></circle>
+                        <line x1="12" y1="1" x2="12" y2="3"></line>
+                        <line x1="12" y1="21" x2="12" y2="23"></line>
+                        <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line>
+                        <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line>
+                        <line x1="1" y1="12" x2="3" y2="12"></line>
+                        <line x1="21" y1="12" x2="23" y2="12"></line>
+                        <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line>
+                        <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
+                    </svg>
+                </button>
+            </div>
         </div>
-      </li>
-    </ul>
-    <span class="nav-toggle" id="js-navbar-toggle">
-      <svg xmlns="http://www.w3.org/2000/svg" id="Outline" viewBox="0 0 24 24" width="30" height="30" fill="var(--color-contrast-high)"><rect y="11" width="24" height="2" rx="1"/><rect y="4" width="24" height="2" rx="1"/><rect y="18" width="24" height="2" rx="1"/></svg>
-    </span>
-  </nav>
-</header><main class="section">
-<div class="container">
-  <section class="page-header">
-    <h1 class="page-header-title">@GenerateForMe</h1>
-    <div class="post-list-meta">
-      <div class="post-list-dates">Nov 11, 2019&nbsp;&middot;&nbsp;10 min.</div>
-      
-      <div class="post-list-categories">
-        
-          <a href="https://pshegger.github.io/categories/kotlin/">kotlin</a>
-        
-      </div>
-      
-      
+        <ul id="menu">
+            <li>
+                <a href="https://pshegger.github.io/categories/" title="Categories">
+                    <span>Categories</span>
+                </a>
+            </li>
+            <li>
+                <a href="https://pshegger.github.io/tags/" title="Tags">
+                    <span>Tags</span>
+                </a>
+            </li>
+        </ul>
+    </nav>
+</header>
+<main class="main">
+
+<article class="post-single">
+  <header class="post-header">
+    
+    <h1 class="post-title entry-hint-parent">
+      @GenerateForMe
+    </h1>
+    <div class="post-description">
+      Annotations are extremely versatile especially if we write our own processor to overcharge our development. Learn how to write one in Kotlin.
     </div>
-    <p class="page-header-desc">Annotations are extremely versatile especially if we write our own processor to overcharge our development. Learn how to write one in Kotlin.</p>
-    <div class="single-terms">
-      
-      
-      <a class="term" href="https://pshegger.github.io/tags/programming/">programming</a></li>
-      
-      <a class="term" href="https://pshegger.github.io/tags/kotlin/">kotlin</a></li>
-      
-      <a class="term" href="https://pshegger.github.io/tags/annotation/">annotation</a></li>
-      
-      <a class="term" href="https://pshegger.github.io/tags/kapt/">kapt</a></li>
-      
-      
-    </div>
-  </section>
-</div>
-<div class="single-container-post">
-  
-
-  <aside class="toc">
-    <div id="js-toc-toggle">
-      <h2 class="toc-header">Table of Contents</h2>
-      <span class="toc-drop-icon">&blacktriangledown;</span>
-    </div>
-    <div id="js-toc-contents" class="toc-contents"><nav id="TableOfContents">
-  <ul>
-    <li><a href="#write-once-use-everywhere">Write once, use everywhere</a></li>
-    <li><a href="#the-example">The example</a></li>
-    <li><a href="#how-to-start">How to start?</a></li>
-    <li><a href="#project-setup">Project setup</a></li>
-    <li><a href="#kotlinpoet">KotlinPoet</a>
-      <ul>
-        <li><a href="#filespec">FileSpec</a></li>
-        <li><a href="#building-a-class">Building a class</a></li>
-      </ul>
-    </li>
-    <li><a href="#generating-the-viewholder">Generating the ViewHolder</a></li>
-    <li><a href="#generating-the-adapter">Generating the Adapter</a></li>
-    <li><a href="#tying-it-all-together">Tying it all together</a></li>
-    <li><a href="#using-it">Using it</a></li>
-    <li><a href="#sample-code">Sample Code</a></li>
-  </ul>
-</nav></div>
-  </aside>
-
-  <div class="single-post-contents">
-    <div class="single-feature-img">
-
-
-
-  
+    <div class="post-meta"><span title='2019-11-11 00:00:00 +0000 UTC'>November 11, 2019</span>&nbsp;·&nbsp;10 min&nbsp;·&nbsp;pshegger
 
 </div>
-    <article class="markdown">
-        <h2 id="write-once-use-everywhere">Write once, use everywhere<a href="#write-once-use-everywhere">
-    <svg role="img" aria-labelledby="write-once-use-everywhere-IconTitle" fill="var(--color-primary)" height="22" viewBox="0 0 24 24" width="22" xmlns="http://www.w3.org/2000/svg">
-      <title id="write-once-use-everywhere-IconTitle">Link to this heading</title>
-      <path d="M0 0h24v24H0z" fill="none"></path>
-      <path d="M3.9 12c0-1.71 1.39-3.1 3.1-3.1h4V7H7c-2.76.0-5 2.24-5 5s2.24 5 5 5h4v-1.9H7c-1.71.0-3.1-1.39-3.1-3.1zM8 13h8v-2H8v2zm9-6h-4v1.9h4c1.71.0 3.1 1.39 3.1 3.1s-1.39 3.1-3.1 3.1h-4V17h4c2.76.0 5-2.24 5-5s-2.24-5-5-5z"></path>
-    </svg>
-  </a>
-</h2><p>Sooner or later every developer meets the following scenario: you have written the same piece of code multiple times, maybe with some minor differences, and you don&rsquo;t want to do it again. You analyze the situation and decide to create a separate function so the next time you need it you just have to call it. Sometimes it&rsquo;s not enough so you create a new abstraction layer and write a class which does what you need. But what happens if you cannot create an abstraction which is suitable for you <em>and</em> it&rsquo;s easy to use whenever you need it. That&rsquo;s when Annotation Processing comes for your help.</p>
-<p>When you write an annotation processor you are creating an application which writes complex code instead of you, but based on your rules. This of course isn&rsquo;t the solution every time as writing these processors could easily end up taking more time than you can save with it (<a href="https://xkcd.com/1205/" target="_blank" rel="noopener">relevant XKCD</a>), but sometimes it can really help your productivity.</p>
-<h2 id="the-example">The example<a href="#the-example">
-    <svg role="img" aria-labelledby="the-example-IconTitle" fill="var(--color-primary)" height="22" viewBox="0 0 24 24" width="22" xmlns="http://www.w3.org/2000/svg">
-      <title id="the-example-IconTitle">Link to this heading</title>
-      <path d="M0 0h24v24H0z" fill="none"></path>
-      <path d="M3.9 12c0-1.71 1.39-3.1 3.1-3.1h4V7H7c-2.76.0-5 2.24-5 5s2.24 5 5 5h4v-1.9H7c-1.71.0-3.1-1.39-3.1-3.1zM8 13h8v-2H8v2zm9-6h-4v1.9h4c1.71.0 3.1 1.39 3.1 3.1s-1.39 3.1-3.1 3.1h-4V17h4c2.76.0 5-2.24 5-5s-2.24-5-5-5z"></path>
-    </svg>
-  </a>
-</h2><p>Let&rsquo;s write an annotation processor which creates our <code>RecyclerView</code> adapter and view holder. If you&rsquo;re not an Android developer don&rsquo;t be alarmed, the same technics can be used for any type of Kotlin code.</p>
+  </header> <div class="toc">
+    <details >
+        <summary accesskey="c" title="(Alt + C)">
+            <span class="details">Table of Contents</span>
+        </summary>
+
+        <div class="inner"><ul>
+                <li>
+                    <a href="#write-once-use-everywhere" aria-label="Write once, use everywhere">Write once, use everywhere</a></li>
+                <li>
+                    <a href="#the-example" aria-label="The example">The example</a></li>
+                <li>
+                    <a href="#how-to-start" aria-label="How to start?">How to start?</a></li>
+                <li>
+                    <a href="#project-setup" aria-label="Project setup">Project setup</a></li>
+                <li>
+                    <a href="#kotlinpoet" aria-label="KotlinPoet">KotlinPoet</a><ul>
+                        
+                <li>
+                    <a href="#filespec" aria-label="FileSpec">FileSpec</a></li>
+                <li>
+                    <a href="#building-a-class" aria-label="Building a class">Building a class</a></li></ul>
+                </li>
+                <li>
+                    <a href="#generating-the-viewholder" aria-label="Generating the ViewHolder">Generating the ViewHolder</a></li>
+                <li>
+                    <a href="#generating-the-adapter" aria-label="Generating the Adapter">Generating the Adapter</a></li>
+                <li>
+                    <a href="#tying-it-all-together" aria-label="Tying it all together">Tying it all together</a></li>
+                <li>
+                    <a href="#using-it" aria-label="Using it">Using it</a></li>
+                <li>
+                    <a href="#sample-code" aria-label="Sample Code">Sample Code</a>
+                </li>
+            </ul>
+        </div>
+    </details>
+</div>
+
+  <div class="post-content"><h2 id="write-once-use-everywhere">Write once, use everywhere<a hidden class="anchor" aria-hidden="true" href="#write-once-use-everywhere">#</a></h2>
+<p>Sooner or later every developer meets the following scenario: you have written the same piece of code multiple times, maybe with some minor differences, and you don&rsquo;t want to do it again. You analyze the situation and decide to create a separate function so the next time you need it you just have to call it. Sometimes it&rsquo;s not enough so you create a new abstraction layer and write a class which does what you need. But what happens if you cannot create an abstraction which is suitable for you <em>and</em> it&rsquo;s easy to use whenever you need it. That&rsquo;s when Annotation Processing comes for your help.</p>
+<p>When you write an annotation processor you are creating an application which writes complex code instead of you, but based on your rules. This of course isn&rsquo;t the solution every time as writing these processors could easily end up taking more time than you can save with it (<a href="https://xkcd.com/1205/">relevant XKCD</a>), but sometimes it can really help your productivity.</p>
+<h2 id="the-example">The example<a hidden class="anchor" aria-hidden="true" href="#the-example">#</a></h2>
+<p>Let&rsquo;s write an annotation processor which creates our <code>RecyclerView</code> adapter and view holder. If you&rsquo;re not an Android developer don&rsquo;t be alarmed, the same technics can be used for any type of Kotlin code.</p>
 <p>Writing the adapter is usually pretty straightforward, but you have to do it for every model you want to display inside a <code>RecyclerView</code>, and writing it generates a lot of boilerplate. Naturally we can&rsquo;t eliminate every parts of writing it, but we can make it easier and faster.</p>
-<h2 id="how-to-start">How to start?<a href="#how-to-start">
-    <svg role="img" aria-labelledby="how-to-start-IconTitle" fill="var(--color-primary)" height="22" viewBox="0 0 24 24" width="22" xmlns="http://www.w3.org/2000/svg">
-      <title id="how-to-start-IconTitle">Link to this heading</title>
-      <path d="M0 0h24v24H0z" fill="none"></path>
-      <path d="M3.9 12c0-1.71 1.39-3.1 3.1-3.1h4V7H7c-2.76.0-5 2.24-5 5s2.24 5 5 5h4v-1.9H7c-1.71.0-3.1-1.39-3.1-3.1zM8 13h8v-2H8v2zm9-6h-4v1.9h4c1.71.0 3.1 1.39 3.1 3.1s-1.39 3.1-3.1 3.1h-4V17h4c2.76.0 5-2.24 5-5s-2.24-5-5-5z"></path>
-    </svg>
-  </a>
-</h2><p>Before we do any coding we should plan how our interface will look like for the end user. As we are planning to generate the adapter with the least possible code we should use a single class for the base and its functions will be used to define the bindings between the data and the view. This means that we will need 2 annotations: one for the class which will define the layout file and an other one for the binding functions, which will define the id of the specific view. Let&rsquo;s call them <em>@ModelBinding</em> and <em>@BindView</em>. Both of them will have one parameter, for <em>@ModelBinding</em> this will be the layout file for the View and for <em>@BindView</em> this will be the ID of the specific View. We will also have a few restriction on where the end user will be able to use these annotations. <em>@ModelBinding</em> will only be usable for classes which has a constructor with a single parameter (this will be the item we will bind to the View) and <em>@BindView</em> will only work for single parameter functions inside the class. Let&rsquo;s see an example:</p>
-
-
-  <span class="code-language">kotlin</span><div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-kotlin" data-lang="kotlin"><span style="display:flex;"><span><span style="color:#a6e22e">@ModelBinding</span>(<span style="color:#a6e22e">R</span>.layout.item_user)
+<h2 id="how-to-start">How to start?<a hidden class="anchor" aria-hidden="true" href="#how-to-start">#</a></h2>
+<p>Before we do any coding we should plan how our interface will look like for the end user. As we are planning to generate the adapter with the least possible code we should use a single class for the base and its functions will be used to define the bindings between the data and the view. This means that we will need 2 annotations: one for the class which will define the layout file and an other one for the binding functions, which will define the id of the specific view. Let&rsquo;s call them <em>@ModelBinding</em> and <em>@BindView</em>. Both of them will have one parameter, for <em>@ModelBinding</em> this will be the layout file for the View and for <em>@BindView</em> this will be the ID of the specific View. We will also have a few restriction on where the end user will be able to use these annotations. <em>@ModelBinding</em> will only be usable for classes which has a constructor with a single parameter (this will be the item we will bind to the View) and <em>@BindView</em> will only work for single parameter functions inside the class. Let&rsquo;s see an example:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-kotlin" data-lang="kotlin"><span style="display:flex;"><span><span style="color:#a6e22e">@ModelBinding</span>(<span style="color:#a6e22e">R</span>.layout.item_user)
 </span></span><span style="display:flex;"><span><span style="color:#66d9ef">class</span> <span style="color:#a6e22e">UserBinding</span>(<span style="color:#66d9ef">private</span> <span style="color:#66d9ef">val</span> user: User) {
 </span></span><span style="display:flex;"><span>    
 </span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">@BindView</span>(<span style="color:#a6e22e">R</span>.id.name)
@@ -363,20 +184,12 @@
 </span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">fun</span> <span style="color:#a6e22e">bindEmail</span>(email: TextView) {
 </span></span><span style="display:flex;"><span>        email.text = user.email
 </span></span><span style="display:flex;"><span>    }
-</span></span><span style="display:flex;"><span>}</span></span></code></pre></div>
-<p>This is all the code we will have to write to create an adapter for our User model which displays the user&rsquo;s name and email address.</p>
-<h2 id="project-setup">Project setup<a href="#project-setup">
-    <svg role="img" aria-labelledby="project-setup-IconTitle" fill="var(--color-primary)" height="22" viewBox="0 0 24 24" width="22" xmlns="http://www.w3.org/2000/svg">
-      <title id="project-setup-IconTitle">Link to this heading</title>
-      <path d="M0 0h24v24H0z" fill="none"></path>
-      <path d="M3.9 12c0-1.71 1.39-3.1 3.1-3.1h4V7H7c-2.76.0-5 2.24-5 5s2.24 5 5 5h4v-1.9H7c-1.71.0-3.1-1.39-3.1-3.1zM8 13h8v-2H8v2zm9-6h-4v1.9h4c1.71.0 3.1 1.39 3.1 3.1s-1.39 3.1-3.1 3.1h-4V17h4c2.76.0 5-2.24 5-5s-2.24-5-5-5z"></path>
-    </svg>
-  </a>
-</h2><p>As we are planning to enchant our existing code with the generator we will be starting by opening the project. If you want to create the generator as a library the steps are almost the same, except we do not have to add our new modules as a dependency.</p>
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><p>This is all the code we will have to write to create an adapter for our User model which displays the user&rsquo;s name and email address.</p>
+<h2 id="project-setup">Project setup<a hidden class="anchor" aria-hidden="true" href="#project-setup">#</a></h2>
+<p>As we are planning to enchant our existing code with the generator we will be starting by opening the project. If you want to create the generator as a library the steps are almost the same, except we do not have to add our new modules as a dependency.</p>
 <p>First we have to create a new (Java library) module for our annotations. This module will only contain our annotation classes, so no dependency is needed (beside Kotlin). After that let&rsquo;s add our classes.</p>
-
-
-  <span class="code-language">kotlin</span><div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-kotlin" data-lang="kotlin"><span style="display:flex;"><span><span style="color:#75715e">// BindView.kt
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-kotlin" data-lang="kotlin"><span style="display:flex;"><span><span style="color:#75715e">// BindView.kt
 </span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span><span style="color:#a6e22e">@Target</span>(<span style="color:#a6e22e">AnnotationTarget</span>.FUNCTION)
 </span></span><span style="display:flex;"><span><span style="color:#a6e22e">@Retention</span>(<span style="color:#a6e22e">AnnotationRetention</span>.SOURCE)
 </span></span><span style="display:flex;"><span><span style="color:#66d9ef">annotation</span> <span style="color:#66d9ef">class</span> <span style="color:#a6e22e">BindView</span>(<span style="color:#66d9ef">val</span> viewId: Int)
@@ -384,51 +197,27 @@
 </span></span><span style="display:flex;"><span><span style="color:#75715e">// ModelBinding.kt
 </span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span><span style="color:#a6e22e">@Target</span>(<span style="color:#a6e22e">AnnotationTarget</span>.CLASS)
 </span></span><span style="display:flex;"><span><span style="color:#a6e22e">@Retention</span>(<span style="color:#a6e22e">AnnotationRetention</span>.SOURCE)
-</span></span><span style="display:flex;"><span><span style="color:#66d9ef">annotation</span> <span style="color:#66d9ef">class</span> <span style="color:#a6e22e">ModelBinding</span>(<span style="color:#66d9ef">val</span> layoutId: Int)</span></span></code></pre></div>
-<p>The next step is creating our generator module. This also has to be a Java library, but it will have significantly more code in it. From this point on we will only be working in this module.</p>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">annotation</span> <span style="color:#66d9ef">class</span> <span style="color:#a6e22e">ModelBinding</span>(<span style="color:#66d9ef">val</span> layoutId: Int)
+</span></span></code></pre></div><p>The next step is creating our generator module. This also has to be a Java library, but it will have significantly more code in it. From this point on we will only be working in this module.</p>
 <p>First we have to add a few dependencies:</p>
-
-
-  <span class="code-language">gradle</span><div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-gradle" data-lang="gradle"><span style="display:flex;"><span>implementation<span style="color:#f92672">(</span>project<span style="color:#f92672">(</span><span style="color:#e6db74">&#34;:annotations&#34;</span><span style="color:#f92672">))</span>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-gradle" data-lang="gradle"><span style="display:flex;"><span>implementation<span style="color:#f92672">(</span>project<span style="color:#f92672">(</span><span style="color:#e6db74">&#34;:annotations&#34;</span><span style="color:#f92672">))</span>
 </span></span><span style="display:flex;"><span>implementation<span style="color:#f92672">(</span><span style="color:#e6db74">&#34;com.google.auto.service:auto-service:1.0-rc4&#34;</span><span style="color:#f92672">)</span>
 </span></span><span style="display:flex;"><span>implementation<span style="color:#f92672">(</span><span style="color:#e6db74">&#34;com.squareup:kotlinpoet:1.3.0&#34;</span><span style="color:#f92672">)</span>
 </span></span><span style="display:flex;"><span>    
-</span></span><span style="display:flex;"><span>kapt<span style="color:#f92672">(</span><span style="color:#e6db74">&#34;com.google.auto.service:auto-service:1.0-rc4&#34;</span><span style="color:#f92672">)</span></span></span></code></pre></div>
-<p>We have to add our previous module as well as Google&rsquo;s AutoService and KotlinPoet.</p>
+</span></span><span style="display:flex;"><span>kapt<span style="color:#f92672">(</span><span style="color:#e6db74">&#34;com.google.auto.service:auto-service:1.0-rc4&#34;</span><span style="color:#f92672">)</span>
+</span></span></code></pre></div><p>We have to add our previous module as well as Google&rsquo;s AutoService and KotlinPoet.</p>
 <p>AutoService is a useful tool which generates configuration for <code>ServiceLoader</code> so we don&rsquo;t have to set up our annotation processor by hand.</p>
-<h2 id="kotlinpoet">KotlinPoet<a href="#kotlinpoet">
-    <svg role="img" aria-labelledby="kotlinpoet-IconTitle" fill="var(--color-primary)" height="22" viewBox="0 0 24 24" width="22" xmlns="http://www.w3.org/2000/svg">
-      <title id="kotlinpoet-IconTitle">Link to this heading</title>
-      <path d="M0 0h24v24H0z" fill="none"></path>
-      <path d="M3.9 12c0-1.71 1.39-3.1 3.1-3.1h4V7H7c-2.76.0-5 2.24-5 5s2.24 5 5 5h4v-1.9H7c-1.71.0-3.1-1.39-3.1-3.1zM8 13h8v-2H8v2zm9-6h-4v1.9h4c1.71.0 3.1 1.39 3.1 3.1s-1.39 3.1-3.1 3.1h-4V17h4c2.76.0 5-2.24 5-5s-2.24-5-5-5z"></path>
-    </svg>
-  </a>
-</h2><p>We will be using <a href="https://github.com/square/kotlinpoet" target="_blank" rel="noopener">KotlinPoet</a> by Square to make our lives easier. It is not required but the alternative would be to write the whole generated code by hand. Let&rsquo;s take a look at some of its features.</p>
-<h3 id="filespec">FileSpec<a href="#filespec">
-    <svg role="img" aria-labelledby="filespec-IconTitle" fill="var(--color-primary)" height="22" viewBox="0 0 24 24" width="22" xmlns="http://www.w3.org/2000/svg">
-      <title id="filespec-IconTitle">Link to this heading</title>
-      <path d="M0 0h24v24H0z" fill="none"></path>
-      <path d="M3.9 12c0-1.71 1.39-3.1 3.1-3.1h4V7H7c-2.76.0-5 2.24-5 5s2.24 5 5 5h4v-1.9H7c-1.71.0-3.1-1.39-3.1-3.1zM8 13h8v-2H8v2zm9-6h-4v1.9h4c1.71.0 3.1 1.39 3.1 3.1s-1.39 3.1-3.1 3.1h-4V17h4c2.76.0 5-2.24 5-5s-2.24-5-5-5z"></path>
-    </svg>
-  </a>
-</h3><p>Using KotlinPoet&rsquo;s <code>FileSpec</code> we get a few advantages. First of all it handles saving the file, we just have to pass an instance of <code>java.io.File</code> to its <code>writeTo</code> method. The second and probably more important feature is that it automatically adds the imports so we don&rsquo;t have to bother about them.</p>
-
-
-  <span class="code-language">kotlin</span><div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-kotlin" data-lang="kotlin"><span style="display:flex;"><span><span style="color:#66d9ef">val</span> fileBuilder = <span style="color:#a6e22e">FileSpec</span>.Builder(<span style="color:#e6db74">&#34;package&#34;</span>, <span style="color:#e6db74">&#34;fileName&#34;</span>)
+<h2 id="kotlinpoet">KotlinPoet<a hidden class="anchor" aria-hidden="true" href="#kotlinpoet">#</a></h2>
+<p>We will be using <a href="https://github.com/square/kotlinpoet">KotlinPoet</a> by Square to make our lives easier. It is not required but the alternative would be to write the whole generated code by hand. Let&rsquo;s take a look at some of its features.</p>
+<h3 id="filespec">FileSpec<a hidden class="anchor" aria-hidden="true" href="#filespec">#</a></h3>
+<p>Using KotlinPoet&rsquo;s <code>FileSpec</code> we get a few advantages. First of all it handles saving the file, we just have to pass an instance of <code>java.io.File</code> to its <code>writeTo</code> method. The second and probably more important feature is that it automatically adds the imports so we don&rsquo;t have to bother about them.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-kotlin" data-lang="kotlin"><span style="display:flex;"><span><span style="color:#66d9ef">val</span> fileBuilder = <span style="color:#a6e22e">FileSpec</span>.Builder(<span style="color:#e6db74">&#34;package&#34;</span>, <span style="color:#e6db74">&#34;fileName&#34;</span>)
 </span></span><span style="display:flex;"><span><span style="color:#75715e">// add whatever you need to the file
-</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>fileBuilder.build().writeTo(outputFile)</span></span></code></pre></div>
-<p>You can add everything which is valid in a Kotlin file, but the most important for us now is <code>addType</code>. In our case it is used to add our generated classes, but in other cases it can be used with any TypeSpec.</p>
-<h3 id="building-a-class">Building a class<a href="#building-a-class">
-    <svg role="img" aria-labelledby="building-a-class-IconTitle" fill="var(--color-primary)" height="22" viewBox="0 0 24 24" width="22" xmlns="http://www.w3.org/2000/svg">
-      <title id="building-a-class-IconTitle">Link to this heading</title>
-      <path d="M0 0h24v24H0z" fill="none"></path>
-      <path d="M3.9 12c0-1.71 1.39-3.1 3.1-3.1h4V7H7c-2.76.0-5 2.24-5 5s2.24 5 5 5h4v-1.9H7c-1.71.0-3.1-1.39-3.1-3.1zM8 13h8v-2H8v2zm9-6h-4v1.9h4c1.71.0 3.1 1.39 3.1 3.1s-1.39 3.1-3.1 3.1h-4V17h4c2.76.0 5-2.24 5-5s-2.24-5-5-5z"></path>
-    </svg>
-  </a>
-</h3><p>As mentioned above we will be using <code>TypeSpec</code> for generating our class. I find learning by examples the easiest so let&rsquo;s see some basic code and understand together what it does.</p>
-
-
-  <span class="code-language">kotlin</span><div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-kotlin" data-lang="kotlin"><span style="display:flex;"><span><span style="color:#a6e22e">TypeSpec</span>.classBuilder(<span style="color:#e6db74">&#34;Greeter&#34;</span>)
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>fileBuilder.build().writeTo(outputFile)
+</span></span></code></pre></div><p>You can add everything which is valid in a Kotlin file, but the most important for us now is <code>addType</code>. In our case it is used to add our generated classes, but in other cases it can be used with any TypeSpec.</p>
+<h3 id="building-a-class">Building a class<a hidden class="anchor" aria-hidden="true" href="#building-a-class">#</a></h3>
+<p>As mentioned above we will be using <code>TypeSpec</code> for generating our class. I find learning by examples the easiest so let&rsquo;s see some basic code and understand together what it does.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-kotlin" data-lang="kotlin"><span style="display:flex;"><span><span style="color:#a6e22e">TypeSpec</span>.classBuilder(<span style="color:#e6db74">&#34;Greeter&#34;</span>)
 </span></span><span style="display:flex;"><span>    .primaryConstructor(
 </span></span><span style="display:flex;"><span>        <span style="color:#a6e22e">FunSpec</span>.constructorBuilder().addParameter(<span style="color:#e6db74">&#34;name&#34;</span>, STRING).build()
 </span></span><span style="display:flex;"><span>    )
@@ -443,29 +232,19 @@
 </span></span><span style="display:flex;"><span>            .addStatement(<span style="color:#e6db74">&#34;println(</span><span style="color:#ae81ff">\&#34;</span><span style="color:#e6db74">Hello </span><span style="color:#e6db74">$name</span><span style="color:#ae81ff">\&#34;</span><span style="color:#e6db74">)&#34;</span>)
 </span></span><span style="display:flex;"><span>            .build()
 </span></span><span style="display:flex;"><span>    )
-</span></span><span style="display:flex;"><span>    .build()</span></span></code></pre></div>
-<p>This code will generate the following class:</p>
-
-
-  <span class="code-language">kotlin</span><div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-kotlin" data-lang="kotlin"><span style="display:flex;"><span><span style="color:#66d9ef">class</span> <span style="color:#a6e22e">Greeter</span>(<span style="color:#66d9ef">private</span> <span style="color:#66d9ef">val</span> name: String) {
+</span></span><span style="display:flex;"><span>    .build()
+</span></span></code></pre></div><p>This code will generate the following class:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-kotlin" data-lang="kotlin"><span style="display:flex;"><span><span style="color:#66d9ef">class</span> <span style="color:#a6e22e">Greeter</span>(<span style="color:#66d9ef">private</span> <span style="color:#66d9ef">val</span> name: String) {
 </span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">fun</span> <span style="color:#a6e22e">greet</span>() {
 </span></span><span style="display:flex;"><span>        println(<span style="color:#e6db74">&#34;Hello </span><span style="color:#e6db74">$name</span><span style="color:#e6db74">&#34;</span>)
 </span></span><span style="display:flex;"><span>    }
-</span></span><span style="display:flex;"><span>}</span></span></code></pre></div>
-<p>So, what&rsquo;s happening here. In my opinion KotlinPoet&rsquo;s API is pretty straightforward and reading it makes everything clear but let&rsquo;s work ourselves through the code together.</p>
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><p>So, what&rsquo;s happening here. In my opinion KotlinPoet&rsquo;s API is pretty straightforward and reading it makes everything clear but let&rsquo;s work ourselves through the code together.</p>
 <p>First of all we are defining a class called <code>Greeter</code> using <code>TypeSpec.classBuilder</code>. After that we are adding 3 things to the class: a constructor, a property and a function. For this we are using <code>FunSpec</code> for functions (for the constructor we have to specify that it is in fact not a normal function, for this we are using <code>constructorBuilder</code>), and <code>PropertySpec</code>. After everything is added we just call build and we have our class as a <code>TypeSpec</code>. We can then add it to our <code>FileSpec</code> and save it.</p>
-<h2 id="generating-the-viewholder">Generating the ViewHolder<a href="#generating-the-viewholder">
-    <svg role="img" aria-labelledby="generating-the-viewholder-IconTitle" fill="var(--color-primary)" height="22" viewBox="0 0 24 24" width="22" xmlns="http://www.w3.org/2000/svg">
-      <title id="generating-the-viewholder-IconTitle">Link to this heading</title>
-      <path d="M0 0h24v24H0z" fill="none"></path>
-      <path d="M3.9 12c0-1.71 1.39-3.1 3.1-3.1h4V7H7c-2.76.0-5 2.24-5 5s2.24 5 5 5h4v-1.9H7c-1.71.0-3.1-1.39-3.1-3.1zM8 13h8v-2H8v2zm9-6h-4v1.9h4c1.71.0 3.1 1.39 3.1 3.1s-1.39 3.1-3.1 3.1h-4V17h4c2.76.0 5-2.24 5-5s-2.24-5-5-5z"></path>
-    </svg>
-  </a>
-</h2><p>Most of the code in this step is easy after learning the basics. We need to create a class which subclasses the <code>RecyclerView.ViewHolder</code> abstract class. It has to have a constructor which accepts a <code>View</code> as a parameter to pass it to the superclass. If we have that all that remains to write is the main part of the <code>ViewHolder</code> which binds the data to the view. We will call this function <code>bind</code>.</p>
+<h2 id="generating-the-viewholder">Generating the ViewHolder<a hidden class="anchor" aria-hidden="true" href="#generating-the-viewholder">#</a></h2>
+<p>Most of the code in this step is easy after learning the basics. We need to create a class which subclasses the <code>RecyclerView.ViewHolder</code> abstract class. It has to have a constructor which accepts a <code>View</code> as a parameter to pass it to the superclass. If we have that all that remains to write is the main part of the <code>ViewHolder</code> which binds the data to the view. We will call this function <code>bind</code>.</p>
 <p>To generate it we have to iterate over the functions marked with <code>@BindView</code> in the binding class. We can do that using <code>Element.getEnclosedElements()</code> which returns all elements inside an other one, and we can filter for the ones that are methods and has our annotation. After that we have to add each <code>View</code> as a class member for the <code>ViewHolder</code> and will be initialized with the ID which was passed to the annotation as a parameter. We will also have to call every function inside bind.</p>
-
-
-  <span class="code-language">kotlin</span><div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-kotlin" data-lang="kotlin"><span style="display:flex;"><span><span style="color:#66d9ef">fun</span> <span style="color:#a6e22e">generateViewHolder</span>(element: Element, itemPack: String, itemClassName: String): TypeSpec {
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-kotlin" data-lang="kotlin"><span style="display:flex;"><span><span style="color:#66d9ef">fun</span> <span style="color:#a6e22e">generateViewHolder</span>(element: Element, itemPack: String, itemClassName: String): TypeSpec {
 </span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">val</span> classBuilder = <span style="color:#a6e22e">TypeSpec</span>.classBuilder(<span style="color:#e6db74">&#34;</span><span style="color:#e6db74">${itemClassName}</span><span style="color:#e6db74">ViewHolder&#34;</span>)
 </span></span><span style="display:flex;"><span>        .primaryConstructor(
 </span></span><span style="display:flex;"><span>            <span style="color:#a6e22e">FunSpec</span>.constructorBuilder()
@@ -506,11 +285,9 @@
 </span></span><span style="display:flex;"><span>    }
 </span></span><span style="display:flex;"><span>
 </span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">return</span> classBuilder.addFunction(bindFunBuilder.build()).build()
-</span></span><span style="display:flex;"><span>}</span></span></code></pre></div>
-<p>If we run it with the previous binding example it will generate the following code (after some formatting):</p>
-
-
-  <span class="code-language">kotlin</span><div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-kotlin" data-lang="kotlin"><span style="display:flex;"><span><span style="color:#66d9ef">class</span> <span style="color:#a6e22e">UserViewHolder</span>(itemView: View) : ViewHolder(itemView) {
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><p>If we run it with the previous binding example it will generate the following code (after some formatting):</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-kotlin" data-lang="kotlin"><span style="display:flex;"><span><span style="color:#66d9ef">class</span> <span style="color:#a6e22e">UserViewHolder</span>(itemView: View) : ViewHolder(itemView) {
 </span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">private</span> <span style="color:#66d9ef">val</span> name: TextView = itemView.findViewById(<span style="color:#ae81ff">11111</span>)
 </span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">private</span> <span style="color:#66d9ef">val</span> email: TextView = itemView.findViewById(<span style="color:#ae81ff">22222</span>)
 </span></span><span style="display:flex;"><span>    
@@ -519,36 +296,20 @@
 </span></span><span style="display:flex;"><span>        binder.bindName(name)
 </span></span><span style="display:flex;"><span>        binder.bindEmail(email)
 </span></span><span style="display:flex;"><span>    }
-</span></span><span style="display:flex;"><span>}</span></span></code></pre></div>
-<p>The view IDs are just examples. When passing them to the annotation we lose the name and can only use the real value, but it&rsquo;s not a problem, because they represent the same thing.</p>
-<h2 id="generating-the-adapter">Generating the Adapter<a href="#generating-the-adapter">
-    <svg role="img" aria-labelledby="generating-the-adapter-IconTitle" fill="var(--color-primary)" height="22" viewBox="0 0 24 24" width="22" xmlns="http://www.w3.org/2000/svg">
-      <title id="generating-the-adapter-IconTitle">Link to this heading</title>
-      <path d="M0 0h24v24H0z" fill="none"></path>
-      <path d="M3.9 12c0-1.71 1.39-3.1 3.1-3.1h4V7H7c-2.76.0-5 2.24-5 5s2.24 5 5 5h4v-1.9H7c-1.71.0-3.1-1.39-3.1-3.1zM8 13h8v-2H8v2zm9-6h-4v1.9h4c1.71.0 3.1 1.39 3.1 3.1s-1.39 3.1-3.1 3.1h-4V17h4c2.76.0 5-2.24 5-5s-2.24-5-5-5z"></path>
-    </svg>
-  </a>
-</h2><p>We are done with the hard part but we still need to generate the adapter. For this we need to generate a class which overrides the methods of <code>RecyclerView.Adapter</code> and for the real binding we will use our <code>ViewHolder</code>. We already know almost everything to write the code which will generate it, but there is one thing we didn&rsquo;t discuss yet. We will need to use generic classes which can be achieved by calling <code>parameterizedBy</code> on a <code>ClassName</code> instance. So for example in our case we can create the list of items with the following code:</p>
-
-
-  <span class="code-language">kotlin</span><div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-kotlin" data-lang="kotlin"><span style="display:flex;"><span>ClassName(<span style="color:#e6db74">&#34;kotlin.collections&#34;</span>, <span style="color:#e6db74">&#34;List&#34;</span>)
-</span></span><span style="display:flex;"><span>    .parameterizedBy(ClassName(itemPack, itemClassName))</span></span></code></pre></div>
-<p>We can then pass it as any other type to KotlinPoet and in the generated code it will show up as <code>List&lt;User&gt;</code>.</p>
-<h2 id="tying-it-all-together">Tying it all together<a href="#tying-it-all-together">
-    <svg role="img" aria-labelledby="tying-it-all-together-IconTitle" fill="var(--color-primary)" height="22" viewBox="0 0 24 24" width="22" xmlns="http://www.w3.org/2000/svg">
-      <title id="tying-it-all-together-IconTitle">Link to this heading</title>
-      <path d="M0 0h24v24H0z" fill="none"></path>
-      <path d="M3.9 12c0-1.71 1.39-3.1 3.1-3.1h4V7H7c-2.76.0-5 2.24-5 5s2.24 5 5 5h4v-1.9H7c-1.71.0-3.1-1.39-3.1-3.1zM8 13h8v-2H8v2zm9-6h-4v1.9h4c1.71.0 3.1 1.39 3.1 3.1s-1.39 3.1-3.1 3.1h-4V17h4c2.76.0 5-2.24 5-5s-2.24-5-5-5z"></path>
-    </svg>
-  </a>
-</h2><p>The final step in the puzzle is to create our processor. This is the part of the code generator which will be called by kapt and is responsible for handling the annotations.</p>
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><p>The view IDs are just examples. When passing them to the annotation we lose the name and can only use the real value, but it&rsquo;s not a problem, because they represent the same thing.</p>
+<h2 id="generating-the-adapter">Generating the Adapter<a hidden class="anchor" aria-hidden="true" href="#generating-the-adapter">#</a></h2>
+<p>We are done with the hard part but we still need to generate the adapter. For this we need to generate a class which overrides the methods of <code>RecyclerView.Adapter</code> and for the real binding we will use our <code>ViewHolder</code>. We already know almost everything to write the code which will generate it, but there is one thing we didn&rsquo;t discuss yet. We will need to use generic classes which can be achieved by calling <code>parameterizedBy</code> on a <code>ClassName</code> instance. So for example in our case we can create the list of items with the following code:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-kotlin" data-lang="kotlin"><span style="display:flex;"><span>ClassName(<span style="color:#e6db74">&#34;kotlin.collections&#34;</span>, <span style="color:#e6db74">&#34;List&#34;</span>)
+</span></span><span style="display:flex;"><span>    .parameterizedBy(ClassName(itemPack, itemClassName))
+</span></span></code></pre></div><p>We can then pass it as any other type to KotlinPoet and in the generated code it will show up as <code>List&lt;User&gt;</code>.</p>
+<h2 id="tying-it-all-together">Tying it all together<a hidden class="anchor" aria-hidden="true" href="#tying-it-all-together">#</a></h2>
+<p>The final step in the puzzle is to create our processor. This is the part of the code generator which will be called by kapt and is responsible for handling the annotations.</p>
 <p>Writing the skeleton of the class is self-explanatory. It has to extend the <code>AbstractProcessor</code> class which has only one abstract method: <code>process</code>. For us the second parameter is the more important, which is a <code>RoundEnvironment</code>. With that we can get everything annotated with our <code>ModelBinding</code> annotation. After that we just have to loop through these elements which contains most of the info we will need to use our adapter builder.</p>
 <p>We also need to use <code>processingEnv</code> which is a protected member of <code>AbstractProcessor</code>. This is the bridge between our processor and the code we are working with. We will use this for 3 things now: getting the folder where we should save our generated files, getting package info about the classes we are working with and printing diagnostic messages.</p>
 <p>Kapt will save the directory for generated files into the processing environment&rsquo;s options with the name <code>kapt.kotlin.generated</code>. We will be also using a simple data class called <code>AdapterInfo</code> to pass every needed info to our code generator classes.</p>
 <p>Now that we have every knowledge let&rsquo;s see how our final process method looks like:</p>
-
-
-  <span class="code-language">kotlin</span><div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-kotlin" data-lang="kotlin"><span style="display:flex;"><span><span style="color:#66d9ef">override</span> <span style="color:#66d9ef">fun</span> <span style="color:#a6e22e">process</span>(annotations: MutableSet&lt;<span style="color:#66d9ef">out</span> TypeElement&gt;?, roundEnv: RoundEnvironment): Boolean {
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-kotlin" data-lang="kotlin"><span style="display:flex;"><span><span style="color:#66d9ef">override</span> <span style="color:#66d9ef">fun</span> <span style="color:#a6e22e">process</span>(annotations: MutableSet&lt;<span style="color:#66d9ef">out</span> TypeElement&gt;?, roundEnv: RoundEnvironment): Boolean {
 </span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">val</span> kaptKotlinGeneratedDir = processingEnv.options[<span style="color:#e6db74">&#34;kapt.kotlin.generated&#34;</span>] <span style="color:#f92672">?:</span> <span style="color:#66d9ef">return</span> <span style="color:#66d9ef">false</span>
 </span></span><span style="display:flex;"><span>    
 </span></span><span style="display:flex;"><span>    roundEnv.getElementsAnnotatedWith(ModelBinding<span style="color:#f92672">::</span><span style="color:#66d9ef">class</span>.java)
@@ -572,207 +333,143 @@
 </span></span><span style="display:flex;"><span>        }
 </span></span><span style="display:flex;"><span>    
 </span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">return</span> <span style="color:#66d9ef">true</span>
-</span></span><span style="display:flex;"><span>}</span></span></code></pre></div>
-<h2 id="using-it">Using it<a href="#using-it">
-    <svg role="img" aria-labelledby="using-it-IconTitle" fill="var(--color-primary)" height="22" viewBox="0 0 24 24" width="22" xmlns="http://www.w3.org/2000/svg">
-      <title id="using-it-IconTitle">Link to this heading</title>
-      <path d="M0 0h24v24H0z" fill="none"></path>
-      <path d="M3.9 12c0-1.71 1.39-3.1 3.1-3.1h4V7H7c-2.76.0-5 2.24-5 5s2.24 5 5 5h4v-1.9H7c-1.71.0-3.1-1.39-3.1-3.1zM8 13h8v-2H8v2zm9-6h-4v1.9h4c1.71.0 3.1 1.39 3.1 3.1s-1.39 3.1-3.1 3.1h-4V17h4c2.76.0 5-2.24 5-5s-2.24-5-5-5z"></path>
-    </svg>
-  </a>
-</h2><p>We are now finished with the processor and all that left is using it inside our main module. For that we have to add the two new modules as a dependency.</p>
-
-
-  <span class="code-language">gradle</span><div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-gradle" data-lang="gradle"><span style="display:flex;"><span>implementation<span style="color:#f92672">(</span>project<span style="color:#f92672">(</span><span style="color:#e6db74">&#34;:annotations&#34;</span><span style="color:#f92672">))</span>
-</span></span><span style="display:flex;"><span>kapt<span style="color:#f92672">(</span>project<span style="color:#f92672">(</span><span style="color:#e6db74">&#34;:codegen&#34;</span><span style="color:#f92672">))</span></span></span></code></pre></div>
-<p>Once they&rsquo;re added we are ready to use it. All we need is a layout for our recycler item and a <code>RecyclerView</code>. After that we just have to write our class containing our bindings and press build.</p>
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><h2 id="using-it">Using it<a hidden class="anchor" aria-hidden="true" href="#using-it">#</a></h2>
+<p>We are now finished with the processor and all that left is using it inside our main module. For that we have to add the two new modules as a dependency.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-gradle" data-lang="gradle"><span style="display:flex;"><span>implementation<span style="color:#f92672">(</span>project<span style="color:#f92672">(</span><span style="color:#e6db74">&#34;:annotations&#34;</span><span style="color:#f92672">))</span>
+</span></span><span style="display:flex;"><span>kapt<span style="color:#f92672">(</span>project<span style="color:#f92672">(</span><span style="color:#e6db74">&#34;:codegen&#34;</span><span style="color:#f92672">))</span>
+</span></span></code></pre></div><p>Once they&rsquo;re added we are ready to use it. All we need is a layout for our recycler item and a <code>RecyclerView</code>. After that we just have to write our class containing our bindings and press build.</p>
 <p>If we did everything correctly, once the build is finished there will be a newly generated adapter which we can then use with our <code>RecyclerView</code>s.</p>
-<h2 id="sample-code">Sample Code<a href="#sample-code">
-    <svg role="img" aria-labelledby="sample-code-IconTitle" fill="var(--color-primary)" height="22" viewBox="0 0 24 24" width="22" xmlns="http://www.w3.org/2000/svg">
-      <title id="sample-code-IconTitle">Link to this heading</title>
-      <path d="M0 0h24v24H0z" fill="none"></path>
-      <path d="M3.9 12c0-1.71 1.39-3.1 3.1-3.1h4V7H7c-2.76.0-5 2.24-5 5s2.24 5 5 5h4v-1.9H7c-1.71.0-3.1-1.39-3.1-3.1zM8 13h8v-2H8v2zm9-6h-4v1.9h4c1.71.0 3.1 1.39 3.1 3.1s-1.39 3.1-3.1 3.1h-4V17h4c2.76.0 5-2.24 5-5s-2.24-5-5-5z"></path>
-    </svg>
-  </a>
-</h2><p>If you would like to have a look at the final version of the code you can do that at <a href="https://github.com/PsHegger/recycleradapter-generator/tree/0.1.0" target="_blank" rel="noopener">https://github.com/PsHegger/recycleradapter-generator/tree/0.1.0</a>.</p>
+<h2 id="sample-code">Sample Code<a hidden class="anchor" aria-hidden="true" href="#sample-code">#</a></h2>
+<p>If you would like to have a look at the final version of the code you can do that at <a href="https://github.com/PsHegger/recycleradapter-generator/tree/0.1.0">https://github.com/PsHegger/recycleradapter-generator/tree/0.1.0</a>.</p>
 <p>It is also a bit extended and works as a standalone library, so if you&rsquo;re an Android developer and would like to use it in your project feel free to do so.</p>
 <hr>
-<p>This post was originally published on <a href="https://www.kotlindevelopment.com/" target="_blank" rel="noopener">kotlindevelopment.com</a>. If you liked it please consider visiting and reading some other articles there.</p>
+<p>This post was originally published on <a href="https://www.kotlindevelopment.com/">kotlindevelopment.com</a>. If you liked it please consider visiting and reading some other articles there.</p>
 
-    </article>
-    <aside>
-      <div class="single-terms">
-        
-          
-          <a class="term" href="https://pshegger.github.io/tags/programming/">programming</a></li>
-          
-          <a class="term" href="https://pshegger.github.io/tags/kotlin/">kotlin</a></li>
-          
-          <a class="term" href="https://pshegger.github.io/tags/annotation/">annotation</a></li>
-          
-          <a class="term" href="https://pshegger.github.io/tags/kapt/">kapt</a></li>
-          
-        
-      </div>
-      
-  
-  
-  
 
-  <section>
-    <h2>Share</h2>
-    <div class="social-links">
-      <ul class="social-icons--share">
-        
-        
-        <a href="https://twitter.com/intent/tweet?url=https%3a%2f%2fpshegger.github.io%2fposts%2fgenerate-for-me%2f&amp;text=%40GenerateForMe" target="_blank" rel="noopener" aria-label="Share on Twitter" class="social-btn twitter">
-          <li><svg xmlns="http://www.w3.org/2000/svg" class="icon icon-twitter" width="24" height="24" viewBox="0 0 384 312" fill="var(--color-primary)"><path d="m384 36.9c-14.1 6.3-29.3 10.5-45.2 12.4 16.3-9.7 28.8-25.2 34.6-43.6-15.2 9-32.1 15.6-50 19.1-14.4-15.2-34.9-24.8-57.5-24.8-43.5 0-78.8 35.3-78.8 78.8 0 6.2.7 12.2 2 17.9-65.5-3.3-123.5-34.6-162.4-82.3-6.7 11.6-10.6 25.2-10.6 39.6 0 27.3 13.9 51.4 35 65.6-12.9-.4-25.1-4-35.7-9.9v1c0 38.2 27.2 70 63.2 77.2-6.6 1.8-13.6 2.8-20.8 2.8-5.1 0-10-.5-14.8-1.4 10 31.3 39.1 54.1 73.6 54.7-27 21.1-60.9 33.7-97.8 33.7-6.4 0-12.6-.4-18.8-1.1 34.9 22.4 76.3 35.4 120.8 35.4 144.9 0 224.1-120 224.1-224.1 0-3.4-.1-6.8-.2-10.2 15.4-11.1 28.7-25 39.3-40.8z"/></svg></li>
-        </a>
-        
-        
-        
-        <a href="https://www.reddit.com/submit?url=https%3a%2f%2fpshegger.github.io%2fposts%2fgenerate-for-me%2f" target="_blank" rel="noopener" aria-label="Share on Reddit" class="social-btn reddit">
-          <li><svg xmlns="http://www.w3.org/2000/svg" class="icon icon-reddit" width="24" height="24" viewBox="0 0 24 24" fill="var(--color-primary)"><path d="M24 11.779c0-1.459-1.192-2.645-2.657-2.645-.715 0-1.363.286-1.84.746-1.81-1.191-4.259-1.949-6.971-2.046l1.483-4.669 4.016.941-.006.058c0 1.193.975 2.163 2.174 2.163 1.198 0 2.172-.97 2.172-2.163s-.975-2.164-2.172-2.164c-.92 0-1.704.574-2.021 1.379l-4.329-1.015c-.189-.046-.381.063-.44.249l-1.654 5.207c-2.838.034-5.409.798-7.3 2.025-.474-.438-1.103-.712-1.799-.712-1.465 0-2.656 1.187-2.656 2.646 0 .97.533 1.811 1.317 2.271-.052.282-.086.567-.086.857 0 3.911 4.808 7.093 10.719 7.093s10.72-3.182 10.72-7.093c0-.274-.029-.544-.075-.81.832-.447 1.405-1.312 1.405-2.318zm-17.224 1.816c0-.868.71-1.575 1.582-1.575.872 0 1.581.707 1.581 1.575s-.709 1.574-1.581 1.574-1.582-.706-1.582-1.574zm9.061 4.669c-.797.793-2.048 1.179-3.824 1.179l-.013-.003-.013.003c-1.777 0-3.028-.386-3.824-1.179-.145-.144-.145-.379 0-.523.145-.145.381-.145.526 0 .65.647 1.729.961 3.298.961l.013.003.013-.003c1.569 0 2.648-.315 3.298-.962.145-.145.381-.144.526 0 .145.145.145.379 0 .524zm-.189-3.095c-.872 0-1.581-.706-1.581-1.574 0-.868.709-1.575 1.581-1.575s1.581.707 1.581 1.575-.709 1.574-1.581 1.574z"/></svg></li>
-        </a>
-        
-        
-                
-        <a href="https://www.facebook.com/sharer.php?u=https%3a%2f%2fpshegger.github.io%2fposts%2fgenerate-for-me%2f" target="_blank" rel="noopener" aria-label="Share on Facebook" class="social-btn facebook">
-          <li><svg xmlns="http://www.w3.org/2000/svg" class="icon icon-facebook" width="24" height="24" viewBox="0 0 352 352" fill="var(--color-primary)"><path d="m0 32v288c0 17.5 14.5 32 32 32h288c17.5 0 32-14.5 32-32v-288c0-17.5-14.5-32-32-32h-288c-17.5 0-32 14.5-32 32zm320 0v288h-83v-108h41.5l6-48h-47.5v-31c0-14 3.5-23.5 23.5-23.5h26v-43.5c-4.4-.6-19.8-1.5-37.5-1.5-36.9 0-62 22.2-62 63.5v36h-42v48h42v108h-155v-288z"/></svg></li>
-        </a>
-        
-        
-        
-        <a href="https://www.linkedin.com/shareArticle?mini=true&amp;url=https%3a%2f%2fpshegger.github.io%2fposts%2fgenerate-for-me%2f&amp;source=https%3a%2f%2fpshegger.github.io%2fposts%2fgenerate-for-me%2f&amp;title=%40GenerateForMe&amp;summary=%40GenerateForMe" target="_blank" rel="noopener" aria-label="Share on LinkedIn" class="social-btn linkedin">
-          <li><svg xmlns="http://www.w3.org/2000/svg" class="icon icon-linkedin" width="24" height="24" viewBox="0 0 352 352" fill="var(--color-primary)"><path d="M0,40v272c0,21.9,18.1,40,40,40h272c21.9,0,40-18.1,40-40V40c0-21.9-18.1-40-40-40H40C18.1,0,0,18.1,0,40z M312,32 c4.6,0,8,3.4,8,8v272c0,4.6-3.4,8-8,8H40c-4.6,0-8-3.4-8-8V40c0-4.6,3.4-8,8-8H312z M59.5,87c0,15.2,12.3,27.5,27.5,27.5 c15.2,0,27.5-12.3,27.5-27.5c0-15.2-12.3-27.5-27.5-27.5C71.8,59.5,59.5,71.8,59.5,87z M187,157h-1v-21h-45v152h47v-75 c0-19.8,3.9-39,28.5-39c24.2,0,24.5,22.4,24.5,40v74h47v-83.5c0-40.9-8.7-72-56.5-72C208.5,132.5,193.3,145.1,187,157z M64,288h47.5 V136H64V288z"/></svg></li>
-        </a>
-        
-        
-        
-        <a href="mailto:?subject=pshegger%20-%20%40GenerateForMe.&amp;body=%40GenerateForMe%2c%20by%20pshegger%0aAnnotations%20are%20extremely%20versatile%20especially%20if%20we%20write%20our%20own%20processor%20to%20overcharge%20our%20development.%20Learn%20how%20to%20write%20one%20in%20Kotlin.%0a%0ahttps%3a%2f%2fpshegger.github.io%2fposts%2fgenerate-for-me%2f%0a" target="_blank" class="social-btn email">
-          <li><svg xmlns="http://www.w3.org/2000/svg" class="icon icon-mail" width="24" height="24" viewBox="0 0 416 288" fill="var(--color-primary)"><path d="m0 16v256 16h16 384 16v-16-256-16h-16-384-16zm347 16-139 92.5-139-92.5zm-148 125.5 9 5.5 9-5.5 167-111.5v210h-352v-210z"/></svg></li>
-        </a>
-      </ul>
-    </div>
-  </section>
-  
-        
-
-  
-  
-    <section class="related">
-      <h2>See Also</h2>
-      <ul class="related-posts">
-        
-          <li><a href="/posts/kotlin-contracts/">Help Yourself and the Compiler with Contracts</a></li>
-        
-      </ul>
-    </section>
-  
-
-        
-  <section>
-    <h2>Read Next</h2>
-    <div class="single-next-previous">
-      
-        <a class="previous" href="https://pshegger.github.io/posts/kotlin-contracts/">&laquo; Help Yourself and the Compiler with Contracts</a>
-      
-      
-        <a class="next" href="https://pshegger.github.io/posts/grpc-talk/">gRPC for Kotliners &raquo;</a>
-      
-    </div>
-  </section>
-
-      
-    </aside>
   </div>
-</div>
 
-    </main><footer>
-  
-  <div class="section footer">
-    <p class="footer-copyright">&copy; 2024 &middot; 
-      <a href="https://pshegger.github.io/">pshegger</a>
-      
-    </p>
-    
-      <div class="footer-socials">
-        
-<div class="social-links">
-  <ul class="social-icons">
-    
-    
+  <footer class="post-footer">
+    <ul class="post-tags">
+      <li><a href="https://pshegger.github.io/tags/programming/">Programming</a></li>
+      <li><a href="https://pshegger.github.io/tags/kotlin/">Kotlin</a></li>
+      <li><a href="https://pshegger.github.io/tags/annotation/">Annotation</a></li>
+      <li><a href="https://pshegger.github.io/tags/kapt/">Kapt</a></li>
+    </ul>
+
+<ul class="share-buttons">
     <li>
-      <a href="https://twitter.com/pshegger" target="_blank" rel="noopener" aria-label="Visit Twitter profile" class="social-btn twitter">
-        <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-twitter" width="24" height="24" viewBox="0 0 384 312" fill="var(--color-primary)"><path d="m384 36.9c-14.1 6.3-29.3 10.5-45.2 12.4 16.3-9.7 28.8-25.2 34.6-43.6-15.2 9-32.1 15.6-50 19.1-14.4-15.2-34.9-24.8-57.5-24.8-43.5 0-78.8 35.3-78.8 78.8 0 6.2.7 12.2 2 17.9-65.5-3.3-123.5-34.6-162.4-82.3-6.7 11.6-10.6 25.2-10.6 39.6 0 27.3 13.9 51.4 35 65.6-12.9-.4-25.1-4-35.7-9.9v1c0 38.2 27.2 70 63.2 77.2-6.6 1.8-13.6 2.8-20.8 2.8-5.1 0-10-.5-14.8-1.4 10 31.3 39.1 54.1 73.6 54.7-27 21.1-60.9 33.7-97.8 33.7-6.4 0-12.6-.4-18.8-1.1 34.9 22.4 76.3 35.4 120.8 35.4 144.9 0 224.1-120 224.1-224.1 0-3.4-.1-6.8-.2-10.2 15.4-11.1 28.7-25 39.3-40.8z"/></svg>
-      </a>
+        <a target="_blank" rel="noopener noreferrer" aria-label="share @GenerateForMe on x"
+            href="https://x.com/intent/tweet/?text=%40GenerateForMe&amp;url=https%3a%2f%2fpshegger.github.io%2fposts%2fgenerate-for-me%2f&amp;hashtags=programming%2ckotlin%2cannotation%2ckapt">
+            <svg version="1.1" viewBox="0 0 512 512" xml:space="preserve" height="30px" width="30px" fill="currentColor">
+                <path
+                    d="M512 62.554 L 512 449.446 C 512 483.97 483.97 512 449.446 512 L 62.554 512 C 28.03 512 0 483.97 0 449.446 L 0 62.554 C 0 28.03 28.029 0 62.554 0 L 449.446 0 C 483.971 0 512 28.03 512 62.554 Z M 269.951 190.75 L 182.567 75.216 L 56 75.216 L 207.216 272.95 L 63.9 436.783 L 125.266 436.783 L 235.9 310.383 L 332.567 436.783 L 456 436.783 L 298.367 228.367 L 432.367 75.216 L 371.033 75.216 Z M 127.633 110 L 164.101 110 L 383.481 400.065 L 349.5 400.065 Z" />
+            </svg>
+        </a>
     </li>
-    
-
-    
-    
     <li>
-      <a href="https://github.com/pshegger" target="_blank" rel="noopener" aria-label="Visit Github profile" class="social-btn github">
-        <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-github" width="24" height="24" viewBox="0 0 24 24" fill="var(--color-primary)"><path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/></svg>
-      </a>
+        <a target="_blank" rel="noopener noreferrer" aria-label="share @GenerateForMe on linkedin"
+            href="https://www.linkedin.com/shareArticle?mini=true&amp;url=https%3a%2f%2fpshegger.github.io%2fposts%2fgenerate-for-me%2f&amp;title=%40GenerateForMe&amp;summary=%40GenerateForMe&amp;source=https%3a%2f%2fpshegger.github.io%2fposts%2fgenerate-for-me%2f">
+            <svg version="1.1" viewBox="0 0 512 512" xml:space="preserve" height="30px" width="30px" fill="currentColor">
+                <path
+                    d="M449.446,0c34.525,0 62.554,28.03 62.554,62.554l0,386.892c0,34.524 -28.03,62.554 -62.554,62.554l-386.892,0c-34.524,0 -62.554,-28.03 -62.554,-62.554l0,-386.892c0,-34.524 28.029,-62.554 62.554,-62.554l386.892,0Zm-288.985,423.278l0,-225.717l-75.04,0l0,225.717l75.04,0Zm270.539,0l0,-129.439c0,-69.333 -37.018,-101.586 -86.381,-101.586c-39.804,0 -57.634,21.891 -67.617,37.266l0,-31.958l-75.021,0c0.995,21.181 0,225.717 0,225.717l75.02,0l0,-126.056c0,-6.748 0.486,-13.492 2.474,-18.315c5.414,-13.475 17.767,-27.434 38.494,-27.434c27.135,0 38.007,20.707 38.007,51.037l0,120.768l75.024,0Zm-307.552,-334.556c-25.674,0 -42.448,16.879 -42.448,39.002c0,21.658 16.264,39.002 41.455,39.002l0.484,0c26.165,0 42.452,-17.344 42.452,-39.002c-0.485,-22.092 -16.241,-38.954 -41.943,-39.002Z" />
+            </svg>
+        </a>
     </li>
-    
-
-    
-    
     <li>
-      <a href="https://stackoverflow.com/users/751482/pshegger" target="_blank" rel="noopener" aria-label="Visit Stack Overflow profile" class="social-btn stack-overflow">
-        <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-stack-overflow" width="24" height="24" viewBox="0 0 24 24" fill="var(--color-primary)"><path d="M15 21h-10v-2h10v2zm6-11.665l-1.621-9.335-1.993.346 1.62 9.335 1.994-.346zm-5.964 6.937l-9.746-.975-.186 2.016 9.755.879.177-1.92zm.538-2.587l-9.276-2.608-.526 1.954 9.306 2.5.496-1.846zm1.204-2.413l-8.297-4.864-1.029 1.743 8.298 4.865 1.028-1.744zm1.866-1.467l-5.339-7.829-1.672 1.14 5.339 7.829 1.672-1.14zm-2.644 4.195v8h-12v-8h-2v10h16v-10h-2z"/></svg>
-      </a>
+        <a target="_blank" rel="noopener noreferrer" aria-label="share @GenerateForMe on reddit"
+            href="https://reddit.com/submit?url=https%3a%2f%2fpshegger.github.io%2fposts%2fgenerate-for-me%2f&title=%40GenerateForMe">
+            <svg version="1.1" viewBox="0 0 512 512" xml:space="preserve" height="30px" width="30px" fill="currentColor">
+                <path
+                    d="M449.446,0c34.525,0 62.554,28.03 62.554,62.554l0,386.892c0,34.524 -28.03,62.554 -62.554,62.554l-386.892,0c-34.524,0 -62.554,-28.03 -62.554,-62.554l0,-386.892c0,-34.524 28.029,-62.554 62.554,-62.554l386.892,0Zm-3.446,265.638c0,-22.964 -18.616,-41.58 -41.58,-41.58c-11.211,0 -21.361,4.457 -28.841,11.666c-28.424,-20.508 -67.586,-33.757 -111.204,-35.278l18.941,-89.121l61.884,13.157c0.756,15.734 13.642,28.29 29.56,28.29c16.407,0 29.706,-13.299 29.706,-29.701c0,-16.403 -13.299,-29.702 -29.706,-29.702c-11.666,0 -21.657,6.792 -26.515,16.578l-69.105,-14.69c-1.922,-0.418 -3.939,-0.042 -5.585,1.036c-1.658,1.073 -2.811,2.761 -3.224,4.686l-21.152,99.438c-44.258,1.228 -84.046,14.494 -112.837,35.232c-7.468,-7.164 -17.589,-11.591 -28.757,-11.591c-22.965,0 -41.585,18.616 -41.585,41.58c0,16.896 10.095,31.41 24.568,37.918c-0.639,4.135 -0.99,8.328 -0.99,12.576c0,63.977 74.469,115.836 166.33,115.836c91.861,0 166.334,-51.859 166.334,-115.836c0,-4.218 -0.347,-8.387 -0.977,-12.493c14.564,-6.47 24.735,-21.034 24.735,-38.001Zm-119.474,108.193c-20.27,20.241 -59.115,21.816 -70.534,21.816c-11.428,0 -50.277,-1.575 -70.522,-21.82c-3.007,-3.008 -3.007,-7.882 0,-10.889c3.003,-2.999 7.882,-3.003 10.885,0c12.777,12.781 40.11,17.317 59.637,17.317c19.522,0 46.86,-4.536 59.657,-17.321c3.016,-2.999 7.886,-2.995 10.885,0.008c3.008,3.011 3.003,7.882 -0.008,10.889Zm-5.23,-48.781c-16.373,0 -29.701,-13.324 -29.701,-29.698c0,-16.381 13.328,-29.714 29.701,-29.714c16.378,0 29.706,13.333 29.706,29.714c0,16.374 -13.328,29.698 -29.706,29.698Zm-160.386,-29.702c0,-16.381 13.328,-29.71 29.714,-29.71c16.369,0 29.689,13.329 29.689,29.71c0,16.373 -13.32,29.693 -29.689,29.693c-16.386,0 -29.714,-13.32 -29.714,-29.693Z" />
+            </svg>
+        </a>
     </li>
-    
-
-    
-    
-
-    
-    
     <li>
-      <a href="mailto:?to=pshegger%40gmail.com" target="_blank" class="social-btn email">
-        <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-mail" width="24" height="24" viewBox="0 0 416 288" fill="var(--color-primary)"><path d="m0 16v256 16h16 384 16v-16-256-16h-16-384-16zm347 16-139 92.5-139-92.5zm-148 125.5 9 5.5 9-5.5 167-111.5v210h-352v-210z"/></svg>
-      </a>
+        <a target="_blank" rel="noopener noreferrer" aria-label="share @GenerateForMe on ycombinator"
+            href="https://news.ycombinator.com/submitlink?t=%40GenerateForMe&u=https%3a%2f%2fpshegger.github.io%2fposts%2fgenerate-for-me%2f">
+            <svg version="1.1" xml:space="preserve" width="30px" height="30px" viewBox="0 0 512 512" fill="currentColor"
+                xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape">
+                <path
+                    d="M449.446 0C483.971 0 512 28.03 512 62.554L512 449.446C512 483.97 483.97 512 449.446 512L62.554 512C28.03 512 0 483.97 0 449.446L0 62.554C0 28.03 28.029 0 62.554 0L449.446 0ZM183.8767 87.9921H121.8427L230.6673 292.4508V424.0079H281.3328V292.4508L390.1575 87.9921H328.1233L256 238.2489z" />
+            </svg>
+        </a>
     </li>
+</ul>
+
+  </footer>
+</article>
+    </main>
     
-  </ul>
-</div>
-      </div>
-    
-  </div>
+<footer class="footer">
+        <span>&copy; 2025 <a href="https://pshegger.github.io/">pshegger&#39;s blog</a></span> · 
+
+    <span>
+        Powered by
+        <a href="https://gohugo.io/" rel="noopener noreferrer" target="_blank">Hugo</a> &
+        <a href="https://github.com/adityatelange/hugo-PaperMod/" rel="noopener" target="_blank">PaperMod</a>
+    </span>
 </footer>
+<a href="#top" aria-label="go to top" title="Go to Top (Alt + G)" class="top-link" id="top-link" accesskey="g">
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 12 6" fill="currentColor">
+        <path d="M12 6H0l6-6z" />
+    </svg>
+</a>
 
-  
-
-
-
-
-
-
-
-
-  
-  
-    
-
-<script src="https://pshegger.github.io/main.min.js"></script>
-
-
-
-  
-<script async src="https://www.googletagmanager.com/gtag/js?id=G-NKBPT9CS94"></script>
 <script>
-var doNotTrack = false;
-if (!doNotTrack) {
-	window.dataLayer = window.dataLayer || [];
-	function gtag(){dataLayer.push(arguments);}
-	gtag('js', new Date());
-	gtag('config', 'G-NKBPT9CS94', { 'anonymize_ip': false });
-}
-</script>
+    let menu = document.getElementById('menu')
+    if (menu) {
+        menu.scrollLeft = localStorage.getItem("menu-scroll-position");
+        menu.onscroll = function () {
+            localStorage.setItem("menu-scroll-position", menu.scrollLeft);
+        }
+    }
 
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+        anchor.addEventListener("click", function (e) {
+            e.preventDefault();
+            var id = this.getAttribute("href").substr(1);
+            if (!window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+                document.querySelector(`[id='${decodeURIComponent(id)}']`).scrollIntoView({
+                    behavior: "smooth"
+                });
+            } else {
+                document.querySelector(`[id='${decodeURIComponent(id)}']`).scrollIntoView();
+            }
+            if (id === "top") {
+                history.replaceState(null, null, " ");
+            } else {
+                history.pushState(null, null, `#${id}`);
+            }
+        });
+    });
+
+</script>
+<script>
+    var mybutton = document.getElementById("top-link");
+    window.onscroll = function () {
+        if (document.body.scrollTop > 800 || document.documentElement.scrollTop > 800) {
+            mybutton.style.visibility = "visible";
+            mybutton.style.opacity = "1";
+        } else {
+            mybutton.style.visibility = "hidden";
+            mybutton.style.opacity = "0";
+        }
+    };
+
+</script>
+<script>
+    document.getElementById("theme-toggle").addEventListener("click", () => {
+        if (document.body.className.includes("dark")) {
+            document.body.classList.remove('dark');
+            localStorage.setItem("pref-theme", 'light');
+        } else {
+            document.body.classList.add('dark');
+            localStorage.setItem("pref-theme", 'dark');
+        }
+    })
+
+</script>
 </body>
+
 </html>

@@ -1,388 +1,195 @@
 <!DOCTYPE html>
-<html lang="en-us"><head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  
-  
+<html lang="en" dir="auto">
 
-
-
-
-
-  
-  
-  
-    
-    
-  
-
-
-
-
-
-  
-
-
-
-  
-  
-
-<link rel="stylesheet" href="https://pshegger.github.io/main.min.css" />
-  
-<meta name="robots" content="index, follow">
-    <meta name="googlebot" content="index, follow, max-snippet:-1, max-image-preview:large, max-video-preview:-1">
-    <meta name="bingbot" content="index, follow, max-snippet:-1, max-image-preview:large, max-video-preview:-1">
-  
-
-<title>My First Gamejam</title>
-
-
-<meta name="author" content="pshegger">
-
+<head><meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<meta name="robots" content="noindex, nofollow">
+<title>My First Gamejam | pshegger&#39;s blog</title>
+<meta name="keywords" content="gamedev, gamejam, ludum dare, godot">
 <meta name="description" content="My thought and experiences about my first gamejam (Ludum Dare 53)">
+<meta name="author" content="pshegger">
 <link rel="canonical" href="https://pshegger.github.io/posts/my-first-gamejam/">
-<meta property="og:locale" content="">
-<meta property="og:type" content="article">
-<meta property="og:title" content="My First Gamejam">
-<meta property="og:description" content="My thought and experiences about my first gamejam (Ludum Dare 53)">
-<meta property="og:url" content="https://pshegger.github.io/posts/my-first-gamejam/">
-<meta property="article:published_time" content="2023-05-02T00:00:00+02:00">
-  <meta property="article:modified_time" content="2023-05-02T00:00:00+02:00">
-  
-
-
-
-
-
-
-  <meta name="twitter:site" content="pshegger">
-
-
-  <meta name="twitter:creator" content="pshegger">
-
-<meta name="twitter:title" content="My First Gamejam">
-<meta name="twitter:description" content="My thought and experiences about my first gamejam (Ludum Dare 53)">
-
-
-
-  <meta name="twitter:card" content="summary">
-
-
-
-
-
-
-<script type="application/ld+json">
-{
-  "@context": "https://schema.org",
-  "@graph": [
-    {
-      "@type": "Person",
-      "@id": "https://pshegger.github.io/#/schema/person/1",
-      "name":  null ,
-      "url": "https://pshegger.github.io/",
-      "image": {
-        "@type": "ImageObject",
-        "@id": "https://pshegger.github.io/#/schema/image/1",
-        "url": "https://pshegger.github.io/\u003cnil\u003e",
-        "width": null ,
-        "height": null ,
-        "caption":  null 
-      }
-    },
-    {
-      "@type": "WebSite",
-      "@id": "https://pshegger.github.io/#/schema/website/1",
-      "url": "https://pshegger.github.io/",
-      "name": "pshegger",
-      "description":  null ,
-      "publisher": {
-        "@id": "https://pshegger.github.io/#/schema/person/1"
-      }
-    },
-    {
-      "@type": "WebPage",
-      "@id": "https://pshegger.github.io/posts/my-first-gamejam/",
-      "url": "https://pshegger.github.io/posts/my-first-gamejam/",
-      "name": "My First Gamejam",
-      "description": "My thought and experiences about my first gamejam (Ludum Dare 53)",
-      "isPartOf": {
-        "@id": "https://pshegger.github.io/#/schema/website/1"
-      },
-      "about": {
-        "@id": "https://pshegger.github.io/#/schema/person/1"
-      },
-      "datePublished": "2023-05-02T00:00:00+02:00",
-      "dateModified": "2023-05-02T00:00:00+02:00",
-      "breadcrumb": {
-        "@id": "https://pshegger.github.io/posts/my-first-gamejam/#/schema/breadcrumb/1"
-      },
-      "primaryImageOfPage": {
-        "@id": "https://pshegger.github.io/posts/my-first-gamejam/#/schema/image/2"
-      },
-      "inLanguage":  null ,
-      "potentialAction": [{
-        "@type": "ReadAction", "target": ["https://pshegger.github.io/posts/my-first-gamejam/"]
-      }]
-    },
-    {
-      "@type": "BreadcrumbList",
-      "@id": "https://pshegger.github.io/posts/my-first-gamejam/#/schema/breadcrumb/1",
-      "name": "Breadcrumbs",
-      "itemListElement": [{
-        "@type": "ListItem",
-        "position":  1 ,
-        "item": {
-          "@type": "WebPage",
-          "@id": "https://pshegger.github.io/",
-          "url": "https://pshegger.github.io/",
-          "name": "Home"
-          }
-        },{
-        "@type": "ListItem",
-        "position":  2 ,
-        "item": {
-          "@type": "WebPage",
-          "@id": "https://pshegger.github.io/posts/",
-          "url": "https://pshegger.github.io/posts/",
-          "name": "Posts"
-          }
-        },{
-        "@type": "ListItem",
-        "position":  3 ,
-        "item": {
-          "@id": "https://pshegger.github.io/posts/my-first-gamejam/"
-          }
-        }]
-    },
-    {
-      "@context": "https://schema.org",
-      "@graph": [
-        {
-          "@type": "Article",
-          "@id": "https://pshegger.github.io/#/schema/article/1",
-          "headline": "My First Gamejam",
-          "description": "My thought and experiences about my first gamejam (Ludum Dare 53)",
-          "isPartOf": {
-            "@id": "https://pshegger.github.io/posts/my-first-gamejam/"
-          },
-          "mainEntityOfPage": {
-            "@id": "https://pshegger.github.io/posts/my-first-gamejam/"
-          },
-          "datePublished": "2023-05-02T00:00:00+02:00",
-          "dateModified": "2023-05-02T00:00:00+02:00",
-          "author": {
-            "@id": "https://pshegger.github.io/#/schema/person/1"
-          },          
-          "publisher": {
-            "@id": "https://pshegger.github.io/#/schema/person/1"
-          },
-          "image": {
-            "@id": "https://pshegger.github.io/posts/my-first-gamejam/#/schema/image/2"
-          }
+<link crossorigin="anonymous" href="/assets/css/stylesheet.f49d66caae9ea0fd43f21f29e71a8d3e284517ed770f2aa86fa012953ad3c9ef.css" integrity="sha256-9J1myq6eoP1D8h8p5xqNPihFF&#43;13Dyqob6ASlTrTye8=" rel="preload stylesheet" as="style">
+<link rel="icon" href="https://pshegger.github.io/favicon.ico">
+<link rel="icon" type="image/png" sizes="16x16" href="https://pshegger.github.io/favicon-16x16.png">
+<link rel="icon" type="image/png" sizes="32x32" href="https://pshegger.github.io/favicon-32x32.png">
+<link rel="apple-touch-icon" href="https://pshegger.github.io/apple-touch-icon.png">
+<link rel="mask-icon" href="https://pshegger.github.io/safari-pinned-tab.svg">
+<meta name="theme-color" content="#2e2e33">
+<meta name="msapplication-TileColor" content="#2e2e33">
+<link rel="alternate" hreflang="en" href="https://pshegger.github.io/posts/my-first-gamejam/">
+<noscript>
+    <style>
+        #theme-toggle,
+        .top-link {
+            display: none;
         }
-      ]
-    },{
-      "@context": "https://schema.org",
-      "@graph": [
-        {
-          "@type": "ImageObject",
-          "@id": "https://pshegger.github.io/posts/my-first-gamejam/#/schema/image/2",
-          "url":  null ,
-          "contentUrl":  null ,
-          "caption": "My First Gamejam"
+
+    </style>
+    <style>
+        @media (prefers-color-scheme: dark) {
+            :root {
+                --theme: rgb(29, 30, 32);
+                --entry: rgb(46, 46, 51);
+                --primary: rgb(218, 218, 219);
+                --secondary: rgb(155, 156, 157);
+                --tertiary: rgb(65, 66, 68);
+                --content: rgb(196, 196, 197);
+                --code-block-bg: rgb(46, 46, 51);
+                --code-bg: rgb(55, 56, 62);
+                --border: rgb(51, 51, 51);
+            }
+
+            .list {
+                background: var(--theme);
+            }
+
+            .list:not(.dark)::-webkit-scrollbar-track {
+                background: 0 0;
+            }
+
+            .list:not(.dark)::-webkit-scrollbar-thumb {
+                border-color: var(--theme);
+            }
         }
-      ]
+
+    </style>
+</noscript>
+</head>
+
+<body class="" id="top">
+<script>
+    if (localStorage.getItem("pref-theme") === "dark") {
+        document.body.classList.add('dark');
+    } else if (localStorage.getItem("pref-theme") === "light") {
+        document.body.classList.remove('dark')
+    } else if (window.matchMedia('(prefers-color-scheme: dark)').matches) {
+        document.body.classList.add('dark');
     }
-  ]
-}
+
 </script>
-  
 
-  
-
-</head><body>
-    <header class="container">
-  <nav class="main-nav" id="js-navbar">
-    <a class="logo" href="https://pshegger.github.io/">pshegger</a>
-    <ul class="menu" id="js-menu">
-      
-      
-      
-        <li class="menu-item">
-          <a href="/about/" class="menu-link">About</a>
-        </li>
-      
-      
-      
-        <li class="menu-item">
-          <a href="/posts/" class="menu-link">All Posts</a>
-        </li>
-      
-      
-      
-      <li class="menu-item">
-        <span class="menu-link">Explore<span class="drop-icon">▾</span></span>
-        <ul class="sub-menu">
-          
-            <li class="menu-item">
-              <a href="/categories/" class="menu-link">Categories</a>                  
-            </li>
-          
-            <li class="menu-item">
-              <a href="/tags/" class="menu-link">Tags</a>                  
-            </li>
-          
-            <li class="menu-item">
-              <a href="/series/" class="menu-link">Series</a>                  
-            </li>
-          
-        </ul>
-      </li>
-      
-      
-      <li class="menu-item--align">
-        <div class="switch">
-          <input class="switch-input" type="checkbox" id="themeSwitch">
-          <label aria-hidden="true" class="switch-label" for="themeSwitch">On</label>
-          <div aria-hidden="true" class="switch-marker"></div>
+<header class="header">
+    <nav class="nav">
+        <div class="logo">
+            <a href="https://pshegger.github.io/" accesskey="h" title="pshegger&#39;s blog (Alt + H)">pshegger&#39;s blog</a>
+            <div class="logo-switches">
+                <button id="theme-toggle" accesskey="t" title="(Alt + T)" aria-label="Toggle theme">
+                    <svg id="moon" xmlns="http://www.w3.org/2000/svg" width="24" height="18" viewBox="0 0 24 24"
+                        fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                        stroke-linejoin="round">
+                        <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
+                    </svg>
+                    <svg id="sun" xmlns="http://www.w3.org/2000/svg" width="24" height="18" viewBox="0 0 24 24"
+                        fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                        stroke-linejoin="round">
+                        <circle cx="12" cy="12" r="5"></circle>
+                        <line x1="12" y1="1" x2="12" y2="3"></line>
+                        <line x1="12" y1="21" x2="12" y2="23"></line>
+                        <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line>
+                        <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line>
+                        <line x1="1" y1="12" x2="3" y2="12"></line>
+                        <line x1="21" y1="12" x2="23" y2="12"></line>
+                        <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line>
+                        <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
+                    </svg>
+                </button>
+            </div>
         </div>
-      </li>
-    </ul>
-    <span class="nav-toggle" id="js-navbar-toggle">
-      <svg xmlns="http://www.w3.org/2000/svg" id="Outline" viewBox="0 0 24 24" width="30" height="30" fill="var(--color-contrast-high)"><rect y="11" width="24" height="2" rx="1"/><rect y="4" width="24" height="2" rx="1"/><rect y="18" width="24" height="2" rx="1"/></svg>
-    </span>
-  </nav>
-</header><main class="section">
-<div class="container">
-  <section class="page-header">
-    <h1 class="page-header-title">My First Gamejam</h1>
-    <div class="post-list-meta">
-      <div class="post-list-dates">May 2, 2023&nbsp;&middot;&nbsp;15 min.</div>
-      
-      <div class="post-list-categories">
-        
-          <a href="https://pshegger.github.io/categories/gamedev/">gamedev</a>
-        
-      </div>
-      
-      
+        <ul id="menu">
+            <li>
+                <a href="https://pshegger.github.io/categories/" title="Categories">
+                    <span>Categories</span>
+                </a>
+            </li>
+            <li>
+                <a href="https://pshegger.github.io/tags/" title="Tags">
+                    <span>Tags</span>
+                </a>
+            </li>
+        </ul>
+    </nav>
+</header>
+<main class="main">
+
+<article class="post-single">
+  <header class="post-header">
+    
+    <h1 class="post-title entry-hint-parent">
+      My First Gamejam
+    </h1>
+    <div class="post-description">
+      My thought and experiences about my first gamejam (Ludum Dare 53)
     </div>
-    <p class="page-header-desc">My thought and experiences about my first gamejam (Ludum Dare 53)</p>
-    <div class="single-terms">
-      
-      
-      <a class="term" href="https://pshegger.github.io/tags/gamedev/">gamedev</a></li>
-      
-      <a class="term" href="https://pshegger.github.io/tags/gamejam/">gamejam</a></li>
-      
-      <a class="term" href="https://pshegger.github.io/tags/ludum-dare/">ludum dare</a></li>
-      
-      <a class="term" href="https://pshegger.github.io/tags/godot/">godot</a></li>
-      
-      
-    </div>
-  </section>
-</div>
-<div class="single-container-post">
-  
-
-  <aside class="toc">
-    <div id="js-toc-toggle">
-      <h2 class="toc-header">Table of Contents</h2>
-      <span class="toc-drop-icon">&blacktriangledown;</span>
-    </div>
-    <div id="js-toc-contents" class="toc-contents"><nav id="TableOfContents">
-  <ul>
-    <li><a href="#so-what-is-ludum-dare">So, what is Ludum Dare?</a></li>
-    <li><a href="#preparations">Preparations</a></li>
-    <li><a href="#the-first-day">The First Day</a></li>
-    <li><a href="#day-two">Day Two</a></li>
-    <li><a href="#final-touches">Final Touches</a></li>
-    <li><a href="#whats-next">What&rsquo;s Next?</a></li>
-    <li><a href="#thoughts-about-godot">Thoughts About Godot</a></li>
-    <li><a href="#where-can-i-play-the-game">Where can I play the game?</a></li>
-  </ul>
-</nav></div>
-  </aside>
-
-  <div class="single-post-contents">
-    <div class="single-feature-img">
-
-
-
-  
+    <div class="post-meta"><span title='2023-05-02 00:00:00 +0000 UTC'>May 2, 2023</span>&nbsp;·&nbsp;15 min&nbsp;·&nbsp;pshegger
 
 </div>
-    <article class="markdown">
-        <blockquote>
-<p>If you&rsquo;re only here to try the game, you can do it on <a href="https://harmlesshawk.itch.io/wheres-my-lunch" target="_blank" rel="noopener">itch.io</a></p>
-</blockquote>
-<p>I cannot even remember when was the first time I heard about <a href="https://ldjam.com/" target="_blank" rel="noopener">Ludum Dare</a>, but it was at least 5 years ago. Even back then, I was fascinated by the idea of creating a game in such a short time, but even though I wanted to try it, I had no game development experience at that time, so it always remained just a dream.</p>
+  </header> <div class="toc">
+    <details >
+        <summary accesskey="c" title="(Alt + C)">
+            <span class="details">Table of Contents</span>
+        </summary>
+
+        <div class="inner"><ul>
+                <li>
+                    <a href="#so-what-is-ludum-dare" aria-label="So, what is Ludum Dare?">So, what is Ludum Dare?</a></li>
+                <li>
+                    <a href="#preparations" aria-label="Preparations">Preparations</a></li>
+                <li>
+                    <a href="#the-first-day" aria-label="The First Day">The First Day</a></li>
+                <li>
+                    <a href="#day-two" aria-label="Day Two">Day Two</a></li>
+                <li>
+                    <a href="#final-touches" aria-label="Final Touches">Final Touches</a></li>
+                <li>
+                    <a href="#whats-next" aria-label="What&rsquo;s Next?">What&rsquo;s Next?</a></li>
+                <li>
+                    <a href="#thoughts-about-godot" aria-label="Thoughts About Godot">Thoughts About Godot</a></li>
+                <li>
+                    <a href="#where-can-i-play-the-game" aria-label="Where can I play the game?">Where can I play the game?</a>
+                </li>
+            </ul>
+        </div>
+    </details>
+</div>
+
+  <div class="post-content"><blockquote>
+<p>If you&rsquo;re only here to try the game, you can do it on <a href="https://harmlesshawk.itch.io/wheres-my-lunch">itch.io</a></p></blockquote>
+<p>I cannot even remember when was the first time I heard about <a href="https://ldjam.com/">Ludum Dare</a>, but it was at least 5 years ago. Even back then, I was fascinated by the idea of creating a game in such a short time, but even though I wanted to try it, I had no game development experience at that time, so it always remained just a dream.</p>
 <p>Up until now. Ludum Dare 53 was organized last weekend, and I finally decided to try it myself by participating. The last big push I needed was the introduction of the extra format, where you had three weeks to submit your game, instead of the usual 2/3 days. As you&rsquo;ll see, this wasn&rsquo;t required in the end, but it gave me the confidence to start.</p>
-<h2 id="so-what-is-ludum-dare">So, what is Ludum Dare?<a href="#so-what-is-ludum-dare">
-    <svg role="img" aria-labelledby="so-what-is-ludum-dare-IconTitle" fill="var(--color-primary)" height="22" viewBox="0 0 24 24" width="22" xmlns="http://www.w3.org/2000/svg">
-      <title id="so-what-is-ludum-dare-IconTitle">Link to this heading</title>
-      <path d="M0 0h24v24H0z" fill="none"></path>
-      <path d="M3.9 12c0-1.71 1.39-3.1 3.1-3.1h4V7H7c-2.76.0-5 2.24-5 5s2.24 5 5 5h4v-1.9H7c-1.71.0-3.1-1.39-3.1-3.1zM8 13h8v-2H8v2zm9-6h-4v1.9h4c1.71.0 3.1 1.39 3.1 3.1s-1.39 3.1-3.1 3.1h-4V17h4c2.76.0 5-2.24 5-5s-2.24-5-5-5z"></path>
-    </svg>
-  </a>
-</h2><p>Ludum Dare is one of the biggest (and probably the most well-known) game jams in the world.</p>
+<h2 id="so-what-is-ludum-dare">So, what is Ludum Dare?<a hidden class="anchor" aria-hidden="true" href="#so-what-is-ludum-dare">#</a></h2>
+<p>Ludum Dare is one of the biggest (and probably the most well-known) game jams in the world.</p>
 <p>The concept of game jams is simple. You have some kind of restriction (usually a theme), and you have a limited time to create a game. Once you&rsquo;re done, you share your game with the public, and they can give feedback and rate it in different categories.</p>
 <p>This time, Ludum Dare had 3 formats: Compo, Jam, and Extra.</p>
 <p>Compo is the most restricted and the hardest. Only solo developers are allowed and they have 48 hours to write the game and create all required assets for it.</p>
 <p>Jam is a bit more relaxed, both solo developers and teams can participate, the time limit is 72 hours, and you can use sounds/graphics that were created outside of the time frame. You&rsquo;re also not required to create these assets by yourself, you can use outside resources.</p>
 <p>Extra is a fairly new format, mostly the same as jam, but you have 3 weeks. The biggest difference is, that in the end your work will not be scored.</p>
-<h2 id="preparations">Preparations<a href="#preparations">
-    <svg role="img" aria-labelledby="preparations-IconTitle" fill="var(--color-primary)" height="22" viewBox="0 0 24 24" width="22" xmlns="http://www.w3.org/2000/svg">
-      <title id="preparations-IconTitle">Link to this heading</title>
-      <path d="M0 0h24v24H0z" fill="none"></path>
-      <path d="M3.9 12c0-1.71 1.39-3.1 3.1-3.1h4V7H7c-2.76.0-5 2.24-5 5s2.24 5 5 5h4v-1.9H7c-1.71.0-3.1-1.39-3.1-3.1zM8 13h8v-2H8v2zm9-6h-4v1.9h4c1.71.0 3.1 1.39 3.1 3.1s-1.39 3.1-3.1 3.1h-4V17h4c2.76.0 5-2.24 5-5s-2.24-5-5-5z"></path>
-    </svg>
-  </a>
-</h2><p>Even though you have to create the game itself in the given timeframe, there are a few things you can prepare for. For me, it came down to 2 things: come up with ideas for the possible themes, and decide what game engine to use.</p>
+<h2 id="preparations">Preparations<a hidden class="anchor" aria-hidden="true" href="#preparations">#</a></h2>
+<p>Even though you have to create the game itself in the given timeframe, there are a few things you can prepare for. For me, it came down to 2 things: come up with ideas for the possible themes, and decide what game engine to use.</p>
 <p>The first one is probably the harder task of the two. Luckily, the theme of the jam was decided by public voting, so a few days before the start we already had a list of 15 possible ones. I went through them one by one and tried to come up with some concepts the day before the event. Unfortunately, I couldn&rsquo;t figure out concepts for all the themes, but fortunately, the chosen theme was one that I had a concept for.</p>
-<p>The second thing was to decide what game engine to use. Even though I don&rsquo;t have a huge game development experience, I played around with a few of them in the last year. The 2 main competitor was <a href="https://bevyengine.org/" target="_blank" rel="noopener">Bevy</a> and <a href="https://godotengine.org/" target="_blank" rel="noopener">Godot</a>. One of my main requirements was to be able to create HTML5 builds with it, but since both engines have support, I couldn&rsquo;t decide based on that.</p>
-<p>Bevy is an awesome open-source engine, written in Rust, and has a really interesting (and performant) <a href="https://en.wikipedia.org/wiki/Entity_component_system" target="_blank" rel="noopener">ECS</a>-based architecture. It&rsquo;s early in development but has great potential in my opinion.</p>
+<p>The second thing was to decide what game engine to use. Even though I don&rsquo;t have a huge game development experience, I played around with a few of them in the last year. The 2 main competitor was <a href="https://bevyengine.org/">Bevy</a> and <a href="https://godotengine.org/">Godot</a>. One of my main requirements was to be able to create HTML5 builds with it, but since both engines have support, I couldn&rsquo;t decide based on that.</p>
+<p>Bevy is an awesome open-source engine, written in Rust, and has a really interesting (and performant) <a href="https://en.wikipedia.org/wiki/Entity_component_system">ECS</a>-based architecture. It&rsquo;s early in development but has great potential in my opinion.</p>
 <p>Godot is a more well-known and also open-source engine, that has a great graphical editor interface but uses its own language (GDScript). It is possible to use it with C#, but the documentation is lacking, and WebGL support is also missing.</p>
 <p>In the end, I decided to use Godot, purely because the editor makes development quicker in my opinion, but if I ever start working on a bigger project, I&rsquo;ll consider Bevy.</p>
-<h2 id="the-first-day">The First Day<a href="#the-first-day">
-    <svg role="img" aria-labelledby="the-first-day-IconTitle" fill="var(--color-primary)" height="22" viewBox="0 0 24 24" width="22" xmlns="http://www.w3.org/2000/svg">
-      <title id="the-first-day-IconTitle">Link to this heading</title>
-      <path d="M0 0h24v24H0z" fill="none"></path>
-      <path d="M3.9 12c0-1.71 1.39-3.1 3.1-3.1h4V7H7c-2.76.0-5 2.24-5 5s2.24 5 5 5h4v-1.9H7c-1.71.0-3.1-1.39-3.1-3.1zM8 13h8v-2H8v2zm9-6h-4v1.9h4c1.71.0 3.1 1.39 3.1 3.1s-1.39 3.1-3.1 3.1h-4V17h4c2.76.0 5-2.24 5-5s-2.24-5-5-5z"></path>
-    </svg>
-  </a>
-</h2><p>Since the start of the event was at 3 AM for me, I couldn&rsquo;t start right away when the theme was announced. I only learned what the theme was when I woke up on Saturday morning. I was a bit sad that it wasn&rsquo;t the one I&rsquo;d preferred, but at the same time, I was happy that it was one that I had an idea for. It was <em>delivery</em> and I already decided on the previous day, that I wanted to create a top-down driving game, where your goal is to deliver lunch for hungry customers. I know it&rsquo;s not the most original or exciting idea, but hey, it&rsquo;s a start.</p>
-<p>I started to work on it at around 7 AM. Since I&rsquo;m not a graphics designer, my first task was to find some assets that could be used for this concept. Luckily, my go-to place for these kinds of things (thanks <a href="https://kenney.nl/" target="_blank" rel="noopener">Kenney</a>, you&rsquo;re awesome) had an asset pack that was perfect for this game.</p>
+<h2 id="the-first-day">The First Day<a hidden class="anchor" aria-hidden="true" href="#the-first-day">#</a></h2>
+<p>Since the start of the event was at 3 AM for me, I couldn&rsquo;t start right away when the theme was announced. I only learned what the theme was when I woke up on Saturday morning. I was a bit sad that it wasn&rsquo;t the one I&rsquo;d preferred, but at the same time, I was happy that it was one that I had an idea for. It was <em>delivery</em> and I already decided on the previous day, that I wanted to create a top-down driving game, where your goal is to deliver lunch for hungry customers. I know it&rsquo;s not the most original or exciting idea, but hey, it&rsquo;s a start.</p>
+<p>I started to work on it at around 7 AM. Since I&rsquo;m not a graphics designer, my first task was to find some assets that could be used for this concept. Luckily, my go-to place for these kinds of things (thanks <a href="https://kenney.nl/">Kenney</a>, you&rsquo;re awesome) had an asset pack that was perfect for this game.</p>
 <p>As the next step, I started to create the map itself. I had some previous experience with tile maps in Godot, but only small trials, so this was the first time I had to really use its capabilities. The process itself was fairly easy, but it took a lot of time. Looking back, I shouldn&rsquo;t have spent that much time on small details, the fast-paced nature of the game makes it almost impossible to notice them. All-in-all, it took me until early afternoon (~2-3 PM) to have a map that I liked enough to move on to the next task.</p>
 <p>My next goal was to create the player car and add controls for its movement. Creating the car itself wasn&rsquo;t too big of a deal, I already had all the assets, I just had to assemble them. Then came the movement. My first idea was to use a rigid body, that way it will handle collisions with other objects (once I added the collision boxes to the tile set). Adding some simple controls was easy, just apply the correct force when the input is pressed. I quickly implemented it, and it was awesome to drive around the map. The only issue was the missing collision boxes for the tiles, so I also added those, and that&rsquo;s when the issues began. Driving was still fine, but as soon as the car collided with the tiles, it started to spin around uncontrollably. This of course was annoying, so I had to find a good solution. I tried a lot of things, but in the end, all I had to do was change the rigid body to a character controller (and reimplement the input handling, since character controllers have different physics).</p>
 <p>At this point, I could drive around the city, but it was a bit empty, so I decided to add some AI cars that drive around too. I thought it would be easy, since all I had to do was to define a route for them and make them drive forward, with the occasional turning when it&rsquo;s required. Well, the turning part wasn&rsquo;t as easy as I expected it to be (quelle surprise), but I managed to make it work after some tinkering. It&rsquo;s still not the best, it can get stuck easily, but I wasn&rsquo;t expecting more in such a short time. (Also, the mandatory, it&rsquo;s not a bug, it&rsquo;s a feature since them getting stuck means the player has less space to navigate, making the game harder as time progresses)</p>
 <p>I spent the remainder of the day (until around 10 PM) setting up a looped route for the cars, which took a bit of time since I had to manually find the correct target coordinates, which minimized the chance of them getting stuck.</p>
-<h2 id="day-two">Day Two<a href="#day-two">
-    <svg role="img" aria-labelledby="day-two-IconTitle" fill="var(--color-primary)" height="22" viewBox="0 0 24 24" width="22" xmlns="http://www.w3.org/2000/svg">
-      <title id="day-two-IconTitle">Link to this heading</title>
-      <path d="M0 0h24v24H0z" fill="none"></path>
-      <path d="M3.9 12c0-1.71 1.39-3.1 3.1-3.1h4V7H7c-2.76.0-5 2.24-5 5s2.24 5 5 5h4v-1.9H7c-1.71.0-3.1-1.39-3.1-3.1zM8 13h8v-2H8v2zm9-6h-4v1.9h4c1.71.0 3.1 1.39 3.1 3.1s-1.39 3.1-3.1 3.1h-4V17h4c2.76.0 5-2.24 5-5s-2.24-5-5-5z"></path>
-    </svg>
-  </a>
-</h2><p>I started this day where I finished the previous one. Added two new loops for two new groups of cars, to have more movement around the map. Even though I wanted to set up the loops without overlaps, I managed to somehow create one, and since I didn&rsquo;t want to spend more time on this part of the game, I decided to leave it. Luckily the timings turned out pretty well, the cars avoid each other most of the time, and it actually looks cool.</p>
+<h2 id="day-two">Day Two<a hidden class="anchor" aria-hidden="true" href="#day-two">#</a></h2>
+<p>I started this day where I finished the previous one. Added two new loops for two new groups of cars, to have more movement around the map. Even though I wanted to set up the loops without overlaps, I managed to somehow create one, and since I didn&rsquo;t want to spend more time on this part of the game, I decided to leave it. Luckily the timings turned out pretty well, the cars avoid each other most of the time, and it actually looks cool.</p>
 <p>After finishing that part of the game, I realized that I should add some gameplay too. At this point, I had to make a decision. Which format do I want to participate in? My original intention was to have a game for the extra format, but the progress I made on the first day meant that I could finish the (somewhat limited version of the) game in time for the jam category. Since I wanted to get as much feedback as possible, I decided to participate in the jam category and finish the game as soon as possible.</p>
 <p>My original idea was to have specific pickup locations (the restaurants) and deliver the food to random buildings starting at those locations. I also wanted to create a system to accept/decline orders, so the players have to make decisions about how to best organize their time. I was also thinking about splitting the game into days and having the player pay for the gas they used during the day. In the end, I had to abandon these ideas, because I thought it would take too much time to implement them.</p>
 <p>Instead, I chose a simplified version, where the player has to visit locations one after the other, each delivery resulting in a salary (based on distance) and a rating (based on speed). The game ends when the player&rsquo;s rating drops below a threshold. This was definitely easier (and with that quicker) to implement.</p>
 <p>After I implemented these mechanics, I added some way to display the earned salary and the current rating of the player. I also added a simple animation that shows the delivery results once it&rsquo;s done. With these done, the game was in a playable (and somewhat enjoyable) state.</p>
-<p>Of course, there were still a lot of things to do. The next task on my list was to create a game over screen and a simple menu screen. After that, I started to look into music and sound effects. I already had a few sound effects from Kenney, but I needed one for the delivery completed notification, so I went to itch.io and found a good one from <a href="https://shapeforms.itch.io/" target="_blank" rel="noopener">Shapeforms Audio</a>. I also needed some good music, and after some search, I found an awesome song by <a href="https://davidkbd.itch.io/" target="_blank" rel="noopener">David KBD</a>. After adding them to the game, only testing left.</p>
+<p>Of course, there were still a lot of things to do. The next task on my list was to create a game over screen and a simple menu screen. After that, I started to look into music and sound effects. I already had a few sound effects from Kenney, but I needed one for the delivery completed notification, so I went to itch.io and found a good one from <a href="https://shapeforms.itch.io/">Shapeforms Audio</a>. I also needed some good music, and after some search, I found an awesome song by <a href="https://davidkbd.itch.io/">David KBD</a>. After adding them to the game, only testing left.</p>
 <p>This is the part, where I have to mention an issue I had during the two days. The game ran fine (500+ FPS), but occasionally it had huge FPS drops, which was not only annoying but also threw off the NPC car algorithm, resulting in more collisions than intended. Until this point, I dismissed this issue, since I thought it happens only because I&rsquo;m using a debug build. As soon as I started testing the release build, I had to realize that this is not a debug issue, so I had to find a solution for it. I did a lot of research, but couldn&rsquo;t find the issue. I used the built-in profiler, but all I could find was that my code wasn&rsquo;t responsible for the longer frame times (the max time it required was less than 1 ms) and that the issue was with <code>Process Time</code>. This one took more than 500ms sometimes, and I had no idea why. After some research, I tried one of the suggested solutions of setting a max FPS. After that, I could still see some long frame times, but it happens rarely, so it seems to have solved the issue.</p>
 <p>At this point of time, it was already after 10 PM on Sunday, so I decided the take a break and continue in the morning. Fortunately, Monday was a public holiday, so I had time to finish everything.</p>
-<h2 id="final-touches">Final Touches<a href="#final-touches">
-    <svg role="img" aria-labelledby="final-touches-IconTitle" fill="var(--color-primary)" height="22" viewBox="0 0 24 24" width="22" xmlns="http://www.w3.org/2000/svg">
-      <title id="final-touches-IconTitle">Link to this heading</title>
-      <path d="M0 0h24v24H0z" fill="none"></path>
-      <path d="M3.9 12c0-1.71 1.39-3.1 3.1-3.1h4V7H7c-2.76.0-5 2.24-5 5s2.24 5 5 5h4v-1.9H7c-1.71.0-3.1-1.39-3.1-3.1zM8 13h8v-2H8v2zm9-6h-4v1.9h4c1.71.0 3.1 1.39 3.1 3.1s-1.39 3.1-3.1 3.1h-4V17h4c2.76.0 5-2.24 5-5s-2.24-5-5-5z"></path>
-    </svg>
-  </a>
-</h2><p>Monday morning I felt completely drained, so it took some time to start doing the last remaining tasks. It also didn&rsquo;t help that these tasks were the ones that excited me the least.</p>
+<h2 id="final-touches">Final Touches<a hidden class="anchor" aria-hidden="true" href="#final-touches">#</a></h2>
+<p>Monday morning I felt completely drained, so it took some time to start doing the last remaining tasks. It also didn&rsquo;t help that these tasks were the ones that excited me the least.</p>
 <p>I had to create a cover image for the game. As I already mentioned, I&rsquo;m not at graphics design, so I decided to just put the name of the game on a semy transparent background, with a screenshot behind that. I also made a really basic icon, with just the name of the game on it. Not too exciting, but still better than using the default one.</p>
 <p>The next step was to create the builds. In theory, this should be easy, just select one of the templates, and press export. Naturally, this was not the case.</p>
 <p>MacOS apps need to be signed and since I don&rsquo;t have an Apple developer account, I had to use the default ad-hoc signing. This means, that when someone wants to start the game the OS will prevent it, and they have to make some adjustments to allow it anyway.</p>
@@ -390,214 +197,146 @@
 <p>The thought behind that of course was that my main target was the HTML5 build. It is the easiest for testers, and it also poses the least risk. Of course, creating this build was harder than expected as well. Godot 4 has made changes to its WebGL exports and now requires some headers that you cannot control most of the time. I found a plugin in the asset store that solved one of the issues, but even when I was using that, the Ludum Dare side still couldn&rsquo;t properly embed the game. I managed to upload it to GitHub Pages, where it fortunately works. Later, I also uploaded it to itch.io, and that also works fine.</p>
 <p>As for the last platform, I had no issues with the Linux build, although the truth is I didn&rsquo;t test that version.</p>
 <p>With the cover image and the builds ready, all that was left was creating the submission page and writing a few words about the game. I quickly managed to do both, and with that, the hard part of the jam was over.</p>
-<h2 id="whats-next">What&rsquo;s Next?<a href="#whats-next">
-    <svg role="img" aria-labelledby="whats-next-IconTitle" fill="var(--color-primary)" height="22" viewBox="0 0 24 24" width="22" xmlns="http://www.w3.org/2000/svg">
-      <title id="whats-next-IconTitle">Link to this heading</title>
-      <path d="M0 0h24v24H0z" fill="none"></path>
-      <path d="M3.9 12c0-1.71 1.39-3.1 3.1-3.1h4V7H7c-2.76.0-5 2.24-5 5s2.24 5 5 5h4v-1.9H7c-1.71.0-3.1-1.39-3.1-3.1zM8 13h8v-2H8v2zm9-6h-4v1.9h4c1.71.0 3.1 1.39 3.1 3.1s-1.39 3.1-3.1 3.1h-4V17h4c2.76.0 5-2.24 5-5s-2.24-5-5-5z"></path>
-    </svg>
-  </a>
-</h2><p>Now, that the submission period is over, there are only two things to do: play and rate the games of other participants, and read the feedback on my game.</p>
+<h2 id="whats-next">What&rsquo;s Next?<a hidden class="anchor" aria-hidden="true" href="#whats-next">#</a></h2>
+<p>Now, that the submission period is over, there are only two things to do: play and rate the games of other participants, and read the feedback on my game.</p>
 <p>I already played some of the games, but I&rsquo;m planning on trying as many of them as possible in the following days. Some of the ones I&rsquo;ve already played were awesome, it&rsquo;s hard to believe that they were developed in only a few days (but of course, I know that that&rsquo;s the case).</p>
 <p>As for the feedback, I already got a few comments, most people think it&rsquo;s a fun game with sometimes frustrating controls. I have to agree with both of these points. I hope I&rsquo;ll get some more comments and ratings, but since the rating period has just started, I&rsquo;m sure more people will try it (especially when they had some rest after this long weekend). I really hope to get at least 20 ratings, since that&rsquo;s the minimum to see them.</p>
 <p>The future of the game is also clear to me: even though it&rsquo;s a fun little game, I don&rsquo;t think it&rsquo;s unique enough to work on it any further. It is available on itch.io so anyone can try it, but no more development should be expected.</p>
 <p>So, what about my future as a game developer? I&rsquo;m still only at the beginning of this journey, but I&rsquo;ll continue creating games in the future, that&rsquo;s for sure. The next Ludum Dare will be at the end of September and I&rsquo;d love to participate. I&rsquo;d also like to take part in a GMTK jam since that was one of my inspirations to start this whole journey. Other than jams, it would be great to start working on some kind of longer game, but I first need a good idea for that.</p>
-<h2 id="thoughts-about-godot">Thoughts About Godot<a href="#thoughts-about-godot">
-    <svg role="img" aria-labelledby="thoughts-about-godot-IconTitle" fill="var(--color-primary)" height="22" viewBox="0 0 24 24" width="22" xmlns="http://www.w3.org/2000/svg">
-      <title id="thoughts-about-godot-IconTitle">Link to this heading</title>
-      <path d="M0 0h24v24H0z" fill="none"></path>
-      <path d="M3.9 12c0-1.71 1.39-3.1 3.1-3.1h4V7H7c-2.76.0-5 2.24-5 5s2.24 5 5 5h4v-1.9H7c-1.71.0-3.1-1.39-3.1-3.1zM8 13h8v-2H8v2zm9-6h-4v1.9h4c1.71.0 3.1 1.39 3.1 3.1s-1.39 3.1-3.1 3.1h-4V17h4c2.76.0 5-2.24 5-5s-2.24-5-5-5z"></path>
-    </svg>
-  </a>
-</h2><p>Even though I tinkered with Godot in the past, it was my first time using it for something more than a learning project, so I thought I&rsquo;ll share a few thoughts about it.</p>
+<h2 id="thoughts-about-godot">Thoughts About Godot<a hidden class="anchor" aria-hidden="true" href="#thoughts-about-godot">#</a></h2>
+<p>Even though I tinkered with Godot in the past, it was my first time using it for something more than a learning project, so I thought I&rsquo;ll share a few thoughts about it.</p>
 <p>The editor is fairly straightforward, I could easily understand how it works and where to search for the things I&rsquo;m looking for. The &ldquo;everything is a scene&rdquo; concept was a bit strange at first but quickly got used to it. The code editor integration is also nice, the suggestions were really useful and made development quicker. I also like that the documentation is quickly available right from the editor.</p>
 <p>On the other hand, I also had a few issues. It stopped responding multiple times during the 2 days. I&rsquo;m using an older MacBook Pro, so I expect slowdowns, but completely stopping is something that never happens with other applications. I also don&rsquo;t like the code editor itself. As I already mentioned, it has great integration, but I always had trouble navigating between open files. I got used to my shortcuts, which are set up by default in every other application (for example Ctrl+Tab to cycle between tabs), but here I couldn&rsquo;t find the settings to have something similar. It might be just me not paying enough attention, but it was annoying for sure. I also tried setting up VSCode as an external editor, but whatever I did, I couldn&rsquo;t make it connect to the language server, even though I was using the official plugin.</p>
 <p>My other issue was GDScript itself. It&rsquo;s not a bad language at all, really easy to learn if you have some Python knowledge, but as an Android developer, I&rsquo;m spoiled with Kotlin. I hope the C# documentation gets improved over time and it will get support for WebGL exports.</p>
 <p>These are of course just minor annoyances, and I got used to most of them after a while, I just wanted to mention them. It&rsquo;s also worth mentioning, that even with these issues, the experience was great and far faster than working with only a code editor, and having no graphical editor interface.</p>
-<h2 id="where-can-i-play-the-game">Where can I play the game?<a href="#where-can-i-play-the-game">
-    <svg role="img" aria-labelledby="where-can-i-play-the-game-IconTitle" fill="var(--color-primary)" height="22" viewBox="0 0 24 24" width="22" xmlns="http://www.w3.org/2000/svg">
-      <title id="where-can-i-play-the-game-IconTitle">Link to this heading</title>
-      <path d="M0 0h24v24H0z" fill="none"></path>
-      <path d="M3.9 12c0-1.71 1.39-3.1 3.1-3.1h4V7H7c-2.76.0-5 2.24-5 5s2.24 5 5 5h4v-1.9H7c-1.71.0-3.1-1.39-3.1-3.1zM8 13h8v-2H8v2zm9-6h-4v1.9h4c1.71.0 3.1 1.39 3.1 3.1s-1.39 3.1-3.1 3.1h-4V17h4c2.76.0 5-2.24 5-5s-2.24-5-5-5z"></path>
-    </svg>
-  </a>
-</h2><p>It is available on <a href="https://harmlesshawk.itch.io/wheres-my-lunch" target="_blank" rel="noopener">itch.io</a>. The HTML5 version is embedded into the page, but you can also download it for Mac, Windows, and Linux. Please keep in mind, that the Linux version is not tested.</p>
-<p>You can also find the source code on <a href="https://github.com/HarmlessHawk/wheres-my-lunch" target="_blank" rel="noopener">GitHub</a>, feel free to check it out, but don&rsquo;t forget, that it was created in 2 days. Don&rsquo;t expect the best code quality.</p>
+<h2 id="where-can-i-play-the-game">Where can I play the game?<a hidden class="anchor" aria-hidden="true" href="#where-can-i-play-the-game">#</a></h2>
+<p>It is available on <a href="https://harmlesshawk.itch.io/wheres-my-lunch">itch.io</a>. The HTML5 version is embedded into the page, but you can also download it for Mac, Windows, and Linux. Please keep in mind, that the Linux version is not tested.</p>
+<p>You can also find the source code on <a href="https://github.com/HarmlessHawk/wheres-my-lunch">GitHub</a>, feel free to check it out, but don&rsquo;t forget, that it was created in 2 days. Don&rsquo;t expect the best code quality.</p>
 
-    </article>
-    <aside>
-      <div class="single-terms">
-        
-          
-          <a class="term" href="https://pshegger.github.io/tags/gamedev/">gamedev</a></li>
-          
-          <a class="term" href="https://pshegger.github.io/tags/gamejam/">gamejam</a></li>
-          
-          <a class="term" href="https://pshegger.github.io/tags/ludum-dare/">ludum dare</a></li>
-          
-          <a class="term" href="https://pshegger.github.io/tags/godot/">godot</a></li>
-          
-        
-      </div>
-      
-  
-  
-  
 
-  <section>
-    <h2>Share</h2>
-    <div class="social-links">
-      <ul class="social-icons--share">
-        
-        
-        <a href="https://twitter.com/intent/tweet?url=https%3a%2f%2fpshegger.github.io%2fposts%2fmy-first-gamejam%2f&amp;text=My%20First%20Gamejam" target="_blank" rel="noopener" aria-label="Share on Twitter" class="social-btn twitter">
-          <li><svg xmlns="http://www.w3.org/2000/svg" class="icon icon-twitter" width="24" height="24" viewBox="0 0 384 312" fill="var(--color-primary)"><path d="m384 36.9c-14.1 6.3-29.3 10.5-45.2 12.4 16.3-9.7 28.8-25.2 34.6-43.6-15.2 9-32.1 15.6-50 19.1-14.4-15.2-34.9-24.8-57.5-24.8-43.5 0-78.8 35.3-78.8 78.8 0 6.2.7 12.2 2 17.9-65.5-3.3-123.5-34.6-162.4-82.3-6.7 11.6-10.6 25.2-10.6 39.6 0 27.3 13.9 51.4 35 65.6-12.9-.4-25.1-4-35.7-9.9v1c0 38.2 27.2 70 63.2 77.2-6.6 1.8-13.6 2.8-20.8 2.8-5.1 0-10-.5-14.8-1.4 10 31.3 39.1 54.1 73.6 54.7-27 21.1-60.9 33.7-97.8 33.7-6.4 0-12.6-.4-18.8-1.1 34.9 22.4 76.3 35.4 120.8 35.4 144.9 0 224.1-120 224.1-224.1 0-3.4-.1-6.8-.2-10.2 15.4-11.1 28.7-25 39.3-40.8z"/></svg></li>
-        </a>
-        
-        
-        
-        <a href="https://www.reddit.com/submit?url=https%3a%2f%2fpshegger.github.io%2fposts%2fmy-first-gamejam%2f" target="_blank" rel="noopener" aria-label="Share on Reddit" class="social-btn reddit">
-          <li><svg xmlns="http://www.w3.org/2000/svg" class="icon icon-reddit" width="24" height="24" viewBox="0 0 24 24" fill="var(--color-primary)"><path d="M24 11.779c0-1.459-1.192-2.645-2.657-2.645-.715 0-1.363.286-1.84.746-1.81-1.191-4.259-1.949-6.971-2.046l1.483-4.669 4.016.941-.006.058c0 1.193.975 2.163 2.174 2.163 1.198 0 2.172-.97 2.172-2.163s-.975-2.164-2.172-2.164c-.92 0-1.704.574-2.021 1.379l-4.329-1.015c-.189-.046-.381.063-.44.249l-1.654 5.207c-2.838.034-5.409.798-7.3 2.025-.474-.438-1.103-.712-1.799-.712-1.465 0-2.656 1.187-2.656 2.646 0 .97.533 1.811 1.317 2.271-.052.282-.086.567-.086.857 0 3.911 4.808 7.093 10.719 7.093s10.72-3.182 10.72-7.093c0-.274-.029-.544-.075-.81.832-.447 1.405-1.312 1.405-2.318zm-17.224 1.816c0-.868.71-1.575 1.582-1.575.872 0 1.581.707 1.581 1.575s-.709 1.574-1.581 1.574-1.582-.706-1.582-1.574zm9.061 4.669c-.797.793-2.048 1.179-3.824 1.179l-.013-.003-.013.003c-1.777 0-3.028-.386-3.824-1.179-.145-.144-.145-.379 0-.523.145-.145.381-.145.526 0 .65.647 1.729.961 3.298.961l.013.003.013-.003c1.569 0 2.648-.315 3.298-.962.145-.145.381-.144.526 0 .145.145.145.379 0 .524zm-.189-3.095c-.872 0-1.581-.706-1.581-1.574 0-.868.709-1.575 1.581-1.575s1.581.707 1.581 1.575-.709 1.574-1.581 1.574z"/></svg></li>
-        </a>
-        
-        
-                
-        <a href="https://www.facebook.com/sharer.php?u=https%3a%2f%2fpshegger.github.io%2fposts%2fmy-first-gamejam%2f" target="_blank" rel="noopener" aria-label="Share on Facebook" class="social-btn facebook">
-          <li><svg xmlns="http://www.w3.org/2000/svg" class="icon icon-facebook" width="24" height="24" viewBox="0 0 352 352" fill="var(--color-primary)"><path d="m0 32v288c0 17.5 14.5 32 32 32h288c17.5 0 32-14.5 32-32v-288c0-17.5-14.5-32-32-32h-288c-17.5 0-32 14.5-32 32zm320 0v288h-83v-108h41.5l6-48h-47.5v-31c0-14 3.5-23.5 23.5-23.5h26v-43.5c-4.4-.6-19.8-1.5-37.5-1.5-36.9 0-62 22.2-62 63.5v36h-42v48h42v108h-155v-288z"/></svg></li>
-        </a>
-        
-        
-        
-        <a href="https://www.linkedin.com/shareArticle?mini=true&amp;url=https%3a%2f%2fpshegger.github.io%2fposts%2fmy-first-gamejam%2f&amp;source=https%3a%2f%2fpshegger.github.io%2fposts%2fmy-first-gamejam%2f&amp;title=My%20First%20Gamejam&amp;summary=My%20First%20Gamejam" target="_blank" rel="noopener" aria-label="Share on LinkedIn" class="social-btn linkedin">
-          <li><svg xmlns="http://www.w3.org/2000/svg" class="icon icon-linkedin" width="24" height="24" viewBox="0 0 352 352" fill="var(--color-primary)"><path d="M0,40v272c0,21.9,18.1,40,40,40h272c21.9,0,40-18.1,40-40V40c0-21.9-18.1-40-40-40H40C18.1,0,0,18.1,0,40z M312,32 c4.6,0,8,3.4,8,8v272c0,4.6-3.4,8-8,8H40c-4.6,0-8-3.4-8-8V40c0-4.6,3.4-8,8-8H312z M59.5,87c0,15.2,12.3,27.5,27.5,27.5 c15.2,0,27.5-12.3,27.5-27.5c0-15.2-12.3-27.5-27.5-27.5C71.8,59.5,59.5,71.8,59.5,87z M187,157h-1v-21h-45v152h47v-75 c0-19.8,3.9-39,28.5-39c24.2,0,24.5,22.4,24.5,40v74h47v-83.5c0-40.9-8.7-72-56.5-72C208.5,132.5,193.3,145.1,187,157z M64,288h47.5 V136H64V288z"/></svg></li>
-        </a>
-        
-        
-        
-        <a href="mailto:?subject=pshegger%20-%20My%20First%20Gamejam.&amp;body=My%20First%20Gamejam%2c%20by%20pshegger%0aMy%20thought%20and%20experiences%20about%20my%20first%20gamejam%20%28Ludum%20Dare%2053%29%0a%0ahttps%3a%2f%2fpshegger.github.io%2fposts%2fmy-first-gamejam%2f%0a" target="_blank" class="social-btn email">
-          <li><svg xmlns="http://www.w3.org/2000/svg" class="icon icon-mail" width="24" height="24" viewBox="0 0 416 288" fill="var(--color-primary)"><path d="m0 16v256 16h16 384 16v-16-256-16h-16-384-16zm347 16-139 92.5-139-92.5zm-148 125.5 9 5.5 9-5.5 167-111.5v210h-352v-210z"/></svg></li>
-        </a>
-      </ul>
-    </div>
-  </section>
-  
-        
-
-  
-  
-    <section class="related">
-      <h2>See Also</h2>
-      <ul class="related-posts">
-        
-          <li><a href="/posts/procedural-dungeon/">Procedural Dungeon Generation</a></li>
-        
-      </ul>
-    </section>
-  
-
-        
-  <section>
-    <h2>Read Next</h2>
-    <div class="single-next-previous">
-      
-        <a class="previous" href="https://pshegger.github.io/posts/procedural-dungeon/">&laquo; Procedural Dungeon Generation</a>
-      
-      
-        <a class="next" href="https://pshegger.github.io/posts/irisctf-2024/">IrisCTF 2024 &raquo;</a>
-      
-    </div>
-  </section>
-
-      
-    </aside>
   </div>
-</div>
 
-    </main><footer>
-  
-  <div class="section footer">
-    <p class="footer-copyright">&copy; 2024 &middot; 
-      <a href="https://pshegger.github.io/">pshegger</a>
-      
-    </p>
-    
-      <div class="footer-socials">
-        
-<div class="social-links">
-  <ul class="social-icons">
-    
-    
+  <footer class="post-footer">
+    <ul class="post-tags">
+      <li><a href="https://pshegger.github.io/tags/gamedev/">Gamedev</a></li>
+      <li><a href="https://pshegger.github.io/tags/gamejam/">Gamejam</a></li>
+      <li><a href="https://pshegger.github.io/tags/ludum-dare/">Ludum Dare</a></li>
+      <li><a href="https://pshegger.github.io/tags/godot/">Godot</a></li>
+    </ul>
+
+<ul class="share-buttons">
     <li>
-      <a href="https://twitter.com/pshegger" target="_blank" rel="noopener" aria-label="Visit Twitter profile" class="social-btn twitter">
-        <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-twitter" width="24" height="24" viewBox="0 0 384 312" fill="var(--color-primary)"><path d="m384 36.9c-14.1 6.3-29.3 10.5-45.2 12.4 16.3-9.7 28.8-25.2 34.6-43.6-15.2 9-32.1 15.6-50 19.1-14.4-15.2-34.9-24.8-57.5-24.8-43.5 0-78.8 35.3-78.8 78.8 0 6.2.7 12.2 2 17.9-65.5-3.3-123.5-34.6-162.4-82.3-6.7 11.6-10.6 25.2-10.6 39.6 0 27.3 13.9 51.4 35 65.6-12.9-.4-25.1-4-35.7-9.9v1c0 38.2 27.2 70 63.2 77.2-6.6 1.8-13.6 2.8-20.8 2.8-5.1 0-10-.5-14.8-1.4 10 31.3 39.1 54.1 73.6 54.7-27 21.1-60.9 33.7-97.8 33.7-6.4 0-12.6-.4-18.8-1.1 34.9 22.4 76.3 35.4 120.8 35.4 144.9 0 224.1-120 224.1-224.1 0-3.4-.1-6.8-.2-10.2 15.4-11.1 28.7-25 39.3-40.8z"/></svg>
-      </a>
+        <a target="_blank" rel="noopener noreferrer" aria-label="share My First Gamejam on x"
+            href="https://x.com/intent/tweet/?text=My%20First%20Gamejam&amp;url=https%3a%2f%2fpshegger.github.io%2fposts%2fmy-first-gamejam%2f&amp;hashtags=gamedev%2cgamejam%2cludumdare%2cgodot">
+            <svg version="1.1" viewBox="0 0 512 512" xml:space="preserve" height="30px" width="30px" fill="currentColor">
+                <path
+                    d="M512 62.554 L 512 449.446 C 512 483.97 483.97 512 449.446 512 L 62.554 512 C 28.03 512 0 483.97 0 449.446 L 0 62.554 C 0 28.03 28.029 0 62.554 0 L 449.446 0 C 483.971 0 512 28.03 512 62.554 Z M 269.951 190.75 L 182.567 75.216 L 56 75.216 L 207.216 272.95 L 63.9 436.783 L 125.266 436.783 L 235.9 310.383 L 332.567 436.783 L 456 436.783 L 298.367 228.367 L 432.367 75.216 L 371.033 75.216 Z M 127.633 110 L 164.101 110 L 383.481 400.065 L 349.5 400.065 Z" />
+            </svg>
+        </a>
     </li>
-    
-
-    
-    
     <li>
-      <a href="https://github.com/pshegger" target="_blank" rel="noopener" aria-label="Visit Github profile" class="social-btn github">
-        <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-github" width="24" height="24" viewBox="0 0 24 24" fill="var(--color-primary)"><path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/></svg>
-      </a>
+        <a target="_blank" rel="noopener noreferrer" aria-label="share My First Gamejam on linkedin"
+            href="https://www.linkedin.com/shareArticle?mini=true&amp;url=https%3a%2f%2fpshegger.github.io%2fposts%2fmy-first-gamejam%2f&amp;title=My%20First%20Gamejam&amp;summary=My%20First%20Gamejam&amp;source=https%3a%2f%2fpshegger.github.io%2fposts%2fmy-first-gamejam%2f">
+            <svg version="1.1" viewBox="0 0 512 512" xml:space="preserve" height="30px" width="30px" fill="currentColor">
+                <path
+                    d="M449.446,0c34.525,0 62.554,28.03 62.554,62.554l0,386.892c0,34.524 -28.03,62.554 -62.554,62.554l-386.892,0c-34.524,0 -62.554,-28.03 -62.554,-62.554l0,-386.892c0,-34.524 28.029,-62.554 62.554,-62.554l386.892,0Zm-288.985,423.278l0,-225.717l-75.04,0l0,225.717l75.04,0Zm270.539,0l0,-129.439c0,-69.333 -37.018,-101.586 -86.381,-101.586c-39.804,0 -57.634,21.891 -67.617,37.266l0,-31.958l-75.021,0c0.995,21.181 0,225.717 0,225.717l75.02,0l0,-126.056c0,-6.748 0.486,-13.492 2.474,-18.315c5.414,-13.475 17.767,-27.434 38.494,-27.434c27.135,0 38.007,20.707 38.007,51.037l0,120.768l75.024,0Zm-307.552,-334.556c-25.674,0 -42.448,16.879 -42.448,39.002c0,21.658 16.264,39.002 41.455,39.002l0.484,0c26.165,0 42.452,-17.344 42.452,-39.002c-0.485,-22.092 -16.241,-38.954 -41.943,-39.002Z" />
+            </svg>
+        </a>
     </li>
-    
-
-    
-    
     <li>
-      <a href="https://stackoverflow.com/users/751482/pshegger" target="_blank" rel="noopener" aria-label="Visit Stack Overflow profile" class="social-btn stack-overflow">
-        <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-stack-overflow" width="24" height="24" viewBox="0 0 24 24" fill="var(--color-primary)"><path d="M15 21h-10v-2h10v2zm6-11.665l-1.621-9.335-1.993.346 1.62 9.335 1.994-.346zm-5.964 6.937l-9.746-.975-.186 2.016 9.755.879.177-1.92zm.538-2.587l-9.276-2.608-.526 1.954 9.306 2.5.496-1.846zm1.204-2.413l-8.297-4.864-1.029 1.743 8.298 4.865 1.028-1.744zm1.866-1.467l-5.339-7.829-1.672 1.14 5.339 7.829 1.672-1.14zm-2.644 4.195v8h-12v-8h-2v10h16v-10h-2z"/></svg>
-      </a>
+        <a target="_blank" rel="noopener noreferrer" aria-label="share My First Gamejam on reddit"
+            href="https://reddit.com/submit?url=https%3a%2f%2fpshegger.github.io%2fposts%2fmy-first-gamejam%2f&title=My%20First%20Gamejam">
+            <svg version="1.1" viewBox="0 0 512 512" xml:space="preserve" height="30px" width="30px" fill="currentColor">
+                <path
+                    d="M449.446,0c34.525,0 62.554,28.03 62.554,62.554l0,386.892c0,34.524 -28.03,62.554 -62.554,62.554l-386.892,0c-34.524,0 -62.554,-28.03 -62.554,-62.554l0,-386.892c0,-34.524 28.029,-62.554 62.554,-62.554l386.892,0Zm-3.446,265.638c0,-22.964 -18.616,-41.58 -41.58,-41.58c-11.211,0 -21.361,4.457 -28.841,11.666c-28.424,-20.508 -67.586,-33.757 -111.204,-35.278l18.941,-89.121l61.884,13.157c0.756,15.734 13.642,28.29 29.56,28.29c16.407,0 29.706,-13.299 29.706,-29.701c0,-16.403 -13.299,-29.702 -29.706,-29.702c-11.666,0 -21.657,6.792 -26.515,16.578l-69.105,-14.69c-1.922,-0.418 -3.939,-0.042 -5.585,1.036c-1.658,1.073 -2.811,2.761 -3.224,4.686l-21.152,99.438c-44.258,1.228 -84.046,14.494 -112.837,35.232c-7.468,-7.164 -17.589,-11.591 -28.757,-11.591c-22.965,0 -41.585,18.616 -41.585,41.58c0,16.896 10.095,31.41 24.568,37.918c-0.639,4.135 -0.99,8.328 -0.99,12.576c0,63.977 74.469,115.836 166.33,115.836c91.861,0 166.334,-51.859 166.334,-115.836c0,-4.218 -0.347,-8.387 -0.977,-12.493c14.564,-6.47 24.735,-21.034 24.735,-38.001Zm-119.474,108.193c-20.27,20.241 -59.115,21.816 -70.534,21.816c-11.428,0 -50.277,-1.575 -70.522,-21.82c-3.007,-3.008 -3.007,-7.882 0,-10.889c3.003,-2.999 7.882,-3.003 10.885,0c12.777,12.781 40.11,17.317 59.637,17.317c19.522,0 46.86,-4.536 59.657,-17.321c3.016,-2.999 7.886,-2.995 10.885,0.008c3.008,3.011 3.003,7.882 -0.008,10.889Zm-5.23,-48.781c-16.373,0 -29.701,-13.324 -29.701,-29.698c0,-16.381 13.328,-29.714 29.701,-29.714c16.378,0 29.706,13.333 29.706,29.714c0,16.374 -13.328,29.698 -29.706,29.698Zm-160.386,-29.702c0,-16.381 13.328,-29.71 29.714,-29.71c16.369,0 29.689,13.329 29.689,29.71c0,16.373 -13.32,29.693 -29.689,29.693c-16.386,0 -29.714,-13.32 -29.714,-29.693Z" />
+            </svg>
+        </a>
     </li>
-    
-
-    
-    
-
-    
-    
     <li>
-      <a href="mailto:?to=pshegger%40gmail.com" target="_blank" class="social-btn email">
-        <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-mail" width="24" height="24" viewBox="0 0 416 288" fill="var(--color-primary)"><path d="m0 16v256 16h16 384 16v-16-256-16h-16-384-16zm347 16-139 92.5-139-92.5zm-148 125.5 9 5.5 9-5.5 167-111.5v210h-352v-210z"/></svg>
-      </a>
+        <a target="_blank" rel="noopener noreferrer" aria-label="share My First Gamejam on ycombinator"
+            href="https://news.ycombinator.com/submitlink?t=My%20First%20Gamejam&u=https%3a%2f%2fpshegger.github.io%2fposts%2fmy-first-gamejam%2f">
+            <svg version="1.1" xml:space="preserve" width="30px" height="30px" viewBox="0 0 512 512" fill="currentColor"
+                xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape">
+                <path
+                    d="M449.446 0C483.971 0 512 28.03 512 62.554L512 449.446C512 483.97 483.97 512 449.446 512L62.554 512C28.03 512 0 483.97 0 449.446L0 62.554C0 28.03 28.029 0 62.554 0L449.446 0ZM183.8767 87.9921H121.8427L230.6673 292.4508V424.0079H281.3328V292.4508L390.1575 87.9921H328.1233L256 238.2489z" />
+            </svg>
+        </a>
     </li>
+</ul>
+
+  </footer>
+</article>
+    </main>
     
-  </ul>
-</div>
-      </div>
-    
-  </div>
+<footer class="footer">
+        <span>&copy; 2025 <a href="https://pshegger.github.io/">pshegger&#39;s blog</a></span> · 
+
+    <span>
+        Powered by
+        <a href="https://gohugo.io/" rel="noopener noreferrer" target="_blank">Hugo</a> &
+        <a href="https://github.com/adityatelange/hugo-PaperMod/" rel="noopener" target="_blank">PaperMod</a>
+    </span>
 </footer>
+<a href="#top" aria-label="go to top" title="Go to Top (Alt + G)" class="top-link" id="top-link" accesskey="g">
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 12 6" fill="currentColor">
+        <path d="M12 6H0l6-6z" />
+    </svg>
+</a>
 
-  
-
-
-
-
-
-
-
-
-  
-  
-    
-
-<script src="https://pshegger.github.io/main.min.js"></script>
-
-
-
-  
-<script async src="https://www.googletagmanager.com/gtag/js?id=G-NKBPT9CS94"></script>
 <script>
-var doNotTrack = false;
-if (!doNotTrack) {
-	window.dataLayer = window.dataLayer || [];
-	function gtag(){dataLayer.push(arguments);}
-	gtag('js', new Date());
-	gtag('config', 'G-NKBPT9CS94', { 'anonymize_ip': false });
-}
-</script>
+    let menu = document.getElementById('menu')
+    if (menu) {
+        menu.scrollLeft = localStorage.getItem("menu-scroll-position");
+        menu.onscroll = function () {
+            localStorage.setItem("menu-scroll-position", menu.scrollLeft);
+        }
+    }
 
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+        anchor.addEventListener("click", function (e) {
+            e.preventDefault();
+            var id = this.getAttribute("href").substr(1);
+            if (!window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+                document.querySelector(`[id='${decodeURIComponent(id)}']`).scrollIntoView({
+                    behavior: "smooth"
+                });
+            } else {
+                document.querySelector(`[id='${decodeURIComponent(id)}']`).scrollIntoView();
+            }
+            if (id === "top") {
+                history.replaceState(null, null, " ");
+            } else {
+                history.pushState(null, null, `#${id}`);
+            }
+        });
+    });
+
+</script>
+<script>
+    var mybutton = document.getElementById("top-link");
+    window.onscroll = function () {
+        if (document.body.scrollTop > 800 || document.documentElement.scrollTop > 800) {
+            mybutton.style.visibility = "visible";
+            mybutton.style.opacity = "1";
+        } else {
+            mybutton.style.visibility = "hidden";
+            mybutton.style.opacity = "0";
+        }
+    };
+
+</script>
+<script>
+    document.getElementById("theme-toggle").addEventListener("click", () => {
+        if (document.body.className.includes("dark")) {
+            document.body.classList.remove('dark');
+            localStorage.setItem("pref-theme", 'light');
+        } else {
+            document.body.classList.add('dark');
+            localStorage.setItem("pref-theme", 'dark');
+        }
+    })
+
+</script>
 </body>
+
 </html>

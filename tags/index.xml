@@ -4,29 +4,57 @@
     <title>Tags on pshegger&#39;s blog</title>
     <link>https://pshegger.github.io/tags/</link>
     <description>Recent content in Tags on pshegger&#39;s blog</description>
-    <generator>Hugo -- 0.146.4</generator>
+    <generator>Hugo -- 0.146.5</generator>
     <language>en-us</language>
-    <lastBuildDate>Mon, 08 Jan 2024 00:00:00 +0000</lastBuildDate>
+    <lastBuildDate>Wed, 16 Apr 2025 00:00:00 +0000</lastBuildDate>
     <atom:link href="https://pshegger.github.io/tags/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>Cryptography</title>
       <link>https://pshegger.github.io/tags/cryptography/</link>
-      <pubDate>Mon, 08 Jan 2024 00:00:00 +0000</pubDate>
+      <pubDate>Wed, 16 Apr 2025 00:00:00 +0000</pubDate>
       <guid>https://pshegger.github.io/tags/cryptography/</guid>
       <description></description>
     </item>
     <item>
       <title>Ctf</title>
       <link>https://pshegger.github.io/tags/ctf/</link>
-      <pubDate>Mon, 08 Jan 2024 00:00:00 +0000</pubDate>
+      <pubDate>Wed, 16 Apr 2025 00:00:00 +0000</pubDate>
       <guid>https://pshegger.github.io/tags/ctf/</guid>
       <description></description>
     </item>
     <item>
       <title>Forensics</title>
       <link>https://pshegger.github.io/tags/forensics/</link>
-      <pubDate>Mon, 08 Jan 2024 00:00:00 +0000</pubDate>
+      <pubDate>Wed, 16 Apr 2025 00:00:00 +0000</pubDate>
       <guid>https://pshegger.github.io/tags/forensics/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>Python</title>
+      <link>https://pshegger.github.io/tags/python/</link>
+      <pubDate>Wed, 16 Apr 2025 00:00:00 +0000</pubDate>
+      <guid>https://pshegger.github.io/tags/python/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>Reversing</title>
+      <link>https://pshegger.github.io/tags/reversing/</link>
+      <pubDate>Wed, 16 Apr 2025 00:00:00 +0000</pubDate>
+      <guid>https://pshegger.github.io/tags/reversing/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>Template Injection</title>
+      <link>https://pshegger.github.io/tags/template-injection/</link>
+      <pubDate>Wed, 16 Apr 2025 00:00:00 +0000</pubDate>
+      <guid>https://pshegger.github.io/tags/template-injection/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>Writeup</title>
+      <link>https://pshegger.github.io/tags/writeup/</link>
+      <pubDate>Wed, 16 Apr 2025 00:00:00 +0000</pubDate>
+      <guid>https://pshegger.github.io/tags/writeup/</guid>
       <description></description>
     </item>
     <item>
@@ -37,24 +65,10 @@
       <description></description>
     </item>
     <item>
-      <title>Python</title>
-      <link>https://pshegger.github.io/tags/python/</link>
-      <pubDate>Mon, 08 Jan 2024 00:00:00 +0000</pubDate>
-      <guid>https://pshegger.github.io/tags/python/</guid>
-      <description></description>
-    </item>
-    <item>
       <title>Sql Injection</title>
       <link>https://pshegger.github.io/tags/sql-injection/</link>
       <pubDate>Mon, 08 Jan 2024 00:00:00 +0000</pubDate>
       <guid>https://pshegger.github.io/tags/sql-injection/</guid>
-      <description></description>
-    </item>
-    <item>
-      <title>Writeup</title>
-      <link>https://pshegger.github.io/tags/writeup/</link>
-      <pubDate>Mon, 08 Jan 2024 00:00:00 +0000</pubDate>
-      <guid>https://pshegger.github.io/tags/writeup/</guid>
       <description></description>
     </item>
     <item>

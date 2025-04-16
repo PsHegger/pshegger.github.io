@@ -1,26 +1,19 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/">
   <channel>
-    <title>Forensics on pshegger&#39;s blog</title>
-    <link>https://pshegger.github.io/tags/forensics/</link>
-    <description>Recent content in Forensics on pshegger&#39;s blog</description>
+    <title>Template Injection on pshegger&#39;s blog</title>
+    <link>https://pshegger.github.io/tags/template-injection/</link>
+    <description>Recent content in Template Injection on pshegger&#39;s blog</description>
     <generator>Hugo -- 0.146.5</generator>
     <language>en-us</language>
     <lastBuildDate>Wed, 16 Apr 2025 00:00:00 +0000</lastBuildDate>
-    <atom:link href="https://pshegger.github.io/tags/forensics/index.xml" rel="self" type="application/rss+xml" />
+    <atom:link href="https://pshegger.github.io/tags/template-injection/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>Cyber Apocalypse 2025</title>
       <link>https://pshegger.github.io/posts/cyber-apocalypse-2025/</link>
       <pubDate>Wed, 16 Apr 2025 00:00:00 +0000</pubDate>
       <guid>https://pshegger.github.io/posts/cyber-apocalypse-2025/</guid>
       <description>Writeups from HTB&amp;#39;s Cyber Apocalypse CTF 2025: Tales from Eldoria</description>
-    </item>
-    <item>
-      <title>IrisCTF 2024</title>
-      <link>https://pshegger.github.io/posts/irisctf-2024/</link>
-      <pubDate>Mon, 08 Jan 2024 00:00:00 +0000</pubDate>
-      <guid>https://pshegger.github.io/posts/irisctf-2024/</guid>
-      <description>Writeups and blog about the first CTF of this year</description>
     </item>
   </channel>
 </rss>

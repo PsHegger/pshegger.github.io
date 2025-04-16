@@ -121,6 +121,21 @@
 
 <article class="post-entry tag-entry"> 
   <header class="entry-header">
+    <h2 class="entry-hint-parent">Cyber Apocalypse 2025
+    </h2>
+  </header>
+  <div class="entry-content">
+    <p>Coding Summoners Incantation It is a fairly simple task. The aim is to choose a number of tokens with the maximum possible sum. The twist is that we cannot use a token next to one that we’ve already chosen.
+To solve it, we can create a recursive search with the following constraints:
+if there are no tokens left, the max sum is 0 if there’s one token left, the max sum is the value of that token otherwise, we can check the first two tokens to decide which one we should use we take the 1st one and call the recursive function with the remaining ones (making sure to remove the 2nd token, since that’s the neighbor we cannot use) repeat previous step with the 2nd token; now we have to remove the 1st and 3rd tokens choose the one that has the higher sum def find_max_energy(tokens): if len(tokens) == 0: return 0 elif len(tokens) == 1: return tokens[0] e1 = tokens[0] &#43; find_max_energy(tokens[2:]) e2 = tokens[1] &#43; find_max_energy(tokens[3:]) return max(e1, e2) input_text = input() tokens = [int(t) for t in input_text[1:-1].split(&#39;,&#39;)] print(find_max_energy(tokens)) Dragon Fury For this task, we get a 2d array that contains possible “damage values” for rounds, and a target we need to reach. Our aim is to select a single value for each round in a way that adds up to our target in the end.
+...</p>
+  </div>
+  <footer class="entry-footer"><span title='2025-04-16 00:00:00 +0000 UTC'>April 16, 2025</span>&nbsp;·&nbsp;17 min&nbsp;·&nbsp;pshegger</footer>
+  <a class="entry-link" aria-label="post link to Cyber Apocalypse 2025" href="https://pshegger.github.io/posts/cyber-apocalypse-2025/"></a>
+</article>
+
+<article class="post-entry tag-entry"> 
+  <header class="entry-header">
     <h2 class="entry-hint-parent">IrisCTF 2024
     </h2>
   </header>

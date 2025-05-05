@@ -4,7 +4,7 @@
 <head><meta charset="utf-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-<meta name="robots" content="noindex, nofollow">
+<meta name="robots" content="index, follow">
 <title>Help Yourself and the Compiler with Contracts | pshegger&#39;s blog</title>
 <meta name="keywords" content="programming, kotlin, contracts">
 <meta name="description" content="In the world of Kotlin, contracts represent a deal between the developer and the compiler. As a developer you can share insight of your code with the compiler and it can use this extra info for better code analysis.">
@@ -56,6 +56,89 @@
 
     </style>
 </noscript>
+      <script async src="https://www.googletagmanager.com/gtag/js?id=G-NKBPT9CS94"></script>
+      <script>
+        var doNotTrack = false;
+        if ( false ) {
+          var dnt = (navigator.doNotTrack || window.doNotTrack || navigator.msDoNotTrack);
+          var doNotTrack = (dnt == "1" || dnt == "yes");
+        }
+        if (!doNotTrack) {
+          window.dataLayer = window.dataLayer || [];
+          function gtag(){dataLayer.push(arguments);}
+          gtag('js', new Date());
+          gtag('config', 'G-NKBPT9CS94');
+        }
+      </script><meta property="og:url" content="https://pshegger.github.io/posts/kotlin-contracts/">
+  <meta property="og:site_name" content="pshegger&#39;s blog">
+  <meta property="og:title" content="Help Yourself and the Compiler with Contracts">
+  <meta property="og:description" content="In the world of Kotlin, contracts represent a deal between the developer and the compiler. As a developer you can share insight of your code with the compiler and it can use this extra info for better code analysis.">
+  <meta property="og:locale" content="en-us">
+  <meta property="og:type" content="article">
+    <meta property="article:section" content="posts">
+    <meta property="article:published_time" content="2019-03-21T00:00:00+00:00">
+    <meta property="article:modified_time" content="2019-03-21T00:00:00+00:00">
+    <meta property="article:tag" content="Programming">
+    <meta property="article:tag" content="Kotlin">
+    <meta property="article:tag" content="Contracts">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Help Yourself and the Compiler with Contracts">
+<meta name="twitter:description" content="In the world of Kotlin, contracts represent a deal between the developer and the compiler. As a developer you can share insight of your code with the compiler and it can use this extra info for better code analysis.">
+
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [
+    {
+      "@type": "ListItem",
+      "position":  1 ,
+      "name": "Posts",
+      "item": "https://pshegger.github.io/posts/"
+    }, 
+    {
+      "@type": "ListItem",
+      "position":  2 ,
+      "name": "Help Yourself and the Compiler with Contracts",
+      "item": "https://pshegger.github.io/posts/kotlin-contracts/"
+    }
+  ]
+}
+</script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BlogPosting",
+  "headline": "Help Yourself and the Compiler with Contracts",
+  "name": "Help Yourself and the Compiler with Contracts",
+  "description": "In the world of Kotlin, contracts represent a deal between the developer and the compiler. As a developer you can share insight of your code with the compiler and it can use this extra info for better code analysis.",
+  "keywords": [
+    "programming", "kotlin", "contracts"
+  ],
+  "articleBody": "What are contracts? In the world of Kotlin, contracts represent a deal between the developer and the compiler. As a developer you can share insight of your code with the compiler and it can use this extra info for better code analysis.\nCurrently there are two kinds of contracts available: callsInPlace which tells the compiler how many times a lambda is called, and returns/implies which indicates that a defined condition is true if the function returns a specific value.\nBasic usage In order to write contracts for your own functions you have to keep in mind a few things. First of all this feature is experimental in Kotlin 1.3, so you have to annotate your functions with @ExperimentalContracts. These functions also have to be top-level functions or your code will fail to compile.\nWith these in mind let’s see how a function with a contract looks like:\n@ExperimentalContracts fun foo() { contract { // your contract definition } // some other code } To write the actual definition we will be using the Contract DSL.\ncallsInPlace Let’s take a look at the following example: you want to put a delay in your code, but the value and the unit is stored separately. You decide to write a function which reads the values and passes them back using a lambda.\nfun readDelay(callback: (Long, TimeUnit) -\u003e Unit) { val value = readDelayValue() val unit = readDelayUnit() callback(value, unit) } You would like to store the values for later use so you create variables for them:\nval delayValue: Long val delayUnit: TimeUnit readDelay { value, unit -\u003e delayValue = value delayUnit = unit } Thread.sleep(delayUnit.toMillis(delayValue)) The problem is that this code will not compile because the compiler has no idea how many times the lambda will be called. If it’s not called at all the two variables would be uninitialized and if it’s called more than once they would be reassigned, which is forbidden. Luckily we have callsInPlace which is exactly what we need now. Let’s modify our reader function:\n@ExperimentalContracts fun readDelay(callback: (Long, TimeUnit) -\u003e Unit) { contract { callsInPlace(callback, InvocationKind.EXACTLY_ONCE) } val value = readDelayValue() val unit = readDelayUnit() callback(value, unit) } The main logic is the same as before, but we added a contract to our function. This tells the compiler that the lambda will be called exactly once (InvocationKind.EXACTLY_ONCE). With that knowledge the compiler will know that the variables will be initialized and will not be reassigned.\nThere are 3 other possible invocation kinds: AT_MOST_ONCE (the lambda will be called once or not at all), AT_LEAST_ONCE (it will be called one or more times) and UNKNOWN (it will be called, but we don’t know how many times).\nreturns/implies The other type of contract we can write tells the compiler that a specific condition is true if the function returns with the specified value. Let’s take a look at the following code:\n@ExperimentalContracts fun String?.isValid(): Boolean { contract { returns(true) implies (this@isValid is String) } return this != null \u0026\u0026 this.length \u003e 3 } We can see that other kind of contract in this example, but what does it exactly do? To understand it better let’s break it down to pieces. The first part (returns(true)) indicates that the contract applies when this function returns true as its result, and the second part tells the compiler what to expect from it. In this case it indicates that the particular String? instance we’re calling this function on is in fact a String and in reality it’s not nullable. From this the compiler knows that if the function returns true it’s safe to smart-case the instance to a non-nullable type. This is how it looks when we try to use it:\nval result: String? = getResult() if (result.isValid()) { println(\"The length of the result is ${result.length}\") } As you can see we didn’t have to use String?.length, because result has been smart-casted to String. Without the contract we would either had to check for nullability in the if expression or use the safe call operator (?.).\nCurrently there are 3 types of return state indicators: returns (without any argument) expresses that the function returned successfully, returns(Any?) (currently only true, false and null is supported) expresses that the function returned successfully with the given value and returnsNotNull which expresses that the returned value is not null. The syntax is the same for all 3 types: *type* implies *expression*.\nA few things to keep in mind When writing your contracts there are a few things to keep in mind. First of all, contracts are not verified, which means that you can write a function with a wrong contract and this may lead to unexpected errors at runtime.\nThe other important thing to remember is that contracts are an experimental feature in Kotlin 1.3 and because of that the syntax may change in the future, so you might want to wait until its stable release to use it in production.\nThis post was originally published on kotlindevelopment.com. If you liked it please consider visiting and reading some other articles there.\n",
+  "wordCount" : "844",
+  "inLanguage": "en",
+  "datePublished": "2019-03-21T00:00:00Z",
+  "dateModified": "2019-03-21T00:00:00Z",
+  "author":{
+    "@type": "Person",
+    "name": "pshegger"
+  },
+  "mainEntityOfPage": {
+    "@type": "WebPage",
+    "@id": "https://pshegger.github.io/posts/kotlin-contracts/"
+  },
+  "publisher": {
+    "@type": "Organization",
+    "name": "pshegger's blog",
+    "logo": {
+      "@type": "ImageObject",
+      "url": "https://pshegger.github.io/favicon.ico"
+    }
+  }
+}
+</script>
 </head>
 
 <body class="" id="top">

@@ -4,7 +4,7 @@
 <head><meta charset="utf-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-<meta name="robots" content="noindex, nofollow">
+<meta name="robots" content="index, follow">
 <title>Procedural Dungeon Generation | pshegger&#39;s blog</title>
 <meta name="keywords" content="kotlin, procgen, gamedev">
 <meta name="description" content="Procedural generation is the key to writing games with endless content. In this article I show you how I generate a dungeon that can be later used in a game.">
@@ -56,6 +56,89 @@
 
     </style>
 </noscript>
+      <script async src="https://www.googletagmanager.com/gtag/js?id=G-NKBPT9CS94"></script>
+      <script>
+        var doNotTrack = false;
+        if ( false ) {
+          var dnt = (navigator.doNotTrack || window.doNotTrack || navigator.msDoNotTrack);
+          var doNotTrack = (dnt == "1" || dnt == "yes");
+        }
+        if (!doNotTrack) {
+          window.dataLayer = window.dataLayer || [];
+          function gtag(){dataLayer.push(arguments);}
+          gtag('js', new Date());
+          gtag('config', 'G-NKBPT9CS94');
+        }
+      </script><meta property="og:url" content="https://pshegger.github.io/posts/procedural-dungeon/">
+  <meta property="og:site_name" content="pshegger&#39;s blog">
+  <meta property="og:title" content="Procedural Dungeon Generation">
+  <meta property="og:description" content="Procedural generation is the key to writing games with endless content. In this article I show you how I generate a dungeon that can be later used in a game.">
+  <meta property="og:locale" content="en-us">
+  <meta property="og:type" content="article">
+    <meta property="article:section" content="posts">
+    <meta property="article:published_time" content="2022-03-10T00:00:00+00:00">
+    <meta property="article:modified_time" content="2022-03-10T00:00:00+00:00">
+    <meta property="article:tag" content="Kotlin">
+    <meta property="article:tag" content="Procgen">
+    <meta property="article:tag" content="Gamedev">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Procedural Dungeon Generation">
+<meta name="twitter:description" content="Procedural generation is the key to writing games with endless content. In this article I show you how I generate a dungeon that can be later used in a game.">
+
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [
+    {
+      "@type": "ListItem",
+      "position":  1 ,
+      "name": "Posts",
+      "item": "https://pshegger.github.io/posts/"
+    }, 
+    {
+      "@type": "ListItem",
+      "position":  2 ,
+      "name": "Procedural Dungeon Generation",
+      "item": "https://pshegger.github.io/posts/procedural-dungeon/"
+    }
+  ]
+}
+</script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BlogPosting",
+  "headline": "Procedural Dungeon Generation",
+  "name": "Procedural Dungeon Generation",
+  "description": "Procedural generation is the key to writing games with endless content. In this article I show you how I generate a dungeon that can be later used in a game.",
+  "keywords": [
+    "kotlin", "procgen", "gamedev"
+  ],
+  "articleBody": "Procedural generation is incredible. It is the key to writing games with endless content. Without it, Minecraft couldn’t have (nearly) infinite worlds with infinite terrain. Spelunky would only contain a few rooms, and we could learn the layout and enemy placement instead of learning the game mechanics. These are only a few examples, but there are a lot of games that use this mechanic for generating content.\nIn this article, I’d like to show you my way of generating a random dungeon that can be later used in a game.\nSteps The process consists of multiple steps, each one starting after the previous finished. Let’s have a look at them one-by-one and see how they work.\n1. Generating rooms This is the beginning of everything. We’re generating multiple random-sized rooms that later will be moved to their correct place and filtered.\nFor each room, we will generate a random width and height. To control the sizes, I introduced a minimum and maximum size setting. When we have the size of the room, we have to place them somewhere. For now, we will put all of them in the middle of our map and will later find their correct position.\nI also needed some way of knowing when to stop generating new rooms. For this, I introduced a new setting that tells us the minimum area of the generated rooms. With this, we can stop generating new ones once the sum of their area reaches our given minimum.\nprivate fun generateRooms() { while (rooms.sumOf { it.room.area() } \u003c settings.minimumArea) { val width = rng.nextInt(settings.maxSize - settings.minSize + 1) + settings.minSize val height = rng.nextInt(settings.maxSize - settings.minSize + 1) + settings.minSize val left = (this.width - width) / 2f val top = (this.height - height) / 2f rooms.add(RoomState(Room(Vector(left, top), width, height), RoomState.State.Generated)) } } 2. Finding room placement First, I select a random room, and we mark that as placed. After that, I iterate over all remaining ones and move them toward a random direction until they no longer intersect with any of the already placed rooms. I also added a margin for this to not end up with rooms that are too close to each other.\nprivate fun moveRooms() { rooms[rng.nextInt(rooms.size)].state = RoomState.State.Placed while (rooms.any { it.state == RoomState.State.Generated }) { val movingRoom = rooms.first { it.state == RoomState.State.Generated } val direction = rng.nextDouble() * 2 * Math.PI val moveVector = Vector(cos(direction), sin(direction)) var finalPlace = false while (!finalPlace) { movingRoom.room.topLeft = movingRoom.room.topLeft + moveVector finalPlace = rooms .filter { it.state == RoomState.State.Placed } .none { it.room.intersects(movingRoom.room, settings.roomMargin) } } movingRoom.state = RoomState.State.Placed } } 3. Selecting rooms to keep We have our rooms in the correct position now, but we still have too many of them. Let’s solve this issue by selecting a few to keep and removing the unnecessary ones. For this, I will calculate the average area of the rooms and only keep those larger than the average times a variable ratio.\nprivate fun selectRooms() { val minArea = rooms.map { it.room.area() }.average() * settings.finalAreaRatio rooms.removeIf { it.room.area() \u003c minArea } } 4. Generating a spanning tree for the rooms Next, we will generate a spanning tree of our rooms. We need this to connect our rooms with as few routes as possible.\nTo achieve this, we need a simple graph class capable of storing our edges and calculating the shortest path between two nodes (I’m using Dijkstra’s algorithm for this).\nAs a start, I calculate all possible edges between our rooms. We will have a complete graph with this, and we can now use that to calculate the spanning tree. We will calculate that by adding new edges until their number is less than the number of selected rooms minus one. We consider an edge a new one if there is currently no path between its two ends.\nprivate fun generateSpanningTree() { val graph = Graph(emptyList()) val allEdges = selectedRooms.mapIndexed { i, x -\u003e selectedRooms.mapIndexed { j, y -\u003e if (i \u003c j) Pair(x.room, y.room) else null }.filterNotNull() }.flatten() while (graph.edges.size \u003c selectedRooms.size - 1) { allEdges .filterNot { graph.isRouteAvailable(it.first, it.second) } .sortedBy { it.first.center.distance(it.second.center) } .take(1) .forEach { graph.addEdge(Graph.Edge(it.first, it.second)) } } } 5. Selecting the entrance With the spanning tree generated, we now have the basic structure of our dungeon. For the next step, let’s choose the room where the whole adventure begins. For this, I wanted to find the farthest room away from any leaf node.\nprivate fun selectEntrance() { val graph = Graph(edges) selectedRooms.forEach { it.room.type = Room.RoomType.Room } selectedRooms.maxByOrNull { graph.branchDistance(it.room) } ?.let { it.room.type = Room.RoomType.Entrance } } private fun \u003cT\u003e Graph.branchDistance(n: T, prev: T? = null): Int { val neighborCount = neighbors(n).size if ((prev == null \u0026\u0026 neighborCount \u003e 1) || neighborCount \u003e 2) { return 0 } val next = neighbors(n).filterNot { it.otherEnd(n) == prev }.firstOrNull()?.otherEnd(n) ?: return 1 return branchDistance(next, n) + 1 } 6. Quest room selection For the next step, I’d like to find the room that will contain the quest objective. I thought that this room should be one of the leaves (that’s why I chose the farthest room as the entrance in the previous step), and it should be far from the entrance.\nTo make it more interesting, I decided to not simply use the farthest room from the entrance but to select a random one, weighted by its distance. I also introduced a factor that can be modified to specify how important the distance is.\nprivate fun selectQuestObjective() { val graph = Graph(edges) val entrance = selectedRooms.first { it.room.type == Room.RoomType.Entrance } val distances = mutableListOf",
+  "wordCount" : "1545",
+  "inLanguage": "en",
+  "datePublished": "2022-03-10T00:00:00Z",
+  "dateModified": "2022-03-10T00:00:00Z",
+  "author":{
+    "@type": "Person",
+    "name": "pshegger"
+  },
+  "mainEntityOfPage": {
+    "@type": "WebPage",
+    "@id": "https://pshegger.github.io/posts/procedural-dungeon/"
+  },
+  "publisher": {
+    "@type": "Organization",
+    "name": "pshegger's blog",
+    "logo": {
+      "@type": "ImageObject",
+      "url": "https://pshegger.github.io/favicon.ico"
+    }
+  }
+}
+</script>
 </head>
 
 <body class="" id="top">

@@ -4,7 +4,7 @@
 <head><meta charset="utf-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-<meta name="robots" content="noindex, nofollow">
+<meta name="robots" content="index, follow">
 <title>Turning a Camera Feed into a Solved Sudoku | pshegger&#39;s blog</title>
 <meta name="keywords" content="programming, android, mlkit, sudoku">
 <meta name="description" content="An introduction to a simple application that uses ML Kit &amp; maths to create an augmented reality sudoku solver">
@@ -56,6 +56,90 @@
 
     </style>
 </noscript>
+      <script async src="https://www.googletagmanager.com/gtag/js?id=G-NKBPT9CS94"></script>
+      <script>
+        var doNotTrack = false;
+        if ( false ) {
+          var dnt = (navigator.doNotTrack || window.doNotTrack || navigator.msDoNotTrack);
+          var doNotTrack = (dnt == "1" || dnt == "yes");
+        }
+        if (!doNotTrack) {
+          window.dataLayer = window.dataLayer || [];
+          function gtag(){dataLayer.push(arguments);}
+          gtag('js', new Date());
+          gtag('config', 'G-NKBPT9CS94');
+        }
+      </script><meta property="og:url" content="https://pshegger.github.io/posts/ar-sudoku/">
+  <meta property="og:site_name" content="pshegger&#39;s blog">
+  <meta property="og:title" content="Turning a Camera Feed into a Solved Sudoku">
+  <meta property="og:description" content="An introduction to a simple application that uses ML Kit &amp; maths to create an augmented reality sudoku solver">
+  <meta property="og:locale" content="en-us">
+  <meta property="og:type" content="article">
+    <meta property="article:section" content="posts">
+    <meta property="article:published_time" content="2020-08-12T00:00:00+00:00">
+    <meta property="article:modified_time" content="2020-08-12T00:00:00+00:00">
+    <meta property="article:tag" content="Programming">
+    <meta property="article:tag" content="Android">
+    <meta property="article:tag" content="Mlkit">
+    <meta property="article:tag" content="Sudoku">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Turning a Camera Feed into a Solved Sudoku">
+<meta name="twitter:description" content="An introduction to a simple application that uses ML Kit &amp; maths to create an augmented reality sudoku solver">
+
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [
+    {
+      "@type": "ListItem",
+      "position":  1 ,
+      "name": "Posts",
+      "item": "https://pshegger.github.io/posts/"
+    }, 
+    {
+      "@type": "ListItem",
+      "position":  2 ,
+      "name": "Turning a Camera Feed into a Solved Sudoku",
+      "item": "https://pshegger.github.io/posts/ar-sudoku/"
+    }
+  ]
+}
+</script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BlogPosting",
+  "headline": "Turning a Camera Feed into a Solved Sudoku",
+  "name": "Turning a Camera Feed into a Solved Sudoku",
+  "description": "An introduction to a simple application that uses ML Kit \u0026 maths to create an augmented reality sudoku solver",
+  "keywords": [
+    "programming", "android", "mlkit", "sudoku"
+  ],
+  "articleBody": "A few months ago, I stumbled upon a video that led me into a rabbit hole. It resulted in a simple application that overlays a sudoku’s solution into the camera image of the puzzle. This post is about the process of getting to the end result.\nIt all started with the idea of writing a sudoku solver. The first version was ready relatively quickly, but there was one big problem: entering the starting position was slow and tedious. That’s when I realized that I could use the camera on my phone as the input device. I’ve never worked with image processing before, but it sounded like a good challenge, so I dived into it.\nThe case of the slow solver As I mentioned before, I already had a working sudoku solver, but it was not ready for this kind of usage. It was a simple brute-force algorithm that tried every solution and discarded the incorrect ones.\nThe only optimization which was in place is that it only tried the currently possible numbers to every cell. This version solved the New York Times hard sudoku in about 3 seconds on my MacBook Pro, and that’s far from ideal, especially on a phone.\nLuckily I already had an idea in mind. Instead of mindlessly trying every possible number in a cell, we can first fill in the ones where there’s only 1 possible number and run the solver on that version of the sudoku. This small change led to a considerable time saving as this version solved the same sudoku as before in ~300 ms.\nIn the beginning, I thought I’ll write the solver to work like a human would do, so I used sealed classes to store the 3 states of a cell (Empty, Filled, and PossibleNumbers). As the first version of the solver wasn’t using the third state and I wasn’t planning on using it, I changed the cell type to be a nullable integer, null being the empty state and any other value the filled state. Although it wasn’t as big of a time saver as the previous optimization, it also made the solver faster.\nThe third idea was that I could pre-calculate the coordinates for the 3x3 boxes, so we don’t have to do it on the fly. Even though the calculation was only a few steps, we had to do it for every cell in every iteration, which added up in the end, so this change was also a good idea.\nFinally, I rewrote the code from functional to use old-school loops. This way, it was possible to break preemptively from them and save even more time. I’m sure it’s possible to write functional code that behaves the same, but I don’t know enough functional programming for that, so I chose this solution.\nWith these changes, I could shave off a huge amount of time, the final version solved the test puzzle in about 80 ms (and the easy puzzle only took ~12 ms). This is still more than I’d prefer, but I stopped here.\nfun solve(): List { val emptyCells = mutableListOf",
+  "wordCount" : "1909",
+  "inLanguage": "en",
+  "datePublished": "2020-08-12T00:00:00Z",
+  "dateModified": "2020-08-12T00:00:00Z",
+  "author":{
+    "@type": "Person",
+    "name": "pshegger"
+  },
+  "mainEntityOfPage": {
+    "@type": "WebPage",
+    "@id": "https://pshegger.github.io/posts/ar-sudoku/"
+  },
+  "publisher": {
+    "@type": "Organization",
+    "name": "pshegger's blog",
+    "logo": {
+      "@type": "ImageObject",
+      "url": "https://pshegger.github.io/favicon.ico"
+    }
+  }
+}
+</script>
 </head>
 
 <body class="" id="top">

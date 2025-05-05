@@ -4,7 +4,7 @@
 <head><meta charset="utf-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-<meta name="robots" content="noindex, nofollow">
+<meta name="robots" content="index, follow">
 <title>Advent of Code 2020 | pshegger&#39;s blog</title>
 <meta name="keywords" content="programming, competitive programming, advent of code">
 <meta name="description" content="A short summary about my experiences with Advent of Code 2020">
@@ -56,6 +56,89 @@
 
     </style>
 </noscript>
+      <script async src="https://www.googletagmanager.com/gtag/js?id=G-NKBPT9CS94"></script>
+      <script>
+        var doNotTrack = false;
+        if ( false ) {
+          var dnt = (navigator.doNotTrack || window.doNotTrack || navigator.msDoNotTrack);
+          var doNotTrack = (dnt == "1" || dnt == "yes");
+        }
+        if (!doNotTrack) {
+          window.dataLayer = window.dataLayer || [];
+          function gtag(){dataLayer.push(arguments);}
+          gtag('js', new Date());
+          gtag('config', 'G-NKBPT9CS94');
+        }
+      </script><meta property="og:url" content="https://pshegger.github.io/posts/aoc-2020/">
+  <meta property="og:site_name" content="pshegger&#39;s blog">
+  <meta property="og:title" content="Advent of Code 2020">
+  <meta property="og:description" content="A short summary about my experiences with Advent of Code 2020">
+  <meta property="og:locale" content="en-us">
+  <meta property="og:type" content="article">
+    <meta property="article:section" content="posts">
+    <meta property="article:published_time" content="2020-12-30T00:00:00+00:00">
+    <meta property="article:modified_time" content="2020-12-30T00:00:00+00:00">
+    <meta property="article:tag" content="Programming">
+    <meta property="article:tag" content="Competitive Programming">
+    <meta property="article:tag" content="Advent of Code">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Advent of Code 2020">
+<meta name="twitter:description" content="A short summary about my experiences with Advent of Code 2020">
+
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [
+    {
+      "@type": "ListItem",
+      "position":  1 ,
+      "name": "Posts",
+      "item": "https://pshegger.github.io/posts/"
+    }, 
+    {
+      "@type": "ListItem",
+      "position":  2 ,
+      "name": "Advent of Code 2020",
+      "item": "https://pshegger.github.io/posts/aoc-2020/"
+    }
+  ]
+}
+</script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BlogPosting",
+  "headline": "Advent of Code 2020",
+  "name": "Advent of Code 2020",
+  "description": "A short summary about my experiences with Advent of Code 2020",
+  "keywords": [
+    "programming", "competitive programming", "advent of code"
+  ],
+  "articleBody": "The 2020 Advent of Code ended less than a week ago, and I thought the best way to cope with the void it left behind is writing a post about how I’ve seen it. This was my 5th year I jumped into it, but only the first one I actually did all the tasks. Just a small warning, this post contains some minor spoilers.\nThis year my aim was to do all the tasks as fast as possible, so I didn’t use a new language. I started with Python, but after the second week, it became obvious that I don’t know it enough to be fast with it, as I had to look up things every day, which took some time. After that, I moved to Kotlin, which was a bit slower because of the compilation time, but my better knowledge of the language paid off. I also rewrote my existing solutions to Kotlin to have them all in one place. You can find it on GitHub, and as you can see, it has a few solutions for tasks from the previous years. I’m planning on going back and doing every task ever released, but that’ll take some time.\nStory \u0026 Tasks The story was fantastic, and I love that the calendar is a map showing our long journey.\nThe tasks were great, and they found a good balance between too easy to solve and so hard you don’t have enough time for it.\nThere were multiple tasks where we had to implement a cellular automata, but each of them was unique. We had to do it in 3d, 4d, and we also had one which used a hexagonal grid (which is great, because everyone should know that Hexagons are the Bestagons). I assume these tasks were a tribute to John Conway, who died this year, and I think it was a great way to remember him.\nThere is one task I have to mention separately, and that is day 20, Jurassic Jigsaw. In my opinion, this was the most challenging task this year, but it was also the most fun. The first part was relatively easy (although it still took me one and a half hours to solve it), but while I was working on it, I already knew what will be the second part, and I dreaded it. After I finished the first part, I quickly learned that my suspicion was correct, and we had to assemble the whole image. First, I didn’t know where to start because writing a backtracking algorithm (which was my first idea) seemed to be too big of a task (especially for a Sunday morning). Luckily as the time passed, I realized that the input constraints meant that we don’t have to backtrack; we have to use them to build the image piece by piece. With that realization, I came up with a solution step by step, and in the end, it turned out to be correct.\nAnother honorable mention is day 21, which was one of the easier tasks, but it inspired me enough to solve it in SQL. Here’s the solution for the first part. I have a working one for the second part, but I’m not too fond of it because instead of a single query it uses a loop to build a table.\nSELECT COUNT(name) AS non_alergenic_count FROM aoc_2020_21_ingredients WHERE name NOT IN ( SELECT DISTINCT ingredient FROM ( SELECT i.name AS ingredient, a.name AS allergen FROM aoc_2020_21_ingredients i JOIN aoc_2020_21_allergens a ON i.food_id = a.food_id GROUP BY i.name, a.name HAVING COUNT(a.food_id) = ( SELECT COUNT(a1.food_id) FROM aoc_2020_21_allergens a1 WHERE a1.name = allergen ) ORDER BY a.name ) possible_combinations ); Community \u0026 Visualizations Another thing I have to mention is the AoC subreddit. That place is one of the best communities on the internet. Everyone was friendly and helpful, which is rare to find nowadays. There are a few posts asking for help, but most of the time I spent there was looking at the awesome visualizations and Upping the Ante posts.\nUpping the Ante posts are the ones where you can find wacky solutions no one in their right mind would think of (no offense, I find them entertaining and fun), like solving day 1 in Factorio or writing a Sega MegaDrive application that solves multiple days.\nThe other big part of the subreddit is visualization posts. These are some fun images or animations that show the solution or part of the story spectacularly. These were so fun that they even inspired me to create a way to create visualizations and make them for a few of my solutions.\nThese are the people standing in line for passport scanning on day 4 (of course, only those who had a valid passport).\nThis is the final image from day 20 (with the sea monsters highlighted).\nAnd I even created a standalone Android application that simulates the floor tiling from day 24 (unfortunately, I had to limit the space because the infinite version quickly became too slow to be displayed at 60 fps).\nSome statistics for the end As I’ve already mentioned, I wanted to achieve good results every day. I also wanted to read the story and not just do the tasks, which took some extra time, but I didn’t mind that.\nIt quickly became apparent that achieving the top 100 is a big challenge, and although I always hoped I’d get at least 1 point, I never expected it. Overall I think I did a good job, my best position was 246th, and my worst was 4412th, with an average rank of 1770 (after both parts).\nMy most significant drop between part 1 and 2 was on day 17 (Conway Cubes). I finished the first part 326th, but I needed 70 minutes to come up with a solution that can simulate an endless 4d space, and I dropped to 3047th by the end of task 2.\nOn the other hand, my most significant gain was on day 15, where I quickly realized that 30 million is not a huge number, so I just plugged it into my part 1 solution and waited a bit (~14 seconds to be exact). It only took me 44 seconds to solve the 2nd part and finish the day in 942nd place (after part 1 I was 2090th).\nMy quickest solution was on day 3 (0:07:15), and my slowest was on day 20 (4:08:57). I spent a bit more than 25 hours writing all the solutions, and I also spent a lot more on doing other related things (e.g., porting the first two weeks to Kotlin and creating visualizations).\nWhat did I learn? Of course, Advent of Code is not only about fun, but it’s also an excellent way for learning, and even though I didn’t try to learn a new language this year, I have a few takeaways anyway.\nThis first is that the release time of the tasks is the worst and best possible at the same time (at least for me). It’s the worst because it’s at 6 am CET. If it were sooner, I wouldn’t get up for it, and if it would be later, I would already be awake by the time it releases. On the other hand, this was the perfect time for me to finish the tasks before work.\nI learned about the Chinese Remainder Theorem, learned how to store infinite spaces in memory effectively, and I also learned that recursive regular expressions are not supported on the JVM.\nI also realized multiple times that creating a general solution is too slow for a competition, and I should only concentrate on solving the task with the given input.\nFrom day 5, I learned that using your brain can be quicker than implementing the algorithm described in the task. Initially, I implemented the binary space partitioning, and I only realized that it’s just binary with other characters instead of 1s and 0s after checking the solution from other users.\nFrom day 16, I learned that 0 shouldn’t be used instead of null, even if this gives you a solution a bit quicker. For part 1, this wasn’t a problem and gave the answer faster than having to check for nulls, but for part 2, it caused a big problem, which took me 40 minutes to debug.\nOverall I enjoyed this past month, and I’m looking forward to next year’s puzzles.\n",
+  "wordCount" : "1403",
+  "inLanguage": "en",
+  "datePublished": "2020-12-30T00:00:00Z",
+  "dateModified": "2020-12-30T00:00:00Z",
+  "author":{
+    "@type": "Person",
+    "name": "pshegger"
+  },
+  "mainEntityOfPage": {
+    "@type": "WebPage",
+    "@id": "https://pshegger.github.io/posts/aoc-2020/"
+  },
+  "publisher": {
+    "@type": "Organization",
+    "name": "pshegger's blog",
+    "logo": {
+      "@type": "ImageObject",
+      "url": "https://pshegger.github.io/favicon.ico"
+    }
+  }
+}
+</script>
 </head>
 
 <body class="" id="top">
